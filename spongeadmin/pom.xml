@@ -21,8 +21,14 @@
     <dependencies>
         <dependency>
             <groupId>org.noear.sponge</groupId>
-            <artifactId>wrap.admin-jetty</artifactId>
-            <version>${wrap.ver}</version>
+            <artifactId>rock-wrap-admin-jetty</artifactId>
+            <version>${rock.ver}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear.sponge</groupId>
+            <artifactId>rockrpc.client</artifactId>
+            <version>${rock.ver}</version>
         </dependency>
 
         <dependency>
@@ -49,11 +55,6 @@
             <version>${bcf.ver}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.noear.sponge</groupId>
-            <artifactId>rockrpc.client</artifactId>
-            <version>${rock.ver}</version>
-        </dependency>
 
         <dependency>
             <groupId>com.alibaba</groupId>

@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>org.noear.sponge</groupId>
-    <artifactId>wrap.admin-jetty</artifactId>
+    <artifactId>rock-wrap-admin-jetty</artifactId>
     <packaging>jar</packaging>
 
     <description>Java project for solon.mvc</description>

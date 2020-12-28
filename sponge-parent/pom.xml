@@ -142,10 +142,10 @@
         <module>../rockrpc.client</module>
 
 
-        <module>../rock-wrap/wrap.api-jlhttp</module>
-        <module>../rock-wrap/wrap.api-jetty</module>
-        <module>../rock-wrap/wrap.admin-jlhttp</module>
-        <module>../rock-wrap/wrap.admin-jetty</module>
+        <module>../rock-wrap/rock-wrap-api-jlhttp</module>
+        <module>../rock-wrap/rock-wrap-api-jetty</module>
+        <module>../rock-wrap/rock-wrap-admin-jlhttp</module>
+        <module>../rock-wrap/rock-wrap-admin-jetty</module>
     </modules>
 
 </project>
