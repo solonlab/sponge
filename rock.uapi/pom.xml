@@ -12,57 +12,58 @@
     </parent>
 
     <groupId>org.noear.sponge</groupId>
-    <artifactId>rockuapi_demo</artifactId>
+    <artifactId>rock.uapi</artifactId>
     <packaging>jar</packaging>
+
 
     <name>${project.artifactId}</name>
     <description>java project for rockgateway</description>
+
 
     <dependencies>
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon.boot.jetty</artifactId>
+            <artifactId>solon</artifactId>
             <version>${solon.ver}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.noear.sponge</groupId>
-            <artifactId>rockuapi</artifactId>
-            <version>${sponge.ver}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.12</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon.wrap.api-jlhttp</artifactId>
-            <version>2.0.3-r3</version>
+            <artifactId>solon.extend.validation</artifactId>
+            <version>${solon.ver}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpcore</artifactId>
-            <version>4.4.6</version>
+            <groupId>org.noear</groupId>
+            <artifactId>water.client-solon-plugin</artifactId>
+            <version>${water.ver}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.5.3</version>
+            <groupId>org.noear</groupId>
+            <artifactId>weed3</artifactId>
+            <version>${weed3.ver}</version>
+            <scope>provided</scope>
         </dependency>
-
 
         <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
+            <groupId>org.noear</groupId>
+            <artifactId>snack3</artifactId>
+            <version>${snack3.ver}</version>
+            <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.noear.sponge</groupId>
+            <artifactId>rockrpc.client</artifactId>
+            <version>${rock.ver}</version>
+            <scope>provided</scope>
+        </dependency>
+
 
     </dependencies>
 

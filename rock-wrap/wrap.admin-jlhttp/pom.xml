@@ -6,13 +6,13 @@
 
     <parent>
         <groupId>org.noear.sponge</groupId>
-        <artifactId>wrap-parent</artifactId>
-        <version>build</version>
-        <relativePath>../../wrap-parent/pom.xml</relativePath>
+        <artifactId>sponge-parent</artifactId>
+        <version>1.0.1</version>
+        <relativePath>../../sponge-parent/pom.xml</relativePath>
     </parent>
 
     <groupId>org.noear.sponge</groupId>
-    <artifactId>wrap.admin-jetty</artifactId>
+    <artifactId>wrap.admin-jlhttp</artifactId>
     <version>2.0.3-r3</version>
     <packaging>jar</packaging>
 
@@ -26,7 +26,7 @@
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon.boot.jetty</artifactId>
+            <artifactId>solon.boot.jlhttp</artifactId>
         </dependency>
 
         <dependency>
@@ -56,12 +56,17 @@
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon.extend.sessionstate.redis</artifactId>
+            <artifactId>solon.serialization.snack3</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon.serialization.snack3</artifactId>
+            <artifactId>solon.extend.sessionstate.local</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon.extend.sessionstate.redis</artifactId>
         </dependency>
 
         <dependency>
@@ -126,9 +131,8 @@
 
         <dependency>
             <groupId>org.noear.sponge</groupId>
-            <artifactId>rockrpcclient</artifactId>
+            <artifactId>rockrpc.client</artifactId>
         </dependency>
-
 
     </dependencies>
 

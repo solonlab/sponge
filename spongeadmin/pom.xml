@@ -20,22 +20,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.noear</groupId>
-            <artifactId>solon-web</artifactId>
-            <version>${solon.ver}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.noear</groupId>
-                    <artifactId>solon.boot.jlhttp</artifactId>
-                </exclusion>
-            </exclusions>
-            <type>pom</type>
-        </dependency>
-
-        <dependency>
-            <groupId>org.noear</groupId>
-            <artifactId>solon.boot.jetty</artifactId>
-            <version>${solon.ver}</version>
+            <groupId>org.noear.sponge</groupId>
+            <artifactId>wrap.admin-jetty</artifactId>
+            <version>${wrap.ver}</version>
         </dependency>
 
         <dependency>
@@ -64,8 +51,8 @@
 
         <dependency>
             <groupId>org.noear.sponge</groupId>
-            <artifactId>rockrpcclient</artifactId>
-            <version>${sponge.ver}</version>
+            <artifactId>rockrpc.client</artifactId>
+            <version>${rock.ver}</version>
         </dependency>
 
         <dependency>

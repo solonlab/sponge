@@ -4,6 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.noear</groupId>
+        <artifactId>solon-parent</artifactId>
+        <version>1.2.12</version>
+    </parent>
+
     <groupId>org.noear.sponge</groupId>
     <artifactId>sponge-parent</artifactId>
     <version>1.0.1</version>
@@ -23,15 +29,71 @@
         <snack3.ver>3.1.12</snack3.ver>
         <bcf.ver>2.0.4</bcf.ver>
 
-        <sponge.ver>1.0.1</sponge.ver>
+        <rock.ver>1.0.1</rock.ver>
+        <wrap.ver>2.0.3-r3</wrap.ver>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.noear.sponge</groupId>
+                <artifactId>rock.uapi</artifactId>
+                <version>${rock.ver}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.noear.sponge</groupId>
+                <artifactId>rockrpc.client</artifactId>
+                <version>${rock.ver}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.noear</groupId>
+                <artifactId>weed3</artifactId>
+                <version>${weed3.ver}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.noear</groupId>
+                <artifactId>snack3</artifactId>
+                <version>${snack3.ver}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.noear</groupId>
+                <artifactId>water.client</artifactId>
+                <version>${water.ver}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.noear</groupId>
+                <artifactId>water.client-solon-plugin</artifactId>
+                <version>${water.ver}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.noear</groupId>
+                <artifactId>bcfclient-solon-plugin</artifactId>
+                <version>${bcf.ver}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.squareup.okhttp3</groupId>
                 <artifactId>okhttp</artifactId>
-                <version>3.14.8</version>
+                <version>${okhttp.ver}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.10</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.70</version>
             </dependency>
 
             <dependency>
@@ -49,7 +111,6 @@
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <!--                <version>8.0.20</version>-->
                 <version>5.1.49</version>
             </dependency>
 
@@ -58,14 +119,33 @@
                 <artifactId>HikariCP</artifactId>
                 <version>3.4.5</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>2.3.28</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>2.0</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
     <modules>
-        <module>../rockclient</module>
+        <module>../rock.client</module>
+        <module>../rock.uapi</module>
 
-        <module>../rockrpcclient</module>
-        <module>../rockuapi</module>
+        <module>../rockrpc.client</module>
+
+
+        <module>../rock-wrap/wrap.api-jlhttp</module>
+        <module>../rock-wrap/wrap.api-jetty</module>
+        <module>../rock-wrap/wrap.admin-jlhttp</module>
+        <module>../rock-wrap/wrap.admin-jetty</module>
     </modules>
 
 </project>

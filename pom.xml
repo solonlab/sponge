@@ -16,15 +16,11 @@
 
     <modules>
         <module>sponge-parent</module>
-
-        <module>rockrpc</module>
-        <module>rockuapi_demo</module>
-
         <module>spongeadmin</module>
-
         <module>trackapi</module>
 
-        <module>wrap-parent</module>
+        <module>rockrpc</module>
+        <module>rock-wrap-demo_uapi</module>
     </modules>
 
 </project>

@@ -12,19 +12,26 @@
     </parent>
 
     <groupId>org.noear.sponge</groupId>
-    <artifactId>rockclient</artifactId>
+    <artifactId>rockrpc.client</artifactId>
     <packaging>jar</packaging>
 
 
-    <!-- 以1.8 build -->
     <dependencies>
+
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon</artifactId>
-            <version>${solon.ver}</version>
+            <artifactId>water.client-solon-plugin</artifactId>
+            <version>${water.ver}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.70</version>
             <scope>provided</scope>
         </dependency>
 
+        <!-- local start -->
         <dependency>
             <groupId>org.noear</groupId>
             <artifactId>weed3</artifactId>
@@ -40,26 +47,12 @@
         </dependency>
 
         <dependency>
-            <groupId>org.noear</groupId>
-            <artifactId>water.client</artifactId>
-            <version>${water.ver}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>3.2.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>1.10</version>
-            <scope>provided</scope>
         </dependency>
 
+        <!-- local end -->
     </dependencies>
 
     <build>
@@ -89,19 +82,18 @@
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
                 </configuration>
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>make-assembly</id>-->
-<!--                        <phase>package</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>single</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
             </plugin>
         </plugins>
 
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>internal-nexus</id>
+            <name>Maven Repository Manager running on maven.data.zm</name>
+            <url>http://maven.data.zm/repository/maven-3rd/</url>
+        </repository>
+    </distributionManagement>
 
     <repositories>
         <repository>

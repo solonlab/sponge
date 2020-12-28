@@ -6,17 +6,18 @@
 
     <parent>
         <groupId>org.noear.sponge</groupId>
-        <artifactId>wrap-parent</artifactId>
-        <version>build</version>
-        <relativePath>../../wrap-parent/pom.xml</relativePath>
+        <artifactId>sponge-parent</artifactId>
+        <version>1.0.1</version>
+        <relativePath>../../sponge-parent/pom.xml</relativePath>
     </parent>
 
     <groupId>org.noear.sponge</groupId>
-    <artifactId>wrap.api-jetty</artifactId>
+    <artifactId>wrap.api-jlhttp</artifactId>
     <version>2.0.3-r3</version>
     <packaging>jar</packaging>
 
     <description>Java project for solon.api</description>
+
 
     <dependencies>
         <dependency>
@@ -26,12 +27,27 @@
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon.boot.jetty</artifactId>
+            <artifactId>solon.boot.jlhttp</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.noear</groupId>
             <artifactId>solon.view.freemarker</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon.extend.data</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon.extend.validation</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon.extend.aspect</artifactId>
         </dependency>
 
         <dependency>
@@ -56,11 +72,6 @@
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon.extend.aspect</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.noear</groupId>
             <artifactId>water.client-solon-plugin</artifactId>
         </dependency>
 
@@ -78,8 +89,6 @@
             <groupId>org.noear</groupId>
             <artifactId>snack3</artifactId>
         </dependency>
-
-
 
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
@@ -119,13 +128,14 @@
 
         <dependency>
             <groupId>org.noear.sponge</groupId>
-            <artifactId>rockuapi</artifactId>
+            <artifactId>rock.uapi</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.noear.sponge</groupId>
-            <artifactId>rockrpcclient</artifactId>
+            <artifactId>rockrpc.client</artifactId>
         </dependency>
+
     </dependencies>
 
     <build>
