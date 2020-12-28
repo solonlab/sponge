@@ -21,9 +21,9 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.noear</groupId>
-            <artifactId>solon.boot.jetty</artifactId>
-            <version>${solon.ver}</version>
+            <groupId>org.noear.sponge</groupId>
+            <artifactId>wrap.api-jlhttp</artifactId>
+            <version>${rock.ver}</version>
         </dependency>
 
         <dependency>
