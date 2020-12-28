@@ -2,8 +2,8 @@
 
 <!DOCTYPE mapper PUBLIC "-//noear.org//DTD Mapper 3.0//EN" "http://noear.org/dtd/weed3-mapper.dtd">
 
-<mapper namespace="zm.data.dobbin.bull.dso.db.mapper.BullOrderMapper"
-        import="zm.data.dobbin.bull.models.*"
+<mapper namespace="apidemo.dso.db.mapper.BullOrderMapper"
+        import="apidemo.models.*"
         db="dobbin">
 
     <sql id="add_bull_order_validate"
