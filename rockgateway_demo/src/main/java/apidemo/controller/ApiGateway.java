@@ -23,25 +23,15 @@ public class ApiGateway extends RockGateway {
 
     @Override
     protected void register() {
-//        before(new StartInterceptor());
-//        before(new ParamsBuildInterceptor(null)); //构建参数
-//        addInterceptor(new AuthInterceptor()); //可以不要签权
-//
-//        after(new OutputBuildInterceptor(new RockXorEncoder()));
-//        after(new OutputInterceptor()); //输出
-//        after(new LogInterceptor()); //也可以不做日志
-//        after(new EndInterceptor("API"));
+        before(new StartInterceptor()); //开始计时
+        before(new ParamsBuildInterceptor(new RockAesDecoder())); //构建参数
+        before(new ParamsAuthInterceptor(new RockSha256Encoder()));//签权，可以没有
 
-        before(new StartInterceptor());
-        before(new ParamsBuildInterceptor(new RockAesDecoder()));
-        before(new ParamsAuthInterceptor(new RockSha256Encoder()));
-
-        after(new OutputBuildInterceptor(new RockAesEncoder()));
-        after(new OutputInterceptor());
-        after(new OutputSignInterceptor(new RockSha1Encoder()));
-        after(new LogInterceptor());
-        after(new EndInterceptor("API"));
-
+        after(new OutputBuildInterceptor(new RockAesEncoder()));//构建输出内容
+        after(new OutputSignInterceptor(new RockSha1Encoder()));//输出签名
+        after(new OutputInterceptor());//输出
+        after(new LogInterceptor());//记录日志
+        after(new EndInterceptor("API"));//结束计时，并上报
 
         Aop.beanOnloaded(() -> {
             Aop.beanForeach((bw) -> {

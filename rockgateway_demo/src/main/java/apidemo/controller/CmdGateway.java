@@ -23,16 +23,15 @@ public class CmdGateway extends RockGateway {
 
     @Override
     protected void register() {
-        before(new StartInterceptor());
-        before(new ParamsBuildInterceptor(new RockAesDecoder()));
-        before(new ParamsAuthInterceptor(new RockSha256Encoder()));
+        before(new StartInterceptor());//开始计时
+        before(new ParamsBuildInterceptor(new RockAesDecoder())); //构建参数
+        before(new ParamsAuthInterceptor(new RockSha256Encoder()));//签权，可以没有
 
-        after(new OutputBuildInterceptor(new RockAesEncoder()));
-        after(new OutputInterceptor());
-        after(new OutputSignInterceptor(new RockSha1Encoder()));
-        after(new LogInterceptor());
-        after(new EndInterceptor("CMD"));
-
+        after(new OutputBuildInterceptor(new RockAesEncoder()));//构建输出内容
+        after(new OutputSignInterceptor(new RockSha1Encoder()));//输出签名
+        after(new OutputInterceptor());//输出
+        after(new LogInterceptor());//日志
+        after(new EndInterceptor("CMD"));//结束计时，并上报
 
         Aop.beanOnloaded(() -> {
             Aop.beanForeach((bw) -> {
