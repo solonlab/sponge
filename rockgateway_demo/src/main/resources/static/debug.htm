@@ -1,0 +1,161 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>WEBAPI评估与调试界面</title>
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("input#btn").bind("click", function () {
+                generateMd();
+
+            })
+        })
+
+        function generateMd() {
+            var cid = $("#cid").val();
+            var vid = $("#vid").val();
+            var cmd_id = $("#cmd_id").val();
+            var url = "/SIGN/" + cmd_id;
+            $.post(url, {"p": $("#p1").val(), "cid": cid}, function (data) {
+                var rst = data;
+
+                if (rst.sign) {
+                    $("#sign").val(rst.sign);
+
+                    var p = $("#p1").val();
+                    var k = cid + "." + vid + "." + rst.sign;
+
+                    $("#paramStr").val(rst.p64);
+                    $("#tokenK").val(k);
+
+                    $("#paramStr2").val(p);
+                    $("#tokenK2").val(k);
+                }
+            });
+        }
+
+        function subFrm2(e) {
+            var cmd_id = $("#cmd_id").val();
+            var frm2 = document.forms["frm2"];
+
+            var url = "/CMD/" + cmd_id;
+
+            if (e == 1)
+                frm2.action = url + "?f=XML";
+            else
+                frm2.action = url;
+
+            frm2.submit();
+        }
+
+        function subFrm22(e) {
+            var p = $("#paramStr2").val();
+            var k = $("#tokenK2").val();
+
+            var cmd_id = $("#cmd_id").val();
+            var frm22 = document.forms["frm22"];
+
+            var url = "/CMD/" + cmd_id;
+
+            if (e == 1)
+                frm22.action = url + "?f=XML&k=" + k + "&p=" + p;
+            else
+                frm22.action = url + "?k=" + k + "&p=" + p;
+
+            frm22.submit();
+        }
+    </script>
+</head>
+<body>
+
+<form>
+    <fieldset style="width: 780px;">
+        <legend>WEBAPI评估与调试界面</legend>
+        <div style="margin: 10px;">
+            <table>
+                <tbody>
+                <tr>
+                    <th>
+                        通道ID
+                    </th>
+                    <td>
+                        <input name="cid" type="text" value="10972" id="cid"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        版本ID
+                    </th>
+                    <td>
+                        <input name="vid" type="text" value="100" id="vid"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        协议号
+                    </th>
+                    <td>
+                        <input name="cmd" id="cmd_id" type="text" value="A.0.1" id="cmd"/>（格式 = *.*.*.*）
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        校验码
+                    </th>
+                    <td>
+                        <input name="md5" type="text" id="sign" style="width:600px;"/>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        参数
+                    </th>
+                    <td>
+                        <textarea name="p1" rows="2" cols="20" id="p1" style="height:150px;width:600px;">{}</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td align="center">
+                        <div style="font-size:9pt;color:Green;">请根据具体协议调整参数（不可有换行符）</div>
+                        <table>
+                            <tr>
+                                <td><input height="70" type="button" name="btn" value="生成MD5及请求数据" id="btn"
+                                           style="height:70px;"/></td>
+                                <td style="width:250px">
+                                    <input height="70" style="width:120px; height:70px;" type="button" value="请求JSON"
+                                           onclick="subFrm2(0);"/>
+                                    <input height="70" style="width:120px; height:70px;" type="button" value="请求XML"
+                                           onclick="subFrm2(1);"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </fieldset>
+</form>
+
+
+<div>
+    <form id="frm2" action="" method="post" target="_blank">
+        <input type="hidden" name="p" id="paramStr"/>
+        <input type="hidden" name="k" id="tokenK"/>
+    </form>
+</div>
+
+<div>
+    <form id="frm22" action="" enctype="multipart/form-data" method="post" target="_blank">
+        <input type="text" name="p" id="paramStr2" style="width:600px;"/><br/>
+        <input type="text" name="k" id="tokenK2" style="width:600px;"/><br/>
+        <input type="file" name="f" style="width:600px;"/><br/>
+        <input type="button" value="上传" onclick="subFrm22()"/>
+    </form>
+</div>
+
+</body>
+</html>
