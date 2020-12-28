@@ -6,9 +6,9 @@
 
     <parent>
         <groupId>org.noear.sponge</groupId>
-        <artifactId>sponge-parent</artifactId>
+        <artifactId>rock-parent</artifactId>
         <version>1.0.1</version>
-        <relativePath>../sponge-parent/pom.xml</relativePath>
+        <relativePath>../rock-parent/pom.xml</relativePath>
     </parent>
 
     <groupId>org.noear.sponge</groupId>

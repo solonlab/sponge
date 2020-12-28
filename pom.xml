@@ -15,8 +15,8 @@
 
 
     <modules>
-        <module>sponge-parent</module>
-        <module>spongeadmin</module>
+        <module>rock-parent</module>
+        <module>rockadmin</module>
         <module>trackapi</module>
 
         <module>rockrpc</module>

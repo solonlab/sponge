@@ -9,7 +9,7 @@ public class Config {
     public static String web_title = "SPONGE";
     public static String water_config_tag = "sponge";
 
-    public static String water_service_name = "spongeadmin";
+    public static String water_service_name = "rockadmin";
 
     public static String track_uri() {
         return cfg("track_uri").value;
