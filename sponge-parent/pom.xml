@@ -65,7 +65,7 @@
         <module>../rockclient</module>
 
         <module>../rockrpcclient</module>
-        <module>../rockgateway</module>
+        <module>../rockuapi</module>
     </modules>
 
 </project>

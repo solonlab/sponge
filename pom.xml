@@ -18,12 +18,13 @@
         <module>sponge-parent</module>
 
         <module>rockrpc</module>
-
-        <module>rockgateway_demo</module>
+        <module>rockuapi_demo</module>
 
         <module>spongeadmin</module>
 
         <module>trackapi</module>
+
+        <module>wrap-parent</module>
     </modules>
 
 </project>
