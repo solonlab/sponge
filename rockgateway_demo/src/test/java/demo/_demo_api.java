@@ -1,10 +1,10 @@
 package demo;
 
-import lib.sponge.rockgateway.RockGateway;
-import lib.sponge.rockgateway.UapiCode;
-import lib.sponge.rockgateway.interceptor.EndInterceptor;
-import lib.sponge.rockgateway.interceptor.OutputInterceptor;
-import lib.sponge.rockgateway.interceptor.StartInterceptor;
+import org.noear.sponge.rockgateway.RockGateway;
+import org.noear.sponge.rockgateway.UapiCode;
+import org.noear.sponge.rockgateway.interceptor.EndInterceptor;
+import org.noear.sponge.rockgateway.interceptor.OutputInterceptor;
+import org.noear.sponge.rockgateway.interceptor.StartInterceptor;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
 

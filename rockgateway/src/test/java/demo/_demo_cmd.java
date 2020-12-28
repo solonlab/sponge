@@ -1,13 +1,13 @@
 package demo;
 
-import lib.sponge.rockgateway.RockGateway;
-import lib.sponge.rockgateway.UapiCode;
-import lib.sponge.rockgateway.decoder.RockXorDecoder;
-import lib.sponge.rockgateway.encoder.RockSha1Encoder;
-import lib.sponge.rockgateway.encoder.RockXorEncoder;
-import lib.sponge.rockgateway.interceptor.*;
+import org.noear.sponge.rockgateway.RockGateway;
+import org.noear.sponge.rockgateway.UapiCode;
+import org.noear.sponge.rockgateway.decoder.RockXorDecoder;
+import org.noear.sponge.rockgateway.encoder.RockSha1Encoder;
+import org.noear.sponge.rockgateway.encoder.RockXorEncoder;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
+import org.noear.sponge.rockgateway.interceptor.*;
 
 @Mapping("/cmd/*")
 @Controller

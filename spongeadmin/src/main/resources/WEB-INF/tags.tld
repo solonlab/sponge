@@ -11,19 +11,19 @@ http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd" version="2.0">
 
     <tag>
         <name>footer</name>
-        <tag-class>webapp.widget.FooterTag</tag-class>
+        <tag-class>org.noear.sponge.admin.widget.FooterTag</tag-class>
         <body-content>empty</body-content>
     </tag>
 
     <tag>
         <name>header</name>
-        <tag-class>webapp.widget.HeaderTag</tag-class>
+        <tag-class>org.noear.sponge.admin.widget.HeaderTag</tag-class>
         <body-content>empty</body-content>
     </tag>
 
     <tag>
         <name>toolmenu</name>
-        <tag-class>webapp.widget.ToolmenuTag</tag-class>
+        <tag-class>org.noear.sponge.admin.widget.ToolmenuTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>pack</name>
@@ -34,7 +34,7 @@ http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd" version="2.0">
 
     <tag>
         <name>leftmenu</name>
-        <tag-class>webapp.widget.LeftmenuTag</tag-class>
+        <tag-class>org.noear.sponge.admin.widget.LeftmenuTag</tag-class>
         <body-content>empty</body-content>
     </tag>
 
@@ -42,7 +42,7 @@ http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd" version="2.0">
 
     <tag>
         <name>pagebar</name>
-        <tag-class>webapp.widget.PagebarTag</tag-class>
+        <tag-class>org.noear.sponge.admin.widget.PagebarTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>rowCount</name>
@@ -58,13 +58,13 @@ http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd" version="2.0">
 
     <tag>
         <name>querybar</name>
-        <tag-class>webapp.widget.QuerybarTag</tag-class>
+        <tag-class>org.noear.sponge.admin.widget.QuerybarTag</tag-class>
         <body-content>empty</body-content>
     </tag>
 
     <tag>
         <name>stateselector</name>
-        <tag-class>webapp.widget.StateSelectorTag</tag-class>
+        <tag-class>org.noear.sponge.admin.widget.StateSelectorTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>clientID</name>

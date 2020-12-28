@@ -5,17 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>lib.sponge</groupId>
-        <artifactId>sponge</artifactId>
-        <version>2.0.3</version>
-        <relativePath>../pom.xml</relativePath>
+        <groupId>org.noear.sponge</groupId>
+        <artifactId>sponge-parent</artifactId>
+        <version>1.0.1</version>
+        <relativePath>../sponge-parent/pom.xml</relativePath>
     </parent>
 
     <groupId>spongeadmin</groupId>
-    <artifactId>spongeadmin</artifactId>
+    <artifactId>sponge-spongeadmin</artifactId>
     <packaging>jar</packaging>
 
-    <name>spongeadmin</name>
     <description>spongeadmin project for Spring Boot</description>
 
 
@@ -64,9 +63,9 @@
         </dependency>
 
         <dependency>
-            <groupId>lib.sponge</groupId>
+            <groupId>org.noear.sponge</groupId>
             <artifactId>rockrpcclient</artifactId>
-            <version>${rock.ver}</version>
+            <version>${sponge.ver}</version>
         </dependency>
 
         <dependency>
@@ -131,7 +130,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>webapp.App</mainClass>
+                            <mainClass>App</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

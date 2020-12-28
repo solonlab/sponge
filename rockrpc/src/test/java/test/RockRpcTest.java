@@ -1,9 +1,9 @@
 package test;
 
-import lib.sponge.rock.RockClient;
-import lib.sponge.rock.models.AppModel;
-import lib.sponge.rock.models.AppUpdateModel;
-import lib.sponge.rock.protocol.RockRpc;
+import org.noear.sponge.rock.RockClient;
+import org.noear.sponge.rock.models.AppModel;
+import org.noear.sponge.rock.models.AppUpdateModel;
+import org.noear.sponge.rock.protocol.RockRpc;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.noear.snack.ONode;

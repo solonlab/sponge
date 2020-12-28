@@ -1,6 +1,6 @@
 import org.junit.Test;
-import webapp.models.others.resp.CallLogDetailsResp;
-import webapp.utils.StringUtil;
+import org.noear.sponge.admin.models.others.resp.CallLogDetailsResp;
+import org.noear.sponge.admin.utils.StringUtil;
 
 
 import java.util.*;

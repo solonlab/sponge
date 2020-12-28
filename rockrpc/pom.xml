@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>lib.sponge</groupId>
-        <artifactId>sponge</artifactId>
-        <version>2.0.3</version>
-        <relativePath>../pom.xml</relativePath>
+        <groupId>org.noear.sponge</groupId>
+        <artifactId>sponge-parent</artifactId>
+        <version>1.0.1</version>
+        <relativePath>../sponge-parent/pom.xml</relativePath>
     </parent>
 
-    <groupId>lib.sponge</groupId>
-    <artifactId>rockrpc</artifactId>
+    <groupId>org.noear.sponge</groupId>
+    <artifactId>sponge-rockrpc</artifactId>
     <packaging>jar</packaging>
 
 
@@ -24,9 +24,9 @@
         </dependency>
 
         <dependency>
-            <groupId>lib.sponge</groupId>
+            <groupId>org.noear.sponge</groupId>
             <artifactId>rockrpcclient</artifactId>
-            <version>${rock.ver}</version>
+            <version>${sponge.ver}</version>
         </dependency>
 
         <dependency>
@@ -87,7 +87,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>webapp.App</mainClass>
+                            <mainClass>App</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
