@@ -7,8 +7,8 @@ import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.Handler;
 import org.noear.water.WaterClient;
 import org.noear.water.log.WaterLogger;
-import org.noear.water.solon_plugin.FromUtils;
-import org.noear.water.solon_plugin.XWaterAdapter;
+import org.noear.water.utils.FromUtils;
+import org.noear.water.solon_plugin.WaterAdapter;
 
 @Component
 public class EndHandler implements Handler {
@@ -20,11 +20,11 @@ public class EndHandler implements Handler {
     public void handle(Context ctx) throws Exception {
         long start = ctx.attr("_start", 0L);
         long times = System.currentTimeMillis() - start;
-        String _node = XWaterAdapter.global().localHost();
+        String _node = WaterAdapter.global().localHost();
 
         String _from = FromUtils.getFrom(ctx);
 
-        WaterClient.Track.track(XWaterAdapter.global().service_name(), "rpc", ctx.path(), times, _node, _from);
+        WaterClient.Track.track(WaterAdapter.global().service_name(), "rpc", ctx.path(), times, _node, _from);
 
         String _out = ctx.attr("output", "");
         String _in = ONode.stringify(ctx.paramMap());

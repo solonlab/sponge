@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>org.noear.sponge</groupId>
-    <artifactId>sponge-rockclient</artifactId>
+    <artifactId>rockclient</artifactId>
     <packaging>jar</packaging>
 
 

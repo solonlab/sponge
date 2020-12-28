@@ -1,11 +1,11 @@
 package org.noear.sponge.admin.dso;
 
 import org.noear.bcf.BcfClient;
-import org.noear.bcf.XSessionBcf;
+import org.noear.bcf.BcfSessionBase;
 import org.noear.bcf.models.BcfUserModel;
 import org.noear.sponge.admin.Config;
 
-public final class Session extends XSessionBcf {
+public final class Session extends BcfSessionBase {
     private static final Session _current = new Session();
     public static Session current(){
         return _current;

@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>org.noear.sponge</groupId>
-    <artifactId>sponge-rockgateway_demo</artifactId>
+    <artifactId>rockgateway_demo</artifactId>
     <packaging>jar</packaging>
 
     <name>${project.artifactId}</name>

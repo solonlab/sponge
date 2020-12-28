@@ -3,7 +3,7 @@ package org.noear.sponge.rock.impl.controller.trigger;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.Handler;
-import org.noear.sponge.track.utils.IpUtil;
+import org.noear.sponge.rock.impl.utils.IpUtil;
 import org.noear.water.WaterClient;
 
 @Component

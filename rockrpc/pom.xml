@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>org.noear.sponge</groupId>
-    <artifactId>sponge-rockrpc</artifactId>
+    <artifactId>rockrpc</artifactId>
     <packaging>jar</packaging>
 
 
@@ -33,6 +33,11 @@
             <groupId>org.noear</groupId>
             <artifactId>water.client-solon-plugin</artifactId>
             <version>${water.ver}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
         </dependency>
 
         <!-- local start -->

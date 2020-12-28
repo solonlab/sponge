@@ -3,8 +3,8 @@ package org.noear.sponge.rockgateway.interceptor;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.Handler;
 import org.noear.water.WaterClient;
-import org.noear.water.solon_plugin.FromUtils;
-import org.noear.water.solon_plugin.XWaterAdapter;
+import org.noear.water.utils.FromUtils;
+import org.noear.water.solon_plugin.WaterAdapter;
 import org.noear.water.utils.Timecount;
 
 /** 结束计时拦截器（完成计时，并发送到WATER） */
@@ -25,9 +25,9 @@ public class EndInterceptor implements Handler {
 
         String _from = FromUtils.getFrom(ctx);
 
-        String service = XWaterAdapter.global().service_name();
+        String service = WaterAdapter.global().service_name();
         String path = ctx.path();
-        String node = XWaterAdapter.global().localHost();
+        String node = WaterAdapter.global().localHost();
 
         WaterClient.Track.track(service, _tag, path, timecount.stop().milliseconds(), node, _from);
     }

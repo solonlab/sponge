@@ -5,7 +5,7 @@ import org.noear.sponge.rock.models.AppModel;
 import org.noear.sponge.rockgateway.interceptor.Attrs;
 import org.noear.solon.annotation.Singleton;
 import org.noear.solon.core.handle.Context;
-import org.noear.water.solon_plugin.IPUtils;
+import org.noear.water.utils.IPUtils;
 
 import java.sql.SQLException;
 

@@ -3,7 +3,7 @@ package org.noear.sponge.rockgateway;
 import org.noear.sponge.rock.RockClient;
 import org.noear.sponge.rock.models.AppModel;
 import org.noear.solon.core.handle.Context;
-import org.noear.water.solon_plugin.IPUtils;
+import org.noear.water.utils.IPUtils;
 import org.noear.water.utils.TextUtils;
 
 import java.sql.SQLException;
