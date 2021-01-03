@@ -24,6 +24,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon.serialization.fastjson</artifactId>
+            <version>${solon.ver}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.noear.sponge</groupId>
             <artifactId>rockrpc.client</artifactId>
             <version>${rock.ver}</version>
@@ -47,6 +53,13 @@
             <version>1.10</version>
         </dependency>
         <!-- local end -->
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <!--                <version>8.0.20</version>-->
+            <version>5.1.49</version>
+        </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>

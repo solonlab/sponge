@@ -24,25 +24,11 @@
             <version>${water.ver}</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.70</version>
-            <scope>provided</scope>
-        </dependency>
-
         <!-- local start -->
         <dependency>
             <groupId>org.noear</groupId>
             <artifactId>weed3</artifactId>
             <version>${weed3.ver}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.noear</groupId>
-            <artifactId>snack3</artifactId>
-            <version>${snack3.ver}</version>
             <scope>provided</scope>
         </dependency>
 
