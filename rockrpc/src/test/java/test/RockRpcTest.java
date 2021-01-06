@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.noear.snack.ONode;
 import org.noear.solon.test.SolonJUnit4ClassRunner;
-import org.noear.water.solon_plugin.WaterUpstream;
+import org.noear.water.integration.solon.WaterUpstream;
 
 @RunWith(SolonJUnit4ClassRunner.class)
 public class RockRpcTest {
