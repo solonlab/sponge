@@ -11,8 +11,8 @@
         <relativePath>../rock-parent/pom.xml</relativePath>
     </parent>
 
-    <groupId>rockadmin</groupId>
-    <artifactId>rockadmin</artifactId>
+    <groupId>spongeadmin</groupId>
+    <artifactId>spongeadmin</artifactId>
     <packaging>jar</packaging>
 
     <description>rockadmin project for Spring Boot</description>

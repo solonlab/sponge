@@ -16,7 +16,9 @@
 
     <modules>
         <module>rock-parent</module>
-        <module>rockadmin</module>
+
+        <module>spongeadmin</module>
+
         <module>trackapi</module>
 
         <module>rockrpc</module>
