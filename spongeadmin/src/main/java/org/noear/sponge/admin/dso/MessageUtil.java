@@ -3,9 +3,6 @@ package org.noear.sponge.admin.dso;
 import org.noear.snack.ONode;
 import org.noear.water.WaterClient;
 
-/**
- * Created by yuety on 2017/7/20.
- */
 public class MessageUtil {
 
     //更新同盾分

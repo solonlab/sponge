@@ -6,11 +6,6 @@ import org.noear.sponge.admin.Config;
 
 import java.sql.SQLException;
 
-/**
- * @Author:Fei.chu
- * @Date:Created in 10:18 2018/08/21
- * @Description:
- */
 public class DbPaasApi {
     private static DbContext db() {
         return Config.water;

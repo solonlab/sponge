@@ -4,9 +4,6 @@ import org.noear.solon.core.handle.Context;
 import org.noear.water.WaterClient;
 import org.noear.water.log.Level;
 
-/**
- * Created by xun on 17/5/2.
- */
 public class LogUtil {
 
     public static void LogDebug(String cmd, String args, Context data) {

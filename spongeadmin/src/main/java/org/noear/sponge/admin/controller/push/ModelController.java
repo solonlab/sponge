@@ -12,11 +12,6 @@ import org.noear.sponge.admin.controller.BaseController;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * 2018.07.24
- *
- * @author konar
- */
 
 @Controller
 @Mapping("push/model")

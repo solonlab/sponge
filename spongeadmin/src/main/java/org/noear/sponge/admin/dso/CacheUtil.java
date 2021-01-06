@@ -3,9 +3,6 @@ package org.noear.sponge.admin.dso;
 import org.noear.weed.cache.ICacheServiceEx;
 import org.noear.sponge.admin.Config;
 
-/**
- * Created by noear on 2017/7/3.
- */
 public class CacheUtil {
    public static boolean isUsingCache = true;
 

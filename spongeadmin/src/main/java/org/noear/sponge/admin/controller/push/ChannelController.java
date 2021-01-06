@@ -18,12 +18,6 @@ import org.noear.sponge.admin.models.sponge.DoveSmsChannelModel;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * 2018.08.06
- *
- * @author konar
- */
-
 @Controller
 @Mapping("push/channel")
 public class ChannelController extends BaseController {

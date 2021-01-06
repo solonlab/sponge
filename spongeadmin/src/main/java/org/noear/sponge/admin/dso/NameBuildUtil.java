@@ -2,11 +2,6 @@ package org.noear.sponge.admin.dso;
 
 import org.noear.sponge.admin.Config;
 
-/**
- * 2018.07.26
- *
- * @author konar
- */
 public class NameBuildUtil {
 
     public static String buildPushTagName(String tag) {

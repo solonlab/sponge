@@ -17,10 +17,6 @@ import org.noear.sponge.admin.Config;
 import java.sql.SQLException;
 import java.util.*;
 
-/**
- * @Author:Fei.chu
- * @Description:
- */
 public class DbTrackApi {
     private static DbContext db() {
         return Config.sponge_track;

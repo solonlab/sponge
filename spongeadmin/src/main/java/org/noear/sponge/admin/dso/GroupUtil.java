@@ -3,11 +3,6 @@ package org.noear.sponge.admin.dso;
 import org.apache.http.util.TextUtils;
 import org.noear.solon.core.handle.Context;
 
-/**
- * @Author:Fei.chu
- * @Date:Created in 13:41 2019/05/09
- * @Description:
- */
 public class GroupUtil {
 
     //应用组cookie记忆处理

@@ -8,11 +8,7 @@ import org.noear.sponge.admin.controller.ViewModel;
 import org.noear.sponge.admin.controller.BaseController;
 import org.noear.sponge.admin.utils.OssUtil;
 
-/**
- * @Author:Fei.chu
- * @Date:Created in 15:29 2019/04/01
- * @Description:
- */
+
 @Controller
 public class FileController extends BaseController {
 

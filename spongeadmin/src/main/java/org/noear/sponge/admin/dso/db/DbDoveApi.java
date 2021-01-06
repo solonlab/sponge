@@ -11,11 +11,6 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
-/**
- * 2018.07.25
- *
- * @author konar
- */
 public class DbDoveApi {
     private static DbContext db() {
         return Config.sponge;

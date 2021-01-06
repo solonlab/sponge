@@ -19,11 +19,6 @@ import org.noear.sponge.admin.models.sponge.DoveMsgModel;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * 2018.07.24
- *
- * @author konar
- */
 
 @Controller
 @Mapping("push/msg")

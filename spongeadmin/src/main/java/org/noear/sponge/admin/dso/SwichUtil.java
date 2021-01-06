@@ -1,10 +1,5 @@
 package org.noear.sponge.admin.dso;
 
-/**
- *
- *
- *根据code获得对应值。
- */
 public class SwichUtil {
     //学历
     public static String getQualification(int qualificationCode){
