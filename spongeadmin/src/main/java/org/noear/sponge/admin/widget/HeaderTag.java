@@ -56,17 +56,17 @@ public class HeaderTag extends TagSupport {
 
             sb.append("</nav>");
 
-            sb.append("<aside>");//new
+            sb.append("<p class='right'>");
             String temp = Session.current().getUserName();
             if(temp!=null) {
-                sb.append("<i class='fa fa-user'></i> ");
+                sb.append("欢迎 ");
                 sb.append(temp);
             }
+            sb.append(" （<a href='#' onclick='modifyMm();return false;' >修改密码</a>）");
+            sb.append("</p>");
 
-            sb.append("<a class='logout' href='/'><i class='fa fa-fw fa-circle-o-notch'></i>退出</a>");
-            sb.append("</aside>");//new
-
-            sb.append("</header>\n");
+            sb.append("</div>");
+            sb.append("</header>");
 
             pageContext.getOut().write(sb.toString());
         } catch (Exception e) {
