@@ -2,7 +2,7 @@ package org.noear.sponge.rock;
 
 import org.noear.sponge.rock.models.*;
 import org.noear.sponge.rock.protocol.RockRpc;
-import org.noear.water.solon_plugin.WaterUpstream;
+import org.noear.water.integration.solon.WaterUpstream;
 import org.noear.water.utils.TextUtils;
 import org.noear.weed.cache.EmptyCache;
 import org.noear.weed.cache.ICacheServiceEx;

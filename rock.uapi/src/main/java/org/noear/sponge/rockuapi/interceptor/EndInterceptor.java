@@ -3,8 +3,8 @@ package org.noear.sponge.rockuapi.interceptor;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.Handler;
 import org.noear.water.WaterClient;
+import org.noear.water.integration.solon.WaterAdapter;
 import org.noear.water.utils.FromUtils;
-import org.noear.water.solon_plugin.WaterAdapter;
 import org.noear.water.utils.Timecount;
 
 /** 结束计时拦截器（完成计时，并发送到WATER） */

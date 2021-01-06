@@ -8,7 +8,7 @@ import org.noear.solon.core.handle.Handler;
 import org.noear.water.WaterClient;
 import org.noear.water.log.WaterLogger;
 import org.noear.water.utils.FromUtils;
-import org.noear.water.solon_plugin.WaterAdapter;
+import org.noear.water.solon_plugin1.WaterAdapter;
 
 @Component
 public class EndHandler implements Handler {
