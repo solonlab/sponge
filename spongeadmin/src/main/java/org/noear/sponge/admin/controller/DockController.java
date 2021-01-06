@@ -12,7 +12,6 @@ import org.noear.water.utils.TextUtils;
 
 import java.net.URLDecoder;
 
- //非单例
 @Controller
 public class DockController extends BaseController {
     //支持外部url

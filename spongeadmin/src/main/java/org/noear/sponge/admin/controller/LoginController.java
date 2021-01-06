@@ -22,10 +22,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by yuety on 14-9-10.
- */
- //非单例
 @Controller
 public class LoginController extends BaseController {
 

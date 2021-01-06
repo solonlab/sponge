@@ -2,9 +2,6 @@ package org.noear.sponge.admin.controller;
 
 import java.util.HashMap;
 
-/**
- * Created by yuety on 14-9-10.
- */
 //用作视图返回的模型
 public class ViewModel extends HashMap<String,Object>{
 

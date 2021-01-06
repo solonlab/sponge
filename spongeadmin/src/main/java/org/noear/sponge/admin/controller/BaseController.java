@@ -7,10 +7,6 @@ import org.noear.sponge.admin.Config;
 import org.noear.sponge.admin.dso.Session;
 import org.noear.water.utils.IPUtils;
 
-
-/**
- * Created by yuety on 14-9-11.
- */
 @Singleton(false)
 public abstract class BaseController {
 
