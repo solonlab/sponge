@@ -13,9 +13,6 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.util.List;
 
-/**
- * Created by yuety on 14-9-10.
- */
 public class HeaderTag extends TagSupport {
     @Override
     public int doStartTag() throws JspException {
@@ -45,20 +42,6 @@ public class HeaderTag extends TagSupport {
             //cls1
             sb.append("<a>").append(Config.web_title).append("</a>");
 
-            //cls2::下拉框形式显示App Group
-//            sb.append("<select class=\"header_select\">");
-//            for (AppGroupModel appGroup :
-//                    DbAppGroupApi.getAllAppGroups()) {
-//                sb.append("<option class=\"header_option\">");
-//                sb.append(appGroup.getName());
-//                sb.append("</option>");
-//            }
-//            sb.append("</select>");
-
-            //cls3::图片形式
-//            sb.append("<img src=\"");
-//            sb.append(request.getAttribute("img"));
-//            sb.append("/title_51kb.png\"/>");
 
             sb.append("</agroup>");
             sb.append("<nav class='left'>");
