@@ -1,7 +1,6 @@
 package org.noear.sponge.admin.dso;
 
 import org.noear.water.utils.IDUtils;
-import org.noear.sponge.admin.Config;
 
 import java.util.Random;
 import java.util.UUID;
@@ -57,30 +56,6 @@ public class IDUtil {
         return getID("ip_id") + 20000;
     }
 
-    public static long buildDoveMsgID() {
-        return getID("dove_msg_id");
-    }
-
-    public static long buildDoveSmsID() {
-        return getID("dove_sms_id");
-    }
-
-    public static int buildDoveMsgActionID() {
-        return new Long(getID("dove_msg_action_id")).intValue();
-    }
-
-    public static int buildDoveMsgLinkID() {
-        return new Long(getID("dove_msg_link_id")).intValue();
-    }
-
-    public static int buildDoveSmsChannelID() {
-        return new Long(getID("dove_sms_channel_id")).intValue();
-    }
-
-    public static int buildDoveSmsTemplateID() {
-        return new Long(getID("dove_sms_template_id")).intValue();
-    }
-
     public static long buildUrlID(){
         return getID("url_id") + 1000000;
     }
@@ -89,18 +64,8 @@ public class IDUtil {
         return getID(tag) + 1000000;
     }
 
-    public static long buildUserBackID(){return getID1("angel_user_back");}
-
-    public static long buildAngelRiskRubberID(){return getID("angel_risk_rubber");}
-
-    public static long buildRiskBlackListID(){return getPandaID("panda_risk_blacklist");}
-
     private static long getID1(String tag) {
-        long max = 10000000;
-
-        if (Config.is_test_env) {
-            max = 1000000;
-        }
+        long max = 1000000;
 
         return buildID(tag, max);
     }
@@ -109,9 +74,6 @@ public class IDUtil {
         return IDUtils.newID("BEAUTY_ID", tag) + startIndex;
     }
 
-    public static long getPandaID(String tag) {
-        return IDUtils.newID("ID", tag) + 100000;
-    }
 
     public static long getID(String tag) {
         return IDUtils.newID("SPONGE_ID", tag);

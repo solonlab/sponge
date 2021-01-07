@@ -16,7 +16,7 @@ import java.util.List;
 
 public class DbRockApi {
     private static DbContext db() {
-        return Config.rock;
+        return Config.sponge_rock;
     }
 
     public static List<UserGroupModel> getUserGroup(String name) throws SQLException{
