@@ -17,7 +17,7 @@ public final class RockClient {
 
     //初始化...
     public static void tryInit(ICacheServiceEx cache) {
-        rock_db = WaterClient.Config.get("sponge", "rock").getDb(true);
+        rock_db = WaterClient.Config.get("sponge", "sponge_rock").getDb(true);
         rock_cache = cache;
     }
 
