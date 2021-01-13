@@ -84,7 +84,7 @@ public class AppModel implements IBinder
         }
 
         if(_setting.containsKey(ver) == false){
-            _setting.put(ver, RockClient.getAppSettingEx(agroup_id, app_id, ver, false));
+            _setting.put(ver, RockClient.getAppSettingEx2(agroup_id, app_id, ver, false));
         }
     }
     private Map<Integer,AppSettingCollection> _client_setting = null;
@@ -94,7 +94,7 @@ public class AppModel implements IBinder
 
         }
         if (_client_setting.containsKey(ver) == false) {
-            _client_setting.put(ver, RockClient.getAppSettingEx(agroup_id, app_id, ver, true));
+            _client_setting.put(ver, RockClient.getAppSettingEx2(agroup_id, app_id, ver, true));
         }
     }
 

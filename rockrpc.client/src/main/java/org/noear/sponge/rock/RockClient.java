@@ -42,22 +42,30 @@ public class RockClient {
     }
 
 
-    //添加一个应用模型
+    /**
+     * 添加一个应用模型
+     * */
     public static AppModel addApp(int agroupID, int ugroupID, String name) throws SQLException {
         return instance().addApp(agroupID, ugroupID, name);
     }
 
-    //更新应用的名称
+    /**
+     * 更新应用的名称
+     * */
     public static void udpAppName(int appID, String name) throws SQLException {
         instance().udpAppName(appID, name);
     }
 
-    //更新应用的审核状态
+    /**
+     * 更新应用的审核状态
+     * */
     public static void udpAppExamine(int appID, int isExamine, int examineVer) throws SQLException {
         instance().udpAppExamine(appID, isExamine, examineVer);
     }
 
-    //获取一个应用模型
+    /**
+     * 获取一个应用模型
+     * */
     public static AppModel getAppByID(int appID) throws SQLException {
         if (appID < 1) {
             throw new RuntimeException("请输入有效的 appID");
@@ -114,7 +122,9 @@ public class RockClient {
 
     }
 
-    //获取一个应用设置项
+    /**
+     * 获取一个应用设置项
+     * */
     public static AppSettingModel getAppSettingItem(int appID, String name) throws Exception {
         if (appID < 1) {
             throw new Exception("请输入有效的 appID");
@@ -132,7 +142,9 @@ public class RockClient {
         return instance().getAppSettingItemNoCache(appID, name);
     }
 
-    //仅用于管理
+    /**
+     * 仅用于管理
+     * */
     public static boolean delAppSettingItem(int appID, String name) throws Exception {
         if (appID < 1) {
             throw new Exception("请输入有效的 appID");
@@ -141,21 +153,23 @@ public class RockClient {
         return instance().delAppSettingItem(appID, name);
     }
 
-    //获取应用设置项 //已包函时间
+    /**
+     * 获取应用设置项（已包函时间）
+     * */
     public static AppSettingCollection getAppSettingEx(int appID, int ver, boolean isClientOnly) throws Exception {
         return cacheLocal.getBy("getAppSettingEx_" + appID + "_" + ver + "_" + isClientOnly, (ru) ->
                 instance().getAppSettingEx(appID, ver, isClientOnly));
     }
 
 
-//    public static AppSettingCollection getAppSettingEx(int groupID, int appID, int ver, boolean isClientOnly) throws Exception {
-//        if (appID < 1) {
-//            throw new Exception("请输入有效的 appID");
-//        }
-//
-//        return cacheLocal.getBy("getAppSettingEx_" + groupID + "_" + appID + "_" + ver + "_" + isClientOnly, (ru) ->
-//                instance().getAppSettingEx(groupID, appID, ver, isClientOnly));
-//    }
+    public static AppSettingCollection getAppSettingEx2(int groupID, int appID, int ver, boolean isClientOnly) throws Exception {
+        if (appID < 1) {
+            throw new Exception("请输入有效的 appID");
+        }
+
+        return cacheLocal.getBy("getAppSettingEx2_" + groupID + "_" + appID + "_" + ver + "_" + isClientOnly, (ru) ->
+                instance().getAppSettingEx2(groupID, appID, ver, isClientOnly));
+    }
 
     public static List<AppSettingModel> getAppSettingItemsByName(int agroupID, String name) throws Exception {
         if (agroupID < 1) {
@@ -166,7 +180,9 @@ public class RockClient {
                 instance().getAppSettingItemsByName(agroupID, name));
     }
 
-    //获取一个应用设置项 //如果没有去app_group_setting获取
+    /**
+     * 获取一个应用设置项（如果没有去app_group_setting获取）
+     * */
     public static AppSettingModel getAppSettingItemEx(int appID, String name) throws Exception {
         if (appID < 1) {
             throw new Exception("请输入有效的 appID");
@@ -177,7 +193,9 @@ public class RockClient {
     }
 
 
-    //设置一个应用设置项的值
+    /**
+     * 设置一个应用设置项的值
+     * */
     public static void setAppSettingItem(int appID, String name, int type, String value, int verStart, boolean isClient) throws Exception {
         if (appID < 1) {
             throw new Exception("请输入有效的 appID");
@@ -187,7 +205,9 @@ public class RockClient {
     }
 
 
-    //获取一个应用组设置集
+    /**
+     * 获取一个应用组设置集
+     * */
     public static AppSettingCollection getAppGroupSetting(int agroupID, int verStart, boolean isClientOnly) throws Exception {
         if (agroupID < 1) {
             throw new Exception("请输入有效的 agroup_id");
@@ -197,7 +217,9 @@ public class RockClient {
                 instance().getAppGroupSetting(agroupID, verStart, isClientOnly));
     }
 
-    //获取一个应用组的设置项
+    /**
+     * 获取一个应用组的设置项
+     * */
     public static AppSettingModel getAppGroupSettingItem(int agroupID, String name) throws Exception {
         if (agroupID < 1) {
             throw new Exception("请输入有效的 agroup_id");
@@ -216,7 +238,9 @@ public class RockClient {
     }
 
 
-    //仅用于管理
+    /**
+     * 仅用于管理
+     * */
     public static boolean delAppGroupSettingItem(int agroupID, String name) throws Exception {
         if (agroupID < 1) {
             throw new Exception("请输入有效的 agroupID");
@@ -226,7 +250,9 @@ public class RockClient {
     }
 
 
-    //设置一个应用组的设置项的值
+    /**
+     * 设置一个应用组的设置项的值
+     * */
     public static void setAppGroupSettingItem(int agroupID, String name, int type, String value, int verStart, boolean isClient) throws Exception {
         if (agroupID < 1) {
             throw new Exception("请输入有效的 agroup_id");
@@ -266,7 +292,9 @@ public class RockClient {
 
     //=======================
 
-    //获取接口状态码
+    /**
+     * 获取接口状态码
+     * */
     public static AppCodeCollection getAppCodes(int agroupID) throws SQLException {
         return cacheLocal.getBy("getAppCodes_" + agroupID, (ru) ->
                 instance().getAppCodes(agroupID));
@@ -277,7 +305,9 @@ public class RockClient {
                 instance().getAppCodesByLang(agroupID, lang));
     }
 
-    //获取一个Api Code 的描述 //无异常
+    /**
+     * 获取一个Api Code 的描述(无异常)
+     * */
     public static String tryAppCode(int agroupID, int code) {
         try {
             return getAppCode(agroupID, code);
@@ -294,7 +324,9 @@ public class RockClient {
         }
     }
 
-    //获取一个Api Code 的描述
+    /**
+     * 获取一个Api Code 的描述
+     * */
     public static String getAppCode(int agroupID, int code) throws SQLException {
         return cacheLocal.getBy("getAppCode_" + agroupID + "_" + code, (ru) ->
                 instance().getAppCode(agroupID, code));

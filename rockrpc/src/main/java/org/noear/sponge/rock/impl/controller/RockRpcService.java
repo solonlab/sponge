@@ -14,10 +14,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-//@XBefore({StartHandler.class,IpHandler.class})
-//@XAfter({EndHandler.class})
+//@Before({StartHandler.class,IpHandler.class})
+//@After({EndHandler.class})
 //@Mapping("/")
-//@XBean(remoting = true)
+//@Component(remoting = true)
 @Component
 public final class RockRpcService implements RockRpc {
     @Inject("rock_db")
@@ -257,11 +257,11 @@ public final class RockRpcService implements RockRpc {
     public AppSettingCollection getAppSettingEx(@NonNull Integer appID,@NonNull  Integer ver, @NonNull Boolean isClientOnly) throws Exception {
          Integer agroup_id = getAppByID(appID).agroup_id;
 
-        return getAppSettingEx0(agroup_id, appID, ver, isClientOnly);
+        return getAppSettingEx2(agroup_id, appID, ver, isClientOnly);
     }
 
     //获取应用设置项 //已包函时间
-    private AppSettingCollection getAppSettingEx0(@NonNull Integer groupID, @NonNull Integer appID, @NonNull Integer ver,@NonNull Boolean isClientOnly) throws Exception {
+    public AppSettingCollection getAppSettingEx2(@NonNull Integer groupID, @NonNull Integer appID, @NonNull Integer ver,@NonNull Boolean isClientOnly) throws Exception {
         if (appID < 1) {
             throw new Exception("请输入有效的 appID");
         }

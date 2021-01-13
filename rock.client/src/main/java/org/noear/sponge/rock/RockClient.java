@@ -70,7 +70,7 @@ public final class RockClient {
     }
 
     //获取一个应用模型
-    public static AppModel getApp(int appID) throws SQLException {
+    public static AppModel getAppById(int appID) throws SQLException {
         app_get_app sp = new app_get_app(rock_db);
 
         sp.app_id = appID;
@@ -83,7 +83,7 @@ public final class RockClient {
     }
 
     //获取一个应用模型
-    public static AppModel getApp(String akey) throws SQLException {
+    public static AppModel getAppByKey(String akey) throws SQLException {
         app_get_app sp = new app_get_app(rock_db);
         sp.akey = akey;
         sp.caching(rock_cache)
@@ -228,13 +228,13 @@ public final class RockClient {
 
 
     public static AppSettingCollection getAppSettingEx(int appID, int ver, boolean isClientOnly) throws Exception {
-        int agroup_id = getApp(appID).agroup_id;
+        int agroup_id = getAppById(appID).agroup_id;
 
-        return getAppSettingEx(agroup_id, appID, ver, isClientOnly);
+        return getAppSettingEx2(agroup_id, appID, ver, isClientOnly);
     }
 
     //获取应用设置项 //已包函时间
-    public static AppSettingCollection getAppSettingEx(int groupID, int appID, int ver, boolean isClientOnly) throws Exception {
+    public static AppSettingCollection getAppSettingEx2(int groupID, int appID, int ver, boolean isClientOnly) throws Exception {
         if (appID < 1) {
             throw new Exception("请输入有效的 appID");
         }
@@ -281,7 +281,7 @@ public final class RockClient {
         if (item.row_id > 0) {
             return item;
         } else {
-            int agroup_id = getApp(appID).agroup_id;
+            int agroup_id = getAppById(appID).agroup_id;
             return getAppGroupSettingItem(agroup_id, name);
         }
     }
@@ -293,7 +293,7 @@ public final class RockClient {
             throw new Exception("请输入有效的 appID");
         }
 
-        int agroup_id = getApp(appID).agroup_id;
+        int agroup_id = getAppById(appID).agroup_id;
 
         if (db().table("appx_ex_setting").where("app_id=? AND name=?", appID, name).exists()) {
             db().table("appx_ex_setting")
@@ -472,7 +472,7 @@ public final class RockClient {
             return ver;
         }
 
-        int agroup_id = getApp(appID).agroup_id;
+        int agroup_id = getAppById(appID).agroup_id;
 
         ver = doGetAppVersion(agroup_id, 0, platform);
 
