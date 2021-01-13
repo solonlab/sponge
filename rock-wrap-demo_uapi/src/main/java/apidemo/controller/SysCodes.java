@@ -6,7 +6,7 @@ import org.noear.sponge.rockuapi.UapiCode;
 /**
  * 系统状态码
  * */
-public class SysCode extends UapiCodes {
+public class SysCodes extends UapiCodes {
 
     public static final UapiCode CODE_102 = new UapiCode(102); // 用户不存在
 

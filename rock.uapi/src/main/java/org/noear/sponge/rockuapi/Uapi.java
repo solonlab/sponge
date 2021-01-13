@@ -117,6 +117,6 @@ public class Uapi {
     }
 
     public AppModel getApp(int appID) throws SQLException{
-        return RockClient.getApp(appID);
+        return RockClient.getAppByID(appID);
     }
 }

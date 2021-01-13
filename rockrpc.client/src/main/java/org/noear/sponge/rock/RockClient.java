@@ -58,7 +58,7 @@ public class RockClient {
     }
 
     //获取一个应用模型
-    public static AppModel getApp(int appID) throws SQLException {
+    public static AppModel getAppByID(int appID) throws SQLException {
         if (appID < 1) {
             throw new RuntimeException("请输入有效的 appID");
         }
@@ -67,7 +67,7 @@ public class RockClient {
     }
 
     //获取一个应用模型
-    public static AppModel getApp(String akey) throws SQLException {
+    public static AppModel getAppByKey(String akey) throws SQLException {
         if (TextUtils.isEmpty(akey)) {
             throw new RuntimeException("请输入有效的 akey");
         }

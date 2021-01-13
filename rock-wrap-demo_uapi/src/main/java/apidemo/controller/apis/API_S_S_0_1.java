@@ -3,7 +3,7 @@ package apidemo.controller.apis;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
 import org.noear.solon.annotation.Mapping;
-import apidemo.controller.SysCode;
+import apidemo.controller.SysCodes;
 import apidemo.controller.UapiBase;
 import apidemo.dso.Logger;
 import apidemo.dso.db.BullOrderService;
@@ -12,6 +12,7 @@ import apidemo.models.BullOrderModel;
 import apidemo.models.BullOrderStatusEnum;
 import apidemo.models.CoProductModel;
 import apidemo.models.UserModel;
+import org.noear.solon.extend.validation.annotation.NotNull;
 
 import java.util.Map;
 
@@ -24,7 +25,7 @@ public class API_S_S_0_1 extends UapiBase {
     @Inject
     CoProductService coProductService;
 
-//    @NotNull({"userId, type, pId"})
+    @NotNull({"userId, type, pId"})
     @Mapping("S.S.0.1")
     public Map<String, Object> exec(long userId, long pId, int type) throws Exception {
 
@@ -35,14 +36,14 @@ public class API_S_S_0_1 extends UapiBase {
 
         // 用户是否存在
         if (um.user_id <= 0) {
-            throw SysCode.CODE_102;
+            throw SysCodes.CODE_102;
         }
 
         CoProductModel cpm = coProductService.get_co_product(pId);
 
         // 产品是否存在
         if (cpm.product_id <= 0){
-            throw SysCode.CODE_1000;
+            throw SysCodes.CODE_1000;
         }
 
         BullOrderModel bom = orderService.get_bull_order(userId, pId);

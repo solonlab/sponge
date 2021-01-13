@@ -5,7 +5,7 @@ import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.extend.validation.annotation.NotNull;
-import apidemo.controller.SysCode;
+import apidemo.controller.SysCodes;
 import apidemo.controller.UapiBase;
 import apidemo.dso.RedisUtil;
 import apidemo.dso.StandardApi;
@@ -34,33 +34,33 @@ public class CMD_A_A_0_3 extends UapiBase {
 
         // 判断用户是否登录
         if (!isLogin()) {
-            throw SysCode.CODE_102;
+            throw SysCodes.CODE_102;
         }
 
         // 先判断产品是否可用
         CoProductModel cpm = coProductService.get_co_product(pId);
 
         if (cpm.product_id <= 0) {
-            throw SysCode.CODE_1000;
+            throw SysCodes.CODE_1000;
         }
 
         // 进件关闭0 开启1
         if (cpm.bull_submit_state == 0) {
-            throw SysCode.CODE_1001;
+            throw SysCodes.CODE_1001;
         }
 
         // 判断进件数量是否有已满
         int submitTotal = RedisUtil.getSubmitStock(pId);
 
         if (submitTotal > cpm.bull_submit_max) {
-            throw SysCode.CODE_1001;
+            throw SysCodes.CODE_1001;
         }
 
         BullOrderModel bom = bullOrderService.get_bull_order(getUserID(), pId);
 
         // 如果当前订单状态不是银行卡认证成功，则不能进行进件
         if (bom.status != BullOrderStatusEnum.BANK_SUCCESS.type()) {
-            throw SysCode.CODE_1002;
+            throw SysCodes.CODE_1002;
         }
 
         UserValidateModel uvm = userService.get_user_validate(getUserID());
@@ -72,7 +72,7 @@ public class CMD_A_A_0_3 extends UapiBase {
                 ONode.load(uvm.validate_info));
 
         if (oNode.get("code").getInt() != 1) {
-            throw SysCode.CODE_1003;
+            throw SysCodes.CODE_1003;
         }
 
         // 修改订单状态

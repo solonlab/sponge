@@ -7,7 +7,7 @@ import org.noear.solon.annotation.Mapping;
 import org.noear.solon.extend.validation.annotation.NotZero;
 import org.noear.water.utils.LockUtils;
 import apidemo.Config;
-import apidemo.controller.SysCode;
+import apidemo.controller.SysCodes;
 import apidemo.controller.UapiBase;
 import apidemo.dso.LockKeyBuilder;
 import apidemo.dso.RedisUtil;
@@ -36,7 +36,7 @@ public class CMD_A_A_0_2 extends UapiBase {
 
         // 判断用户是否登录
         if (!isLogin()) {
-            throw SysCode.CODE_102;
+            throw SysCodes.CODE_102;
         }
 
         int status = 0;
@@ -47,7 +47,7 @@ public class CMD_A_A_0_2 extends UapiBase {
 
         // 检测产品是否存在
         if (cpm.product_id <= 0) {
-            throw SysCode.CODE_1000;
+            throw SysCodes.CODE_1000;
         }
 
         // 查询用户是否存在该产品订单
@@ -59,7 +59,7 @@ public class CMD_A_A_0_2 extends UapiBase {
 
             // 对该用户上锁
             if (!LockUtils.tryLock(Config.group_name, LockKeyBuilder.buildUserBullOrder(getUser().user_id))) {
-                throw SysCode.CODE_212;
+                throw SysCodes.CODE_212;
             }
 
             bullOrderService.addBullOrder(getUser().agroup_id,

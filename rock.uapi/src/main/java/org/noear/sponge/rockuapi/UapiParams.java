@@ -55,11 +55,11 @@ public class UapiParams {
     public AppModel getApp() throws SQLException {
         if (_app == null) {
             if (appID > 0) {
-                _app = RockClient.getApp(appID);
+                _app = RockClient.getAppByID(appID);
             } else {
                 String akey = ctx.param("akey");
                 if (TextUtils.isEmpty(akey) == false) {
-                    _app = RockClient.getApp(akey);
+                    _app = RockClient.getAppByKey(akey);
                 }
             }
         }

@@ -5,7 +5,7 @@ import org.noear.solon.annotation.Inject;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.extend.validation.annotation.NotNull;
 import org.noear.water.utils.Datetime;
-import apidemo.controller.SysCode;
+import apidemo.controller.SysCodes;
 import apidemo.controller.UapiBase;
 import apidemo.dso.db.BullOrderService;
 import apidemo.dso.db.CoProductService;
@@ -34,7 +34,7 @@ public class CMD_A_A_0_4 extends UapiBase {
 
         // 判断用户是否登录
         if (!isLogin()) {
-            throw SysCode.CODE_102;
+            throw SysCodes.CODE_102;
         }
 
         List<BullOrderModel> orders = bullOrderService.list_bull_order(getUserID(), type, next, size);

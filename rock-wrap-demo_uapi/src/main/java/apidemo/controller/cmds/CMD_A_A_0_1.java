@@ -4,7 +4,7 @@ import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.extend.validation.annotation.NotNull;
-import apidemo.controller.SysCode;
+import apidemo.controller.SysCodes;
 import apidemo.controller.UapiBase;
 import apidemo.dso.db.mapper.CoProductMapper;
 import apidemo.models.CoProductModel;
@@ -23,7 +23,7 @@ public class CMD_A_A_0_1 extends UapiBase {
 
         // 判断用户是否登录
         if (!isLogin()) {
-            throw SysCode.CODE_102;
+            throw SysCodes.CODE_102;
         }
 
         CoProductModel model = productService.get_co_product(pId);

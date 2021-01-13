@@ -34,7 +34,7 @@ public class RockRpcTest {
 
     @Test
     public void test1() throws Exception {
-        AppModel app = RockClient.getApp(48);
+        AppModel app = RockClient.getAppByID(48);
 
         assert app != null;
         assert app.app_id == 48;

@@ -32,7 +32,7 @@ public class SignHandler {
         ONode n = new ONode();
 
         try {
-            AppModel app = RockClient.getApp(Integer.parseInt(cid));
+            AppModel app = RockClient.getAppByID(Integer.parseInt(cid));
 
             String sign = buildSign(app, cmd, arg);
 
