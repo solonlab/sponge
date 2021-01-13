@@ -2,6 +2,7 @@ package org.noear.sponge.admin.controller._bcf;
 
 
 import org.noear.bcf.BcfInterceptorBase;
+import org.noear.solon.Solon;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.Context;
@@ -32,10 +33,12 @@ public class BcfInterceptor extends BcfInterceptorBase implements Handler {
         if (path.startsWith("/rock/") || path.startsWith("/auth/")) {
             String ip = IPUtils.getIP(ctx);
 
-            if (WaterClient.Whitelist.existsOfClientIp(ip) == false) {
-                ctx.setHandled(true);
-                ctx.output(ip + ",not is whitelist!");
-                return;
+            if(Solon.cfg().isWhiteMode()) {
+                if (WaterClient.Whitelist.existsOfClientIp(ip) == false) {
+                    ctx.setHandled(true);
+                    ctx.output(ip + ",not is whitelist!");
+                    return;
+                }
             }
         }
 
