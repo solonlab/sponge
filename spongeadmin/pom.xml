@@ -15,7 +15,7 @@
     <artifactId>spongeadmin</artifactId>
     <packaging>jar</packaging>
 
-    <description>rockadmin project for Spring Boot</description>
+    <description>rockadmin project for Solon Boot</description>
 
 
     <dependencies>
@@ -118,7 +118,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>App</mainClass>
+                            <mainClass>org.noear.sponge.admin.App</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

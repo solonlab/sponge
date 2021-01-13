@@ -23,7 +23,7 @@
     <dependencies>
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon.boot.jlhttp</artifactId>
+            <artifactId>solon.boot.smarthttp</artifactId>
             <version>${solon.ver}</version>
         </dependency>
 
@@ -113,7 +113,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>App</mainClass>
+                            <mainClass>org.noear.sponge.track.App</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

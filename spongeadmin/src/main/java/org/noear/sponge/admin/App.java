@@ -4,19 +4,18 @@ import org.noear.solon.Solon;
 import org.noear.solon.core.handle.Context;
 import org.noear.sponge.admin.dso.LogUtil;
 
-public class App
-{
+public class App {
     public static void main(String[] args) {
         Solon.start(App.class, args, app -> {
             //
             // 在此处初始化配置
             //
             Config.tryInit();
-        }).onError((ex)->{
+        }).onError((ex) -> {
             Context ctx = Context.current();
 
             if (ctx != null) {
-                LogUtil.error("XAPP", ctx.path(), ctx.paramMap().toString(),ex);
+                LogUtil.error("XAPP", ctx.path(), ctx.paramMap().toString(), ex);
             }
         });
     }
