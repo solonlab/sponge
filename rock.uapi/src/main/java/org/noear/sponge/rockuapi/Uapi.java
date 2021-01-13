@@ -10,10 +10,10 @@ import org.noear.water.utils.IPUtils;
 import java.sql.SQLException;
 
 @Singleton(false)
-public class RockUapi {
+public class Uapi {
     protected final Context ctx;
 
-    public RockUapi(){
+    public Uapi(){
         ctx = Context.current();
     }
 
@@ -28,7 +28,7 @@ public class RockUapi {
         }
     }
 
-    public static <T extends RockUapi> T current(){
+    public static <T extends Uapi> T current(){
         return (T) Context.current().controller();
     }
 
@@ -69,11 +69,11 @@ public class RockUapi {
 
     ///////////
 
-    private RockParams _params;
+    private UapiParams _params;
     /**
      * 基础参数（不一定会有）
      * */
-    public RockParams params() {
+    public UapiParams params() {
         if (_params != null) {
             return _params;
         }

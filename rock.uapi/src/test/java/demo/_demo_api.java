@@ -1,6 +1,6 @@
 package demo;
 
-import org.noear.sponge.rockuapi.RockGateway;
+import org.noear.sponge.rockuapi.UapiGateway;
 import org.noear.sponge.rockuapi.UapiCode;
 import org.noear.sponge.rockuapi.interceptor.EndInterceptor;
 import org.noear.sponge.rockuapi.interceptor.OutputInterceptor;
@@ -10,7 +10,7 @@ import org.noear.solon.annotation.Mapping;
 
 @Mapping("/api/*")
 @Controller
-class _demo_api extends RockGateway {
+class _demo_api extends UapiGateway {
     @Override
     protected void register() {
         //开始计时

@@ -1,6 +1,6 @@
 package org.noear.sponge.rockuapi.interceptor;
 
-import org.noear.sponge.rockuapi.RockParams;
+import org.noear.sponge.rockuapi.UapiParams;
 import org.noear.snack.ONode;
 import org.noear.sponge.rockuapi.decoder.RockDecoder;
 import org.noear.sponge.rockuapi.decoder.RockDefDecoder;
@@ -45,7 +45,7 @@ public class ParamsBuildInterceptor implements Handler {
 
 
         /** 处理CMD风格的参数 */
-        RockParams params = new RockParams(ctx);
+        UapiParams params = new UapiParams(ctx);
         ctx.attrSet(Attrs.params, params);
 
         //1.获取参数与令牌

@@ -1,10 +1,10 @@
 package org.noear.sponge.rockuapi.interceptor;
 
 import org.noear.sponge.rock.models.AppModel;
-import org.noear.sponge.rockuapi.RockParams;
+import org.noear.sponge.rockuapi.UapiParams;
 import org.noear.sponge.rockuapi.encoder.RockDefEncoder;
 import org.noear.sponge.rockuapi.encoder.RockEncoder;
-import org.noear.sponge.rockuapi.RockCode;
+import org.noear.sponge.rockuapi.UapiCodes;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.Handler;
 import org.noear.water.utils.TextUtils;
@@ -38,7 +38,7 @@ public class ParamsAuthInterceptor implements Handler {
 
 
         /** 获取参数 */
-        RockParams ctp = ctx.attr(Attrs.params);
+        UapiParams ctp = ctx.attr(Attrs.params);
 
         if (ctp == null) {
             return;
@@ -58,7 +58,7 @@ public class ParamsAuthInterceptor implements Handler {
         }
 
         if (isOk == false) {
-            throw RockCode.CODE_12;
+            throw UapiCodes.CODE_12;
         }
     }
 

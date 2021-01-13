@@ -1,7 +1,7 @@
 package apidemo.dso;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
-import org.noear.sponge.rockuapi.RockParams;
+import org.noear.sponge.rockuapi.UapiParams;
 import org.noear.water.log.WaterLogger;
 import apidemo.controller.UapiBase;
 
@@ -17,7 +17,7 @@ public class Logger {
      * @param params
      * @param result
      */
-    public static void logOutput(UapiBase cmd, RockParams params, String result) {
+    public static void logOutput(UapiBase cmd, UapiParams params, String result) {
 
         String summary = (null == params) ? "" : params.org_param;
         if (null == summary) {
@@ -48,7 +48,7 @@ public class Logger {
      * @param params
      * @param e
      */
-    public static void logError(UapiBase cmd, RockParams params, Throwable e) {
+    public static void logError(UapiBase cmd, UapiParams params, Throwable e) {
 
         String summary = null != params ? params.org_param : "";
 

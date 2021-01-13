@@ -3,7 +3,7 @@ package apidemo.controller;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.Aop;
-import org.noear.sponge.rockuapi.RockGateway;
+import org.noear.sponge.rockuapi.UapiGateway;
 import org.noear.sponge.rockuapi.decoder.RockAesDecoder;
 import org.noear.sponge.rockuapi.encoder.RockAesEncoder;
 import org.noear.sponge.rockuapi.encoder.RockSha1Encoder;
@@ -14,7 +14,7 @@ import org.noear.sponge.rockuapi.interceptor.ParamsAuthInterceptor;
 
 @Mapping("/CMD/*")
 @Controller
-public class CmdGateway extends RockGateway {
+public class CmdGateway extends UapiGateway {
 
     @Override
     public int agroup_id() {

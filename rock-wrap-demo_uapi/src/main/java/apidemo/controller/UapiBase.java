@@ -2,7 +2,7 @@ package apidemo.controller;
 
 import org.noear.solon.annotation.Inject;
 import org.noear.solon.extend.validation.annotation.Valid;
-import org.noear.sponge.rockuapi.RockUapi;
+import org.noear.sponge.rockuapi.Uapi;
 import apidemo.dso.db.UserService;
 import apidemo.models.UserModel;
 
@@ -10,7 +10,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Valid
-public class UapiBase extends RockUapi {
+public class UapiBase extends Uapi {
 
     private UserModel _user = null;
 

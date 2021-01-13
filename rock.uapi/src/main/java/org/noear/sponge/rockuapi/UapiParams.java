@@ -8,10 +8,10 @@ import org.noear.water.utils.TextUtils;
 
 import java.sql.SQLException;
 
-public class RockParams {
+public class UapiParams {
     private Context ctx;
 
-    public RockParams(Context ctx){
+    public UapiParams(Context ctx){
         this.ctx = ctx;
     }
 

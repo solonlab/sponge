@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public abstract class RockGateway extends Gateway {
+public abstract class UapiGateway extends Gateway {
 
     /**
      * 应用组ID
@@ -50,7 +50,7 @@ public abstract class RockGateway extends Gateway {
                 Map<String, Object> map = new HashMap<>();
 
                 map.put("code", err.getCode());
-                map.put("msg", RockCode.CODE_txt(agroup_id(), g_lang(c), err));
+                map.put("msg", UapiCodes.CODE_txt(agroup_id(), g_lang(c), err));
 
                 c.result = map;
             } else if (obj instanceof Throwable) {
@@ -58,7 +58,7 @@ public abstract class RockGateway extends Gateway {
                 Map<String, Object> map = new HashMap<>();
 
                 map.put("code", 0);
-                map.put("msg", RockCode.CODE_txt(agroup_id(), g_lang(c), RockCode.CODE_0));
+                map.put("msg", UapiCodes.CODE_txt(agroup_id(), g_lang(c), UapiCodes.CODE_0));
 
                 c.result = map;
             } else if (obj instanceof ONode) {

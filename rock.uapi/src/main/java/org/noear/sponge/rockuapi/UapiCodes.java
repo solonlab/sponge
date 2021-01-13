@@ -5,7 +5,7 @@ import org.noear.water.utils.TextUtils;
 
 import java.sql.SQLException;
 
-public class RockCode {
+public class UapiCodes {
     /**
      * 失败，未知错误
      */

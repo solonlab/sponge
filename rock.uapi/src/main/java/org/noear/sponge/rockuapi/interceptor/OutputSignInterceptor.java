@@ -1,6 +1,6 @@
 package org.noear.sponge.rockuapi.interceptor;
 
-import org.noear.sponge.rockuapi.RockParams;
+import org.noear.sponge.rockuapi.UapiParams;
 import org.noear.sponge.rockuapi.encoder.RockDefEncoder;
 import org.noear.sponge.rockuapi.encoder.RockEncoder;
 import org.noear.solon.core.handle.Context;
@@ -25,7 +25,7 @@ public class OutputSignInterceptor implements Handler {
     @Override
     public void handle(Context ctx) throws Throwable {
         /** 获取参数 */
-        RockParams ctp = ctx.attr(Attrs.params);
+        UapiParams ctp = ctx.attr(Attrs.params);
 
         if(ctp == null){
             return;

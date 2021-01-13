@@ -1,6 +1,6 @@
 package org.noear.sponge.rockuapi.validation;
 
-import org.noear.sponge.rockuapi.RockCode;
+import org.noear.sponge.rockuapi.UapiCodes;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.Result;
 import org.noear.solon.extend.validation.ValidatorManager;
@@ -20,11 +20,11 @@ public class ValidatorManagerNew extends ValidatorManager {
         Class<?> type = ano.annotationType();
 
         if (type.equals(NoRepeatSubmit.class)) {
-            throw RockCode.CODE_15;
+            throw UapiCodes.CODE_15;
         } else if (type.equals(Whitelist.class)) {
-            throw RockCode.CODE_16;
+            throw UapiCodes.CODE_16;
         } else {
-            throw RockCode.CODE_13(result.getDescription());
+            throw UapiCodes.CODE_13(result.getDescription());
         }
     }
 }

@@ -1,6 +1,6 @@
 package demo;
 
-import org.noear.sponge.rockuapi.RockGateway;
+import org.noear.sponge.rockuapi.UapiGateway;
 import org.noear.sponge.rockuapi.UapiCode;
 import org.noear.sponge.rockuapi.decoder.RockXorDecoder;
 import org.noear.sponge.rockuapi.encoder.RockSha1Encoder;
@@ -11,7 +11,7 @@ import org.noear.sponge.rockuapi.interceptor.*;
 
 @Mapping("/cmd/*")
 @Controller
-class _demo_cmd extends RockGateway {
+class _demo_cmd extends UapiGateway {
     @Override
     public int agroup_id() {
         return 5;
