@@ -266,6 +266,10 @@ public final class RockRpcService implements RockRpc {
             throw new Exception("请输入有效的 appID");
         }
 
+        if(groupID < 1){
+            groupID = getAppByID(appID).agroup_id;
+        }
+
         AppSettingCollection sets = getAppGroupSetting(groupID, ver, isClientOnly);
 
         AppSettingCollection temp = getAppSetting(appID, ver, isClientOnly);
