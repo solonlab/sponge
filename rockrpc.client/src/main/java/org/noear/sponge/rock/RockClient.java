@@ -141,21 +141,21 @@ public class RockClient {
         return instance().delAppSettingItem(appID, name);
     }
 
-
+    //获取应用设置项 //已包函时间
     public static AppSettingCollection getAppSettingEx(int appID, int ver, boolean isClientOnly) throws Exception {
         return cacheLocal.getBy("getAppSettingEx_" + appID + "_" + ver + "_" + isClientOnly, (ru) ->
                 instance().getAppSettingEx(appID, ver, isClientOnly));
     }
 
-    //获取应用设置项 //已包函时间
-    public static AppSettingCollection getAppSettingEx(int groupID, int appID, int ver, boolean isClientOnly) throws Exception {
-        if (appID < 1) {
-            throw new Exception("请输入有效的 appID");
-        }
 
-        return cacheLocal.getBy("getAppSettingEx_" + groupID + "_" + appID + "_" + ver + "_" + isClientOnly, (ru) ->
-                instance().getAppSettingEx(groupID, appID, ver, isClientOnly));
-    }
+//    public static AppSettingCollection getAppSettingEx(int groupID, int appID, int ver, boolean isClientOnly) throws Exception {
+//        if (appID < 1) {
+//            throw new Exception("请输入有效的 appID");
+//        }
+//
+//        return cacheLocal.getBy("getAppSettingEx_" + groupID + "_" + appID + "_" + ver + "_" + isClientOnly, (ru) ->
+//                instance().getAppSettingEx(groupID, appID, ver, isClientOnly));
+//    }
 
     public static List<AppSettingModel> getAppSettingItemsByName(int agroupID, String name) throws Exception {
         if (agroupID < 1) {
@@ -303,11 +303,5 @@ public class RockClient {
     public static String getAppCode(int agroupID, int code, String lang) throws SQLException {
         return cacheLocal.getBy("getAppCode_" + agroupID + "_" + code + "_" + lang, (ru) ->
                 instance().getAppCodeByLang(agroupID, code, lang));
-    }
-
-    //type=0=ip; type=1=host
-    public static boolean isWhitelist(String tag, int type, String val) throws SQLException {
-        return cacheLocal.getBy("isWhitelist_" + tag + "_" + type + "_" + val, (ru) ->
-                instance().isWhitelist(tag, type, val));
     }
 }

@@ -82,7 +82,7 @@ public class AppModel implements IBinder
         }
 
         if(_setting.containsKey(ver) == false){
-            _setting.put(ver, rockclient.getAppSettingEx(agroup_id, app_id, ver, false));
+            _setting.put(ver, rockclient.getAppSettingEx(app_id, ver, false));
         }
     }
     private transient Map<Integer,AppSettingCollection> _client_setting = null;
@@ -92,7 +92,7 @@ public class AppModel implements IBinder
 
         }
         if (_client_setting.containsKey(ver) == false) {
-            _client_setting.put(ver, rockclient.getAppSettingEx(agroup_id, app_id, ver, true));
+            _client_setting.put(ver, rockclient.getAppSettingEx(app_id, ver, true));
         }
     }
 

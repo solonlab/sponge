@@ -257,12 +257,11 @@ public final class RockRpcService implements RockRpc {
     public AppSettingCollection getAppSettingEx(@NonNull Integer appID,@NonNull  Integer ver, @NonNull Boolean isClientOnly) throws Exception {
          Integer agroup_id = getAppByID(appID).agroup_id;
 
-        return getAppSettingEx(agroup_id, appID, ver, isClientOnly);
+        return getAppSettingEx0(agroup_id, appID, ver, isClientOnly);
     }
 
     //获取应用设置项 //已包函时间
-    @Override
-    public AppSettingCollection getAppSettingEx(@NonNull Integer groupID, @NonNull Integer appID, @NonNull Integer ver,@NonNull Boolean isClientOnly) throws Exception {
+    private AppSettingCollection getAppSettingEx0(@NonNull Integer groupID, @NonNull Integer appID, @NonNull Integer ver,@NonNull Boolean isClientOnly) throws Exception {
         if (appID < 1) {
             throw new Exception("请输入有效的 appID");
         }
@@ -604,20 +603,20 @@ public final class RockRpcService implements RockRpc {
     }
 
     //type=0=ip; type=1=host
-    @Override
-    public Boolean isWhitelist(@NonNull String tag,@NonNull  Integer type, String val) throws SQLException {
-        if(val == null){
-            return false;
-        }
-
-        app_get_whitelist sp = new app_get_whitelist(rock_db);
-        sp.type = type;
-        sp.tag = tag;
-        sp.value = val;
-
-        sp.caching(rock_cache)
-                .cacheTag("app_whitelist_" + type + "_" + tag);
-
-        return sp.getValue(null) != null;
-    }
+//    @Override
+//    public Boolean isWhitelist(@NonNull String tag,@NonNull  Integer type, String val) throws SQLException {
+//        if(val == null){
+//            return false;
+//        }
+//
+//        app_get_whitelist sp = new app_get_whitelist(rock_db);
+//        sp.type = type;
+//        sp.tag = tag;
+//        sp.value = val;
+//
+//        sp.caching(rock_cache)
+//                .cacheTag("app_whitelist_" + type + "_" + tag);
+//
+//        return sp.getValue(null) != null;
+//    }
 }

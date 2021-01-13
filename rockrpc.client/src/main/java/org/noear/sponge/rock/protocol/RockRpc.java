@@ -45,11 +45,9 @@ public interface RockRpc {
     //仅用于管理
     Boolean delAppSettingItem(Integer appID, String name) throws Exception;
 
-
+    //获取应用设置项 //已包函时间
     AppSettingCollection getAppSettingEx(Integer appID, Integer ver, Boolean isClientOnly) throws Exception;
 
-    //获取应用设置项 //已包函时间
-    AppSettingCollection getAppSettingEx(Integer groupID, Integer appID, Integer ver, Boolean isClientOnly) throws Exception;
 
     List<AppSettingModel> getAppSettingItemsByName(Integer agroupID, String name) throws Exception;
 
@@ -106,7 +104,5 @@ public interface RockRpc {
 
     String getAppCodeByLang(Integer agroupID, Integer code, String lang) throws SQLException;
 
-    //type=0=ip; type=1=host
-    Boolean isWhitelist(String tag, Integer type, String val) throws SQLException;
 
 }
