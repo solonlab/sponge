@@ -1,24 +1,24 @@
 package org.noear.sponge.rockuapi.interceptor;
 
-import org.noear.sponge.rockuapi.encoder.RockDefEncoder;
+import org.noear.sponge.rockuapi.encoder.DefEncoder;
 import org.noear.snack.ONode;
 
-import org.noear.sponge.rockuapi.encoder.RockEncoder;
+import org.noear.sponge.rockuapi.encoder.Encoder;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.Handler;
 
 /** 输出拦截器（用于内容格式化并输出） */
 public class OutputBuildInterceptor implements Handler {
 
-    RockEncoder _encoder;
+    Encoder _encoder;
 
     public OutputBuildInterceptor(){
-        _encoder = new RockDefEncoder();
+        _encoder = new DefEncoder();
     }
 
-    public OutputBuildInterceptor(RockEncoder encoder) {
+    public OutputBuildInterceptor(Encoder encoder) {
         if (encoder == null) {
-            _encoder = new RockDefEncoder();
+            _encoder = new DefEncoder();
         } else {
             _encoder = encoder;
         }

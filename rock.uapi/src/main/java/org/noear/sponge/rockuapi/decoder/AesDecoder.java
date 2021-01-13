@@ -6,7 +6,7 @@ import org.noear.water.utils.EncryptUtils;
 
 import java.net.URLDecoder;
 
-public class RockXorDecoder implements RockDecoder {
+public class AesDecoder implements Decoder {
     @Override
     public String tryDecode(Context context, AppModel app, String text) throws Exception {
         if (text.indexOf("{") < 0 && text.indexOf("<") < 0) {
@@ -14,7 +14,7 @@ public class RockXorDecoder implements RockDecoder {
                 text = new String(URLDecoder.decode(text, "UTF-8"));
             }
 
-            return EncryptUtils.xorDecode(text, app.app_key);
+            return EncryptUtils.aesDecrypt(text, app.app_key, null);
         }
 
         return text;

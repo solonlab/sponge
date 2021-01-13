@@ -2,8 +2,8 @@ package org.noear.sponge.rockuapi.interceptor;
 
 import org.noear.sponge.rockuapi.UapiParams;
 import org.noear.snack.ONode;
-import org.noear.sponge.rockuapi.decoder.RockDecoder;
-import org.noear.sponge.rockuapi.decoder.RockDefDecoder;
+import org.noear.sponge.rockuapi.decoder.Decoder;
+import org.noear.sponge.rockuapi.decoder.DefDecoder;
 import org.noear.solon.Utils;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.Handler;
@@ -21,16 +21,16 @@ import org.noear.solon.core.handle.Handler;
  * */
 public class ParamsBuildInterceptor implements Handler {
 
-    private RockDecoder _decoder;
+    private Decoder _decoder;
 
 
     public ParamsBuildInterceptor() {
-        _decoder = new RockDefDecoder();
+        _decoder = new DefDecoder();
     }
 
-    public ParamsBuildInterceptor(RockDecoder decoder) {
+    public ParamsBuildInterceptor(Decoder decoder) {
         if (decoder == null) {
-            _decoder = new RockDefDecoder();
+            _decoder = new DefDecoder();
         } else {
             _decoder = decoder;
         }

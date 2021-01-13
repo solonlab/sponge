@@ -3,7 +3,7 @@ package demo;
 import org.noear.sponge.rockuapi.UapiGateway;
 import org.noear.sponge.rockuapi.UapiCode;
 import org.noear.sponge.rockuapi.decoder.RockXorDecoder;
-import org.noear.sponge.rockuapi.encoder.RockSha1Encoder;
+import org.noear.sponge.rockuapi.encoder.Sha1Encoder;
 import org.noear.sponge.rockuapi.encoder.RockXorEncoder;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
@@ -29,7 +29,7 @@ class _demo_cmd extends UapiGateway {
         //构建参数
         before(new org.noear.sponge.rockuapi.interceptor.ParamsBuildInterceptor(new RockXorDecoder()));
         //签权
-        before(new ParamsAuthInterceptor(new RockSha1Encoder()));
+        before(new ParamsAuthInterceptor(new Sha1Encoder()));
 
         //
         //::执行后::
@@ -38,7 +38,7 @@ class _demo_cmd extends UapiGateway {
         //构建输出
         after(new org.noear.sponge.rockuapi.interceptor.OutputBuildInterceptor(new RockXorEncoder()));
         //签名
-        after(new org.noear.sponge.rockuapi.interceptor.OutputSignInterceptor(new RockSha1Encoder())); //可选
+        after(new org.noear.sponge.rockuapi.interceptor.OutputSignInterceptor(new Sha1Encoder())); //可选
         //输出
         after(new org.noear.sponge.rockuapi.interceptor.OutputInterceptor());
         //结束计时

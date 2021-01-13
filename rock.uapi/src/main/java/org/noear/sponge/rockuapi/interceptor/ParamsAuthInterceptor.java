@@ -2,8 +2,8 @@ package org.noear.sponge.rockuapi.interceptor;
 
 import org.noear.sponge.rock.models.AppModel;
 import org.noear.sponge.rockuapi.UapiParams;
-import org.noear.sponge.rockuapi.encoder.RockDefEncoder;
-import org.noear.sponge.rockuapi.encoder.RockEncoder;
+import org.noear.sponge.rockuapi.encoder.DefEncoder;
+import org.noear.sponge.rockuapi.encoder.Encoder;
 import org.noear.sponge.rockuapi.UapiCodes;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.Handler;
@@ -15,15 +15,15 @@ import org.noear.water.utils.TextUtils;
  * 对cmd有用；对api没用
  * */
 public class ParamsAuthInterceptor implements Handler {
-    private RockEncoder _encoder;
+    private Encoder _encoder;
 
     public ParamsAuthInterceptor(){
-        _encoder = new RockDefEncoder();
+        _encoder = new DefEncoder();
     }
 
-    public ParamsAuthInterceptor(RockEncoder encoder) {
+    public ParamsAuthInterceptor(Encoder encoder) {
         if (encoder == null) {
-            _encoder = new RockDefEncoder();
+            _encoder = new DefEncoder();
         } else {
             _encoder = encoder;
         }
