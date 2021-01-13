@@ -15,7 +15,7 @@ public class RockRpcTest {
 
     @Test
     public void test0() throws Exception {
-        RockRpc rpc = WaterUpstream.xclient(RockRpc.class);
+        RockRpc rpc = WaterUpstream.client(RockRpc.class);
 //        RockRpc rpc = Fairy.builder().server("http://12.12.1.1").create(RockRpc.class);
 
         rpc.getAppsByGroup(1, 1);

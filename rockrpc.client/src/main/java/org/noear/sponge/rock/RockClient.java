@@ -32,7 +32,7 @@ public class RockClient {
         if (_instance == null) {
             synchronized (_lock) {
                 if (_instance == null) {
-                    _instance = WaterUpstream.xclient(RockRpc.class);
+                    _instance = WaterUpstream.client(RockRpc.class);
                     AppModel.rockclient = _instance;
                 }
             }
