@@ -15,7 +15,6 @@ public class Config {
         return cfg("track_uri").value;
     }
 
-    public static DbContext sponge = cfg("sponge").getDb(true);
     public static DbContext sponge_track = cfg("sponge_track").getDb(true);
     public static DbContext sponge_rock = cfg("sponge_rock").getDb(true);
 
