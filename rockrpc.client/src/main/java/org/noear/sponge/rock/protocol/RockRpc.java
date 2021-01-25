@@ -6,7 +6,7 @@ import org.noear.sponge.rock.models.*;
 import java.sql.SQLException;
 import java.util.List;
 
-@NamiClient("rockrpc")
+@NamiClient(name = "rockrpc")
 public interface RockRpc {
 
     /**

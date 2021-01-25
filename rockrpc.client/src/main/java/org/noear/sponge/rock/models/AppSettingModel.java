@@ -2,7 +2,7 @@ package org.noear.sponge.rock.models;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import org.noear.snack.ONode;
-import org.noear.water.utils.RunUtils;
+import org.noear.water.utils.CallUtils;
 import org.noear.weed.GetHandlerEx;
 import org.noear.weed.IBinder;
 
@@ -112,7 +112,7 @@ public class AppSettingModel implements IBinder
 	public Properties getProp() {
 		if (_prop == null) {
 			_prop = new Properties();
-			RunUtils.runActEx(() -> _prop.load(new StringReader(value)));
+			CallUtils.run(() -> _prop.load(new StringReader(value)));
 		}
 
 		return _prop;
