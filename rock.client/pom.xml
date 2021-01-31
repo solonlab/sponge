@@ -41,15 +41,14 @@
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>water.client</artifactId>
-            <version>${water.ver}</version>
+            <artifactId>water-solon-plugin</artifactId>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
-            <version>3.2.0</version>
+            <version>3.3.0</version>
             <scope>provided</scope>
         </dependency>
 

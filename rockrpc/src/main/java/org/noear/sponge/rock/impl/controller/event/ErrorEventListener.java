@@ -2,13 +2,14 @@ package org.noear.sponge.rock.impl.controller.event;
 
 import org.noear.snack.ONode;
 import org.noear.solon.annotation.Component;
+import org.noear.solon.cloud.CloudLogger;
+import org.noear.solon.cloud.utils.Tags;
 import org.noear.solon.core.event.EventListener;
 import org.noear.solon.core.handle.Context;
-import org.noear.water.log.WaterLogger;
 
 @Component
 public class ErrorEventListener implements EventListener<Throwable> {
-    WaterLogger log = new WaterLogger("rock_log");
+    CloudLogger log = CloudLogger.get("sponge_log_rock");
 
     @Override
     public void onEvent(Throwable err) {
@@ -17,7 +18,8 @@ public class ErrorEventListener implements EventListener<Throwable> {
         if (ctx != null) {
             String _in = ONode.stringify(ctx.paramMap());
 
-            log.error(ctx.path(), _in, err);
+            log.error(Tags.tag0(ctx.path()), "{}\n\n{}", _in, err);
+            //WaterClient.Log.append("sponge_log_rock", Level.ERROR, ctx.path(), _in, err);
         }
     }
 }

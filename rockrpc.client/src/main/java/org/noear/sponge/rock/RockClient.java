@@ -1,8 +1,10 @@
 package org.noear.sponge.rock;
 
+import org.noear.nami.Nami;
 import org.noear.sponge.rock.models.*;
 import org.noear.sponge.rock.protocol.RockRpc;
-import org.noear.water.integration.solon.WaterUpstream;
+import org.noear.water.WW;
+import org.noear.water.WaterClient;
 import org.noear.water.utils.TextUtils;
 import org.noear.weed.cache.EmptyCache;
 import org.noear.weed.cache.ICacheServiceEx;
@@ -32,7 +34,11 @@ public class RockClient {
         if (_instance == null) {
             synchronized (_lock) {
                 if (_instance == null) {
-                    _instance = WaterUpstream.client(RockRpc.class);
+                    _instance = Nami.builder().filterAdd((cfg, m, url, h, a) -> {
+                        h.put(WW.http_header_trace, WaterClient.waterTraceId());
+                        h.put(WW.http_header_from, WaterClient.localServiceHost());
+                    }).create(RockRpc.class);
+
                     AppModel.rockclient = _instance;
                 }
             }

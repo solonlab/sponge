@@ -1,5 +1,7 @@
 package test;
 
+import org.noear.nami.Nami;
+import org.noear.solon.cloud.impl.CloudLoadBalanceFactory;
 import org.noear.sponge.rock.RockClient;
 import org.noear.sponge.rock.models.AppModel;
 import org.noear.sponge.rock.models.AppUpdateModel;
@@ -8,14 +10,18 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.noear.snack.ONode;
 import org.noear.solon.test.SolonJUnit4ClassRunner;
-import org.noear.water.integration.solon.WaterUpstream;
+import org.noear.water.WW;
+import org.noear.water.WaterClient;
 
 @RunWith(SolonJUnit4ClassRunner.class)
 public class RockRpcTest {
 
     @Test
     public void test0() throws Exception {
-        RockRpc rpc = WaterUpstream.client(RockRpc.class);
+        RockRpc rpc = Nami.builder().filterAdd((cfg, m, url, h, a) -> {
+            h.put(WW.http_header_trace, WaterClient.waterTraceId());
+            h.put(WW.http_header_from, WaterClient.localServiceHost());
+        }).create(RockRpc.class);
 //        RockRpc rpc = Fairy.builder().server("http://12.12.1.1").create(RockRpc.class);
 
         rpc.getAppsByGroup(1, 1);
@@ -26,7 +32,7 @@ public class RockRpcTest {
         System.out.println("RockClient.getApp(48)::成功!!!");
 
 
-        int cont = WaterUpstream.get("rockrpc").nodes().size();
+        int cont = CloudLoadBalanceFactory.instance.get("rockrpc").getDiscovery().clusterSize();
         assert cont > 0;
 
         System.out.println("upstream>>" + cont);

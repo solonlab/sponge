@@ -37,6 +37,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon.extend.properties.yaml</artifactId>
+            <version>${solon.ver}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.noear.sponge</groupId>
             <artifactId>rockrpc.client</artifactId>
             <version>${rock.ver}</version>
@@ -44,8 +50,8 @@
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>water.client-solon-plugin</artifactId>
-            <version>${water.ver}</version>
+            <artifactId>water-solon-plugin</artifactId>
+            <version>${solon.ver}</version>
         </dependency>
 
         <dependency>

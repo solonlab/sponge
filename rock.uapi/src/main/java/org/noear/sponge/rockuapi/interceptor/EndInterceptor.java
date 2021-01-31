@@ -1,9 +1,9 @@
 package org.noear.sponge.rockuapi.interceptor;
 
+import org.noear.solon.cloud.model.Instance;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.Handler;
 import org.noear.water.WaterClient;
-import org.noear.water.integration.solon.WaterAdapter;
 import org.noear.water.utils.FromUtils;
 import org.noear.water.utils.Timecount;
 
@@ -25,9 +25,9 @@ public class EndInterceptor implements Handler {
 
         String _from = FromUtils.getFrom(ctx);
 
-        String service = WaterAdapter.global().service_name();
+        String service = Instance.local().service();
         String path = ctx.path();
-        String node = WaterAdapter.global().localHost();
+        String node = Instance.local().address();
 
         WaterClient.Track.track(service, _tag, path, timecount.stop().milliseconds(), node, _from);
     }

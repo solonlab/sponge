@@ -1,14 +1,14 @@
 package apidemo.dso;
 
-import org.apache.commons.lang.exception.ExceptionUtils;
+import org.noear.solon.cloud.CloudLogger;
+import org.noear.solon.cloud.utils.Tags;
 import org.noear.sponge.rockuapi.UapiParams;
-import org.noear.water.log.WaterLogger;
 import apidemo.controller.UapiBase;
 
 public class Logger {
 
-    private static final WaterLogger log_api = new WaterLogger("bull_log_api");
-    private static final WaterLogger log_api_party = new WaterLogger("bull_log_api_party");
+    private static final CloudLogger log_api =  CloudLogger.get("bull_log_api");
+    private static final CloudLogger log_api_party =  CloudLogger.get("bull_log_api_party");
 
 
     /**
@@ -35,11 +35,11 @@ public class Logger {
         }
 
         log_api.info(
-                cmd.name(), String.valueOf(cmd.getUserID()), String.valueOf(ver),
+                Tags.tag0(cmd.name()).tag1(String.valueOf(cmd.getUserID())).tag2(String.valueOf(ver)),
+                "{}\n\n{}",
                 summary,
                 content
         );
-
     }
 
     /**
@@ -51,11 +51,13 @@ public class Logger {
     public static void logError(UapiBase cmd, UapiParams params, Throwable e) {
 
         String summary = null != params ? params.org_param : "";
+        String tag2 = null != params ? String.valueOf(params.verID) : "";
 
         log_api.error(
-                cmd.name(), String.valueOf(cmd.getUserID()), null != params ? String.valueOf(params.verID) : "",
+                Tags.tag0(cmd.name()).tag1(String.valueOf(cmd.getUserID())).tag2(tag2),
+                "{}\n\n{}",
                 summary,
-                ExceptionUtils.getFullStackTrace(e)
+                e
         );
 
     }
@@ -64,7 +66,8 @@ public class Logger {
     public static void logOutput(String tag, String tag1, String tag2, String summary, String content) {
 
         log_api.info(
-                tag, tag1, tag2,
+                Tags.tag0(tag).tag1(tag1).tag2(tag2),
+                "{}\n\n{}",
                 summary,
                 content
         );
@@ -74,16 +77,18 @@ public class Logger {
     public static void logError(String tag, String tag1, String tag2, String summary, Throwable e) {
 
         log_api.error(
-                tag, tag1, tag2,
+                Tags.tag0(tag).tag1(tag1).tag2(tag2),
+                "{}\n\n{}",
                 summary,
-                ExceptionUtils.getFullStackTrace(e)
+                e
         );
     }
 
     public static void logError(String tag, String tag1, String tag2, String summary, String content) {
 
         log_api.error(
-                tag, tag1, tag2,
+                Tags.tag0(tag).tag1(tag1).tag2(tag2),
+                "{}\n\n{}",
                 summary,
                 content
         );
@@ -93,7 +98,8 @@ public class Logger {
     public static void logPartyOutput(String tag, String tag1, String tag2, String summary, String content) {
 
         log_api_party.info(
-                tag, tag1, tag2,
+                Tags.tag0(tag).tag1(tag1).tag2(tag2),
+                "{}\n\n{}",
                 summary,
                 content
         );
@@ -103,16 +109,18 @@ public class Logger {
     public static void logPartyError(String tag, String tag1, String tag2, String summary, Throwable e) {
 
         log_api_party.error(
-                tag, tag1, tag2,
+                Tags.tag0(tag).tag1(tag1).tag2(tag2),
+                "{}\n\n{}",
                 summary,
-                ExceptionUtils.getFullStackTrace(e)
+                e
         );
     }
 
     public static void logPartyError(String tag, String tag1, String tag2, String summary, String content) {
 
         log_api_party.error(
-                tag, tag1, tag2,
+                Tags.tag0(tag).tag1(tag1).tag2(tag2),
+                "{}\n\n{}",
                 summary,
                 content
         );

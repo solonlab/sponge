@@ -1,16 +1,17 @@
 package org.noear.sponge.rock.impl.controller;
 
-import org.noear.water.annotation.WaterMessage;
-import org.noear.water.dso.MessageHandler;
-import org.noear.water.model.MessageM;
+import org.noear.solon.cloud.CloudEventHandler;
+import org.noear.solon.cloud.annotation.CloudEvent;
+import org.noear.solon.cloud.model.Event;
 
 /**
  * @author noear 2021/1/29 created
  */
-@WaterMessage("hello.test")
-public class MessageTest implements MessageHandler {
+@CloudEvent("hello.test")
+public class MessageTest implements CloudEventHandler {
+
     @Override
-    public boolean handler(MessageM msg) throws Throwable {
+    public boolean handler(Event event) throws Throwable {
         return true;
     }
 }
