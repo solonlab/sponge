@@ -23,6 +23,11 @@
             <artifactId>water.client-solon-plugin</artifactId>
             <version>${water.ver}</version>
         </dependency>
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>nami.channel.socketd.smartsocket</artifactId>
+            <version>${solon.ver}</version>
+        </dependency>
 
         <!-- local start -->
         <dependency>

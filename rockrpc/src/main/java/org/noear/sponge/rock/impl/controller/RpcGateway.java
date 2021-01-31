@@ -3,11 +3,12 @@ package org.noear.sponge.rock.impl.controller;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.Gateway;
+import org.noear.solon.core.handle.MethodType;
 import org.noear.sponge.rock.impl.controller.trigger.EndHandler;
 import org.noear.sponge.rock.impl.controller.trigger.IpHandler;
 import org.noear.sponge.rock.impl.controller.trigger.StartHandler;
 
-@Mapping("/*")
+@Mapping(value = "/*", method = MethodType.ALL)
 @Controller
 public class RpcGateway extends Gateway {
     @Override

@@ -23,11 +23,11 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <solon.ver>1.2.26</solon.ver>
-        <weed3.ver>3.2.30</weed3.ver>
-        <water.ver>2.0.14</water.ver>
-        <snack3.ver>3.1.13</snack3.ver>
-        <bcf.ver>2.0.7</bcf.ver>
+        <solon.ver>1.3.1</solon.ver>
+        <weed3.ver>3.2.32</weed3.ver>
+        <water.ver>2.0.16</water.ver>
+        <snack3.ver>3.1.14</snack3.ver>
+        <bcf.ver>2.0.9</bcf.ver>
 
         <fastjson.ver>1.2.75</fastjson.ver>
         <jedis.ver>3.3.0</jedis.ver>

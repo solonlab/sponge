@@ -7,7 +7,7 @@ import org.noear.solon.core.handle.Context;
 import org.noear.water.log.WaterLogger;
 
 @Component
-public class err_event implements EventListener<Throwable> {
+public class ErrorEventListener implements EventListener<Throwable> {
     WaterLogger log = new WaterLogger("rock_log");
 
     @Override
