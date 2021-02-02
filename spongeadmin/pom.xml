@@ -11,7 +11,7 @@
         <relativePath>../rock-parent/pom.xml</relativePath>
     </parent>
 
-    <groupId>spongeadmin</groupId>
+    <groupId>org.noear.sponge</groupId>
     <artifactId>spongeadmin</artifactId>
     <packaging>jar</packaging>
 
