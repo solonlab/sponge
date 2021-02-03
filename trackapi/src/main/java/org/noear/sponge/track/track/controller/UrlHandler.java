@@ -1,6 +1,8 @@
 package org.noear.sponge.track.track.controller;
 
 import org.noear.snack.ONode;
+import org.noear.solon.annotation.Controller;
+import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.Handler;
 import org.noear.sponge.track.track.dso.HttpRequestX;
@@ -10,29 +12,19 @@ import org.noear.sponge.track.track.dso.db_sponge_track.DbTrackApi;
 import org.noear.sponge.track.track.models.ShortUrlModel;
 import org.noear.water.utils.TextUtils;
 
-public class UrlHandler implements Handler {
+@Controller
+public class UrlHandler{
 
-    @Override
-    public void handle(Context cxt) throws Exception {
-        String key = cxt.path().substring(1);
-
-        if ("".equals(key)) {
-            return ;
-        }
-
-        if (key.indexOf(".") > 0 || key.indexOf("/") > 0) {
-            return;
-        }
-
+    @Mapping("/{key}")
+    public void handle(Context cxt, String key) {
         try {
-
             ShortUrlModel url = DbTrackApi.getShortUrl(key);
 
             cmd_exec(cxt, url);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             String txt = new ONode()
-                    .set("code",0)
-                    .set("msg",ex.getMessage())
+                    .set("code", 0)
+                    .set("msg", ex.getMessage())
                     .toJson();
 
             cxt.outputAsJson(txt);

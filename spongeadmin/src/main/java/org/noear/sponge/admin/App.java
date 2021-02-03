@@ -1,6 +1,7 @@
 package org.noear.sponge.admin;
 
 import org.noear.solon.Solon;
+import org.noear.solon.core.event.PluginLoadEndEvent;
 import org.noear.solon.core.handle.Context;
 import org.noear.sponge.admin.dso.LogUtil;
 
