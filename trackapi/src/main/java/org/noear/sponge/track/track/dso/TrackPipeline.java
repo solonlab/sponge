@@ -1,8 +1,11 @@
 package org.noear.sponge.track.track.dso;
 
+import org.noear.solon.core.event.EventBus;
 import org.noear.water.utils.EventPipeline;
 import org.noear.weed.DataItem;
 import org.noear.sponge.track.track.dso.db_sponge_track.DbTrackApi;
+
+import java.util.List;
 
 
 /**
@@ -18,12 +21,15 @@ public class TrackPipeline extends EventPipeline<DataItem> {
     }
 
     private TrackPipeline() {
-        super((list) -> {
-            try {
-                DbTrackApi.addUrlLogAll("short_redirect_log_30d", list);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });
+        super();
+    }
+
+    @Override
+    protected void handler(List<DataItem> list) {
+        try {
+            DbTrackApi.addUrlLogAll("short_redirect_log_30d", list);
+        } catch (Exception ex) {
+            EventBus.pushAsyn(ex);
+        }
     }
 }
