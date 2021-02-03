@@ -13,7 +13,7 @@ import org.noear.water.utils.FromUtils;
 @Component
 public class EndHandler implements Handler {
 
-    CloudLogger log = CloudLogger.get("rock_log");
+    CloudLogger log = CloudLogger.get("sponge_log_rock");
 
     @Override
     public void handle(Context ctx) throws Exception {
