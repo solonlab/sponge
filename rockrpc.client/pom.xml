@@ -88,19 +88,4 @@
 
     </build>
 
-    <distributionManagement>
-        <repository>
-            <id>internal-nexus</id>
-            <name>Maven Repository Manager running on maven.data.zm</name>
-            <url>http://maven.data.zm/repository/maven-3rd/</url>
-        </repository>
-    </distributionManagement>
-
-    <repositories>
-        <repository>
-            <id>nexus-zm</id>
-            <name>Nexus zm</name>
-            <url>http://maven.data.zm/repository/maven-public/</url>
-        </repository>
-    </repositories>
 </project>

@@ -1,9 +1,9 @@
 package org.noear.sponge.rock.impl.controller.event;
 
+import org.noear.mlog.utils.Tags;
 import org.noear.snack.ONode;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.cloud.CloudLogger;
-import org.noear.solon.cloud.utils.Tags;
 import org.noear.solon.core.event.EventListener;
 import org.noear.solon.core.handle.Context;
 
