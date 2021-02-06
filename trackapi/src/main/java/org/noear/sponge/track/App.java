@@ -15,6 +15,8 @@ public class App {
 
             if (ctx != null) {
                 LogUtil.error(ctx.path(), "", "", ctx.paramMap().toString(), ex);
+            } else {
+                LogUtil.error("global", ex);
             }
         });
     }

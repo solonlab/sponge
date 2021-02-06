@@ -14,7 +14,7 @@ import java.io.PrintStream;
 public class LogUtil {
 
 
-    public static void error(String tag, Exception ex) {
+    public static void error(String tag, Throwable ex) {
         error(tag, "", "", "", ex);
     }
 
