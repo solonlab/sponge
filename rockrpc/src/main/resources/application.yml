@@ -1,13 +1,5 @@
 server.port: 8181
 
-#water.host=water
-#water.service.tag=sponge
-#water.service.name=rockrpc
-#water.service.secretKey=KvnY27kd9VhoNOT3
-#water.service.hostname=rockrpc
-#
-#water.weed.log.style=text2
-
 solon.app:
   group: sponge
   name: rockrpc

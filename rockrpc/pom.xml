@@ -25,13 +25,6 @@
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon.boot.socketd.smartsocket</artifactId>
-            <version>${solon.ver}</version>
-        </dependency>
-
-
-        <dependency>
-            <groupId>org.noear</groupId>
             <artifactId>solon.serialization.fastjson</artifactId>
             <version>${solon.ver}</version>
         </dependency>
