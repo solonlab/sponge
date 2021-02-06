@@ -1,7 +1,7 @@
 package apidemo.dso;
 
+import org.noear.mlog.utils.Tags;
 import org.noear.solon.cloud.CloudLogger;
-import org.noear.solon.cloud.utils.Tags;
 import org.noear.sponge.rockuapi.UapiParams;
 import apidemo.controller.UapiBase;
 

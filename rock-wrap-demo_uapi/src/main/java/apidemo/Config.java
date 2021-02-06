@@ -5,7 +5,7 @@ import org.noear.solon.annotation.Configuration;
 import org.noear.solon.core.cache.CacheService;
 import org.noear.water.WaterClient;
 import org.noear.water.model.ConfigM;
-import org.noear.water.utils.CacheUtils;
+import org.noear.water.utils.CacheWrap;
 import org.noear.water.utils.RedisX;
 import org.noear.weed.cache.ICacheServiceEx;
 import org.noear.weed.cache.LocalCache;
@@ -56,6 +56,6 @@ public class Config {
         ICacheServiceEx cache_local = new LocalCache(60 * 5);
         ICacheServiceEx cache = new SecondCache(cache_local, cache_remote).nameSet("cache_bull");
 
-        return CacheUtils.wrap(cache);
+        return CacheWrap.wrap(cache);
     }
 }
