@@ -2,10 +2,10 @@ package test;
 
 import org.noear.nami.Nami;
 import org.noear.solon.cloud.impl.CloudLoadBalanceFactory;
-import org.noear.sponge.rock.RockClient;
-import org.noear.sponge.rock.models.AppModel;
-import org.noear.sponge.rock.models.AppUpdateModel;
-import org.noear.sponge.rock.protocol.RockRpc;
+import org.noear.rock.RockClient;
+import org.noear.rock.model.AppModel;
+import org.noear.rock.model.AppUpdateModel;
+import org.noear.rock.protocol.RockRpc;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.noear.snack.ONode;
