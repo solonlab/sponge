@@ -41,8 +41,8 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.noear.sponge</groupId>
-                <artifactId>rockrpc.client</artifactId>
+                <groupId>org.noear</groupId>
+                <artifactId>rock.client</artifactId>
                 <version>${rock.ver}</version>
             </dependency>
 
@@ -118,7 +118,7 @@
     <modules>
         <module>../rock.client.local</module>
 
-        <module>../rockrpc.client</module>
+        <module>../rock.client</module>
 
     </modules>
 
