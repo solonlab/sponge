@@ -58,7 +58,7 @@ public abstract class UapiGateway extends Gateway {
                 Map<String, Object> map = new HashMap<>();
 
                 map.put("code", 0);
-                map.put("msg", UapiCodes.CODE_txt(agroup_id(), g_lang(c), UapiCodes.CODE_0));
+                map.put("msg", UapiCodes.CODE_txt(agroup_id(), g_lang(c), UapiCodes.CODE_400));
 
                 c.result = map;
             } else if (obj instanceof ONode) {

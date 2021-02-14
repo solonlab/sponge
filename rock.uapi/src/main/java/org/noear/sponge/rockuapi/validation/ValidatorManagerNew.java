@@ -20,11 +20,11 @@ public class ValidatorManagerNew extends ValidatorManager {
         Class<?> type = ano.annotationType();
 
         if (type.equals(NoRepeatSubmit.class)) {
-            throw UapiCodes.CODE_15;
+            throw UapiCodes.CODE_4001015;
         } else if (type.equals(Whitelist.class)) {
-            throw UapiCodes.CODE_16;
+            throw UapiCodes.CODE_4001016;
         } else {
-            throw UapiCodes.CODE_13(result.getDescription());
+            throw UapiCodes.CODE_4001014(result.getDescription());
         }
     }
 }

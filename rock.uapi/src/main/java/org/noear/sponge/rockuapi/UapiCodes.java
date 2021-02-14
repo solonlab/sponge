@@ -7,43 +7,47 @@ import java.sql.SQLException;
 
 public class UapiCodes {
     /**
-     * 失败，未知错误
-     */
-    public static final UapiCode CODE_0 = new UapiCode(0);
-    /**
      * 成功
      */
-    public static final UapiCode CODE_1 = new UapiCode(1);
+    public static final UapiCode CODE_200 = new UapiCode(200, "Succeed");
+
+    /**
+     * 失败，未知错误
+     */
+    public static final UapiCode CODE_400 = new UapiCode(400, "Unknown error");
+
 
     /**
      * 请求的接口不存在或不再支持
      */
-    public static final UapiCode CODE_11 = new UapiCode(11);
-    /**
-     * 请求的签名校验失败
-     */
-    public static final UapiCode CODE_12 = new UapiCode(12);
-
-    /**
-     * 请求的参数缺少或有错误
-     */
-    public static final UapiCode CODE_13(String names) {
-        return new UapiCode(13, names);
-    }
+    public static final UapiCode CODE_4001011 = new UapiCode(4001011, "The api not exist");
 
     /**
      * 请求的不符合规范
      */
-    public static final UapiCode CODE_14 = new UapiCode(14);
+    public static final UapiCode CODE_4001012 = new UapiCode(4001012, "The request is not up to par");
+
+
+    /**
+     * 请求的签名校验失败
+     */
+    public static final UapiCode CODE_4001013 = new UapiCode(4001013, "The signature error");
+
+    /**
+     * 请求的参数缺少或有错误
+     */
+    public static final UapiCode CODE_4001014(String names) {
+        return new UapiCode(4001014, names);
+    }
 
     /**
      * 请求太频繁了
-     * */
-    public static final UapiCode CODE_15 = new UapiCode(15);
+     */
+    public static final UapiCode CODE_4001015 = new UapiCode(4001015, "Too many requests");
     /**
      * 请求不在白名单
-     * */
-    public static final UapiCode CODE_16 = new UapiCode(16);
+     */
+    public static final UapiCode CODE_4001016 = new UapiCode(4001016, "The request is not in the whitelist");
 
 
     public static final String CODE_txt(int agroup_id, String lang, UapiCode error) throws SQLException {
@@ -55,23 +59,10 @@ public class UapiCodes {
             }
         }
 
-        switch (error.getCode()) {
-            case 1:
-                return "Succeed";
-            case 11:
-                return "The api not exist";
-            case 12:
-                return "The signature error";
-            case 13:
-                return "Parameter missing or error" + (error.getDescription() == null ? "" : "(" + error.getDescription() + ")");
-            case 14:
-                return "The request is not up to par";
-            case 15:
-                return "Too many requests";
-            case 16:
-                return "The request is not in the whitelist";
-            default:
-                return "Unknown error!";
+        if (error.getCode() == 4001014) {
+            return "Parameter missing or error" + (error.getDescription() == null ? "" : "(" + error.getDescription() + ")");
+        } else {
+            return error.getDescription();
         }
     }
 }

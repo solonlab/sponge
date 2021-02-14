@@ -58,7 +58,7 @@ public class ParamsAuthInterceptor implements Handler {
         }
 
         if (isOk == false) {
-            throw UapiCodes.CODE_12;
+            throw UapiCodes.CODE_4001013;
         }
     }
 
