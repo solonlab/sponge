@@ -1,4 +1,4 @@
-package org.noear.sponge.rock.models;
+package org.noear.rock.model;
 
 import org.noear.snack.ONode;
 import org.noear.water.utils.CallUtils;

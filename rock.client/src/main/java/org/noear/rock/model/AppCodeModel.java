@@ -1,4 +1,4 @@
-package org.noear.sponge.rock.models;
+package org.noear.rock.model;
 
 import org.noear.weed.GetHandlerEx;
 import org.noear.weed.IBinder;

@@ -1,4 +1,4 @@
-package org.noear.sponge.rock.models;
+package org.noear.rock.model;
 
 /// <summary>
 /// 生成:2017/08/08 12:03:44

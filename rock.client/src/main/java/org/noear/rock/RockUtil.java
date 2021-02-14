@@ -1,4 +1,4 @@
-package org.noear.sponge.rock;
+package org.noear.rock;
 
 import org.noear.solon.Solon;
 import org.noear.water.WaterClient;

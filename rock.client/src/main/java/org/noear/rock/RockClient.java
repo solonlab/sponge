@@ -1,7 +1,7 @@
-package org.noear.sponge.rock;
+package org.noear.rock;
 
-import org.noear.sponge.rock.models.*;
-import org.noear.sponge.rock.process.*;
+import org.noear.rock.model.*;
+import org.noear.rock.dso.process.*;
 import org.noear.water.WaterClient;
 import org.noear.water.model.ConfigM;
 import org.noear.water.utils.RedisX;

@@ -1,7 +1,7 @@
-package org.noear.sponge.rock;
+package org.noear.rock;
 
 
-import org.noear.sponge.rock.models.AppSettingModel;
+import org.noear.rock.model.AppSettingModel;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,4 +1,4 @@
-package org.noear.sponge.rock.process;
+package org.noear.rock.dso.process;
 
 import org.noear.weed.DbContext;
 import org.noear.weed.DbQueryProcedure;

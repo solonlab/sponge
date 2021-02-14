@@ -20,9 +20,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.noear.sponge</groupId>
-            <artifactId>rock-wrap-admin-jetty</artifactId>
-            <version>${rock.ver}</version>
+            <groupId>org.noear</groupId>
+            <artifactId>srww-admin</artifactId>
+            <version>${srww.ver}</version>
         </dependency>
 
         <dependency>

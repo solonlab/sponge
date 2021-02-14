@@ -29,6 +29,7 @@
         <water.ver>2.0.17</water.ver>
         <snack3.ver>3.1.14</snack3.ver>
         <bcf.ver>2.0.10</bcf.ver>
+        <srww.ver>1.0</srww.ver>
 
         <fastjson.ver>1.2.75</fastjson.ver>
         <jedis.ver>3.3.0</jedis.ver>

@@ -1,4 +1,4 @@
-package org.noear.sponge.rock.models;
+package org.noear.rock.model;
 
 public enum UpdateType {
     /** 没有更新*/
