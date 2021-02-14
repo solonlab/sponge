@@ -7,11 +7,15 @@ import org.noear.solon.core.handle.Context;
 
 public class App {
     public static void main(String[] args) {
-        CloudLogger log = CloudLogger.get("sponge_log_rock");
+
 
         Solon.start(App.class, args, app -> {
             app.enableSafeStop(app.cfg().isFilesMode() == false);
-        }).onError((ex) -> {
+        });
+
+        CloudLogger log = CloudLogger.get("sponge_log_rock");
+
+        Solon.global().onError((ex) -> {
             Context ctx = Context.current();
 
             if (ctx != null) {
