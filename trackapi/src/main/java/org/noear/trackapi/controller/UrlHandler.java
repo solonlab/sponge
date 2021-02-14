@@ -1,14 +1,14 @@
-package org.noear.trackapi.track.controller;
+package org.noear.trackapi.controller;
 
 import org.noear.snack.ONode;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.Context;
-import org.noear.trackapi.track.dso.HttpRequestX;
-import org.noear.trackapi.track.dso.LogUtil;
-import org.noear.trackapi.track.dso.TrackApi;
-import org.noear.trackapi.track.dso.db_sponge_track.DbTrackApi;
-import org.noear.trackapi.track.models.ShortUrlModel;
+import org.noear.trackapi.dso.HttpRequestX;
+import org.noear.trackapi.dso.LogUtil;
+import org.noear.trackapi.dso.TrackApi;
+import org.noear.trackapi.dso.db_sponge_track.DbTrackApi;
+import org.noear.trackapi.model.ShortUrlModel;
 import org.noear.water.utils.TextUtils;
 
 @Controller

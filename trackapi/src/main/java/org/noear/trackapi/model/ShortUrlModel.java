@@ -1,4 +1,4 @@
-package org.noear.trackapi.track.models;
+package org.noear.trackapi.model;
 
 import org.noear.water.utils.TextUtils;
 import org.noear.weed.GetHandlerEx;

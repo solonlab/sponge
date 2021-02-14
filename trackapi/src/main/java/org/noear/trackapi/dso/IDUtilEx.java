@@ -1,4 +1,4 @@
-package org.noear.trackapi.track.dso;
+package org.noear.trackapi.dso;
 
 
 import org.noear.water.utils.IDUtils;
