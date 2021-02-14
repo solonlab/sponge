@@ -22,7 +22,6 @@
         <module>trackapi</module>
 
         <module>rockrpc</module>
-        <module>rock-wrap-demo_uapi</module>
     </modules>
 
 </project>

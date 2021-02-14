@@ -3,7 +3,6 @@ package org.noear.sponge.rockuapi;
 import org.noear.sponge.rock.RockClient;
 import org.noear.sponge.rock.models.AppModel;
 import org.noear.solon.core.handle.Context;
-import org.noear.water.utils.IPUtils;
 import org.noear.water.utils.TextUtils;
 
 import java.sql.SQLException;
@@ -34,18 +33,6 @@ public class UapiParams {
         }else{
             return 0;
         }
-    }
-
-    private String _ip;
-    /**
-     * 当前请求IP
-     * */
-    public String getIP(){
-        if(_ip == null){
-            _ip = IPUtils.getIP(ctx);
-        }
-
-        return _ip;
     }
 
     private AppModel _app;
