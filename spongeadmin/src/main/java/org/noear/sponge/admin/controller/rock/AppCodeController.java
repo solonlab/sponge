@@ -6,11 +6,11 @@ import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.ModelAndView;
 import org.noear.sponge.admin.dso.BcfTagChecker;
 import org.noear.sponge.admin.dso.db.DbRockApi;
-import org.noear.sponge.admin.models.TagCountsModel;
-import org.noear.sponge.admin.models.rock.AppExCodeModel;
+import org.noear.sponge.admin.model.TagCountsModel;
+import org.noear.sponge.admin.model.rock.AppExCodeModel;
 import org.noear.sponge.admin.controller.BaseController;
-import org.noear.sponge.admin.models.others.resp.BaseResp;
-import org.noear.sponge.admin.models.rock.AppGroupModel;
+import org.noear.sponge.admin.model.others.resp.BaseResp;
+import org.noear.sponge.admin.model.rock.AppGroupModel;
 
 import java.sql.SQLException;
 import java.util.LinkedHashMap;

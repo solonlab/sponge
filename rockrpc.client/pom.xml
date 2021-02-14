@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.noear.sponge</groupId>
+        <groupId>org.noear</groupId>
         <artifactId>rock-parent</artifactId>
         <version>1.0.1</version>
         <relativePath>../rock-parent/pom.xml</relativePath>
     </parent>
 
-    <groupId>org.noear.sponge</groupId>
+    <groupId>org.noear</groupId>
     <artifactId>rockrpc.client</artifactId>
     <packaging>jar</packaging>
 

@@ -1,8 +1,8 @@
 package org.noear.sponge.admin.dso.db;
 
 import org.noear.sponge.admin.dso.CacheUtil;
-import org.noear.sponge.admin.models.TagCountsModel;
-import org.noear.sponge.admin.models.rock.*;
+import org.noear.sponge.admin.model.TagCountsModel;
+import org.noear.sponge.admin.model.rock.*;
 import org.noear.rock.RockUtil;
 import org.noear.weed.DbContext;
 import org.noear.weed.DbTableQuery;

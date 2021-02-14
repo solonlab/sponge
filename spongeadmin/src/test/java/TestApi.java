@@ -1,5 +1,5 @@
 import org.junit.Test;
-import org.noear.sponge.admin.models.others.resp.CallLogDetailsResp;
+import org.noear.sponge.admin.model.others.resp.CallLogDetailsResp;
 import org.noear.sponge.admin.utils.StringUtil;
 
 

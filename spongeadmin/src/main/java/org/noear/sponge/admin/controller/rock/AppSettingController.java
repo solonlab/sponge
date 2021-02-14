@@ -6,10 +6,10 @@ import org.noear.solon.core.handle.ModelAndView;
 import org.noear.sponge.admin.dso.db.DbRockApi;
 import org.noear.sponge.admin.controller.BaseController;
 import org.noear.sponge.admin.dso.BcfTagChecker;
-import org.noear.sponge.admin.models.others.resp.BaseResp;
-import org.noear.sponge.admin.models.rock.AppExSettingModel;
-import org.noear.sponge.admin.models.rock.AppGroupModel;
-import org.noear.sponge.admin.models.rock.AppModel;
+import org.noear.sponge.admin.model.others.resp.BaseResp;
+import org.noear.sponge.admin.model.rock.AppExSettingModel;
+import org.noear.sponge.admin.model.rock.AppGroupModel;
+import org.noear.sponge.admin.model.rock.AppModel;
 
 import java.sql.SQLException;
 import java.util.*;
