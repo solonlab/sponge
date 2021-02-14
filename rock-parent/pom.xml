@@ -42,12 +42,6 @@
         <dependencies>
             <dependency>
                 <groupId>org.noear.sponge</groupId>
-                <artifactId>rock.uapi</artifactId>
-                <version>${rock.ver}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.noear.sponge</groupId>
                 <artifactId>rockrpc.client</artifactId>
                 <version>${rock.ver}</version>
             </dependency>
@@ -123,7 +117,6 @@
 
     <modules>
         <module>../rock.client</module>
-        <module>../rock.uapi</module>
 
         <module>../rockrpc.client</module>
 
