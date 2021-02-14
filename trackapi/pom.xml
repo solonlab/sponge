@@ -113,7 +113,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>org.noear.sponge.track.App</mainClass>
+                            <mainClass>org.noear.trackapi.App</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

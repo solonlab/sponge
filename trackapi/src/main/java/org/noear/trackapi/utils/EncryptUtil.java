@@ -1,4 +1,4 @@
-package org.noear.sponge.track.utils;
+package org.noear.trackapi.utils;
 
 import org.apache.commons.codec.digest.DigestUtils;
 

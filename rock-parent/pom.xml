@@ -36,7 +36,6 @@
         <okhttp.ver>3.14.8</okhttp.ver>
 
         <rock.ver>1.0.1</rock.ver>
-        <wrap.ver>1.0.1</wrap.ver>
     </properties>
 
     <dependencyManagement>
