@@ -1,21 +1,18 @@
 package org.noear.rock.impl;
 
+import org.noear.mlog.Logger;
+import org.noear.mlog.LoggerFactory;
 import org.noear.mlog.utils.Tags;
 import org.noear.solon.Solon;
-import org.noear.solon.cloud.CloudLogger;
 import org.noear.solon.core.handle.Context;
 
 public class App {
     public static void main(String[] args) {
-
+        Logger log = LoggerFactory.get("sponge_log_rock");
 
         Solon.start(App.class, args, app -> {
             app.enableSafeStop(app.cfg().isFilesMode() == false);
-        });
-
-        CloudLogger log = CloudLogger.get("sponge_log_rock");
-
-        Solon.global().onError((ex) -> {
+        }).onError((ex) -> {
             Context ctx = Context.current();
 
             if (ctx != null) {
