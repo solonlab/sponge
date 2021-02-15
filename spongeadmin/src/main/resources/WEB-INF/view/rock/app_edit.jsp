@@ -58,9 +58,9 @@
                 success:function (data) {
                     if(data.code==1) {
                         top.layer.msg(data.msg);
-                            setTimeout(function(){
-                                parent.location.href="/rock/app?agroup_id="+agroup_id;
-                            },1000);
+                        setTimeout(function(){
+                            parent.location.href="/rock/app?agroup_id="+agroup_id;
+                        },1000);
                     }else{
                         top.layer.msg(data.msg);
                     }
@@ -74,87 +74,79 @@
 </head>
 <body>
 
-        <detail><form>
-            <h2>编辑应用</h2>
-            <hr/>
-            <table>
-                <tr>
-                    <td>应用名称</td>
-                    <td><input type="text" id="name" value="${appEdit.name}"></td>
-                </tr>
-                <tr style="display: none;">
-                    <td>所属应用组</td>
-                    <td>
-                        <select id="app_group" disabled="disabled">
-                            <c:forEach var="app_group" items="${app_groups}">
+<toolbar class="blockquote">
+    <left class="ln30">
+        <h2><a onclick="history.back(-1)" href="#" class="noline">应用</a></h2> /  编辑
+    </left>
+</toolbar>
+
+<detail>
+    <form>
+        <table>
+            <tr>
+                <th>应用名称</th>
+                <td><input type="text" id="name" value="${appEdit.name}"></td>
+            </tr>
+            <tr style="display: none;">
+                <th>所属应用组</th>
+                <td>
+                    <select id="app_group" disabled="disabled">
+                        <c:forEach var="app_group" items="${app_groups}">
                             <option value=${app_group.agroup_id}>${app_group.name}</option>
-                            </c:forEach>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>所属用户组</td>
-                    <td>
-                        <select id="user_group">
-                            <c:forEach var="user_group" items="${user_groups}">
-                                <option value=${user_group.ugroup_id}>${user_group.name}</option>
-                            </c:forEach>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>签名密钥</td>
-                    <td><input disabled="disabled" type="text" id="app_key"  value="${appEdit.app_key}"/></td>
-                </tr>
-                <tr>
-                    <td>akey</td>
-                    <td><input disabled="disabled" type="text" id="akey"  value="${appEdit.akey}"/>
-                    </td>
-                </tr>
-                <tr style="display: none">
-                    <td>备注</td>
-                    <td><input type="text" id="note" class="longtxt" value="${appEdit.note}"/></td>
-                </tr>
-                <tr>
-                    <td>是否可设置</td>
-                    <td>
-                        <radio>
-                        <c:if test="${appEdit.ar_is_setting == 1}">
-                            <label><input type="radio" name="ar_is_setting" value="1" checked="checked"><a>是</a></label>&nbsp;&nbsp;&nbsp;
-                            <label><input type="radio" name="ar_is_setting" value="0"><a>否</a></label>
-                        </c:if>
-                        <c:if test="${appEdit.ar_is_setting == 0}">
-                            <label><input type="radio" name="ar_is_setting" value="1"><a>是</a></label>&nbsp;&nbsp;&nbsp;
-                            <label><input type="radio" name="ar_is_setting" value="0" checked="checked"><a>否</a></label>
-                        </c:if>
-                        </radio>
-                    </td>
-                </tr>
-                <tr>
-                    <td>是否审核中</td>
-                    <td>
-                        <radio>
-                        <c:if test="${appEdit.ar_is_examine == 1}">
-                            <label><input type="radio" name="ar_is_examine" value="1" checked="checked"><a>是</a></label>&nbsp;&nbsp;&nbsp;
-                            <label><input type="radio" name="ar_is_examine" value="0"><a>否</a></label>
-                        </c:if>
-                        <c:if test="${appEdit.ar_is_examine == 0}">
-                            <label><input type="radio" name="ar_is_examine" value="1"><a>是</a></label>&nbsp;&nbsp;&nbsp;
-                            <label><input type="radio" name="ar_is_examine" value="0" checked="checked"><a>否</a></label>
-                        </c:if>
-                        </radio>
-                    </td>
-                </tr>
-                <tr>
-                    <td>审核版本号</td>
-                    <td><input type="text" id="ar_examine_ver" value="${appEdit.ar_examine_ver}"/></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><button type="button" onclick="saveEdit()">保存</button></td>
-                </tr>
-            </table>
-        </form></detail>
+                        </c:forEach>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>所属用户组</th>
+                <td>
+                    <select id="user_group">
+                        <c:forEach var="user_group" items="${user_groups}">
+                            <option value=${user_group.ugroup_id}>${user_group.name}</option>
+                        </c:forEach>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>签名密钥</th>
+                <td><input disabled="disabled" type="text" id="app_key"  value="${appEdit.app_key}"/></td>
+            </tr>
+            <tr>
+                <th>应用标识</th>
+                <td><input disabled="disabled" type="text" id="akey"  value="${appEdit.akey}"/>
+                </td>
+            </tr>
+            <tr style="display: none">
+                <th>备注</th>
+                <td><input type="text" id="note" class="longtxt" value="${appEdit.note}"/></td>
+            </tr>
+            <tr>
+                <th>审核版本号</th>
+                <td><input type="text" id="ar_examine_ver" value="${appEdit.ar_examine_ver}"/></td>
+            </tr>
+            <tr>
+                <th>是否可设置</th>
+                <td>
+                    <switcher>
+                        <label><input id="ar_is_setting" value="1" type="checkbox" ${appEdit.ar_is_setting == 1?"checked":""}><a></a></label>
+                    </switcher>
+                </td>
+            </tr>
+            <tr>
+                <th>是否审核中</th>
+                <td>
+                    <switcher>
+                        <label><input id="ar_is_examine" value="1" type="checkbox" ${appEdit.ar_is_examine == 1?"checked":""}><a></a></label>
+                    </switcher>
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><button type="button" onclick="saveEdit()">保存</button></td>
+            </tr>
+        </table>
+    </form>
+</detail>
 
 </body>
 </html>

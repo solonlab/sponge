@@ -23,8 +23,6 @@
 </head>
 <body>
         <toolbar>
-            <cell>
-
                 <form>
                 <input type="text" value="${name}" name="name" id="name" value="${name}" placeholder="设置项名称"/>
                 <input type="hidden"  name="agroup_id"  value="${agroup_id}"/>
@@ -33,8 +31,6 @@
                     <button type="button" onclick="addAgroup()" class="edit">新增</button>
                 </c:if>
                 </form>
-
-            </cell>
         </toolbar>
 
         <datagrid>
@@ -42,10 +38,10 @@
                 <thead>
                 <tr>
                     <td width="120px">设置项名称</td>
-                    <td width="50px">设置项<br/>值类型</td>
+                    <td width="60px">设置项<br/>值类型</td>
                     <td>设置项值</td>
-                    <td width="60px">是否输出<br/>到客户端</td>
-                    <td width="60px">开始支持<br/>的版本</td>
+                    <td width="70px">是否输出<br/>到客户端</td>
+                    <td width="70px">开始支持<br/>的版本</td>
                     <c:if test="${isOperator==1}">
                         <td width="50px">操作</td>
                     </c:if>

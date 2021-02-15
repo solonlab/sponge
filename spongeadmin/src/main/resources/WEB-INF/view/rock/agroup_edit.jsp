@@ -36,9 +36,11 @@
             if(agroup_id==null){
                 agroup_id=0
             }
+
             if(!a_id){
-               a_id=0;
+                a_id=0;
             }
+
             $.ajax({
                 type:"POST",
                 url:"/rock/agroup/edit/ajax/save",
@@ -53,9 +55,9 @@
                 success:function (data) {
                     if(data.code==1) {
                         top.layer.msg(data.msg);
-                            setTimeout(function(){
-                                location.href="/rock/agroup";
-                            },1000);
+                        setTimeout(function(){
+                            location.href="/rock/agroup";
+                        },1000);
                     }else{
                         top.layer.msg(data.msg);
                     }
@@ -68,53 +70,57 @@
 </head>
 <body>
 
-<main>
-        <detail><form>
-            <h2>编辑应用组</h2>
-            <hr/>
-            <table>
-                <c:if test="${isAdmin==1}">
-                    <tr>
-                        <td>应用组ID</td>
-                        <td><input type="text" id="agroup_id" value="${agroup.agroup_id}" onkeyup="value=value.replace(/[^\d.]/g,'')"></td>
-                    </tr>
-                </c:if>
+<toolbar class="blockquote">
+    <left class="ln30">
+        <h2><a onclick="history.back(-1)" href="#" class="noline">应用组</a></h2> /  编辑
+    </left>
+</toolbar>
+
+<detail>
+    <form>
+        <table>
+            <c:if test="${isAdmin==1}">
                 <tr>
-                    <td>应用组名称</td>
-                    <td><input type="text" id="name" value="${agroup.name}"></td>
+                    <th>应用组ID</th>
+                    <td><input type="text" id="agroup_id" value="${agroup.agroup_id}" onkeyup="value=value.replace(/[^\d.]/g,'')"></td>
                 </tr>
-                <tr>
-                    <td>默认用户组</td>
-                    <td>
+            </c:if>
+            <tr>
+                <th>应用组名称</th>
+                <td><input type="text" id="name" value="${agroup.name}"></td>
+            </tr>
+            <tr>
+                <th>默认用户组</th>
+                <td>
                     <select id="ugroup">
                         <option value=""></option>
                         <c:forEach var="ugroup" items="${ugroupList}">
                             <option value="${ugroup.ugroup_id}">${ugroup.name}</option>
                         </c:forEach>
                     </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>技术代号名</td>
-                    <td><input type="text" id="tag" value="${agroup.tag}"></td>
-                </tr>
-                <tr>
-                    <td>是否启用</td>
-                    <td>
-                        <switcher>
-                            <label><input id="is_enabled" value="1" type="checkbox" ${agroup.is_disabled == 0?"checked":""}><a></a></label>
-                        </switcher>
-                    </td>
-                </tr>
+                </td>
+            </tr>
+            <tr>
+                <th>技术代号名</th>
+                <td><input type="text" id="tag" value="${agroup.tag}"></td>
+            </tr>
+            <tr>
+                <th>是否启用</th>
+                <td>
+                    <switcher>
+                        <label><input id="is_enabled" value="1" type="checkbox" ${agroup.is_disabled == 0?"checked":""}><a></a></label>
+                    </switcher>
+                </td>
+            </tr>
 
-                <tr>
-                    <td></td>
-                    <td><button type="button" onclick="saveEditAgroup()">保存</button></td>
-                </tr>
-            </table>
+            <tr>
+                <th></th>
+                <td><button type="button" onclick="saveEditAgroup()">保存</button></td>
+            </tr>
+        </table>
+    </form>
+</detail>
 
-        </form></detail>
-</main>
 
 </body>
 </html>

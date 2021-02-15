@@ -23,56 +23,56 @@
 </head>
 <body>
 
-        <toolbar>
-            <cell>
-                <form>
-                    <input type="hidden" name="agroup_id" value="${agroup_id}">
-                <input type="text" value="${name}" name="name" id="name" placeholder="应用名称"/>&nbsp;&nbsp;
-                <button type="submit">查询</button>&nbsp;&nbsp;
-                    <c:if test="${agroup_id>0&&isOperator==1}">
+<toolbar>
+    <left>
+        <form>
+            <input type="hidden" name="agroup_id" value="${agroup_id}">
+            <input type="text" value="${name}" name="name" id="name" placeholder="应用名称"/>&nbsp;&nbsp;
+            <button type="submit">查询</button>&nbsp;&nbsp;
+            <c:if test="${agroup_id>0&&isOperator==1}">
                 <button type="button" onclick="addApp()" class="edit">新增</button>
-                    </c:if>
-                </form>
-            </cell>
-            <cell><ct:stateselector items="全部,已过审,审核中"/></cell>
-        </toolbar>
+            </c:if>
+        </form>
+    </left>
+    <right><ct:stateselector items="全部,已过审,审核中"/></right>
+</toolbar>
 
-        <datagrid>
-            <table>
-                <thead>
-                <tr>
-                    <td width="70px">应用ID</td>
-                    <td width="180px">签名密钥</td>
-                    <td >应用名称</td>
-                    <td width="60px">应用组ID</td>
-                    <td width="60px">用户组ID</td>
-                    <td width="50px">是否<br/>审核中</td>
-                    <td width="50px">审核<br/>版本号</td>
-                    <td width="50px">是否<br/>可设置</td>
-                    <c:if test="${isOperator==1}">
-                        <td width="50px">操作</td>
-                    </c:if>
-                </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="app" items="${appList}">
-                        <tr>
-                            <td style="text-align: left">${app.app_id}</td>
-                            <td style="text-align: left">${app.app_key}</td>
-                            <td style="text-align: left">${app.name}</td>
-                            <td>${app.agroup_id}</td>
-                            <td>${app.ugroup_id}</td>
-                            <td>${app.ar_is_examine}</td>
-                            <td>${app.ar_examine_ver}</td>
-                            <td >${app.ar_is_setting}</td>
-                            <c:if test="${isOperator==1}">
-                                <td><a href="/rock/app/edit?app_id=${app.app_id}" style="color: blue;">编辑</a></td>
-                            </c:if>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-        </datagrid>
+<datagrid>
+    <table>
+        <thead>
+        <tr>
+            <td width="70px">应用ID</td>
+            <td width="180px">签名密钥</td>
+            <td >应用名称</td>
+            <td width="60px">应用组ID</td>
+            <td width="60px">用户组ID</td>
+            <td width="60px">是否<br/>审核中</td>
+            <td width="60px">审核<br/>版本号</td>
+            <td width="60px">是否<br/>可设置</td>
+            <c:if test="${isOperator==1}">
+                <td width="50px">操作</td>
+            </c:if>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="app" items="${appList}">
+            <tr>
+                <td style="text-align: left">${app.app_id}</td>
+                <td style="text-align: left">${app.app_key}</td>
+                <td style="text-align: left">${app.name}</td>
+                <td>${app.agroup_id}</td>
+                <td>${app.ugroup_id}</td>
+                <td>${app.ar_is_examine}</td>
+                <td>${app.ar_examine_ver}</td>
+                <td >${app.ar_is_setting}</td>
+                <c:if test="${isOperator==1}">
+                    <td><a href="/rock/app/edit?app_id=${app.app_id}" style="color: blue;">编辑</a></td>
+                </c:if>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</datagrid>
 
 </body>
 </html>

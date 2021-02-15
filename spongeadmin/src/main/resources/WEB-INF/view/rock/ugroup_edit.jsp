@@ -45,9 +45,9 @@
                 success:function (data) {
                     if(data.code==1) {
                         top.layer.msg(data.msg);
-                            setTimeout(function(){
-                                location.href="/rock/ugroup";
-                            },1000);
+                        setTimeout(function(){
+                            location.href="/rock/ugroup";
+                        },1000);
                     }else{
                         top.layer.msg(data.msg);
                     }
@@ -60,36 +60,41 @@
 </head>
 <body>
 
-<main>
-        <detail><form>
-            <h2>编辑用户组</h2>
-            <hr/>
-            <table>
-                <c:if test="${isAdmin==1}">
-                    <tr>
-                        <td>用户组ID</td>
-                        <td><input type="text" id="ugroup_id" value="${ugroup.ugroup_id}" onkeyup="value=value.replace(/[^\d.]/g,'')"></td>
-                    </tr>
-                </c:if>
+<toolbar class="blockquote">
+    <left class="ln30">
+        <h2><a onclick="history.back(-1)" href="#" class="noline">用户组</a></h2> /  编辑
+    </left>
+</toolbar>
+
+<detail>
+    <form>
+        <table>
+            <c:if test="${isAdmin==1}">
                 <tr>
-                    <td>用户组名称</td>
-                    <td><input type="text" id="name" value="${ugroup.name}"></td>
+                    <th>用户组ID</th>
+                    <td><input type="text" id="ugroup_id" value="${ugroup.ugroup_id}" onkeyup="value=value.replace(/[^\d.]/g,'')"></td>
                 </tr>
-                <tr>
-                    <td>是否启用</td>
-                    <td>
-                        <switcher>
-                            <label><input id="is_enabled" value="1" type="checkbox" ${ugroup.is_disabled == 0?"checked":""}><a></a></label>
-                        </switcher>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><button type="button" onclick="saveEdit()">保存</button></td>
-                </tr>
-            </table>
-        </form></detail>
-</main>
+            </c:if>
+            <tr>
+                <th>用户组名称</th>
+                <td><input type="text" id="name" value="${ugroup.name}"></td>
+            </tr>
+            <tr>
+                <th>是否启用</th>
+                <td>
+                    <switcher>
+                        <label><input id="is_enabled" value="1" type="checkbox" ${ugroup.is_disabled == 0?"checked":""}><a></a></label>
+                    </switcher>
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><button type="button" onclick="saveEdit()">保存</button></td>
+            </tr>
+        </table>
+    </form>
+</detail>
+
 
 </body>
 </html>

@@ -23,54 +23,52 @@
 </head>
 <body>
 
-<main>
 
-        <toolbar>
-            <cell>
-                <form>
-                <input type="text" value="${name}" name="name" id="name" placeholder="应用组名称"/>
-                <button type="submit">查询</button>&nbsp;&nbsp;
+<toolbar>
+    <left>
+        <form>
+            <input type="text" value="${name}" name="name" id="name" placeholder="应用组名称"/>
+            <button type="submit">查询</button>&nbsp;&nbsp;
+            <c:if test="${isOperator==1}">
+                <button type="button" onclick="addAgroup()" class="edit">新增</button>
+            </c:if>
+        </form>
+    </left>
+
+    <right>
+        <ct:stateselector items="启用,未启用"></ct:stateselector>
+    </right>
+</toolbar>
+
+<datagrid>
+    <table>
+        <thead>
+        <tr>
+            <td width="100px">应用组ID</td>
+            <td width="100px">技术代号</td>
+            <td>应用组名称</td>
+            <td width="100px">默认用户组ID</td>
+
+            <c:if test="${isOperator==1}">
+                <td width="50px">操作</td>
+            </c:if>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="agroup" items="${agroupList}">
+            <tr>
+                <td style="text-align: left">${agroup.agroup_id}</td>
+                <td style="text-align: left">${agroup.tag}</td>
+                <td style="text-align: left">${agroup.name}</td>
+                <td style="text-align: left">${agroup.ugroup_id}</td>
                 <c:if test="${isOperator==1}">
-                    <button type="button" onclick="addAgroup()" class="edit">新增</button>
+                    <td><a href="agroup/edit?agroup_id=${agroup.agroup_id}" style="color: blue;">编辑</a></td>
                 </c:if>
-                </form>
-            </cell>
-            <cell>
-                <ct:stateselector items="启用,未启用"></ct:stateselector>
-            </cell>
-        </toolbar>
-
-        <datagrid>
-            <table>
-                <thead>
-                <tr>
-                    <td width="100px">应用组ID</td>
-                    <td width="100px">技术代号</td>
-                    <td>应用组名称</td>
-                    <td width="100px">默认用户组ID</td>
-
-                    <c:if test="${isOperator==1}">
-                        <td width="50px">操作</td>
-                    </c:if>
-                </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="agroup" items="${agroupList}">
-                        <tr>
-                            <td style="text-align: left">${agroup.agroup_id}</td>
-                            <td style="text-align: left">${agroup.tag}</td>
-                            <td style="text-align: left">${agroup.name}</td>
-                            <td style="text-align: left">${agroup.ugroup_id}</td>
-                            <c:if test="${isOperator==1}">
-                                <td><a href="agroup/edit?agroup_id=${agroup.agroup_id}" style="color: blue;">编辑</a></td>
-                            </c:if>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-        </datagrid>
-
-</main>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</datagrid>
 
 </body>
 </html>
