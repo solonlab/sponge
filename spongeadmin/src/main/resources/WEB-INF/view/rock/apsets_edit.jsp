@@ -46,9 +46,9 @@
                 success:function (data) {
                     if(data.code==1) {
                         top.layer.msg(data.msg);
-                            setTimeout(function(){
-                                location.href="/rock/apsets/inner?app_id="+app_id;
-                            },1000);
+                        setTimeout(function(){
+                            location.href="/rock/apsets/inner?app_id="+app_id;
+                        },1000);
                     }else{
                         top.layer.msg(data.msg);
                     }
@@ -61,56 +61,55 @@
 </head>
 <body>
 
-        <detail><form>
-            <h2>编辑应用设置</h2>
-            <hr/>
-            <table>
-                <tr>
-                    <td>项名称</td>
-                    <td><input type="text" id="name" value="${apsets.name}"></td>
-                </tr>
-                <tr>
-                    <td>项值类型</td>
-                    <td>
-                        <select id="type">
-                            <option value="0">文字</option>
-                            <option value="1">数字</option>
-                            <option value="9">JSON</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>项值</td>
-                    <td><textarea id="value">${apsets.value}</textarea></td>
-                </tr>
-                <tr>
-                    <td>备注</td>
-                    <td><input type="text" id="note" class="longtxt" value="${apsets.note}"/></td>
-                </tr>
-                <tr>
-                    <td>开始支持的版本</td>
-                    <td><input type="text" id="ver_start" value="${apsets.ver_start}"/></td>
-                </tr>
-                <tr>
-                    <td>是否输出客户端</td>
-                    <td>
-                        <radio>
-                        <c:if test="${apsets.is_client == 1}">
-                            <label><input type="radio" name="is_client" value="1" checked="checked"><a>是</a></label>&nbsp;&nbsp;&nbsp;
-                            <label><input type="radio" name="is_client" value="0"><a>否</a></label>
-                        </c:if>
-                        <c:if test="${apsets.is_client == 0}">
-                            <label><input type="radio" name="is_client" value="1"><a>是</a></label>&nbsp;&nbsp;&nbsp;
-                            <label><input type="radio" name="is_client" value="0" checked="checked"><a>否</a></label>
-                        </c:if>
-                        </radio>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><button type="button" onclick="saveApset()">保存</button></td>
-                </tr>
-            </table>
-        </form></detail>
+<toolbar class="blockquote">
+    <left class="ln30">
+        <h2><a onclick="history.back(-1)" href="#" class="noline">应用设置</a></h2> /  编辑
+    </left>
+</toolbar>
+
+<detail>
+    <form>
+        <table>
+            <tr>
+                <th>项名称</th>
+                <td><input type="text" id="name" value="${apsets.name}"></td>
+            </tr>
+            <tr>
+                <th>项值类型</th>
+                <td>
+                    <select id="type">
+                        <option value="0">文字</option>
+                        <option value="1">数字</option>
+                        <option value="9">JSON</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>项值</th>
+                <td><textarea id="value" style="height: 220px;">${apsets.value}</textarea></td>
+            </tr>
+            <tr>
+                <th>备注</th>
+                <td><input type="text" id="note" class="longtxt" value="${apsets.note}"/></td>
+            </tr>
+            <tr>
+                <th>起始支持版本</th>
+                <td><input type="text" id="ver_start" value="${apsets.ver_start}"/></td>
+            </tr>
+            <tr>
+                <th>输出到客户端</th>
+                <td>
+                    <switcher>
+                        <label><input id="is_client" value="1" type="checkbox" ${apsets.is_client == 1?"checked":""}><a></a></label>
+                    </switcher>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button type="button" onclick="saveApset()">保存</button></td>
+            </tr>
+        </table>
+    </form>
+</detail>
 </body>
 </html>

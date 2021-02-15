@@ -76,23 +76,27 @@
     <option value="zh_TW">zh_TW 中文(台湾地区)</option>
 </datalist>
 
+<toolbar class="blockquote">
+    <left class="ln30">
+        <h2><a onclick="history.back(-1)" href="#" class="noline">应用状态码</a></h2> /  编辑
+    </left>
+</toolbar>
+
 <detail>
     <form>
-        <h2>编辑状态码</h2>
-        <hr/>
         <table>
             <tr>
-                <td>状态码</td>
+                <th>状态码</th>
                 <td><input type="text" id="code" value="${code.code}"></td>
             </tr>
             <tr>
-                <td>语言</td>
+                <th>语言</th>
                 <td><input type="text" id="lang" list="lang_list" autocomplete="off" value="${code.lang}">
                 <n>（空表示默认语言）</n>
                 </td>
             </tr>
             <tr style="display: none;">
-                <td>所属应用组</td>
+                <th>所属应用组</th>
                 <td>
                     <select id="agroup_id" disabled="disabled">
                         <c:forEach var="app_group" items="${app_groups}">
@@ -102,11 +106,11 @@
                 </td>
             </tr>
             <tr>
-                <td>对应信息</td>
+                <th>对应信息</th>
                 <td><input type="text" id="note" class="longtxt" value="${code.note}"/></td>
             </tr>
             <tr>
-                <td></td>
+                <th></th>
                 <td><button type="button" onclick="saveEdit()">保存</button></td>
             </tr>
         </table>

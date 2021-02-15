@@ -24,7 +24,7 @@
 <body>
 
         <toolbar>
-            <cell>
+            <left>
                 <form>
                 <input type="text" value="${code_num}" name="code_num" placeholder="状态码"/>&nbsp;&nbsp;
                 <input type="hidden" value="${agroup_id}" name="agroup_id" />
@@ -33,14 +33,14 @@
                 <button type="button" onclick="addApCode()" class="edit">新增</button>
                     </c:if>
                 </form>
-            </cell>
-            <cell>
+            </left>
+            <right>
                 <selector>
                     <c:forEach var="l" items="${langs}">
                     <a class='noline ${l.tag == lang ? "sel":"" }' href="./inner?lang=${l.tag}&agroup_id=${agroup_id}">${l.tag}(${l.counts})</a>
                     </c:forEach>
                 </selector>
-            </cell>
+            </right>
         </toolbar>
         <datagrid>
             <table>

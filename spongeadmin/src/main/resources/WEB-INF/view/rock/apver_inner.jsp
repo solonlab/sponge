@@ -25,12 +25,12 @@
 <body>
 
         <toolbar>
-            <cell>
+            <left>
                 <c:if test="${agroup_id>0&&isOperator==1}">
                 <button type="button" onclick="addApver()" class="edit">新建更新</button>
                 </c:if>
-            </cell>
-            <cell><ct:stateselector state="1" items="全部,有效,无效"/></cell>
+            </left>
+            <right><ct:stateselector state="1" items="全部,有效,无效"/></right>
         </toolbar>
 
         <datagrid>
@@ -38,7 +38,7 @@
                 <thead>
                 <tr>
                     <td width="60px">应用ID</td>
-                    <td width="45px">版本号</td>
+                    <td width="60px">版本号</td>
                     <td>更新内容</td>
                     <td width="70px">更新方式</td>
                     <td width="60px">平台</td>

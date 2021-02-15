@@ -86,7 +86,7 @@
             </tr>
             <tr>
                 <th>项值</th>
-                <td><textarea id="value" style="height: 230px;">${agsets.value}</textarea></td>
+                <td><textarea id="value" style="height: 220px;">${agsets.value}</textarea></td>
             </tr>
             <tr>
                 <th>备注</th>
