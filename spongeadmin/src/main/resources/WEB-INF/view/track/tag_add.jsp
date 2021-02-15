@@ -76,23 +76,23 @@
 
                 <tr>
                     <td>标签名称</td>
-                    <td><input type="text" placeholder="请输入标签名称" id="tagName"/> *必填</td>
+                    <td><input type="text"  id="tagName"/> *必填</td>
                 </tr>
                 <tr>
                     <td>标签主域</td>
-                    <td><input type="text" placeholder="请输入标签主域" id="tagHost"/> 例：https://x.x.x</td>
+                    <td><input type="text" id="tagHost"/> 例：https://x.x.x</td>
                 </tr>
                 <tr>
                     <td>用户标识</td>
-                    <td><input type="text" placeholder="请输入用户标识" id="t_user_field"/></td>
+                    <td><input type="text" id="t_user_field"/></td>
                 </tr>
                 <tr>
                     <td>跟踪参数</td>
-                    <td><input type="text" placeholder="请输入跟踪参数" id="t_track_params"/> 例(c,f,ap,v)用逗号隔开；禁放无限值的参数</td>
+                    <td><input type="text"  id="t_track_params"/> 例(c,f,ap,v)用逗号隔开；禁放无限值的参数</td>
                 </tr>
                 <tr>
                     <td>透传参数</td>
-                    <td><input type="text" placeholder="请输入透传参数" id="t_trans_params"/> 例(c=c,ukey=uk)用逗号隔开</td>
+                    <td><input type="text" id="t_trans_params"/> 例(c=c,ukey=uk)用逗号隔开</td>
                 </tr>
                 <tr>
                     <td>构建链接<br/></td>
