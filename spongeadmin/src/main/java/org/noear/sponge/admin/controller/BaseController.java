@@ -5,7 +5,6 @@ import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ModelAndView;
 import org.noear.sponge.admin.Config;
 import org.noear.sponge.admin.dso.Session;
-import org.noear.water.utils.IPUtils;
 
 @Singleton(false)
 public abstract class BaseController {
@@ -17,17 +16,9 @@ public abstract class BaseController {
     }
 
     public int getInt(Context request, String key) {
-        String p = request.param(key);
-
-        if(p==null|| p.length()==0)
-            return -1;
-        else
-            return Integer.parseInt(p);
+        return request.paramAsInt(key,-1);
     }
 
-    public String getIP(Context request) {
-        return IPUtils.getIP(request);
-    }
 
     /*视图数据模型*/
     protected ViewModel viewModel = new ViewModel();
@@ -65,14 +56,18 @@ public abstract class BaseController {
         viewModel.put("isOperator",isAdmin==1||isOperator==1?1:0);
         viewModel.put("isAdmin",isAdmin);
 
-        return new ModelAndView(viewName+".jsp", viewModel);
+        return viewModel.view(viewName+".jsp");
     }
 
     /*
-    * @return 输出一个跳转视图
-    * @prarm  url 可以是任何URL地址
-    * */
-    public void redirect(String url) throws Exception{
-        Context.current().redirect(url);//跳转到另一个url上
+     * @return 输出一个跳转视图
+     * @prarm  url 可以是任何URL地址
+     * */
+    public void redirect(String url) {
+        try {
+            Context.current().redirect(url);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 }

@@ -16,9 +16,9 @@ import java.net.URLDecoder;
 public class DockController extends BaseController {
     //支持外部url
     @Mapping("/**/$*") //视图 返回
-    public ModelAndView dock1(Context request) {
-        String uri = request.url().toLowerCase();
-        String query = request.uri().getQuery();
+    public ModelAndView dock1(Context ctx) {
+        String uri = ctx.path().toLowerCase();
+        String query = ctx.queryString();
 
         try {
             BcfResourceModel res = BcfClient.getResourceByPath(uri);
@@ -39,27 +39,20 @@ public class DockController extends BaseController {
 
     //此处改过，xyj，201811(uadmin) //增加内部url支持
     @Mapping("/**/@*") //视图 返回
-    public ModelAndView dock2(Context request) {
-        String uri = request.path().toLowerCase();
-        String query = request.uri().getQuery();
+    public ModelAndView dock2(Context ctx) {
+        String uri = ctx.path();
+        String query = ctx.queryString();
 
         String fun_name = uri.split("/@")[1];
-        String fun_url = uri.split("/@")[0];
+        String fun_url = uri.split("/@")[0].toLowerCase();
 
-        String newUrl = fun_url;
-
-        //传递参数
-        if(TextUtils.isEmpty(query) == false) {
-            if (newUrl.indexOf("?") > 0) {
-                newUrl = newUrl + "&" + query;
-            } else {
-                newUrl = newUrl + "?" + query;
-            }
+        if(TextUtils.isEmpty(query)==false) {
+            fun_url = fun_url + "?" + query;
         }
 
         try {
             viewModel.set("fun_name", URLDecoder.decode(fun_name, "utf-8"));
-            viewModel.set("fun_url", newUrl);
+            viewModel.set("fun_url", fun_url);
 
             if (query != null && query.indexOf("@=") >= 0) {
                 viewModel.set("fun_type", 1);

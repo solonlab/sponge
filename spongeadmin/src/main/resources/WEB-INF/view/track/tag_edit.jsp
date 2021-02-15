@@ -77,51 +77,53 @@
 </head>
 <body>
 
-<main>
-        <detail><form>
-            <h2>编辑标签（<a class="t2" onclick="history.back(-1)">返回</a>）</h2>
-            <hr/>
-            <table>
+<toolbar class="blockquote">
+    <left class="ln30">
+        <h2><a onclick="history.back(-1)" href="#" class="noline">标签配置</a></h2> /  编辑
+    </left>
+</toolbar>
 
-                <tr>
-                    <td>标签名称</td>
-                    <td><input type="text" id="tagName" value="${tag.tag_name}"/> *必填</td>
-                </tr>
-                <tr>
-                    <td>标签主域</td>
-                    <td><input type="text" id="tagHost" value="${tag.tag_host}"/> 例：https://x.x.x</td>
-                </tr>
-                <tr>
-                    <td>用户标识</td>
-                    <td><input type="text" id="t_user_field" value="${tag.t_user_field}"/></td>
-                </tr>
-                <tr>
-                    <td>跟踪参数</td>
-                    <td><input type="text" id="t_track_params" value="${tag.t_track_params}"/> 例(c,f,ap,v)用逗号隔开；禁放无限值的参数</td>
-                </tr>
-                <tr>
-                    <td>透传参数</td>
-                    <td><input type="text" id="t_trans_params" value="${tag.t_trans_params}" /> 例(c=c,ukey=uk)用逗号隔开</td>
-                </tr>
-                <tr>
-                    <td>构建链接<br/></td>
-                    <td><textarea  id="t_build_link" style="height: 80px;">${tag.t_build_link}</textarea> 例(网站::f=web;卡片::f=app)</td>
-                </tr>
-                <tr>
-                    <td>备注</td>
-                    <td><input type="text" id="note" class="longtxt" /></td>
-                </tr>
-                <c:if test="${isOperator==1}">
-                    <tr>
-                        <td></td>
-                        <td><button type="button" onclick="save()">保存</button></td>
-                    </tr>
-                </c:if>
-            </table>
+<detail>
+    <form>
+        <table>
 
-        </form></detail>
-
-</main>
+            <tr>
+                <th>标签名称</th>
+                <td><input type="text" id="tagName" value="${tag.tag_name}"/> *必填</td>
+            </tr>
+            <tr>
+                <th>标签主域</th>
+                <td><input type="text" id="tagHost" value="${tag.tag_host}"/> 例：https://x.x.x</td>
+            </tr>
+            <tr>
+                <th>用户标识</th>
+                <td><input type="text" id="t_user_field" value="${tag.t_user_field}"/></td>
+            </tr>
+            <tr>
+                <th>跟踪参数</th>
+                <td><input type="text" id="t_track_params" value="${tag.t_track_params}"/> 例：(c,f,ap,v)用逗号隔开；禁放无限值的参数</td>
+            </tr>
+            <tr>
+                <th>透传参数</th>
+                <td><input type="text" id="t_trans_params" value="${tag.t_trans_params}" /> 例：(c=c,ukey=uk)用逗号隔开</td>
+            </tr>
+            <tr>
+                <th>构建链接<br/></th>
+                <td><textarea  id="t_build_link" style="height: 80px;">${tag.t_build_link}</textarea> 例：(网站::f=web)</td>
+            </tr>
+            <tr>
+                <th>备注</th>
+                <td><input type="text" id="note" class="longtxt" /></td>
+            </tr>
+            <c:if test="${isOperator==1}">
+                <tr>
+                    <td></td>
+                    <td><button type="button" onclick="save()">保存</button></td>
+                </tr>
+            </c:if>
+        </table>
+    </form>
+</detail>
 
 </body>
 </html>

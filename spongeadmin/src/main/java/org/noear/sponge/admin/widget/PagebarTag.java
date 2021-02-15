@@ -47,24 +47,24 @@ public class PagebarTag extends TagSupport {
             if(pageIndex<1)
                 pageIndex=1;
 
-            StringBuffer sb = new StringBuffer();
-            sb.append("<pagebar>");
+            StringBuilder sb = new StringBuilder();
+            sb.append("<pagebar class='mar10-t'>");
 
             sb.append("<left>");
             sb.append(" <table>");
             sb.append("  <tr>");
-            sb.append("   <td><button class='form_button' onclick=\"UrlQueryBy('page',1)\" "+(1 == pageIndex ? "disabled='disabled'":"")+" >首页</button></td>");
-            sb.append("   <td><button class='form_button' onclick=\"UrlQueryBy('page',"+(pageIndex-1)+")\" "+(1 == pageIndex ? "disabled='disabled'":"")+" >上一页</button></td>");
-            sb.append("   <td><input  id='js_pager_no' type='text' value='"+(pageIndex)+"' onblur=\"UrlQueryBy('page',this.value);\" class='form_text' /></td>");
-            sb.append("   <td><button class='form_button' onclick=\"UrlQueryBy('page',"+(pageIndex+1)+")\" "+ (pageCount == pageIndex ? "disabled='disabled'":"") +" >下一页</button></td>");
-            sb.append("   <td><button class='form_button' onclick=\"UrlQueryBy('page',"+(pageCount)+")\" "+(pageCount == pageIndex ? "disabled='disabled'":"")+" >尾页</button></td>");
+            sb.append("   <td><button type='button' class='form_button' onclick=\"UrlQueryBy('page',1)\" " + (1 == pageIndex ? "disabled='disabled'" : "") + " >首页</button></td>");
+            sb.append("   <td><button type='button' class='form_button' onclick=\"UrlQueryBy('page'," + (pageIndex - 1) + ")\" " + (1 == pageIndex ? "disabled='disabled'" : "") + " >上一页</button></td>");
+            sb.append("   <td><input  id='js_pager_no' type='text' value='" + (pageIndex) + "' onblur=\"UrlQueryBy('page',this.value);\" class='form_text' /></td>");
+            sb.append("   <td><button type='button' class='form_button' onclick=\"UrlQueryBy('page'," + (pageIndex + 1) + ")\" " + (pageCount == pageIndex ? "disabled='disabled'" : "") + " >下一页</button></td>");
+            sb.append("   <td><button type='button' class='form_button' onclick=\"UrlQueryBy('page'," + (pageCount) + ")\" " + (pageCount == pageIndex ? "disabled='disabled'" : "") + " >尾页</button></td>");
             sb.append("  </tr>");
             sb.append(" </table>");
             sb.append("</left>");
 
             sb.append("<right>");
-            sb.append("  <em>共<span>"+(pageCount)+"</span>页</em>");
-            sb.append("  <em>（共<span>"+(rowCount)+"</span>条记录）</em>");
+            sb.append("  <em>共<span>" + (pageCount) + "</span>页</em>");
+            sb.append("  <em>（共<span>" + (rowCount) + "</span>条记录）</em>");
             sb.append("</right>");
 
             sb.append("</pagebar>");
@@ -81,9 +81,9 @@ public class PagebarTag extends TagSupport {
                     "\n" +
                     "            if (event.ctrlKey) {\n" +
                     "                if (event.keyCode == 37)\n" +
-                    "                    UrlQueryBy('page',"+(pageIndex -1)+");\n" +
+                    "                    UrlQueryBy('page'," + (pageIndex - 1) + ");\n" +
                     "                else if (event.keyCode == 39)\n" +
-                    "                    UrlQueryBy('page',"+(pageIndex +1)+");\n" +
+                    "                    UrlQueryBy('page'," + (pageIndex + 1) + ");\n" +
                     "            }\n" +
                     "        });\n" +
                     "    });\n" +

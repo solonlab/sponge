@@ -1,13 +1,12 @@
 package org.noear.sponge.admin;
 
 import org.noear.solon.Solon;
-import org.noear.solon.core.event.PluginLoadEndEvent;
 import org.noear.solon.core.handle.Context;
 import org.noear.sponge.admin.dso.LogUtil;
 
-public class App {
+public class SpongeApp {
     public static void main(String[] args) {
-        Solon.start(App.class, args, app -> {
+        Solon.start(SpongeApp.class, args, app -> {
             //
             // 在此处初始化配置
             //
@@ -16,7 +15,7 @@ public class App {
             Context ctx = Context.current();
 
             if (ctx != null) {
-                LogUtil.error("XAPP", ctx.path(), ctx.paramMap().toString(), ex);
+                LogUtil.error("global", ctx.path(), ctx.paramMap().toString(), ex);
             }
         });
     }

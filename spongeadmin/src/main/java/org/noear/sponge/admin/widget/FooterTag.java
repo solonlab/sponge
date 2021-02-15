@@ -15,20 +15,18 @@ public class FooterTag extends TagSupport {
             //当前视图path
             String cPath = Context.current().path();
 
-            StringBuffer sb = new StringBuffer();
-            sb.append("<footer>");
 
-            if(cPath.indexOf("/WEB-INF/view/login")==0) //只在登录页显示
-            {
+            if (cPath.startsWith("/WEB-INF/view/login")) {
+                StringBuffer sb = new StringBuffer();
+                sb.append("<footer>");
                 sb.append("<p>");
-                //sb.append("众马科技 浙ICP备16027614号");
                 sb.append("</p>");
+                sb.append("</footer>");
+                pageContext.getOut().write(sb.toString());
             }
 
-            sb.append("</footer>");
-            pageContext.getOut().write(sb.toString());
-        }
-        catch (Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

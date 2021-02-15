@@ -104,7 +104,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>org.noear.sponge.admin.App</mainClass>
+                            <mainClass>org.noear.sponge.admin.SpongeApp</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

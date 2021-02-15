@@ -29,63 +29,58 @@
 </head>
 <body>
 
-<main>
-    <c:if test="${agroup_id>0 && isOperator==1}">
-        <toolbar>
-            <cell>
-                <button onclick="toAddTag()" class="edit">新建标签</button>
-            </cell>
-        </toolbar>
-    </c:if>
+<c:if test="${agroup_id>0 && isOperator==1}">
+    <toolbar>
+        <button onclick="toAddTag()" class="edit">新建标签</button>
+    </toolbar>
+</c:if>
 
-        <datagrid>
-            <table>
-                <thead>
-                <tr>
-                    <td width="40">ID</td>
-                    <td width="120">标签名称</td>
-                    <td>用户标识</td>
-                    <td>跟踪参数</td>
-                    <td>透传参数</td>
-                    <td width="30"></td>
-                    <td width="80">浏览次数<br/>PV</td>
-                    <td width="80">独立访客<br/>UV</td>
-                    <td width="80">IP</td>
-                    <td width="40"></td>
-                </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="tag" items="${tags}">
-                        <tr>
-                            <td>${tag.tag_id}</td>
-                            <td>${tag.tag_name}</td>
-                            <td>${tag.t_user_field}</td>
-                            <td>${tag.t_track_params}</td>
-                            <td>${tag.t_trans_params}</td>
-                            <td>今日<br/><b>昨日</b></td>
-                            <td style="text-align: right">
-                                    ${tag.pv_today}
-                                <br/>
-                                        <b>${tag.pv_yesterday}</b>
-                            </td>
-                            <td style="text-align: right">
-                                    ${tag.uv_today}
-                                <br/>
-                                    <b>${tag.uv_yesterday}</b>
-                            </td>
-                            <td style="text-align: right">
-                                    ${tag.ip_today}
-                                <br/>
-                                    <b>${tag.ip_yesterday}</b>
-                            </td>
-                            <td><a href="/track/tag/edit?tag_id=${tag.tag_id}" style="color: blue">编辑</a></td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
-        </datagrid>
-
-</main>
+<datagrid>
+    <table>
+        <thead>
+        <tr>
+            <td width="40">ID</td>
+            <td width="120">标签名称</td>
+            <td>用户标识</td>
+            <td>跟踪参数</td>
+            <td>透传参数</td>
+            <td width="50"></td>
+            <td width="80">浏览次数<br/>PV</td>
+            <td width="80">独立访客<br/>UV</td>
+            <td width="80">IP</td>
+            <td width="40"></td>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="tag" items="${tags}">
+            <tr>
+                <td>${tag.tag_id}</td>
+                <td>${tag.tag_name}</td>
+                <td>${tag.t_user_field}</td>
+                <td>${tag.t_track_params}</td>
+                <td>${tag.t_trans_params}</td>
+                <td>今日<br/><b>昨日</b></td>
+                <td style="text-align: right">
+                        ${tag.pv_today}
+                    <br/>
+                    <b>${tag.pv_yesterday}</b>
+                </td>
+                <td class="right">
+                        ${tag.uv_today}
+                    <br/>
+                    <b>${tag.uv_yesterday}</b>
+                </td>
+                <td class="right">
+                        ${tag.ip_today}
+                    <br/>
+                    <b>${tag.ip_yesterday}</b>
+                </td>
+                <td><a href="/track/tag/edit?tag_id=${tag.tag_id}" style="color: blue">编辑</a></td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+</datagrid>
 
 </body>
 </html>

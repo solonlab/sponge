@@ -4,10 +4,10 @@ import org.noear.bcf.BcfClient;
 import org.noear.bcf.BcfUtil;
 import org.noear.bcf.models.BcfGroupModel;
 import org.noear.bcf.models.BcfResourceModel;
-import org.apache.http.util.TextUtils;
 import org.noear.solon.core.handle.Context;
 import org.noear.sponge.admin.Config;
 import org.noear.sponge.admin.dso.Session;
+import org.noear.water.utils.TextUtils;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
@@ -18,8 +18,9 @@ public class HeaderTag extends TagSupport {
     public int doStartTag() throws JspException {
         try {
 
-            //当前视图path //此处改过，xyj，20180831
-            String cPath = Context.current().path();
+            //当前视图path //此处改过，noear，20180831
+            Context context = Context.current();
+            String cPath = context.path();
 
 
             if (Session.current().getPUID() == 0) {   //检查用户是已登录
@@ -37,14 +38,13 @@ public class HeaderTag extends TagSupport {
 
             StringBuffer sb = new StringBuffer();
             sb.append("<header>");
-            sb.append("<div>");
-            sb.append("<agroup class='left'>");
-            //cls1
-            sb.append("<a>").append(Config.web_title).append("</a>");
+
+            sb.append("<label>"); //new
+            sb.append(Config.web_title);
+            sb.append("</label>\n");//new
 
 
-            sb.append("</agroup>");
-            sb.append("<nav class='left'>");
+            sb.append("<nav>");
 
             for(BcfGroupModel g :list) {
                 BcfResourceModel res = BcfClient.getUserFirstResourceByPack(Session.current().getPUID(), g.pgid);
@@ -54,19 +54,19 @@ public class HeaderTag extends TagSupport {
                 }
             }
 
-            sb.append("</nav>");
+            sb.append("</nav>\n");
 
-            sb.append("<p class='right'>");
+            sb.append("<aside>");//new
             String temp = Session.current().getUserName();
             if(temp!=null) {
-                sb.append("欢迎 ");
+                sb.append("<i class='fa fa-user'></i> ");
                 sb.append(temp);
             }
-            sb.append(" （<a href='#' onclick='modifyMm();return false;' >修改密码</a>）");
-            sb.append("</p>");
 
-            sb.append("</div>");
-            sb.append("</header>");
+            sb.append("<a class='logout' href='/'><i class='fa fa-fw fa-circle-o-notch'></i>退出</a>");
+            sb.append("</aside>");//new
+
+            sb.append("</header>\n");
 
             pageContext.getOut().write(sb.toString());
         } catch (Exception e) {
@@ -78,7 +78,7 @@ public class HeaderTag extends TagSupport {
 
     private void buildItem(StringBuffer sb,String title,BcfResourceModel res,String cPath,String pack) {
 
-        //此处改过，xyj，201811(uadmin)
+        //此处改过，noear，201811(uadmin)
         String newUrl = BcfUtil.buildBcfUnipath(res);
 
         if(cPath.indexOf(pack)==0)

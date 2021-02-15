@@ -50,81 +50,86 @@
     </script>
 </head>
 <body>
-<detail><form>
-    <h2>编辑跟踪</h2>
-    <hr/>
-    <table>
-        <tr>
-            <td>名称</td>
-            <td><input type="text" id="url_name" value="${url.url_name}"/> *必填</td>
-        </tr>
-        <tr>
-            <td>外部标识</td>
-            <td><input type="text" id="url_partner_key" value="${url.url_partner_key}"/></td>
-        </tr>
-        <tr>
-            <td>原网址</td>
-            <td><input type="text" id="url_val" value="${url.url_val}" class="longtxt"/></td>
-        </tr>
-        <tr>
-            <td>用户标识</td>
-            <td>
-                <c:if test="${!empty tag.t_user_field}">
-                    <input type="text" id="user_field" value="${url.user_field}" disabled="disabled"/>
-                </c:if>
-                <c:if test="${empty tag.t_user_field}">
-                    <input type="text" id="user_field" value="${url.user_field}"/>
-                </c:if>
-            </td>
-        </tr>
-        <tr>
-            <td>跟踪参数</td>
-            <td>
-                <c:if test="${!empty tag.t_track_params}">
-                    <input type="text" id="track_params" value="${url.track_params}" disabled="disabled"/> 例(c,f,ap,v)用逗号隔开；禁放无限值的参数
-                </c:if>
-                <c:if test="${empty tag.t_track_params}">
-                    <input type="text" id="track_params" value="${url.track_params}" /> 例(c,f,ap,v)用逗号隔开；禁放无限值的参数
-                </c:if>
-            </td>
-        </tr>
-        <tr>
-            <td>透传参数</td>
-            <td>
-                <input type="text" id="trans_params" value="${url.trans_params}" /> 例(c=c,ukey=uk)用逗号隔开（即，将获取的参数值附加给源网址）
-            </td>
-        </tr>
-        <tr>
-            <td>构建链接</td>
-            <td><textarea id="build_link" type="text" style="height: 80px;">${url.build_link}</textarea> 例(网站::f=web;卡片::f=app)</td>
-        </tr>
-        <tr>
-            <td>备注</td>
-            <td><input type="text" class="longtxt" id="note" value="${url.note}" /></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <radio>
-                <c:if test="${url.is_disable == 0}">
-                    <label><input type="radio" name="is_disable" value="0" checked="checked"><a>启用</a></label>&nbsp;&nbsp;&nbsp;
-                    <label><input type="radio" name="is_disable" value="1"><a>禁用</a></label>
-                </c:if>
-                <c:if test="${url.is_disable == 1}">
-                    <label><input type="radio" name="is_disable" value="0"><a>启用</a></label>&nbsp;&nbsp;&nbsp;
-                    <label><input type="radio" name="is_disable" value="1" checked="checked"><a>禁用</a></label>
-                </c:if>
-                </radio>
-            </td>
-        </tr>
-        <c:if test="${isOperator==1}">
+<toolbar class="blockquote">
+    <left class="ln30">
+        <h2><a onclick="history.back(-1)" href="#" class="noline">跟踪配置</a></h2> /  编辑
+    </left>
+</toolbar>
+
+<detail>
+    <form>
+        <table>
             <tr>
-                <td></td>
-                <td><button type="button" onclick="saveEditUrl()">保存</button></td>
+                <th>名称</th>
+                <td><input type="text" id="url_name" value="${url.url_name}"/> *必填</td>
             </tr>
-        </c:if>
-    </table>
-</form>
+            <tr>
+                <th>外部标识</th>
+                <td><input type="text" id="url_partner_key" value="${url.url_partner_key}"/></td>
+            </tr>
+            <tr>
+                <th>原网址</th>
+                <td><input type="text" id="url_val" value="${url.url_val}" class="longtxt"/></td>
+            </tr>
+            <tr>
+                <th>用户标识</th>
+                <td>
+                    <c:if test="${!empty tag.t_user_field}">
+                        <input type="text" id="user_field" value="${url.user_field}" disabled="disabled"/>
+                    </c:if>
+                    <c:if test="${empty tag.t_user_field}">
+                        <input type="text" id="user_field" value="${url.user_field}"/>
+                    </c:if>
+                </td>
+            </tr>
+            <tr>
+                <th>跟踪参数</th>
+                <td>
+                    <c:if test="${!empty tag.t_track_params}">
+                        <input type="text" id="track_params" value="${url.track_params}" disabled="disabled"/> 例：(c,f,ap,v)用逗号隔开；禁放无限值的参数
+                    </c:if>
+                    <c:if test="${empty tag.t_track_params}">
+                        <input type="text" id="track_params" value="${url.track_params}" /> 例：(c,f,ap,v)用逗号隔开；禁放无限值的参数
+                    </c:if>
+                </td>
+            </tr>
+            <tr>
+                <th>透传参数</th>
+                <td>
+                    <input type="text" id="trans_params" value="${url.trans_params}" /> 例：(c=c,ukey=uk)用逗号隔开（即，将获取的参数值附加给源网址）
+                </td>
+            </tr>
+            <tr>
+                <th>构建链接</th>
+                <td><textarea id="build_link" type="text" style="height: 80px;">${url.build_link}</textarea> 例：(网站::f=web)</td>
+            </tr>
+            <tr>
+                <th>备注</th>
+                <td><input type="text" class="longtxt" id="note" value="${url.note}" /></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    <radio>
+                        <c:if test="${url.is_disable == 0}">
+                            <label><input type="radio" name="is_disable" value="0" checked="checked"><a>启用</a></label>&nbsp;&nbsp;&nbsp;
+                            <label><input type="radio" name="is_disable" value="1"><a>禁用</a></label>
+                        </c:if>
+                        <c:if test="${url.is_disable == 1}">
+                            <label><input type="radio" name="is_disable" value="0"><a>启用</a></label>&nbsp;&nbsp;&nbsp;
+                            <label><input type="radio" name="is_disable" value="1" checked="checked"><a>禁用</a></label>
+                        </c:if>
+                    </radio>
+                </td>
+            </tr>
+            <c:if test="${isOperator==1}">
+                <tr>
+                    <th></th>
+                    <td><button type="button" onclick="saveEditUrl()">保存</button></td>
+                </tr>
+            </c:if>
+        </table>
+    </form>
 </detail>
 </body>
 </html>

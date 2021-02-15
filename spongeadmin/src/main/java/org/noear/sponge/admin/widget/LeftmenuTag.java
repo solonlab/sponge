@@ -21,8 +21,9 @@ public class LeftmenuTag extends TagSupport {
     @Override
     public int doStartTag() throws JspException {
         try {
-            //当前视图path //此处改过，xyj，20180831
-            String cPath = Context.current().path();
+            Context context = Context.current();
+            //当前视图path //此处改过，noear，20180831
+            String cPath = context.path();
             StringBuffer sb = new StringBuffer();
 
             List<BcfGroupModel> plist = BcfClient.getAllPacks();
@@ -36,11 +37,11 @@ public class LeftmenuTag extends TagSupport {
 
             sb.append("<menu>");
 
-            sb.append("<div onclick=\"$('main').toggleClass('smlmenu');if(window.onMenuHide){window.onMenuHide();}\">Ⅲ</div>");
+            sb.append("<div onclick=\"$('main').toggleClass('smlmenu');if(window.onMenuHide){window.onMenuHide();}\"><i class='fa fa-bars'></i></div>");
 
             sb.append("<items>");
 
-            forPack(packID,sb,cPath);
+            forPack(packID, sb, cPath);
 
             sb.append("</items>");
 

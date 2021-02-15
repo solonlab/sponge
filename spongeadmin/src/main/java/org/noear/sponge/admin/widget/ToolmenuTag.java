@@ -19,15 +19,22 @@ import java.util.List;
  */
 public class ToolmenuTag extends TagSupport {
     private String pack;
-    public String getPack(){return this.pack;}
-    public void setPack(String pack){this.pack=pack;}
+
+    public String getPack() {
+        return this.pack;
+    }
+
+    public void setPack(String pack) {
+        this.pack = pack;
+    }
 
     @Override
     public int doStartTag() throws JspException {
         try {
             //当前视图path
-            HttpServletRequest request = ((HttpServletRequest)pageContext.getRequest());
-            String cPath = Context.current().path();;
+            HttpServletRequest request = ((HttpServletRequest) pageContext.getRequest());
+            String cPath = Context.current().path();
+            ;
 
             StringBuffer sb = new StringBuffer();
 
@@ -37,7 +44,7 @@ public class ToolmenuTag extends TagSupport {
                 sb.append("<toolmenu>");
                 sb.append("<tabbar>");
 
-                forPack(request,gPack.pgid, sb, cPath);
+                forPack(request, gPack.pgid, sb, cPath);
 
                 sb.append("</tabbar>");
                 sb.append("</toolmenu>");
@@ -60,22 +67,19 @@ public class ToolmenuTag extends TagSupport {
         List<BcfResourceModel> list = BcfClient.getUserResourcesByPack(Session.current().getPUID(), packID);
 
         for (BcfResourceModel r : list) {
-            buildItem(request,sb, r.cn_name, r.uri_path, cPath);
+            buildItem(request, sb, r.cn_name, r.uri_path, cPath);
         }
     }
 
-    private void buildItem(HttpServletRequest request,StringBuffer sb,String title,String url,String cPath) {
-        String url2 = url + "?"+request.getQueryString();
+    private void buildItem(HttpServletRequest request, StringBuffer sb, String title, String url, String cPath) {
+        String url2 = url + "?" + request.getQueryString();
 
-        if(cPath.indexOf(url)!=-1)
-        {
-            sb.append("<button onclick=\"location='"+url2+"'\" class='sel'>");
+        if (cPath.indexOf(url) > 0) {
+            sb.append("<button onclick=\"location='" + url2 + "'\" class='sel'>");
             sb.append(title);
             sb.append("</button>");
-        }
-        else
-        {
-            sb.append("<button onclick=\"location='"+url2+"'\">");
+        } else {
+            sb.append("<button onclick=\"location='" + url2 + "'\">");
             sb.append(title);
             sb.append("</button>");
         }

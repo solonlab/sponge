@@ -34,65 +34,65 @@
         };
     </script>
     <style>
-       tbody td{text-align: left;}
+        tbody td{text-align: left;}
     </style>
 </head>
 <body>
-    <toolbar>
-        <cell>
-            <input type="text" value="${url_name}" id="url_name" placeholder="名称"/>
-            <button onclick="query()">查询</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <c:if test="${tag_id>0 && isOperator==1}">
+<toolbar>
+    <left>
+        <input type="text" value="${url_name}" id="url_name" placeholder="名称"/>
+        <button onclick="query()">查询</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <c:if test="${tag_id>0 && isOperator==1}">
             <button onclick="toAddUrl()" class="edit">新建跟踪</button>
-            </c:if>
-        </cell>
-        <cell><ct:stateselector items="启用中,禁用中"/></cell>
-    </toolbar>
-    <datagrid>
-        <table>
-            <thead>
+        </c:if>
+    </left>
+    <right><ct:stateselector items="启用中,禁用中"/></right>
+</toolbar>
+<datagrid>
+    <table>
+        <thead>
+        <tr>
+            <td width="50px">外部<br/>标识</td>
+            <td>名称</td>
+            <td>源网址</td>
+            <td>用户<br/>标识</td>
+            <td>跟踪<br/>参数</td>
+            <td>透传<br/>参数</td>
+            <td>复制<br/>代码</td>
+            <td width="40px">操作</td>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        <c:forEach var="url" items="${urls}">
             <tr>
-                <td width="50px">外部<br/>标识</td>
-                <td>名称</td>
-                <td>源网址</td>
-                <td>用户<br/>标识</td>
-                <td>跟踪<br/>参数</td>
-                <td>透传<br/>参数</td>
-                <td>复制<br/>代码</td>
-                <td width="40px">操作</td>
+                <td>${url.url_partner_key}</td>
+                <td title="${url.url_id}">
+                    <c:if test="${url.has_track == 1}">
+                        <a href="/track/stat/url?url_id=${url.url_id}" target="_blank" style="cursor: pointer;text-decoration:none;color: blue">${url.url_name}</a>
+                    </c:if>
+                    <c:if test="${url.has_track == 0}">
+                        ${url.url_name}
+                    </c:if>
+                </td>
+                <td style="max-width: 450px;min-width:300px;word-wrap : break-word;word-break:break-all;">${url.url_val}</td>
+                <td>${url.user_field}</td>
+                <td>${url.track_params}</td>
+                <td class="break">${url.trans_params}</td>
+                <td style="text-align: center;">
+                    <c:forEach var="copy" items="${url.hrefList}">
+                        <c:if test="${empty copy.url}">
+                            <a style="cursor: pointer;color: blue" class="a" data-clipboard-text="${track_uri}${url.url_key}" >${copy.name}</a>
+                        </c:if>
+                        <c:if test="${!empty copy.url}">
+                            <span> | </span><a style="cursor: pointer;color: blue" class="a" data-clipboard-text="${track_uri}${url.url_key}?${copy.url}" >${copy.name}</a>
+                        </c:if>
+                    </c:forEach>
+                </td>
+                <td class="center"><a onclick="toEditUrl('${url.url_id}')" style="color: blue;cursor:pointer">编辑</a></td>
             </tr>
-            </thead>
-            <tbody id="tbody">
-            <c:forEach var="url" items="${urls}">
-                <tr>
-                    <td>${url.url_partner_key}</td>
-                    <td title="${url.url_id}">
-                        <c:if test="${url.has_track == 1}">
-                            <a href="/track/stat/url?url_id=${url.url_id}" target="_blank" style="cursor: pointer;text-decoration:none;color: blue">${url.url_name}</a>
-                        </c:if>
-                        <c:if test="${url.has_track == 0}">
-                            ${url.url_name}
-                        </c:if>
-                    </td>
-                    <td style="max-width: 450px;min-width:300px;word-wrap : break-word;word-break:break-all;">${url.url_val}</td>
-                    <td>${url.user_field}</td>
-                    <td>${url.track_params}</td>
-                    <td class="break">${url.trans_params}</td>
-                    <td style="text-align: center;">
-                        <c:forEach var="copy" items="${url.hrefList}">
-                            <c:if test="${empty copy.url}">
-                                <a style="cursor: pointer;color: blue" class="a" data-clipboard-text="${track_uri}${url.url_key}" >${copy.name}</a>
-                            </c:if>
-                            <c:if test="${!empty copy.url}">
-                                <span> | </span><a style="cursor: pointer;color: blue" class="a" data-clipboard-text="${track_uri}${url.url_key}?${copy.url}" >${copy.name}</a>
-                            </c:if>
-                        </c:forEach>
-                    </td>
-                    <td class="center"><a onclick="toEditUrl('${url.url_id}')" style="color: blue;cursor:pointer">编辑</a></td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-    </datagrid>
+        </c:forEach>
+        </tbody>
+    </table>
+</datagrid>
 </body>
 </html>

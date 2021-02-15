@@ -48,24 +48,29 @@
     </script>
 </head>
 <body>
-    <detail><form>
-        <h2>新建跟踪</h2>
-        <hr/>
+<toolbar class="blockquote">
+    <left class="ln30">
+        <h2><a onclick="history.back(-1)" href="#" class="noline">跟踪配置</a></h2> /  新建
+    </left>
+</toolbar>
+
+<detail>
+    <form>
         <table>
             <tr>
-                <td>名称</td>
+                <th>名称</th>
                 <td><input type="text" id="url_name"/> *必填</td>
             </tr>
             <tr>
-                <td>外部标识</td>
+                <th>外部标识</th>
                 <td><input type="text" id="url_partner_key"/></td>
             </tr>
             <tr>
-                <td>原网址</td>
+                <th>原网址</th>
                 <td><input type="text" id="url_val" class="longtxt"/></td>
             </tr>
             <tr>
-                <td>用户标识</td>
+                <th>用户标识</th>
                 <td>
                     <c:if test="${!empty tag.t_user_field}">
                         <input type="text" id="user_field" value="${tag.t_user_field}" disabled="disabled"/>
@@ -76,37 +81,37 @@
                 </td>
             </tr>
             <tr>
-                <td>跟踪参数</td>
+                <th>跟踪参数</th>
                 <td>
                     <c:if test="${!empty tag.t_track_params}">
-                        <input type="text" id="track_params" value="${tag.t_track_params}" disabled="disabled"/> 例(c,f,ap,v)用逗号隔开；禁放无限值的参数
+                        <input type="text" id="track_params" value="${tag.t_track_params}" disabled="disabled"/> 例：(c,f,ap,v)用逗号隔开；禁放无限值的参数
                     </c:if>
                     <c:if test="${empty tag.t_track_params}">
-                        <input type="text" id="track_params" value="${tag.t_track_params}" /> 例(c,f,ap,v)用逗号隔开；禁放无限值的参数
+                        <input type="text" id="track_params" value="${tag.t_track_params}" /> 例：(c,f,ap,v)用逗号隔开；禁放无限值的参数
                     </c:if>
                 </td>
             </tr>
             <tr>
-                <td>透传参数</td>
+                <th>透传参数</th>
                 <td>
-                    <input type="text" id="trans_params" value="${tag.t_trans_params}" /> 例(c=c,ukey=uk)用逗号隔开（即，将获取的参数值附加给源网址）
+                    <input type="text" id="trans_params" value="${tag.t_trans_params}" /> 例：(c=c,ukey=uk)用逗号隔开（即，将获取的参数值附加给源网址）
                 </td>
             </tr>
             <tr>
-                <td>构建链接<br/></td>
-                <td><textarea  id="build_link" style="height:80px">${tag.t_build_link}</textarea> 例(网站::f=web;卡片::f=app)</td>
+                <th>构建链接<br/></th>
+                <td><textarea  id="build_link" style="height:80px">${tag.t_build_link}</textarea> 例：(网站::f=web)</td>
             </tr>
             <tr>
-                <td>备注</td>
+                <th>备注</th>
                 <td><input type="text" id="note" class="longtxt" /></td>
             </tr>
             <tr>
-                <td></td>
+                <th></th>
                 <td><button type="button" onclick="saveAddUrl()">保存</button></td>
 
             </tr>
         </table>
     </form>
-    </detail>
+</detail>
 </body>
 </html>
