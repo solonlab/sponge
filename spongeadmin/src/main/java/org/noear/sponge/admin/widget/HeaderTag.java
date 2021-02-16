@@ -4,6 +4,7 @@ import org.noear.bcf.BcfClient;
 import org.noear.bcf.BcfUtil;
 import org.noear.bcf.models.BcfGroupModel;
 import org.noear.bcf.models.BcfResourceModel;
+import org.noear.solon.Solon;
 import org.noear.solon.core.handle.Context;
 import org.noear.sponge.admin.Config;
 import org.noear.sponge.admin.dso.Session;
@@ -40,7 +41,7 @@ public class HeaderTag extends TagSupport {
             sb.append("<header>");
 
             sb.append("<label>"); //new
-            sb.append(Config.web_title);
+            sb.append(Solon.cfg().appTitle());
             sb.append("</label>\n");//new
 
 

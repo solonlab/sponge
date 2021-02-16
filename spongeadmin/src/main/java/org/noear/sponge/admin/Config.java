@@ -6,11 +6,6 @@ import org.noear.weed.DbContext;
 import org.noear.water.*;
 
 public class Config {
-    public static String web_title = "SPONGE";
-    public static String water_config_tag = "sponge";
-
-    public static String water_service_name = "rockadmin";
-
     public static String track_uri() {
         return cfg("track_uri").value;
     }
@@ -37,6 +32,6 @@ public class Config {
     //
     //获取一个数据库配置
     public static ConfigM cfg(String key) {
-        return WaterClient.Config.get(water_config_tag, key);
+        return WaterClient.Config.get(Solon.cfg().appGroup(), key);
     }
 }
