@@ -1,9 +1,6 @@
 server.port: 8182
 server.session.timeout: 7200
 
-bcf.root: sponge_gl
-
-
 #water.host = water
 #water.logger = sponge_log_admin
 #water.service.tag=sponge
