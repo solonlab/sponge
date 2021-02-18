@@ -25,6 +25,10 @@
             <version>${srww.ver}</version>
             <exclusions>
                 <exclusion>
+                    <groupId>org.noear</groupId>
+                    <artifactId>srww.uadmin</artifactId>
+                </exclusion>
+                <exclusion>
                     <groupId>org.mongodb</groupId>
                     <artifactId>mongo-java-driver</artifactId>
                 </exclusion>
