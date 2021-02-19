@@ -81,12 +81,12 @@ public class RockClient {
     }
 
     //获取一个应用模型
-    public static AppModel getAppByKey(String akey) throws SQLException {
-        if (TextUtils.isEmpty(akey)) {
-            throw new RuntimeException("请输入有效的 akey");
+    public static AppModel getAppByKey(String appKey) throws SQLException {
+        if (TextUtils.isEmpty(appKey)) {
+            throw new RuntimeException("请输入有效的 appKey");
         }
 
-        return cacheLocal.getBy("getApp_" + akey, (ru) -> instance().getAppByKey(akey));
+        return cacheLocal.getBy("getApp_" + appKey, (ru) -> instance().getAppByKey(appKey));
     }
 
     //可以只输入一个分组

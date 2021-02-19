@@ -32,7 +32,7 @@ public interface RockRpc {
     /**
      * 获取一个应用模型
      */
-    AppModel getAppByKey(String akey) throws SQLException;
+    AppModel getAppByKey(String appKey) throws SQLException;
 
     /**
      * 可以只输入一个分组

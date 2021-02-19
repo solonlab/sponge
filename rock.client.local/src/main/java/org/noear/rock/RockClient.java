@@ -34,14 +34,14 @@ public final class RockClient {
 
     //添加一个应用模型
     public static AppModel addApp(int agroupID, int ugroupID, String name) throws SQLException {
-        String appKey = RockUtil.buildAppkey();
-        String akey = RockUtil.buildAkey();
+        String appKey = RockUtil.buildAppKey();
+        String appSecretKey = RockUtil.buildAppSecretKey();
 
         long app_id = db().table("appx")
                 .set("agroup_id", agroupID)
                 .set("ugroup_id", ugroupID)
                 .set("app_key", appKey)
-                .set("akey", akey)
+                .set("app_secret_key", appSecretKey)
                 .set("name", name)
                 .insert();
 
@@ -83,9 +83,9 @@ public final class RockClient {
     }
 
     //获取一个应用模型
-    public static AppModel getAppByKey(String akey) throws SQLException {
+    public static AppModel getAppByKey(String appKey) throws SQLException {
         app_get_app sp = new app_get_app(rock_db);
-        sp.akey = akey;
+        sp.app_key = appKey;
         sp.caching(rock_cache)
                 .usingCache(60 * 10);
 

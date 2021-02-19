@@ -124,8 +124,8 @@ public class AppController extends BaseController {
             appEdit.agroup_id = agroup_id;
         }
 
-        appEdit.akey = IDUtil.buildGuid();
-        appEdit.app_key = IDUtil.getAppkey();
+        appEdit.app_key = IDUtil.buildGuid();
+        appEdit.app_secret_key = IDUtil.getAppSecretkey();
 
         viewModel.put("user_groups",userGroups);
         viewModel.put("app_groups",appGroups);
@@ -135,11 +135,11 @@ public class AppController extends BaseController {
 
     //应用新增编辑ajax保存功能
     @Mapping("app/edit/ajax/save")
-    public BaseResp saveApp(Integer app_id, String name, Integer agroup_id, Integer ugroup_id, String app_key, String akey, Integer ar_is_examine, Integer ar_is_setting, String note, Integer ar_examine_ver) throws SQLException {
+    public BaseResp saveApp(Integer app_id, String name, Integer agroup_id, Integer ugroup_id, String app_key, String app_secret_key, Integer ar_is_examine, Integer ar_is_setting, String note, Integer ar_examine_ver) throws SQLException {
         BaseResp resp = new BaseResp();
         app_key.trim();
-        akey.trim();
-        boolean result = DbRockApi.editApp(app_id,name,agroup_id,ugroup_id,app_key,akey,ar_is_examine,ar_is_setting,note,ar_examine_ver);
+        app_secret_key.trim();
+        boolean result = DbRockApi.editApp(app_id,name,agroup_id,ugroup_id,app_key,app_secret_key,ar_is_examine,ar_is_setting,note,ar_examine_ver);
         if (result){
             resp.code = 1;
             resp.msg = "保存成功！";

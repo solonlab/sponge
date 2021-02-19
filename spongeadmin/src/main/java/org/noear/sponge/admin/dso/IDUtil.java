@@ -6,7 +6,7 @@ import java.util.Random;
 import java.util.UUID;
 
 public class IDUtil {
-    public static String getAppkey() {
+    public static String getAppSecretkey() {
         char[] chars = new char[16];
         int i = 0;
         while (i < 16) {

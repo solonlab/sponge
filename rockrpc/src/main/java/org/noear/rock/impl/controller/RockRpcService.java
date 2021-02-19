@@ -42,14 +42,14 @@ public final class RockRpcService implements RockRpc {
     //添加一个应用模型
     @Override
     public AppModel addApp(@NonNull Integer agroupID, @NonNull Integer ugroupID, @NonNull String name) throws SQLException {
-        String appKey = RockUtil.buildAppkey();
-        String akey = RockUtil.buildAkey();
+        String app_key = RockUtil.buildAppKey();
+        String app_secret_key = RockUtil.buildAppSecretKey();
 
         long app_id = db().table("appx")
                 .set("agroup_id", agroupID)
                 .set("ugroup_id", ugroupID)
-                .set("app_key", appKey)
-                .set("akey", akey)
+                .set("app_key", app_key)
+                .set("app_secret_key", app_secret_key)
                 .set("name", name)
                 .insert();
 
@@ -103,9 +103,9 @@ public final class RockRpcService implements RockRpc {
 
     //获取一个应用模型
     @Override
-    public AppModel getAppByKey(@NonNull String akey) throws SQLException {
+    public AppModel getAppByKey(@NonNull String appKey) throws SQLException {
         app_get_app sp = new app_get_app(rock_db);
-        sp.akey = akey;
+        sp.app_key = appKey;
         sp.caching(rock_cache)
                 .usingCache(60 * 10);
 

@@ -17,16 +17,16 @@ public class app_get_app extends DbQueryProcedure
             //set("{colname}", ()->{popname});
             //
             set("@app_id", app_id);
-            set("@akey", akey);
+            set("@app_key", app_key);
 
             if(app_id>0){
                 sql("select * from appx WHERE app_id = @app_id;");
             }else{
-                sql("select * from appx WHERE akey = @akey;");
+                sql("select * from appx WHERE app_key = @app_key;");
             }
         });
     }
 
     public int app_id;
-    public String akey;
+    public String app_key;
 }

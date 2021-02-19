@@ -26,18 +26,18 @@
             var agroup_id = $('#app_group').val();
             var ugroup_id = $('#user_group').val();
             var app_key = $('#app_key').val();
-            var akey = $('#akey').val();
+            var app_secret_key = $('#app_secret_key').val();
             var ar_is_setting = $('input[name="ar_is_setting"]:checked').val();
             var ar_is_examine = $('input[name="ar_is_examine"]:checked').val();
             var note = $('#note').val();
             var ar_examine_ver = $('#ar_examine_ver').val();
 
-            if (!name || name==null) {
+            if (!name) {
                 top.layer.msg("应用名称不能为空！");
                 return;
             }
-            if (!akey || akey==null) {
-                top.layer.msg("akey不能为空！");
+            if (!app_secret_key) {
+                top.layer.msg("应用密钥不能为空！");
                 return;
             }
             if(app_id==null){
@@ -54,7 +54,7 @@
             $.ajax({
                 type:"POST",
                 url:"/rock/app/edit/ajax/save",
-                data:{"app_id":app_id,"name":name,"agroup_id":agroup_id,"ugroup_id":ugroup_id,"app_key":app_key,"akey":akey,"ar_is_examine":ar_is_examine,"ar_is_setting":ar_is_setting,"note":note,"ar_examine_ver":ar_examine_ver},
+                data:{"app_id":app_id,"name":name,"agroup_id":agroup_id,"ugroup_id":ugroup_id,"app_key":app_key,"app_secret_key":app_secret_key,"ar_is_examine":ar_is_examine,"ar_is_setting":ar_is_setting,"note":note,"ar_examine_ver":ar_examine_ver},
                 success:function (data) {
                     if(data.code==1) {
                         top.layer.msg(data.msg);
@@ -113,7 +113,7 @@
             </tr>
             <tr>
                 <th>应用标识</th>
-                <td><input disabled="disabled" type="text" id="akey"  value="${appEdit.akey}"/>
+                <td><input disabled="disabled" type="text" id="app_secret_key"  value="${appEdit.app_secret_key}"/>
                 </td>
             </tr>
             <tr style="display: none">

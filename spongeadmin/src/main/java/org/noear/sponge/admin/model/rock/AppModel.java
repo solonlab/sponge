@@ -13,7 +13,7 @@ public class AppModel implements IBinder
 {
     public int app_id;
     public String app_key;
-    public String akey;
+    public String app_secret_key;
     public int ugroup_id;
     public int agroup_id;
     public String name;
@@ -33,7 +33,7 @@ public class AppModel implements IBinder
 		//
         app_id = s.get("app_id").value(0);
         app_key = s.get("app_key").value(null);
-        akey = s.get("akey").value(null);
+        app_secret_key = s.get("app_secret_key").value(null);
         ugroup_id = s.get("ugroup_id").value(0);
         agroup_id = s.get("agroup_id").value(0);
         name = s.get("name").value(null);

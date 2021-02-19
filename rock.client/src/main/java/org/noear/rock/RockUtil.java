@@ -121,7 +121,7 @@ public class RockUtil {
     }
 
 
-    public static String buildAppkey() {
+    public static String buildAppSecretKey() {
         char[] chars = new char[16];
         int i = 0;
         while (i < 16) {
@@ -137,7 +137,7 @@ public class RockUtil {
         return new String(chars);
     }
 
-    public static String buildAkey() {
+    public static String buildAppKey() {
         return buildGuid();
     }
 
