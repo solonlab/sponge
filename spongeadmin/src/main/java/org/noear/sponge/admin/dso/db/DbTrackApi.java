@@ -6,7 +6,6 @@ import org.noear.sponge.admin.dso.IDUtil;
 import org.noear.sponge.admin.model.others.ienum.ProvinceEnum;
 import org.noear.sponge.admin.model.others.resp.*;
 import org.noear.sponge.admin.model.sponge_track.*;
-import org.noear.sponge.admin.utils.TimeUtil;
 import org.noear.water.WaterClient;
 import org.noear.water.utils.Datetime;
 import org.noear.water.utils.EncryptUtils;
@@ -442,10 +441,10 @@ public class DbTrackApi {
     //处理短地址 uv pv ip 小时 图表渲染数据
     public static HourUPIResp getCharts(int id, int vi, String vd, int type, int queryType) throws SQLException{
         HourUPIResp resp = new HourUPIResp();
-        Date today = new Date();
-        int todayInt = TimeUtil.getDateInt(today);
-        int yesterdayInt = TimeUtil.getDateInt(TimeUtil.getDateFuture(today,-1));
-        int beforeYesInt = TimeUtil.getDateInt(TimeUtil.getDateFuture(today,-2));
+        Datetime datetime = Datetime.Now();
+        int todayInt = datetime.getDate();
+        int yesterdayInt = datetime.addDay(-1).getDate();
+        int beforeYesInt = datetime.addDay(-1).getDate();
 
         List<StatDateHourPvUvIpModel> todayList = null;
         List<StatDateHourPvUvIpModel> yesList = null;
@@ -586,15 +585,16 @@ public class DbTrackApi {
     //处理短地址 uv pv ip  30天图表渲染数据
     public static Days30UPIResp get30DaysUPICharts(int id, int vi, String vd, int type) throws SQLException{
         Days30UPIResp resp = new Days30UPIResp();
-        Date today = new Date();
+        Datetime today = Datetime.Now();
+        Datetime today30bef = Datetime.Now().addDay(-30);
         List<StatDateHourPvUvIpModel> list = null;
         if (type == 0) {
-            list = getStatDateHourPvUvIpByDateTagId(id, TimeUtil.getDateInt(TimeUtil.getDateFuture(today, -30)), TimeUtil.getDateInt(today));
+            list = getStatDateHourPvUvIpByDateTagId(id, today30bef.getDate(), today.getDate());
         } else if (type == 1) {
             if (vi > 0) {
-                list = getStatDateHourPvUvIpByDateUrlIdViVd(id,vi,vd, TimeUtil.getDateInt(TimeUtil.getDateFuture(today, -30)), TimeUtil.getDateInt(today));
+                list = getStatDateHourPvUvIpByDateUrlIdViVd(id,vi,vd, today30bef.getDate(), today.getDate());
             } else {
-                list = getStatDateHourPvUvIpByDateUrlId(id, TimeUtil.getDateInt(TimeUtil.getDateFuture(today, -30)), TimeUtil.getDateInt(today));
+                list = getStatDateHourPvUvIpByDateUrlId(id, today30bef.getDate(), today.getDate());
             }
         }
         Map<Integer, StatDateHourPvUvIpModel> map = new HashMap<>();
@@ -609,7 +609,7 @@ public class DbTrackApi {
         }
 
         for (int i = 29; i >= 0; i--) {
-            int dateInt = TimeUtil.getDateInt(TimeUtil.getDateFuture(today,-i));
+            int dateInt = Datetime.Now().addDay(-i).getDate();
             String dateStr = dateInt+"";
             dateStr = dateStr.substring(4,8);
             daysList.add(dateStr.substring(0,2)+"-"+dateStr.substring(2,4));

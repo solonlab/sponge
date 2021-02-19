@@ -1,7 +1,5 @@
 import org.junit.Test;
 import org.noear.sponge.admin.model.others.resp.CallLogDetailsResp;
-import org.noear.sponge.admin.utils.StringUtil;
-
 
 import java.util.*;
 
@@ -10,10 +8,6 @@ import java.util.*;
  * @Description: 单元测试
  */
 public class TestApi {
-    public static void main(String[] args) throws Exception {
-        boolean mobile = StringUtil.isMobile("15183854646");
-        System.out.println(mobile);
-    }
 
     @Test
     public void test1() throws Exception{

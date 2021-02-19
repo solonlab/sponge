@@ -251,10 +251,7 @@
     </build>
 
     <modules>
-        <module>../rock.client.local</module>
-
         <module>../rock.client</module>
-
     </modules>
 
 </project>
