@@ -108,11 +108,11 @@
                 </td>
             </tr>
             <tr>
-                <th>签名密钥</th>
+                <th>应用标识</th>
                 <td><input disabled="disabled" type="text" id="app_key"  value="${appEdit.app_key}"/></td>
             </tr>
             <tr>
-                <th>应用标识</th>
+                <th>密钥</th>
                 <td><input disabled="disabled" type="text" id="app_secret_key"  value="${appEdit.app_secret_key}"/>
                 </td>
             </tr>
