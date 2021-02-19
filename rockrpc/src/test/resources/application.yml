@@ -1,0 +1,17 @@
+#water.host=localhost:9371
+#water.service.tag=sponge
+#water.service.name=rockrpctest
+#water.service.secretKey=KvnY27kd9VhoNOT3
+#
+#water.weed.log.style=text2
+
+
+server.port: 8081
+server.session.timeout: 7200
+
+solon.app:
+  group: sponge
+  name: rockrpc
+
+solon.cloud.water:
+  server: water
