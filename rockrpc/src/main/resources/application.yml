@@ -6,3 +6,5 @@ solon.app:
 
 solon.cloud.water:
   server: water
+  log:
+    default: sponge_log_rock

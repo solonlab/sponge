@@ -13,7 +13,7 @@ import org.noear.water.utils.FromUtils;
 @Component
 public class EndHandler implements Handler {
 
-    CloudLogger log = CloudLogger.get("sponge_log_rock");
+    CloudLogger log = CloudLogger.get(EndHandler.class);
 
     @Override
     public void handle(Context ctx) throws Exception {
@@ -29,10 +29,10 @@ public class EndHandler implements Handler {
 
 
         if (_out != null && _out.startsWith("warn::")) {
-            log.warn(Tags.tag0(ctx.path()).tag3(_from), "{}\n\n{}", _in, _out);
+            log.warn(Tags.tag0(ctx.path()).tag3(_from), "::{}\r\n::{}", _in, _out);
             //WaterClient.Log.append("rock_log", Level.WARN, ctx.path(), null, null, _from, _in, _out);
         } else {
-            log.info(Tags.tag0(ctx.path()).tag3(_from), "{}\n\n{}", _in, _out);
+            log.info(Tags.tag0(ctx.path()).tag3(_from), "::{}\r\n::{}", _in, _out);
             //WaterClient.Log.append("rock_log", Level.INFO, ctx.path(), null, null, _from, _in, _out);
         }
     }
