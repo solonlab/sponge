@@ -1,12 +1,12 @@
 package org.noear.sponge.admin.dso;
 
-import org.noear.solon.cloud.CloudLogger;
+import org.noear.mlog.Logger;
 import org.noear.solon.core.handle.Context;
 import org.noear.mlog.utils.*;
 
 public class LogUtil {
 
-    private static CloudLogger logger = CloudLogger.get("sponge_log_admin");
+    static Logger logger = Logger.get("sponge_log_admin");
 
     public static void LogDebug(String cmd, String args, Context data) {
         StringBuilder sb = new StringBuilder();
