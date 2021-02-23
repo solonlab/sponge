@@ -29,7 +29,7 @@
             var type = $('#type').val();
             var platform = $('#platform').val();
             var url = $('#url').val();
-            var is_enable = $('#is_enabled').prop("checked")?1:0;
+            var is_enable = $('#is_enable').prop("checked")?1:0;
             if (!ver || ver==null) {
                 top.layer.msg("版本号不能为空！");
                 return;
