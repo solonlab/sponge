@@ -27,8 +27,8 @@
             var ugroup_id = $('#user_group').val();
             var app_key = $('#app_key').val();
             var app_secret_key = $('#app_secret_key').val();
-            var ar_is_setting = $('input[name="ar_is_setting"]:checked').val();
-            var ar_is_examine = $('input[name="ar_is_examine"]:checked').val();
+            var ar_is_setting = $('#ar_is_setting').prop("checked")?1:0;
+            var ar_is_examine = $('#ar_is_examine').prop("checked")?1:0;
             var note = $('#note').val();
             var ar_examine_ver = $('#ar_examine_ver').val();
 

@@ -27,7 +27,7 @@
             var type = $('#type').val();
             var value = $('#value').val();
             var note = $('#note').val();
-            var is_client = $('input[name="is_client"]:checked').val();
+            var is_client = $('#is_client').prop("checked")?1:0;
             var ver_start =$('#ver_start').val();
             if (!name || name==null) {
                 top.layer.msg("配置项名称不能为空！");
