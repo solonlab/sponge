@@ -29,7 +29,7 @@
             var type = $('#type').val();
             var platform = $('#platform').val();
             var url = $('#url').val();
-            var is_enable = $('#is_enable').prop("checked")?1:0;
+            var is_disabled = $('#is_disabled').prop("checked")?1:0;
             if (!ver || ver==null) {
                 top.layer.msg("版本号不能为空！");
                 return;
@@ -53,7 +53,7 @@
                 data:{"app_id":app_id,"row_id":row_id,"ver":ver,"content":content,"type":type,
                     alert_ver:$('#alert_ver').val(),
                     force_ver:$('#force_ver').val(),
-                    "platform":platform,"url":url,"is_enable":is_enable,"agroup_id":agroup_id},
+                    "platform":platform,"url":url,"is_disabled":is_disabled,"agroup_id":agroup_id},
                 success:function (data) {
                     if(data.code==1) {
                         top.layer.msg(data.msg);
@@ -127,7 +127,7 @@
                 <th>是否生效</th>
                 <td>
                     <switcher>
-                        <label><input id="is_enable" value="1" type="checkbox" ${apver.is_enable == 1?"checked":""}><a></a></label>
+                        <label><input id="is_disabled" value="1" type="checkbox" ${apver.is_disabled == 1?"checked":""}><a></a></label>
                     </switcher>
                 </td>
             </tr>

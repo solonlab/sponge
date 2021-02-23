@@ -17,9 +17,9 @@ public class app_ex_get_verson extends DbQueryProcedure {
             set("@app_id",app_id);
 
             if(agroup_id>0){
-                sql("SELECT * FROM appx_ex_version WHERE agroup_id=@agroup_id  AND app_id=0 AND platform=@platform AND is_enable=1 ORDER BY ver desc LIMIT 1");
+                sql("SELECT * FROM appx_ex_version WHERE agroup_id=@agroup_id  AND app_id=0 AND platform=@platform AND is_disabled=0 ORDER BY ver desc LIMIT 1");
             }else{
-                sql("SELECT * FROM appx_ex_version WHERE app_id=@app_id                     AND platform=@platform AND is_enable=1 ORDER BY ver desc LIMIT 1");
+                sql("SELECT * FROM appx_ex_version WHERE app_id=@app_id                     AND platform=@platform AND is_disabled=0 ORDER BY ver desc LIMIT 1");
             }
         });
     }

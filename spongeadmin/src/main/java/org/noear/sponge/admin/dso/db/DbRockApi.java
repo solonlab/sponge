@@ -434,15 +434,15 @@ public class DbRockApi {
                 .getList(new AppExVersionModel());
     }
     //根据agoup_id获取发布版本列表。
-    public static List<AppExVersionModel> getApvers(Integer agroup_id,Integer is_enable) throws SQLException {
+    public static List<AppExVersionModel> getApvers(Integer agroup_id,Integer is_disabled) throws SQLException {
         return db().table("appx_ex_version")
                 .where("1=1")
-                .expre((tb)->{
-                    if (agroup_id!=null && agroup_id!=0){
-                        tb.and("agroup_id = ?",agroup_id);
+                .expre((tb) -> {
+                    if (agroup_id != null && agroup_id != 0) {
+                        tb.and("agroup_id = ?", agroup_id);
                     }
-                    if (is_enable!=null){
-                        tb.and("is_enable = ?",is_enable);
+                    if (is_disabled != null) {
+                        tb.and("is_disabled = ?", is_disabled);
                     }
                 })
                 .orderBy("app_id ASC,ver DESC")

@@ -24,8 +24,6 @@ public class AppVersionModel implements IBinder {
     public int force_ver;
     public int platform;
     public String url;
-    public int is_enable;
-    public Date log_fulltime;
 
     @Override
     public void bind(GetHandlerEx s) {
@@ -40,8 +38,6 @@ public class AppVersionModel implements IBinder {
         force_ver = s.get("force_ver").value(0);
         platform = s.get("platform").value(0);
         url = s.get("url").value(null);
-        is_enable = s.get("is_enable").value(0);
-        log_fulltime = s.get("log_fulltime").value(null);
     }
 
     @Override

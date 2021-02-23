@@ -62,10 +62,10 @@
                             <c:if test="${apver.platform==3}"><td>Web</td></c:if>
                             <c:if test="${apver.platform==0||apver.platform==null}"><td>未知</td></c:if>
                             <td><fmt:formatDate value="${apver.log_fulltime}" pattern="yyyy-MM-dd HH:mm:dd"/></td>
-                            <c:if test="${apver.is_enable==0}">
+                            <c:if test="${apver.is_disabled==1}">
                             <td>无效</td>
                             </c:if>
-                            <c:if test="${apver.is_enable==1}">
+                            <c:if test="${apver.is_disabled==0}">
                             <td>有效</td>
                             </c:if>
                             <c:if test="${isOperator==1}">

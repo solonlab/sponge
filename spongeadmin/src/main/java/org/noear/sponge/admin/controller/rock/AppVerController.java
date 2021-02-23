@@ -22,7 +22,7 @@ public class AppVerController extends BaseController {
 
     //应用版本发布页面跳转
     @Mapping("apver")
-    public ModelAndView apver(Integer agroup_id)throws SQLException {
+    public ModelAndView apver(Integer agroup_id) throws SQLException {
         //by xyj 20180516::添加应用组的权限控制
         BcfTagChecker checker = new BcfTagChecker();
 
@@ -58,42 +58,41 @@ public class AppVerController extends BaseController {
     }
 
 
-
     @Mapping("apver/inner")
-    public ModelAndView apver_inner(Integer agroup_id,Integer _state) throws SQLException {
-        Integer is_enable = null;
-        if (_state!=null) {
+    public ModelAndView apver_inner(Integer agroup_id, Integer _state) throws SQLException {
+        Integer is_disabled = null;
+        if (_state != null) {
             viewModel.put("_state", _state);
 
             if (_state == 1) {
-                is_enable = 1;
+                is_disabled = 0;
             } else if (_state == 2) {
-                is_enable = 0;
+                is_disabled = 1;
             }
-        }else {
-            is_enable = 1; //默认只显示有效的
+        } else {
+            is_disabled = 0; //默认只显示有效的
         }
 
-        List<AppExVersionModel> apverList = DbRockApi.getApvers(agroup_id,is_enable);
-        viewModel.put("apverList",apverList);
-        viewModel.put("agroup_id",agroup_id);
+        List<AppExVersionModel> apverList = DbRockApi.getApvers(agroup_id, is_disabled);
+        viewModel.put("apverList", apverList);
+        viewModel.put("agroup_id", agroup_id);
         return view("rock/apver_inner");
     }
 
     //新建更新页面跳转
     @Mapping("apver/add")
-    public ModelAndView apver_add(Integer agroup_id){
-        viewModel.put("agroup_id",agroup_id);
-        viewModel.put("apver",new AppExVersionModel());
+    public ModelAndView apver_add(Integer agroup_id) {
+        viewModel.put("agroup_id", agroup_id);
+        viewModel.put("apver", new AppExVersionModel());
         return view("rock/apver_edit");
     }
 
     //编辑更新页面跳转
     @Mapping("apver/edit")
-    public ModelAndView apver_edit(Integer agroup_id,Integer row_id) throws SQLException {
+    public ModelAndView apver_edit(Integer agroup_id, Integer row_id) throws SQLException {
         AppExVersionModel apver = DbRockApi.getApverByRowId(row_id);
-        viewModel.put("apver",apver);
-        viewModel.put("agroup_id",agroup_id);
+        viewModel.put("apver", apver);
+        viewModel.put("agroup_id", agroup_id);
         return view("rock/apver_edit");
     }
 
@@ -101,14 +100,14 @@ public class AppVerController extends BaseController {
     @Mapping("apver/edit/ajax/save")
     public BaseResp editApver(Integer app_id, Integer row_id, Integer ver, String content, Integer type, Integer alert_ver, Integer force_ver, Integer platform, String url, Integer is_enable, Integer agroup_id) throws SQLException {
         BaseResp resp = new BaseResp();
-        if(TextUtils.isEmpty(content)==false){
+        if (TextUtils.isEmpty(content) == false) {
             content = content.trim();
         }
-        boolean result = DbRockApi.editApver(app_id,row_id,ver,content,type,alert_ver,force_ver,platform,url,is_enable,agroup_id);
-        if (result){
+        boolean result = DbRockApi.editApver(app_id, row_id, ver, content, type, alert_ver, force_ver, platform, url, is_enable, agroup_id);
+        if (result) {
             resp.code = 1;
             resp.msg = "保存成功！";
-        }else{
+        } else {
             resp.code = 0;
             resp.msg = "保存失败！";
         }
