@@ -19,17 +19,17 @@ public class LogUtil {
     }
 
     public static void LogDebug(String cmd, String args, String data) {
-        logger.debug(Tags.tag0(cmd), "{}\n\n{}", args, data);
+        logger.debug(Tags.tag0(cmd), "{}\r\n{}", args, data);
         //WaterClient.Log.append("sponge_log_admin", Level.DEBUG, cmd, args, data);
     }
 
     public static void error(String tag, String label, Throwable ex) {
-        logger.error(Tags.tag0(tag), "{}\n\n{}", label, ex);
+        logger.error(Tags.tag0(tag), "{}\r\n{}", label, ex);
         //WaterClient.Log.append("sponge_log_admin", Level.ERROR, tag, label, ex);
     }
 
     public static void error(String tag, String tag1, String label, Throwable ex) {
-        logger.error(Tags.tag0(tag).tag1(tag1), "{}\n\n{}", label, ex);
+        logger.error(Tags.tag0(tag).tag1(tag1), "{}\r\n{}", label, ex);
         //WaterClient.Log.append("sponge_log_admin", Level.ERROR, tag, tag1, label, ex);
     }
 }

@@ -1,9 +1,9 @@
 package org.noear.rock.impl.controller.trigger;
 
+import org.noear.mlog.Logger;
 import org.noear.mlog.utils.Tags;
 import org.noear.snack.ONode;
 import org.noear.solon.annotation.Component;
-import org.noear.solon.cloud.CloudLogger;
 import org.noear.solon.cloud.model.Instance;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.Handler;
@@ -13,7 +13,7 @@ import org.noear.water.utils.FromUtils;
 @Component
 public class EndHandler implements Handler {
 
-    CloudLogger log = CloudLogger.get(EndHandler.class);
+    static Logger log = Logger.get(EndHandler.class);
 
     @Override
     public void handle(Context ctx) throws Exception {
