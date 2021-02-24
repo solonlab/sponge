@@ -14,7 +14,7 @@
     <script src="/_session/domain.js"></script>
     <script src="${js}/lib.js"></script>
     <script>
-        function addApCode() {
+        function add() {
             location.href="/rock/apcode/add?agroup_id=${agroup_id}&service=${service}";
         }
     </script>
@@ -31,7 +31,7 @@
                     <input type="hidden" value="${service}" name="service" />
                     <button type="submit">查询</button>&nbsp;&nbsp;
                     <c:if test="${agroup_id>0&&isOperator==1}">
-                        <button type="button" onclick="addApCode()" class="edit">新增</button>
+                        <button type="button" onclick="add()" class="edit">新增</button>
                     </c:if>
                 </form>
             </left>

@@ -14,8 +14,35 @@
     <script src="/_session/domain.js"></script>
     <script src="${js}/lib.js"></script>
     <script>
-        function addApCode() {
+        function add() {
             location.href="/rock/api18n/add?agroup_id=${agroup_id}&service=${service}";
+        }
+
+        function imp(file) {
+            if(confirm("确定要导入吗？") == false){
+                return;
+            }
+
+            var fromData = new FormData();
+            fromData.append("file", file);
+
+            $.ajax({
+                type:"POST",
+                url:"ajax/import",
+                data:fromData,
+                processData: false,
+                contentType: false,
+                success:function (data) {
+                    if(data.code==1) {
+                        top.layer.msg('操作成功');
+                        setTimeout(function(){
+                            location.reload();
+                        },800);
+                    }else{
+                        top.layer.msg(data.msg);
+                    }
+                }
+            });
         }
     </script>
     <style>
@@ -31,7 +58,10 @@
                     <input type="hidden" value="${service}" name="service" />
                     <button type="submit">查询</button>&nbsp;&nbsp;
                     <c:if test="${agroup_id>0&&isOperator==1}">
-                        <button type="button" onclick="addApCode()" class="edit">新增</button>
+                        <button type="button" onclick="add()" class="edit">新增</button>
+                        <file>
+                            <label><input id="imp_file" type="file" accept=".properties"/><a class="btn minor w80">导入</a></label>
+                        </file>
                     </c:if>
                 </form>
             </left>

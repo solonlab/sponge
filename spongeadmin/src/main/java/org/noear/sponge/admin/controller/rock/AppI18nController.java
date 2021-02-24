@@ -1,9 +1,12 @@
 package org.noear.sponge.admin.controller.rock;
 
 import org.apache.http.util.TextUtils;
+import org.noear.rock.RockUtil;
+import org.noear.solon.Utils;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.ModelAndView;
+import org.noear.solon.core.handle.UploadedFile;
 import org.noear.sponge.admin.controller.BaseController;
 import org.noear.sponge.admin.controller.ViewModel;
 import org.noear.sponge.admin.dso.BcfTagChecker;
@@ -18,6 +21,7 @@ import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 @Controller
 @Mapping("/rock/api18n")
@@ -71,7 +75,7 @@ public class AppI18nController extends BaseController {
     }
 
     @Mapping("inner")
-    public ModelAndView apcode_inner(Integer agroup_id, String service , String name, String lang) throws SQLException {
+    public ModelAndView apcode_inner(Integer agroup_id, String service, String name, String lang) throws SQLException {
         List<TagCountsModel> langs = DbRockI18nApi.getApi18nLangsByService(service);
         for (TagCountsModel m : langs) {
             if (TextUtils.isEmpty(m.tag)) {
@@ -106,8 +110,8 @@ public class AppI18nController extends BaseController {
     public ModelAndView editApcode(Integer row_id) throws SQLException {
         AppExI18nModel model = DbRockI18nApi.getApi18nById(row_id);
         List<AppGroupModel> appGroups = DbRockApi.getAppGroup("");
-        viewModel.put("app_groups",appGroups);
-        viewModel.put("model",model);
+        viewModel.put("app_groups", appGroups);
+        viewModel.put("model", model);
         return view("rock/api18n_edit");
     }
 
@@ -132,12 +136,52 @@ public class AppI18nController extends BaseController {
     @Mapping("edit/ajax/save")
     public ViewModel saveApcode(Integer row_id, String name, String lang, String note, Integer agroup_id, String service) throws SQLException {
 
-        boolean result = DbRockI18nApi.editApi18n(row_id,agroup_id, service,name,lang,note);
+        boolean result = DbRockI18nApi.editApi18n(row_id, agroup_id, service, name, lang, note);
 
         if (result) {
             return viewModel.code(1, "保存成功！");
         } else {
             return viewModel.code(0, "保存失败！");
         }
+    }
+
+    @Mapping("ajax/import")
+    public ViewModel importFile(UploadedFile file) throws SQLException{
+        String i18nStr = Utils.getString(file.content, "UTF-8");
+        Properties i18n = Utils.buildProperties(i18nStr);
+
+        String agroup_id_str = i18n.getProperty("rock.agroup_id");
+        String service = i18n.getProperty("rock.service");
+        String lang = i18n.getProperty("rock.lang");
+
+        if (Utils.isEmpty(agroup_id_str) || Utils.isEmpty(service) || Utils.isEmpty(lang)) {
+            return viewModel.code(0, "提示：缺少元信息配置");
+        }
+
+        int agroup_id = Integer.parseInt(agroup_id_str);
+        boolean isOk = false;
+
+        if(DbRockApi.getAppGroupById(agroup_id).agroup_id != agroup_id){
+            return viewModel.code(0, "提示：应用组不存在");
+        }
+
+        //去除元信息
+        i18n.remove("rock.agroup_id");
+        i18n.remove("rock.service");
+        i18n.remove("rock.lang");
+
+        for (Object k : i18n.keySet()) {
+            if (k instanceof String) {
+                String name = (String) k;
+                DbRockI18nApi.impApi18n(agroup_id, service, name, lang, i18n.getProperty(name));
+                isOk = true;
+            }
+        }
+
+        if(isOk) {
+            RockUtil.delCacheForCodes(agroup_id);
+        }
+
+        return viewModel.code(1, "导入成功");
     }
 }

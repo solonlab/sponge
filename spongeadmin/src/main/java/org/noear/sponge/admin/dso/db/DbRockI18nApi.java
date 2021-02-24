@@ -29,22 +29,23 @@ public class DbRockI18nApi {
                 .groupBy("service")
                 .selectList("service tag,count(*) counts", TagCountsModel.class);
     }
+
     //根据agroup_id获取列表。
     public static List<AppExCodeModel> getApcodeByService(String service, Integer code, String lang) throws SQLException {
-        if(lang == null){
+        if (lang == null) {
             lang = "";
         }
 
-        if(TextUtils.isEmpty(service)){
+        if (TextUtils.isEmpty(service)) {
             return new ArrayList<>();
         }
 
         return db().table("appx_ex_code")
-                .whereEq("service",service)
-                .andEq("lang",lang)
-                .build((tb)->{
-                    if (code!=null){
-                        tb.andEq("code",code);
+                .whereEq("service", service)
+                .andEq("lang", lang)
+                .build((tb) -> {
+                    if (code != null) {
+                        tb.andEq("code", code);
                     }
                 })
                 .orderBy("code ASC")
@@ -54,12 +55,12 @@ public class DbRockI18nApi {
 
     //根据agroup_id获取列表。
     public static List<TagCountsModel> getApcodeLangsByService(String service) throws SQLException {
-        if(TextUtils.isEmpty(service)){
+        if (TextUtils.isEmpty(service)) {
             return new ArrayList<>();
         }
 
         return db().table("appx_ex_code")
-                .whereEq("service",service)
+                .whereEq("service", service)
                 .groupBy("lang")
                 .orderBy("lang ASC")
                 .select("lang tag,count(*) counts")
@@ -69,7 +70,7 @@ public class DbRockI18nApi {
     //根据id获取对应状态码信息
     public static AppExCodeModel getApCodeById(Integer row_id) throws SQLException {
         return db().table("appx_ex_code")
-                .where("row_id = ?",row_id)
+                .where("row_id = ?", row_id)
                 .select("*")
                 .getItem(new AppExCodeModel());
     }
@@ -109,13 +110,14 @@ public class DbRockI18nApi {
                 .groupBy("service")
                 .selectList("service tag,count(*) counts", TagCountsModel.class);
     }
+
     //根据agroup_id获取列表。
     public static List<AppExI18nModel> getApi18nByService(String service, String name, String lang) throws SQLException {
         if (lang == null) {
             lang = "";
         }
 
-        if(TextUtils.isEmpty(service)){
+        if (TextUtils.isEmpty(service)) {
             return new ArrayList<>();
         }
 
@@ -134,12 +136,12 @@ public class DbRockI18nApi {
 
     //根据agroup_id获取列表。
     public static List<TagCountsModel> getApi18nLangsByService(String service) throws SQLException {
-        if(TextUtils.isEmpty(service)){
+        if (TextUtils.isEmpty(service)) {
             return new ArrayList<>();
         }
 
         return db().table("appx_ex_i18n")
-                .whereEq("service",service)
+                .whereEq("service", service)
                 .groupBy("lang")
                 .orderBy("lang ASC")
                 .select("lang tag,count(*) counts")
@@ -149,7 +151,7 @@ public class DbRockI18nApi {
     //根据id获取对应状态码信息
     public static AppExI18nModel getApi18nById(Integer row_id) throws SQLException {
         return db().table("appx_ex_i18n")
-                .where("row_id = ?",row_id)
+                .where("row_id = ?", row_id)
                 .select("*")
                 .getItem(new AppExI18nModel());
     }
@@ -174,5 +176,15 @@ public class DbRockI18nApi {
         }
 
         return isOk;
+    }
+
+    public static void impApi18n(int agroup_id, String service, String name, String lang, String note) throws SQLException {
+        db().table("appx_ex_i18n")
+                .set("agroup_id", agroup_id)
+                .set("name", name)
+                .set("service", service)
+                .set("lang", lang)
+                .set("note", note)
+                .upsertBy("agroup_id,service,name,lang");
     }
 }
