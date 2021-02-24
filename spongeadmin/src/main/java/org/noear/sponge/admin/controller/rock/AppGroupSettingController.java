@@ -3,10 +3,10 @@ package org.noear.sponge.admin.controller.rock;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.ModelAndView;
+import org.noear.sponge.admin.controller.ViewModel;
 import org.noear.sponge.admin.dso.BcfTagChecker;
 import org.noear.sponge.admin.dso.db.DbRockApi;
 import org.noear.sponge.admin.controller.BaseController;
-import org.noear.sponge.admin.model.others.resp.BaseResp;
 import org.noear.sponge.admin.model.rock.AppExSettingModel;
 import org.noear.sponge.admin.model.rock.AppGroupModel;
 
@@ -61,43 +61,41 @@ public class AppGroupSettingController extends BaseController {
 
     //agsets的iframe页面。
     @Mapping("agsets/inner")
-    public ModelAndView agesets_inner(Integer agroup_id,String name) throws SQLException {
-        List<AppExSettingModel> agsetsList = DbRockApi.getAppGroupSetsById(agroup_id,name);
-        viewModel.put("name",name);
-        viewModel.put("agroup_id",agroup_id);
-        viewModel.put("agsetsList",agsetsList);
+    public ModelAndView agesets_inner(Integer agroup_id, String name) throws SQLException {
+        List<AppExSettingModel> agsetsList = DbRockApi.getAppGroupSetsById(agroup_id, name);
+        viewModel.put("name", name);
+        viewModel.put("agroup_id", agroup_id);
+        viewModel.put("agsetsList", agsetsList);
         return view("rock/agsets_inner");
     }
 
     //agsets编辑页面跳转
     @Mapping("agsets/edit")
-    public ModelAndView agsets_edit(Integer row_id,Integer agroup_id) throws SQLException {
+    public ModelAndView agsets_edit(Integer row_id, Integer agroup_id) throws SQLException {
         AppExSettingModel agsets = DbRockApi.getAgsetsById(row_id);
-        viewModel.put("agroup_id",agroup_id);
-        viewModel.put("agsets",agsets);
+        viewModel.put("agroup_id", agroup_id);
+        viewModel.put("agsets", agsets);
         return view("rock/agsets_edit");
     }
 
     //agsets新增页面跳转
     @Mapping("agsets/add")
-    public ModelAndView agsets_add(Integer agroup_id){
-        viewModel.put("agroup_id",agroup_id);
-        viewModel.put("agsets",new AppExSettingModel());
+    public ModelAndView agsets_add(Integer agroup_id) {
+        viewModel.put("agroup_id", agroup_id);
+        viewModel.put("agsets", new AppExSettingModel());
         return view("rock/agsets_edit");
     }
 
     //ajax保存编辑
     @Mapping("agsets/edit/ajax/save")
-    public BaseResp saveAgsets(Integer row_id, String name, Integer type, String value, String note, Integer is_client, Integer ver_start, Integer agroup_id) throws SQLException {
-        BaseResp resp = new BaseResp();
+    public ViewModel saveAgsets(Integer row_id, String name, Integer type, String value, String note, Integer is_client, Integer ver_start, Integer agroup_id) throws SQLException {
+
         boolean result = DbRockApi.editAgsets(row_id, name, type, value, note, is_client, ver_start, agroup_id);
-        if (result){
-            resp.code = 1;
-            resp.msg = "保存成功！";
+
+        if (result) {
+            return viewModel.code(1, "保存成功！");
         } else {
-            resp.code = 0;
-            resp.msg = "保存失败！";
+            return viewModel.code(0, "保存失败！");
         }
-        return resp;
     }
 }

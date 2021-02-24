@@ -82,8 +82,7 @@ public class DbRockApi {
                         tb.and("name like ?", name + "%");
                     }
                 })
-                .select("*")
-                .getList(new AppGroupModel());
+                .selectList("*", AppGroupModel.class);
     }
 
 //    public static List<AppGroupModel> getAppGroupOfTrack(String name) throws SQLException {
@@ -102,8 +101,7 @@ public class DbRockApi {
         return db().table("appx_agroup")
                 .where("`tag` IS NOT NULL")
                 .and("`tag` != ''")
-                .select("*")
-                .getList(new AppGroupModel());
+                .selectList("*", AppGroupModel.class);
     }
 
     //根据id获取应用组
@@ -362,11 +360,11 @@ public class DbRockApi {
 
 
     //对api_code 根据agroup_id分组
-    public static List<AppExCodeModel> getApCodeCounts() throws SQLException {
+    public static List<TagCountsModel> getApCodeCounts(int agroup_id) throws SQLException {
         return db().table("appx_ex_code")
-                .groupBy("agroup_id")
-                .select("agroup_id,count(*) counts")
-                .getList(new AppExCodeModel());
+                .whereEq("agroup_id", agroup_id)
+                .groupBy("service")
+                .selectList("service tag,count(*) counts", TagCountsModel.class);
     }
     //根据agroup_id获取列表。
     public static List<AppExCodeModel> getApcodeByAgroupId(Integer agroup_id, Integer code, String lang) throws SQLException {
@@ -388,9 +386,9 @@ public class DbRockApi {
     }
 
     //根据agroup_id获取列表。
-    public static List<TagCountsModel> getApcodeLangsByAgroupId(Integer agroup_id) throws SQLException {
+    public static List<TagCountsModel> getApcodeLangsByService(String service) throws SQLException {
         return db().table("appx_ex_code")
-                .where("agroup_id = ?",agroup_id)
+                .whereEq("service",service)
                 .groupBy("lang")
                 .orderBy("lang ASC")
                 .select("lang tag,count(*) counts")
@@ -405,21 +403,22 @@ public class DbRockApi {
                 .getItem(new AppExCodeModel());
     }
 
-    public static boolean editApcode(Integer row_id, Integer agroup_id, Integer code, String lang, String note) throws SQLException {
+    public static boolean editApcode(Integer row_id, Integer agroup_id, String service, Integer code, String lang, String note) throws SQLException {
         DbTableQuery tb = db().table("appx_ex_code")
-                .set("`agroup_id`",agroup_id)
-                .set("`code`",code)
-                .set("`lang`",lang)
-                .set("`note`",note);
+                .set("agroup_id", agroup_id)
+                .set("code", code)
+                .set("service", service)
+                .set("lang", lang)
+                .set("note", note);
 
         boolean isOk = true;
-        if(row_id>0){
-            isOk = tb.where("row_id = ?",row_id).update()>0;
-        }else{
-            isOk = tb.insert()>0;
+        if (row_id > 0) {
+            isOk = tb.where("row_id = ?", row_id).update() > 0;
+        } else {
+            isOk = tb.insert() > 0;
         }
 
-        if(isOk){
+        if (isOk) {
             RockUtil.delCacheForCodes(agroup_id);
         }
 

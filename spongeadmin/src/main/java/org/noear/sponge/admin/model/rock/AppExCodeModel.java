@@ -12,11 +12,10 @@ public class AppExCodeModel implements IBinder
 {
     public int row_id;
     public int agroup_id;
+    public String service;
     public int code;
     public String lang;
     public String note;
-
-    public long counts;
 
 	public void bind(GetHandlerEx s)
 	{
@@ -24,10 +23,10 @@ public class AppExCodeModel implements IBinder
 		//
         row_id = s.get("row_id").value(0);
         agroup_id = s.get("agroup_id").value(0);
+        service = s.get("service").value("");
         code = s.get("code").value(0);
         lang = s.get("lang").value("");
         note = s.get("note").value(null);
-        counts = s.get("counts").value(0L);
 	}
 	
 	public IBinder clone()

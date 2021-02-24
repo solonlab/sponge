@@ -14,20 +14,26 @@
     <script src="/_session/domain.js"></script>
     <script src="${js}/lib.js"></script>
     <script>
+        var agroupId = ${agroup_id};
+        var sevTag = '${service}';
+
         $(function () {
-            if (${!empty agroup_id}) {
-                $('#${agroup_id}').addClass('sel');
+            $('#app_group').val(${agroup_id});
+
+            if (sevTag) {
+                $('#' + sevTag).addClass('sel');
             } else {
                 $('tree li:first').addClass('sel');
             }
 
         });
-        var agroupId = ${agroup_id};
-        function node_onclick(agroup_id,obj) {
-            agroupId = agroup_id
+
+        function node_onclick(service,obj) {
+            sevTag = service;
+
             $('li.sel').removeClass('sel');
             $(obj).addClass("sel");
-            $("#table").attr('src',"/rock/apcode/inner?agroup_id="+agroupId);
+            $("#table").attr('src',"/rock/apcode/inner?agroup_id="+agroupId+"&service="+service);
         };
     </script>
 </head>
@@ -44,13 +50,13 @@
                 </select>
                 </div>
                 <c:forEach var="sev" items="${sevList}">
-                    <li onclick="node_onclick('${sev}',this)" id="${sev}">- ${sev}</li>
+                    <li onclick="node_onclick('${sev.tag}',this)" id="${sev.tag}">- ${sev.tag}</li>
                 </c:forEach>
             </ul>
         </tree>
     </middle>
     <right class="frm">
-        <iframe src="/rock/apcode/inner?agroup_id=${agroup_id}&sev=" frameborder="0" id="table"></iframe>
+        <iframe src="/rock/apcode/inner?agroup_id=${agroup_id}&service=${service}" frameborder="0" id="table"></iframe>
     </right>
 </main>
 </body>

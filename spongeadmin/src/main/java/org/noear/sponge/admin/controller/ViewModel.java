@@ -14,13 +14,15 @@ public class ViewModel extends ModelAndView {
         return this;
     }
 
-    public void code(int code){
+    public ViewModel code(int code){
         put("code",code);
+        return this;
     }
 
-    public void code(int code, String msg){
+    public ViewModel code(int code, String msg){
         put("code",code);
         put("msg",msg);
+        return this;
     }
 
     public void msg(String msg) {

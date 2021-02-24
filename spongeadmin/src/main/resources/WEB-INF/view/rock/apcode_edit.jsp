@@ -21,10 +21,16 @@
         });
         var row_id = ${code.row_id};
         function saveEdit() {
+            var service = $('#service').val();
             var code = $('#code').val();
             var agroup_id = $('#agroup_id').val();
             var note = $('#note').val();
             var lang = $('#lang').val();
+
+            if (!service) {
+                top.layer.msg("服务名不能为空！");
+                return;
+            }
 
             if (!code) {
                 top.layer.msg("状态码不能为空！");
@@ -47,7 +53,7 @@
             $.ajax({
                 type:"POST",
                 url:"/rock/apcode/edit/ajax/save",
-                data:{"row_id":row_id,"agroup_id":agroup_id,"note":note,"code":code,"lang":lang},
+                data:{"row_id":row_id,"agroup_id":agroup_id,"service":service,"note":note,"code":code,"lang":lang},
                 success:function (data) {
                     if(data.code==1) {
                         top.layer.msg(data.msg);
@@ -85,6 +91,10 @@
 <detail>
     <form>
         <table>
+            <tr>
+                <th>服务</th>
+                <td><input type="text" id="service" value="${code.service}"></td>
+            </tr>
             <tr>
                 <th>状态码</th>
                 <td><input type="text" id="code" value="${code.code}"></td>
