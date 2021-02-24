@@ -4,13 +4,14 @@ import org.apache.http.util.TextUtils;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.ModelAndView;
+import org.noear.sponge.admin.controller.BaseController;
 import org.noear.sponge.admin.controller.ViewModel;
 import org.noear.sponge.admin.dso.BcfTagChecker;
 import org.noear.sponge.admin.dso.db.DbRockApi;
 import org.noear.sponge.admin.dso.db.DbRockI18nApi;
 import org.noear.sponge.admin.model.TagCountsModel;
 import org.noear.sponge.admin.model.rock.AppExCodeModel;
-import org.noear.sponge.admin.controller.BaseController;
+import org.noear.sponge.admin.model.rock.AppExI18nModel;
 import org.noear.sponge.admin.model.rock.AppGroupModel;
 
 import java.sql.SQLException;
@@ -19,8 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@Mapping("/rock/apcode")
-public class AppCodeController extends BaseController {
+@Mapping("/rock/api18n")
+public class AppI18nController extends BaseController {
 
     //应用状态码跳转
     @Mapping("")
@@ -54,7 +55,7 @@ public class AppCodeController extends BaseController {
         }
 
 
-        List<TagCountsModel> sevList = DbRockI18nApi.getApCodeCounts(out_agroup_id);
+        List<TagCountsModel> sevList = DbRockI18nApi.getApi18nCounts(out_agroup_id);
 
         if (TextUtils.isEmpty(out_sev) && sevList.size() > 0) {
             out_sev = sevList.get(0).tag;
@@ -66,12 +67,12 @@ public class AppCodeController extends BaseController {
         viewModel.put("sevList", sevList);
         viewModel.put("service", out_sev);
 
-        return view("rock/apcode");
+        return view("rock/api18n");
     }
 
     @Mapping("inner")
-    public ModelAndView apcode_inner(Integer agroup_id, String service, Integer code_num, String lang) throws SQLException {
-        List<TagCountsModel> langs = DbRockI18nApi.getApcodeLangsByService(service);
+    public ModelAndView apcode_inner(Integer agroup_id, String service , String name, String lang) throws SQLException {
+        List<TagCountsModel> langs = DbRockI18nApi.getApi18nLangsByService(service);
         for (TagCountsModel m : langs) {
             if (TextUtils.isEmpty(m.tag)) {
                 m.tag = "default";
@@ -82,7 +83,7 @@ public class AppCodeController extends BaseController {
             lang = "";
         }
 
-        List<AppExCodeModel> codes = DbRockI18nApi.getApcodeByAgroupId(agroup_id, code_num, lang);
+        List<AppExI18nModel> codes = DbRockI18nApi.getApi18nByAgroupId(agroup_id, name, lang);
 
         if (TextUtils.isEmpty(lang)) {
             lang = "default";
@@ -91,23 +92,23 @@ public class AppCodeController extends BaseController {
         viewModel.put("lang", lang);
         viewModel.put("langs", langs);
         viewModel.put("list", codes);
-        viewModel.put("code_num", code_num);
+        viewModel.put("name", name);
         viewModel.put("agroup_id", agroup_id);
         viewModel.put("service", service);
 
 
-        return view("rock/apcode_inner");
+        return view("rock/api18n_inner");
     }
 
 
     //应用状态码编辑页面跳转
     @Mapping("edit")
     public ModelAndView editApcode(Integer row_id) throws SQLException {
-        AppExCodeModel model = DbRockI18nApi.getApCodeById(row_id);
+        AppExI18nModel model = DbRockI18nApi.getApi18nById(row_id);
         List<AppGroupModel> appGroups = DbRockApi.getAppGroup("");
-        viewModel.put("app_groups", appGroups);
-        viewModel.put("model", model);
-        return view("rock/apcode_edit");
+        viewModel.put("app_groups",appGroups);
+        viewModel.put("model",model);
+        return view("rock/api18n_edit");
     }
 
 
@@ -116,22 +117,22 @@ public class AppCodeController extends BaseController {
     public ModelAndView addApcode(Integer agroup_id, String service) throws SQLException {
         List<AppGroupModel> appGroups = DbRockApi.getAppGroup("");
         AppExCodeModel model = new AppExCodeModel();
-        if (agroup_id != null) {
+        if (agroup_id!=null) {
             model.agroup_id = agroup_id;
             model.service = service;
         }
 
-        viewModel.put("app_groups", appGroups);
-        viewModel.put("model", model);
-        viewModel.put("agroup_id", agroup_id);
-        return view("rock/apcode_edit");
+        viewModel.put("app_groups",appGroups);
+        viewModel.put("model",model);
+        viewModel.put("agroup_id",agroup_id);
+        return view("rock/api18n_edit");
     }
 
     //应用状态码新增编辑ajax保存功能
     @Mapping("edit/ajax/save")
-    public ViewModel saveApcode(Integer row_id, Integer code, String lang, String note, Integer agroup_id, String service) throws SQLException {
+    public ViewModel saveApcode(Integer row_id, String name, String lang, String note, Integer agroup_id, String service) throws SQLException {
 
-        boolean result = DbRockI18nApi.editApcode(row_id, agroup_id, service, code, lang, note);
+        boolean result = DbRockI18nApi.editApi18n(row_id,agroup_id, service,name,lang,note);
 
         if (result) {
             return viewModel.code(1, "保存成功！");

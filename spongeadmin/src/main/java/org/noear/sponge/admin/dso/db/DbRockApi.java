@@ -359,132 +359,7 @@ public class DbRockApi {
     }
 
 
-    //对api_code 根据agroup_id分组
-    public static List<TagCountsModel> getApCodeCounts(int agroup_id) throws SQLException {
-        return db().table("appx_ex_code")
-                .whereEq("agroup_id", agroup_id)
-                .groupBy("service")
-                .selectList("service tag,count(*) counts", TagCountsModel.class);
-    }
-    //根据agroup_id获取列表。
-    public static List<AppExCodeModel> getApcodeByAgroupId(Integer agroup_id, Integer code, String lang) throws SQLException {
-        if(lang == null){
-            lang = "";
-        }
 
-        return db().table("appx_ex_code")
-                .whereEq("agroup_id",agroup_id)
-                .andEq("lang",lang)
-                .build((tb)->{
-                    if (code!=null){
-                        tb.andEq("code",code);
-                    }
-                })
-                .orderBy("code ASC")
-                .select("*")
-                .getList(new AppExCodeModel());
-    }
-
-    //根据agroup_id获取列表。
-    public static List<TagCountsModel> getApcodeLangsByService(String service) throws SQLException {
-        return db().table("appx_ex_code")
-                .whereEq("service",service)
-                .groupBy("lang")
-                .orderBy("lang ASC")
-                .select("lang tag,count(*) counts")
-                .getList(TagCountsModel.class);
-    }
-
-    //根据id获取对应状态码信息
-    public static AppExCodeModel getApCodeById(Integer row_id) throws SQLException {
-        return db().table("appx_ex_code")
-                .where("row_id = ?",row_id)
-                .select("*")
-                .getItem(new AppExCodeModel());
-    }
-
-    public static boolean editApcode(Integer row_id, Integer agroup_id, String service, Integer code, String lang, String note) throws SQLException {
-        DbTableQuery tb = db().table("appx_ex_code")
-                .set("agroup_id", agroup_id)
-                .set("code", code)
-                .set("service", service)
-                .set("lang", lang)
-                .set("note", note);
-
-        boolean isOk = true;
-        if (row_id > 0) {
-            isOk = tb.where("row_id = ?", row_id).update() > 0;
-        } else {
-            isOk = tb.insert() > 0;
-        }
-
-        if (isOk) {
-            RockUtil.delCacheForCodes(agroup_id);
-        }
-
-        return isOk;
-    }
-
-    //获取app版本更新分组
-    public static List<AppExVersionModel> getApverCounts() throws SQLException {
-        return db().table("appx_ex_version")
-                .groupBy("agroup_id")
-                .select("agroup_id,count(*) counts")
-                .getList(new AppExVersionModel());
-    }
-    //根据agoup_id获取发布版本列表。
-    public static List<AppExVersionModel> getApvers(Integer agroup_id,Integer is_disabled) throws SQLException {
-        return db().table("appx_ex_version")
-                .where("1=1")
-                .expre((tb) -> {
-                    if (agroup_id != null && agroup_id != 0) {
-                        tb.and("agroup_id = ?", agroup_id);
-                    }
-                    if (is_disabled != null) {
-                        tb.and("is_disabled = ?", is_disabled);
-                    }
-                })
-                .orderBy("app_id ASC,ver DESC")
-                .select("*")
-                .getList(new AppExVersionModel());
-    }
-    //根据row_id 获取apver
-    public static AppExVersionModel getApverByRowId(Integer row_id) throws SQLException {
-            return db().table("appx_ex_version")
-                    .where("row_id = ?",row_id)
-                    .select("*")
-                    .getItem(new AppExVersionModel());
-
-    }
-
-
-    public static Boolean editApver(Integer app_id,Integer row_id, Integer ver, String content, Integer type, Integer alert_ver,Integer force_ver,Integer platform, String url, Integer is_enable,Integer agroup_id) throws SQLException {
-        DbTableQuery db = db().table("appx_ex_version")
-                .set("`app_id`", app_id)
-                .set("`ver`", ver)
-                .set("`content`", content)
-                .set("`type`", type)
-                .set("`alert_ver`", alert_ver)
-                .set("`force_ver`", force_ver)
-                .set("`platform`", platform)
-                .set("`url`", url)
-                .set("`is_enable`", is_enable)
-                .set("`agroup_id`", agroup_id);
-
-        boolean isOk = true;
-        if (row_id > 0) {
-            isOk = db.where("row_id = ?", row_id).update() > 0;
-        } else {
-            db.set("`log_fulltime`", "$NOW()");
-            isOk = db.insert() > 0;
-        }
-
-        if (isOk) {
-            RockUtil.delCacheForVersion(agroup_id, app_id);
-        }
-
-        return isOk;
-    }
 
     public static List<AppxWhitelistModel> getWhiteListGroup() throws SQLException{
         return db().table("appx_whitelist")
@@ -554,6 +429,68 @@ public class DbRockApi {
                 .caching(CacheUtil.dataCache)
                 .select("*")
                 .getList(new UserGroupModel());
+    }
+
+
+    //获取app版本更新分组
+    public static List<AppExVersionModel> getApverCounts() throws SQLException {
+        return db().table("appx_ex_version")
+                .groupBy("agroup_id")
+                .select("agroup_id,count(*) counts")
+                .getList(new AppExVersionModel());
+    }
+    //根据agoup_id获取发布版本列表。
+    public static List<AppExVersionModel> getApvers(Integer agroup_id,Integer is_disabled) throws SQLException {
+        return db().table("appx_ex_version")
+                .where("1=1")
+                .expre((tb) -> {
+                    if (agroup_id != null && agroup_id != 0) {
+                        tb.and("agroup_id = ?", agroup_id);
+                    }
+                    if (is_disabled != null) {
+                        tb.and("is_disabled = ?", is_disabled);
+                    }
+                })
+                .orderBy("app_id ASC,ver DESC")
+                .select("*")
+                .getList(new AppExVersionModel());
+    }
+    //根据row_id 获取apver
+    public static AppExVersionModel getApverByRowId(Integer row_id) throws SQLException {
+        return db().table("appx_ex_version")
+                .where("row_id = ?",row_id)
+                .select("*")
+                .getItem(new AppExVersionModel());
+
+    }
+
+
+    public static Boolean editApver(Integer app_id,Integer row_id, Integer ver, String content, Integer type, Integer alert_ver,Integer force_ver,Integer platform, String url, Integer is_enable,Integer agroup_id) throws SQLException {
+        DbTableQuery db = db().table("appx_ex_version")
+                .set("`app_id`", app_id)
+                .set("`ver`", ver)
+                .set("`content`", content)
+                .set("`type`", type)
+                .set("`alert_ver`", alert_ver)
+                .set("`force_ver`", force_ver)
+                .set("`platform`", platform)
+                .set("`url`", url)
+                .set("`is_enable`", is_enable)
+                .set("`agroup_id`", agroup_id);
+
+        boolean isOk = true;
+        if (row_id > 0) {
+            isOk = db.where("row_id = ?", row_id).update() > 0;
+        } else {
+            db.set("`log_fulltime`", "$NOW()");
+            isOk = db.insert() > 0;
+        }
+
+        if (isOk) {
+            RockUtil.delCacheForVersion(agroup_id, app_id);
+        }
+
+        return isOk;
     }
 
 }

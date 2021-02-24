@@ -15,7 +15,7 @@
     <script src="${js}/lib.js"></script>
     <script>
         function addApCode() {
-            location.href="/rock/apcode/add?agroup_id=${agroup_id}&service=${service}";
+            location.href="/rock/api18n/add?agroup_id=${agroup_id}&service=${service}";
         }
     </script>
     <style>
@@ -47,7 +47,7 @@
             <table>
                 <thead>
                 <tr>
-                    <td width="100px">状态码</td>
+                    <td width="100px">键值</td>
                     <td width="100px">语言</td>
                     <td>描述信息</td>
                     <c:if test="${isOperator==1}">
@@ -58,11 +58,11 @@
                 <tbody>
                     <c:forEach var="m1" items="${list}">
                         <tr>
-                            <td style="text-align: left">${m1.code}</td>
+                            <td style="text-align: left">${m1.name}</td>
                             <td style="text-align: left">${m1.lang}</td>
                             <td style="text-align: left;word-break: break-all;word-wrap: break-word">${m1.note}</td>
                             <c:if test="${isOperator==1}">
-                                <td><a href="/rock/apcode/edit?row_id=${m1.row_id}" style="color: blue;">编辑</a></td>
+                                <td><a href="/rock/api18n/edit?row_id=${m1.row_id}" style="color: blue;">编辑</a></td>
                             </c:if>
                         </tr>
                     </c:forEach>

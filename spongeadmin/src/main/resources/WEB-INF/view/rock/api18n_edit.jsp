@@ -22,7 +22,7 @@
         var row_id = ${model.row_id};
         function saveEdit() {
             var service = $('#service').val();
-            var code = $('#code').val();
+            var name = $('#name').val();
             var agroup_id = $('#agroup_id').val();
             var note = $('#note').val();
             var lang = $('#lang').val();
@@ -32,7 +32,7 @@
                 return;
             }
 
-            if (!code) {
+            if (!name) {
                 top.layer.msg("状态码不能为空！");
                 return;
             }
@@ -41,24 +41,16 @@
                 row_id=0
             }
 
-            var reg = "^[0-9]*$";
-            var re = new RegExp(reg);
-            if (re.test(code)) {
-            }
-            else{
-                top.layer.msg('应用状态码应为纯数字！');
-                return;
-            }
 
             $.ajax({
                 type:"POST",
-                url:"/rock/apcode/edit/ajax/save",
-                data:{"row_id":row_id,"agroup_id":agroup_id,"service":service,"note":note,"code":code,"lang":lang},
+                url:"/rock/api18n/edit/ajax/save",
+                data:{"row_id":row_id,"agroup_id":agroup_id,"service":service,"note":note,"name":name,"lang":lang},
                 success:function (data) {
                     if(data.code==1) {
                         top.layer.msg(data.msg);
                         setTimeout(function(){
-                            parent.location.href="/rock/apcode?agroup_id="+agroup_id;
+                            parent.location.href="/rock/api18n?agroup_id="+agroup_id;
                         },1000);
                     }else{
                         top.layer.msg(data.msg);
@@ -96,8 +88,8 @@
                 <td><input type="text" id="service" value="${model.service}"></td>
             </tr>
             <tr>
-                <th>状态码</th>
-                <td><input type="text" id="code" value="${model.code}"></td>
+                <th>键值</th>
+                <td><input type="text" id="name" value="${model.name}"></td>
             </tr>
             <tr>
                 <th>语言</th>
