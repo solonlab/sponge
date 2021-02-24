@@ -22,7 +22,7 @@ public class AppSettingController extends BaseController {
     @Mapping("apsets")
     public ModelAndView apsets(Integer app_id, Integer agroup_id) throws SQLException {
 
-        //by xyj 20180516::添加应用组的权限控制
+        //by noear 20180516::添加应用组的权限控制
         BcfTagChecker checker = new BcfTagChecker();
 
         Integer out_agroup_id = agroup_id;

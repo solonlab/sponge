@@ -28,7 +28,7 @@ public class UrlController extends BaseController {
     //跳转进入短网址管理页面
     @Mapping("track/url")
     public ModelAndView shortUrl(Integer tag_id,Integer agroup_id) throws SQLException{
-        //by xyj 20180516::添加应用组的权限控制
+        //by noear 20180516::添加应用组的权限控制
         BcfTagChecker checker = new BcfTagChecker();
 
         //应用组cookie记忆处理

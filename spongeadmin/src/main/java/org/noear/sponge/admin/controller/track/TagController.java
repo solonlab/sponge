@@ -25,7 +25,7 @@ public class TagController extends BaseController {
     //标签管理
     @Mapping("track/tag")
     public ModelAndView tag(Integer agroup_id) throws SQLException{
-        //by xyj 20180516::添加应用组的权限控制
+        //by noear 20180516::添加应用组的权限控制
         BcfTagChecker checker = new BcfTagChecker();
 
         //应用组cookie记忆处理

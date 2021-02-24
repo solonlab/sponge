@@ -23,7 +23,7 @@ public class AppVerController extends BaseController {
     //应用版本发布页面跳转
     @Mapping("apver")
     public ModelAndView apver(Integer agroup_id) throws SQLException {
-        //by xyj 20180516::添加应用组的权限控制
+        //by noear 20180516::添加应用组的权限控制
         BcfTagChecker checker = new BcfTagChecker();
 
         List<AppGroupModel> agroups = DbRockApi.getAppGroup("");

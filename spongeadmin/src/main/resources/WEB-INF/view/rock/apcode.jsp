@@ -36,14 +36,21 @@
     <middle>
         <tree id="tree">
             <ul>
-                <c:forEach var="map" items="${apGmap}">
-                    <li onclick="node_onclick('${map.key}',this)" id="${map.key}">${map.value.name} (${map.value.counts})</li>
+                <div style="margin: 5px;"><select style="width: 100%;" id="app_group" name="agroup_id" onchange="queryForm();">
+                    <option value=""></option>
+                    <c:forEach var="app_group" items="${app_groups}">
+                        <option value=${app_group.agroup_id}>${app_group.name}</option>
+                    </c:forEach>
+                </select>
+                </div>
+                <c:forEach var="sev" items="${sevList}">
+                    <li onclick="node_onclick('${sev}',this)" id="${sev}">- ${sev}</li>
                 </c:forEach>
             </ul>
         </tree>
     </middle>
     <right class="frm">
-        <iframe src="/rock/apcode/inner?agroup_id=${agroup_id}" frameborder="0" id="table"></iframe>
+        <iframe src="/rock/apcode/inner?agroup_id=${agroup_id}&sev=" frameborder="0" id="table"></iframe>
     </right>
 </main>
 </body>

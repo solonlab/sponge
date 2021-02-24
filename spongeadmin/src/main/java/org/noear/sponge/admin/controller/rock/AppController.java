@@ -24,7 +24,7 @@ public class AppController extends BaseController {
     @Mapping("app")
     public ModelAndView app(Integer agroup_id) throws SQLException {
 
-        //by xyj 20180516::添加应用组的权限控制
+        //by noear 20180516::添加应用组的权限控制
         BcfTagChecker checker = new BcfTagChecker();
 
         List<AppGroupModel> agroups = DbRockApi.getAppGroup("");

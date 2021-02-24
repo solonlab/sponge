@@ -23,8 +23,8 @@ public class AppCodeController extends BaseController {
 
     //应用状态码跳转
     @Mapping("apcode")
-    public ModelAndView apcode(Integer agroup_id) throws SQLException {
-        //by xyj 20180516::添加应用组的权限控制
+    public ModelAndView apcode(Integer agroup_id, String sev) throws SQLException {
+        //by noear 20180516::添加应用组的权限控制
         BcfTagChecker checker = new BcfTagChecker();
 
         List<AppGroupModel> agroups = DbRockApi.getAppGroup("", 0);
@@ -34,6 +34,11 @@ public class AppCodeController extends BaseController {
         Integer out_agroup_id = agroup_id;
         if (out_agroup_id == null) {
             out_agroup_id = 0;
+        }
+
+        String out_sev = sev;
+        if (out_sev == null) {
+            out_sev = "";
         }
 
 
@@ -54,8 +59,9 @@ public class AppCodeController extends BaseController {
                 apGmap.put(aps.agroup_id, apG);
             }
         }
-        viewModel.put("apGmap", apGmap);
+        viewModel.put("app_groups", apGmap.values());
         viewModel.put("agroup_id", out_agroup_id);
+        viewModel.put("sev", out_sev);
 
         return view("rock/apcode");
     }
