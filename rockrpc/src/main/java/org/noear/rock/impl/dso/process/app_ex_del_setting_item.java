@@ -25,9 +25,7 @@ public class app_ex_del_setting_item extends DbQueryProcedure
             }else{
                 sql("DELETE FROM appx_ex_setting WHERE app_id>0 AND app_id=@app_id AND name=@name;");
             }
-
         });
-
     }
 
     public int agroup_id;

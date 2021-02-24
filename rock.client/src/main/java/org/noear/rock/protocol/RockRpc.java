@@ -150,4 +150,34 @@ public interface RockRpc {
     String getAppCodeByLang(Integer agroupID, Integer code, String lang) throws SQLException;
 
 
+    //=======================
+
+    /**
+     * 获取接口状态码
+     */
+    AppCodeCollection getServiceCodes(String service) throws SQLException;
+
+    AppCodeCollection getServiceCodesByLang(String service, String lang) throws SQLException;
+
+    /**
+     * 获取一个Api Code 的描述
+     */
+    String getServiceCode(String service, Integer code) throws SQLException;
+
+    String getServiceCodeByLang(String service, Integer code, String lang) throws SQLException;
+
+    /**
+     * 获取接口状态码
+     */
+    AppI18nCollection getServiceI18ns(String service) throws SQLException;
+
+    AppI18nCollection getServiceI18nsByLang(String service, String lang) throws SQLException;
+
+    /**
+     * 获取一个Api Code 的描述
+     */
+    String getServiceI18n(String service, String name) throws SQLException;
+
+    String getServiceI18nByLang(String service, String name, String lang) throws SQLException;
+
 }

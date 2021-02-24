@@ -571,15 +571,6 @@ public final class RockRpcService implements RockRpc {
         return ac;
     }
 
-    //获取一个Api Code 的描述 //无异常
-    public String tryAppCode(@NonNull Integer agroupID, @NonNull Integer code) {
-        try {
-            return getAppCode(agroupID, code);
-        } catch (Exception ex) {
-            return "";
-        }
-    }
-
     //获取一个Api Code 的描述
     @Override
     public String getAppCode(@NonNull Integer agroupID,@NonNull  Integer code) throws SQLException {
@@ -606,21 +597,97 @@ public final class RockRpcService implements RockRpc {
         }
     }
 
-    //type=0=ip; type=1=host
-//    @Override
-//    public Boolean isWhitelist(@NonNull String tag,@NonNull  Integer type, String val) throws SQLException {
-//        if(val == null){
-//            return false;
-//        }
-//
-//        app_get_whitelist sp = new app_get_whitelist(rock_db);
-//        sp.type = type;
-//        sp.tag = tag;
-//        sp.value = val;
-//
-//        sp.caching(rock_cache)
-//                .cacheTag("app_whitelist_" + type + "_" + tag);
-//
-//        return sp.getValue(null) != null;
-//    }
+    @Override
+    public AppCodeCollection getServiceCodes(String service) throws SQLException {
+        return getServiceCodesByLang(service, "");
+    }
+
+    @Override
+    public AppCodeCollection getServiceCodesByLang(String service, String lang) throws SQLException {
+        app_ex_get_codes2 sp = new app_ex_get_codes2(rock_db);
+        sp.service = service;
+        sp.lang = lang;
+
+        sp.caching(rock_cache)
+                .usingCache(60 * 10)
+                .cacheTag("app_code_" + service);
+
+        List<AppCodeModel> m = sp.getList(new AppCodeModel());
+
+        AppCodeCollection ac = new AppCodeCollection();
+        ac.bind(m);
+        return ac;
+    }
+
+    @Override
+    public String getServiceCode(String service, Integer code) throws SQLException {
+        return getServiceCodeByLang(service, code, "");
+    }
+
+    @Override
+    public String getServiceCodeByLang(String service, Integer code, String lang) throws SQLException {
+        app_ex_get_code2 sp = new app_ex_get_code2(rock_db);
+        sp.service = service;
+        sp.code = code;
+        sp.lang = lang;
+
+        AppCodeModel m = sp.caching(rock_cache)
+                .usingCache(60 * 10)
+                .cacheTag("app_code_" + service)
+                .getItem(new AppCodeModel());
+
+        if (m.note == null) {
+            return "";
+        }
+        else {
+            return m.note;
+        }
+    }
+
+    @Override
+    public AppI18nCollection getServiceI18ns(String service) throws SQLException {
+        return getServiceI18nsByLang(service, "");
+    }
+
+    @Override
+    public AppI18nCollection getServiceI18nsByLang(String service, String lang) throws SQLException {
+        app_ex_get_i18ns sp = new app_ex_get_i18ns(rock_db);
+        sp.service = service;
+        sp.lang = lang;
+
+        sp.caching(rock_cache)
+                .usingCache(60 * 10)
+                .cacheTag("app_code_" + service);
+
+        List<AppI18nModel> m = sp.getList(new AppI18nModel());
+
+        AppI18nCollection ac = new AppI18nCollection();
+        ac.bind(m);
+        return ac;
+    }
+
+    @Override
+    public String getServiceI18n(String service, String name) throws SQLException {
+        return getServiceI18nByLang(service, name, "");
+    }
+
+    @Override
+    public String getServiceI18nByLang(String service, String name, String lang) throws SQLException {
+        app_ex_get_i18n sp = new app_ex_get_i18n(rock_db);
+        sp.service = service;
+        sp.name = name;
+        sp.lang = lang;
+
+        AppI18nModel m = sp.caching(rock_cache)
+                .usingCache(60 * 10)
+                .cacheTag("app_i18n_" + service)
+                .getItem(new AppI18nModel());
+
+        if (m.note == null) {
+            return "";
+        }
+        else {
+            return m.note;
+        }
+    }
 }
