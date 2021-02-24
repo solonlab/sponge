@@ -21,4 +21,14 @@ public class RockI18nTest {
     public void test2() throws SQLException {
         System.out.println(RockClient.getServiceCodes("demoapi"));
     }
+
+    @Test
+    public void test10() throws SQLException {
+        System.out.println(RockClient.getServiceI18n("demoapi","title"));
+    }
+
+    @Test
+    public void test12() throws SQLException {
+        System.out.println(RockClient.getServiceI18ns("demoapi"));
+    }
 }
