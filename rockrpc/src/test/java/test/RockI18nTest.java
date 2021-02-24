@@ -22,7 +22,7 @@ public class RockI18nTest {
     public void test2() throws SQLException {
         AppCodeCollection coll = RockClient.getServiceCodes("demoapi");
 
-        System.out.println(coll.get("200"));
+        System.out.println(coll.get(200));
 
         System.out.println(coll);
     }
