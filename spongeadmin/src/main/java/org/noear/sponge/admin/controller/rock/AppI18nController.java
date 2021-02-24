@@ -155,19 +155,17 @@ public class AppI18nController extends BaseController {
     }
 
     @Mapping("ajax/import")
-    public ViewModel importFile(UploadedFile file) throws SQLException{
+    public ViewModel importFile(int agroup_id,UploadedFile file) throws SQLException{
         String i18nStr = Utils.getString(file.content, "UTF-8");
         Properties i18n = Utils.buildProperties(i18nStr);
 
-        String agroup_id_str = i18n.getProperty("rock.i18n.agroup_id");
         String service = i18n.getProperty("rock.i18n.service");
         String lang = i18n.getProperty("rock.i18n.lang");
 
-        if (Utils.isEmpty(agroup_id_str) || Utils.isEmpty(service)) {
+        if (Utils.isEmpty(service)) {
             return viewModel.code(0, "提示：缺少元信息配置");
         }
 
-        int agroup_id = Integer.parseInt(agroup_id_str);
         boolean isOk = false;
 
         if(DbRockApi.getAppGroupById(agroup_id).agroup_id != agroup_id){
@@ -179,7 +177,6 @@ public class AppI18nController extends BaseController {
         }
 
         //去除元信息
-        i18n.remove("rock.i18n.agroup_id");
         i18n.remove("rock.i18n.service");
         i18n.remove("rock.i18n.lang");
 

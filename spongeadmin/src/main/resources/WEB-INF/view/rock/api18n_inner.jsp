@@ -25,6 +25,7 @@
 
             var fromData = new FormData();
             fromData.append("file", file);
+            fromData.append("agroup_id","${agroup_id}");
 
             $.ajax({
                 type:"POST",
