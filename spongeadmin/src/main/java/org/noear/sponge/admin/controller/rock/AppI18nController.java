@@ -116,15 +116,15 @@ public class AppI18nController extends BaseController {
     @Mapping("add")
     public ModelAndView addApcode(Integer agroup_id, String service) throws SQLException {
         List<AppGroupModel> appGroups = DbRockApi.getAppGroup("");
-        AppExCodeModel model = new AppExCodeModel();
-        if (agroup_id!=null) {
+        AppExI18nModel model = new AppExI18nModel();
+        if (agroup_id != null) {
             model.agroup_id = agroup_id;
             model.service = service;
         }
 
-        viewModel.put("app_groups",appGroups);
-        viewModel.put("model",model);
-        viewModel.put("agroup_id",agroup_id);
+        viewModel.put("app_groups", appGroups);
+        viewModel.put("model", model);
+        viewModel.put("agroup_id", agroup_id);
         return view("rock/api18n_edit");
     }
 

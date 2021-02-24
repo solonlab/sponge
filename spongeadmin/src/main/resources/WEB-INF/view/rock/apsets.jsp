@@ -14,9 +14,7 @@
     <script src="/_session/domain.js"></script>
     <script src="${js}/lib.js"></script>
     <script>
-        function queryForm() {
-            location.href = "/rock/apsets?agroup_id="+$('#app_group').val();
-        }
+
 
         $(function () {
             $('#app_group').val(${agroup_id});
@@ -29,6 +27,12 @@
         });
 
         var appId = '${app_id}';
+
+        function queryForm() {
+            location.href = "/rock/apsets?agroup_id="+$('#app_group').val();
+        }
+
+
         function node_onclick(app_id,obj) {
             appId = app_id;
             $('li.sel').removeClass('sel');

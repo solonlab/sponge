@@ -28,6 +28,10 @@
 
         });
 
+        function queryForm() {
+            location.href = "/rock/api18n?agroup_id="+$('#app_group').val();
+        }
+
         function node_onclick(service,obj) {
             sevTag = service;
 

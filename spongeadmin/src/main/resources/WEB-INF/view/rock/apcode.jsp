@@ -28,6 +28,10 @@
 
         });
 
+        function queryForm() {
+            location.href = "/rock/apcode?agroup_id="+$('#app_group').val();
+        }
+
         function node_onclick(service,obj) {
             sevTag = service;
 

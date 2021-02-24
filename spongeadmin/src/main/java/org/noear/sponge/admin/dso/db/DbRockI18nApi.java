@@ -127,7 +127,7 @@ public class DbRockI18nApi {
                         tb.andEq("name", name);
                     }
                 })
-                .orderBy("code ASC")
+                .orderBy("name ASC")
                 .select("*")
                 .getList(new AppExI18nModel());
     }

@@ -21,10 +21,10 @@
         });
         var row_id = ${model.row_id};
         function saveEdit() {
-            var service = $('#service').val();
-            var name = $('#name').val();
+            var service = $('#service').val().trim();
+            var name = $('#name').val().trim();
             var agroup_id = $('#agroup_id').val();
-            var note = $('#note').val();
+            var note = $('#note').val().trim();
             var lang = $('#lang').val();
 
             if (!service) {
