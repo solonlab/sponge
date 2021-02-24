@@ -13,7 +13,6 @@
     <name>sponge</name>
     <description>Java project for sponge</description>
 
-
     <modules>
         <module>rock-parent</module>
 
