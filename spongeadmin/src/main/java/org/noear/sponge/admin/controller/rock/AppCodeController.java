@@ -82,7 +82,7 @@ public class AppCodeController extends BaseController {
             lang = "";
         }
 
-        List<AppExCodeModel> codes = DbRockI18nApi.getApcodeByAgroupId(agroup_id, code_num, lang);
+        List<AppExCodeModel> list = DbRockI18nApi.getApcodeByService(service, code_num, lang);
 
         if (TextUtils.isEmpty(lang)) {
             lang = "default";
@@ -90,7 +90,7 @@ public class AppCodeController extends BaseController {
 
         viewModel.put("lang", lang);
         viewModel.put("langs", langs);
-        viewModel.put("list", codes);
+        viewModel.put("list", list);
         viewModel.put("code_num", code_num);
         viewModel.put("agroup_id", agroup_id);
         viewModel.put("service", service);

@@ -83,7 +83,7 @@ public class AppI18nController extends BaseController {
             lang = "";
         }
 
-        List<AppExI18nModel> codes = DbRockI18nApi.getApi18nByAgroupId(agroup_id, name, lang);
+        List<AppExI18nModel> list = DbRockI18nApi.getApi18nByService(service, name, lang);
 
         if (TextUtils.isEmpty(lang)) {
             lang = "default";
@@ -91,7 +91,7 @@ public class AppI18nController extends BaseController {
 
         viewModel.put("lang", lang);
         viewModel.put("langs", langs);
-        viewModel.put("list", codes);
+        viewModel.put("list", list);
         viewModel.put("name", name);
         viewModel.put("agroup_id", agroup_id);
         viewModel.put("service", service);

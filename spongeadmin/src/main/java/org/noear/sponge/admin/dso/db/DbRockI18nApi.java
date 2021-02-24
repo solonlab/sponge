@@ -5,10 +5,13 @@ import org.noear.sponge.admin.Config;
 import org.noear.sponge.admin.model.TagCountsModel;
 import org.noear.sponge.admin.model.rock.AppExCodeModel;
 import org.noear.sponge.admin.model.rock.AppExI18nModel;
+import org.noear.water.utils.TextUtils;
 import org.noear.weed.DbContext;
 import org.noear.weed.DbTableQuery;
 
+import javax.rmi.CORBA.Util;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,13 +30,17 @@ public class DbRockI18nApi {
                 .selectList("service tag,count(*) counts", TagCountsModel.class);
     }
     //根据agroup_id获取列表。
-    public static List<AppExCodeModel> getApcodeByAgroupId(Integer agroup_id, Integer code, String lang) throws SQLException {
+    public static List<AppExCodeModel> getApcodeByService(String service, Integer code, String lang) throws SQLException {
         if(lang == null){
             lang = "";
         }
 
+        if(TextUtils.isEmpty(service)){
+            return new ArrayList<>();
+        }
+
         return db().table("appx_ex_code")
-                .whereEq("agroup_id",agroup_id)
+                .whereEq("service",service)
                 .andEq("lang",lang)
                 .build((tb)->{
                     if (code!=null){
@@ -47,6 +54,10 @@ public class DbRockI18nApi {
 
     //根据agroup_id获取列表。
     public static List<TagCountsModel> getApcodeLangsByService(String service) throws SQLException {
+        if(TextUtils.isEmpty(service)){
+            return new ArrayList<>();
+        }
+
         return db().table("appx_ex_code")
                 .whereEq("service",service)
                 .groupBy("lang")
@@ -99,13 +110,17 @@ public class DbRockI18nApi {
                 .selectList("service tag,count(*) counts", TagCountsModel.class);
     }
     //根据agroup_id获取列表。
-    public static List<AppExI18nModel> getApi18nByAgroupId(Integer agroup_id, String name, String lang) throws SQLException {
+    public static List<AppExI18nModel> getApi18nByService(String service, String name, String lang) throws SQLException {
         if (lang == null) {
             lang = "";
         }
 
+        if(TextUtils.isEmpty(service)){
+            return new ArrayList<>();
+        }
+
         return db().table("appx_ex_i18n")
-                .whereEq("agroup_id", agroup_id)
+                .whereEq("service", service)
                 .andEq("lang", lang)
                 .build((tb) -> {
                     if (name != null) {
@@ -119,6 +134,10 @@ public class DbRockI18nApi {
 
     //根据agroup_id获取列表。
     public static List<TagCountsModel> getApi18nLangsByService(String service) throws SQLException {
+        if(TextUtils.isEmpty(service)){
+            return new ArrayList<>();
+        }
+
         return db().table("appx_ex_i18n")
                 .whereEq("service",service)
                 .groupBy("lang")
