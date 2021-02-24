@@ -4,6 +4,7 @@ import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.ModelAndView;
 import org.noear.sponge.admin.controller.ViewModel;
+import org.noear.sponge.admin.dso.AgroupCookieUtil;
 import org.noear.sponge.admin.dso.BcfTagChecker;
 import org.noear.sponge.admin.dso.db.DbRockApi;
 import org.noear.sponge.admin.controller.BaseController;
@@ -29,7 +30,7 @@ public class AppGroupSettingController extends BaseController {
 
         Integer out_agroup_id = agroup_id;
         if (out_agroup_id == null) {
-            out_agroup_id = 0;
+            out_agroup_id = AgroupCookieUtil.cookieGet();
         }
 
         Map<Integer, AppGroupModel> apGmap = new LinkedHashMap<>();
@@ -62,6 +63,12 @@ public class AppGroupSettingController extends BaseController {
     //agsets的iframe页面。
     @Mapping("agsets/inner")
     public ModelAndView agesets_inner(Integer agroup_id, String name) throws SQLException {
+        if (agroup_id == null) {
+            agroup_id = 0;
+        } else {
+            AgroupCookieUtil.cookieSet(agroup_id);
+        }
+
         List<AppExSettingModel> agsetsList = DbRockApi.getAppGroupSetsById(agroup_id, name);
         viewModel.put("name", name);
         viewModel.put("agroup_id", agroup_id);

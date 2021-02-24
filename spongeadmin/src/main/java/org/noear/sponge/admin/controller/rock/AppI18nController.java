@@ -10,11 +10,11 @@ import org.noear.solon.core.handle.ModelAndView;
 import org.noear.solon.core.handle.UploadedFile;
 import org.noear.sponge.admin.controller.BaseController;
 import org.noear.sponge.admin.controller.ViewModel;
+import org.noear.sponge.admin.dso.AgroupCookieUtil;
 import org.noear.sponge.admin.dso.BcfTagChecker;
 import org.noear.sponge.admin.dso.db.DbRockApi;
 import org.noear.sponge.admin.dso.db.DbRockI18nApi;
 import org.noear.sponge.admin.model.TagCountsModel;
-import org.noear.sponge.admin.model.rock.AppExCodeModel;
 import org.noear.sponge.admin.model.rock.AppExI18nModel;
 import org.noear.sponge.admin.model.rock.AppGroupModel;
 
@@ -37,9 +37,7 @@ public class AppI18nController extends BaseController {
 
         Integer out_agroup_id = agroup_id;
         if (out_agroup_id == null) {
-            out_agroup_id = Integer.parseInt(ctx.cookie("spongeadmin_agroup", "0"));
-        }else {
-            ctx.cookieSet("spongeadmin_agroup", String.valueOf(out_agroup_id));
+            out_agroup_id = AgroupCookieUtil.cookieGet();
         }
 
         String out_sev = sev;
@@ -79,6 +77,12 @@ public class AppI18nController extends BaseController {
 
     @Mapping("inner")
     public ModelAndView apcode_inner(Integer agroup_id, String service, String name, String lang) throws SQLException {
+        if (agroup_id == null) {
+            agroup_id = 0;
+        } else {
+            AgroupCookieUtil.cookieSet(agroup_id);
+        }
+
         List<TagCountsModel> langs = DbRockI18nApi.getApi18nLangsByService(service);
         for (TagCountsModel m : langs) {
             if (TextUtils.isEmpty(m.tag)) {

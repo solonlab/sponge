@@ -4,6 +4,7 @@ import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ModelAndView;
+import org.noear.sponge.admin.dso.AgroupCookieUtil;
 import org.noear.sponge.admin.dso.BcfTagChecker;
 import org.noear.sponge.admin.dso.IDUtil;
 import org.noear.sponge.admin.dso.db.DbRockApi;
@@ -34,9 +35,7 @@ public class AppController extends BaseController {
 
         Integer out_agroup_id = agroup_id;
         if (out_agroup_id == null) {
-            out_agroup_id = Integer.parseInt(ctx.cookie("spongeadmin_agroup", "0"));
-        }else {
-            ctx.cookieSet("spongeadmin_agroup", String.valueOf(out_agroup_id));
+            out_agroup_id = AgroupCookieUtil.cookieGet();
         }
 
         for (AppGroupModel ap : agroups) {
@@ -67,7 +66,7 @@ public class AppController extends BaseController {
     @Mapping("app/inner")
     public ModelAndView app_inner(String name,Integer agroup_id,Integer _state) throws SQLException {
         Integer ar_is_examine = null;
-        if (_state!=null) {
+        if (_state != null) {
             viewModel.put("_state", _state);
             if (_state == 1) {
                 ar_is_examine = 0;
@@ -76,14 +75,16 @@ public class AppController extends BaseController {
             }
         }
 
-        if(agroup_id == null){
+        if (agroup_id == null) {
             agroup_id = 0;
+        } else {
+            AgroupCookieUtil.cookieSet(agroup_id);
         }
 
-        List<AppModel> appList = DbRockApi.getApps(name,agroup_id,ar_is_examine);
-        viewModel.put("appList",appList);
-        viewModel.put("name",name);
-        viewModel.put("agroup_id",agroup_id);
+        List<AppModel> appList = DbRockApi.getApps(name, agroup_id, ar_is_examine);
+        viewModel.put("appList", appList);
+        viewModel.put("name", name);
+        viewModel.put("agroup_id", agroup_id);
         return view("rock/app_inner");
     }
 

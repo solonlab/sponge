@@ -6,6 +6,7 @@ import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ModelAndView;
 import org.noear.sponge.admin.controller.ViewModel;
+import org.noear.sponge.admin.dso.AgroupCookieUtil;
 import org.noear.sponge.admin.dso.BcfTagChecker;
 import org.noear.sponge.admin.dso.db.DbRockApi;
 import org.noear.sponge.admin.dso.db.DbRockI18nApi;
@@ -32,9 +33,7 @@ public class AppCodeController extends BaseController {
 
         Integer out_agroup_id = agroup_id;
         if (out_agroup_id == null) {
-            out_agroup_id = Integer.parseInt(ctx.cookie("spongeadmin_agroup", "0"));
-        }else {
-            ctx.cookieSet("spongeadmin_agroup", String.valueOf(out_agroup_id));
+            out_agroup_id = AgroupCookieUtil.cookieGet();
         }
 
         String out_sev = sev;
@@ -89,6 +88,12 @@ public class AppCodeController extends BaseController {
 
         if (TextUtils.isEmpty(lang)) {
             lang = "default";
+        }
+
+        if (agroup_id == null) {
+            agroup_id = 0;
+        } else {
+            AgroupCookieUtil.cookieSet(agroup_id);
         }
 
         viewModel.put("lang", lang);

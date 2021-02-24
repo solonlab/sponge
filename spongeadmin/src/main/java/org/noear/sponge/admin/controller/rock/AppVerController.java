@@ -5,6 +5,7 @@ import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ModelAndView;
+import org.noear.sponge.admin.dso.AgroupCookieUtil;
 import org.noear.sponge.admin.dso.BcfTagChecker;
 import org.noear.sponge.admin.dso.db.DbRockApi;
 import org.noear.sponge.admin.model.others.resp.BaseResp;
@@ -33,9 +34,9 @@ public class AppVerController extends BaseController {
 
         Integer out_agroup_id = agroup_id;
         if (out_agroup_id == null) {
-            out_agroup_id = Integer.parseInt(ctx.cookie("spongeadmin_agroup", "0"));
-        }else {
-            ctx.cookieSet("spongeadmin_agroup", String.valueOf(out_agroup_id));
+            out_agroup_id = AgroupCookieUtil.cookieGet();
+        }else{
+            AgroupCookieUtil.cookieSet(agroup_id);
         }
 
         for (AppGroupModel ap : agroups) {
