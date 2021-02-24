@@ -353,7 +353,7 @@ public class RockClient {
     }
 
     public static AppCodeCollection getServiceCodesByLang(String service, String lang) throws SQLException {
-        return cacheLocal.getBy("getServiceCodesByLang_" + service + "_" + lang, (ru) ->
+        return cacheLocal.getBy(10, "getServiceCodesByLang_" + service + "_" + lang, (ru) ->
                 instance().getServiceCodesByLang(service, lang));
     }
 
@@ -365,7 +365,7 @@ public class RockClient {
     }
 
     public static String getServiceCodeByLang(String service, Integer code, String lang) throws SQLException {
-        return cacheLocal.getBy("getServiceCodeByLang_" + service + "_" + code + "_" + lang, (ru) ->
+        return cacheLocal.getBy(10, "getServiceCodeByLang_" + service + "_" + code + "_" + lang, (ru) ->
                 instance().getServiceCodeByLang(service, code, lang));
     }
 
@@ -377,7 +377,7 @@ public class RockClient {
     }
 
     public static AppI18nCollection getServiceI18nsByLang(String service, String lang) throws SQLException {
-        return cacheLocal.getBy("getServiceI18nsByLang_" + service + "_" + lang, (ru) ->
+        return cacheLocal.getBy(10, "getServiceI18nsByLang_" + service + "_" + lang, (ru) ->
                 instance().getServiceI18nsByLang(service, lang));
     }
 
@@ -389,7 +389,7 @@ public class RockClient {
     }
 
     public static String getServiceI18nByLang(String service, String name, String lang) throws SQLException {
-        return cacheLocal.getBy("getServiceI18nByLang_" + service + "_" + name + "_" + lang, (ru) ->
+        return cacheLocal.getBy(10, "getServiceI18nByLang_" + service + "_" + name + "_" + lang, (ru) ->
                 instance().getServiceI18nByLang(service, name, lang));
     }
 }
