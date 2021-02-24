@@ -11,7 +11,7 @@ server.session.timeout: 7200
 
 solon.app:
   group: sponge
-  name: rockrpc
+  name: demoapi
 
 solon.cloud.water:
   server: water

@@ -59,7 +59,7 @@ public class I18nUtils {
         return coll.get(name);
     }
 
-    public static void updateCodeMap() throws SQLException {
+    protected static void updateCodeMap() throws SQLException {
         Map<String, AppCodeCollection> codeMap2 = new HashMap<>();
 
         for (Map.Entry<String, AppCodeCollection> kv : codeMap.entrySet()) {
@@ -70,7 +70,7 @@ public class I18nUtils {
         codeMap = codeMap2;
     }
 
-    public static void updateNameMap() throws SQLException {
+    protected static void updateNameMap() throws SQLException {
         Map<String, AppI18nCollection> nameMap2 = new HashMap<>();
 
         for (Map.Entry<String, AppI18nCollection> kv : nameMap.entrySet()) {
