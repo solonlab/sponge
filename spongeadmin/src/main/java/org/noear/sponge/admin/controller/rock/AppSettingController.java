@@ -2,6 +2,7 @@ package org.noear.sponge.admin.controller.rock;
 
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
+import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ModelAndView;
 import org.noear.sponge.admin.dso.db.DbRockApi;
 import org.noear.sponge.admin.controller.BaseController;
@@ -20,14 +21,16 @@ public class AppSettingController extends BaseController {
 
 
     @Mapping("apsets")
-    public ModelAndView apsets(Integer app_id, Integer agroup_id) throws SQLException {
+    public ModelAndView apsets(Context ctx, Integer app_id, Integer agroup_id) throws SQLException {
 
         //by noear 20180516::添加应用组的权限控制
         BcfTagChecker checker = new BcfTagChecker();
 
         Integer out_agroup_id = agroup_id;
         if (out_agroup_id == null) {
-            out_agroup_id = 0;
+            out_agroup_id = Integer.parseInt(ctx.cookie("spongeadmin_agroup", "0"));
+        }else {
+            ctx.cookieSet("spongeadmin_agroup", String.valueOf(out_agroup_id));
         }
 
         Integer out_app_id = app_id;

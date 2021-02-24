@@ -3,6 +3,7 @@ package org.noear.sponge.admin.controller.rock;
 import org.apache.http.util.TextUtils;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
+import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ModelAndView;
 import org.noear.sponge.admin.controller.ViewModel;
 import org.noear.sponge.admin.dso.BcfTagChecker;
@@ -24,14 +25,16 @@ public class AppCodeController extends BaseController {
 
     //应用状态码跳转
     @Mapping("")
-    public ModelAndView apcode(Integer agroup_id, String sev) throws SQLException {
+    public ModelAndView apcode(Context ctx, Integer agroup_id, String sev) throws SQLException {
         //by noear 20180516::添加应用组的权限控制
         BcfTagChecker checker = new BcfTagChecker();
 
 
         Integer out_agroup_id = agroup_id;
         if (out_agroup_id == null) {
-            out_agroup_id = 0;
+            out_agroup_id = Integer.parseInt(ctx.cookie("spongeadmin_agroup", "0"));
+        }else {
+            ctx.cookieSet("spongeadmin_agroup", String.valueOf(out_agroup_id));
         }
 
         String out_sev = sev;

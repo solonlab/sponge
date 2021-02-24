@@ -3,6 +3,7 @@ package org.noear.sponge.admin.controller.rock;
 import org.apache.http.util.TextUtils;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
+import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ModelAndView;
 import org.noear.sponge.admin.dso.BcfTagChecker;
 import org.noear.sponge.admin.dso.db.DbRockApi;
@@ -22,7 +23,7 @@ public class AppVerController extends BaseController {
 
     //应用版本发布页面跳转
     @Mapping("apver")
-    public ModelAndView apver(Integer agroup_id) throws SQLException {
+    public ModelAndView apver(Context ctx, Integer agroup_id) throws SQLException {
         //by noear 20180516::添加应用组的权限控制
         BcfTagChecker checker = new BcfTagChecker();
 
@@ -32,7 +33,9 @@ public class AppVerController extends BaseController {
 
         Integer out_agroup_id = agroup_id;
         if (out_agroup_id == null) {
-            out_agroup_id = 0;
+            out_agroup_id = Integer.parseInt(ctx.cookie("spongeadmin_agroup", "0"));
+        }else {
+            ctx.cookieSet("spongeadmin_agroup", String.valueOf(out_agroup_id));
         }
 
         for (AppGroupModel ap : agroups) {

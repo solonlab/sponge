@@ -44,6 +44,12 @@
                 }
             });
         }
+
+        $(function (){
+            $("#imp_file").change(function () {
+                imp(this.files[0]);
+            });
+        });
     </script>
     <style>
     </style>
@@ -59,7 +65,7 @@
                     <button type="submit">查询</button>&nbsp;&nbsp;
                     <c:if test="${agroup_id>0&&isOperator==1}">
                         <button type="button" onclick="add()" class="edit">新增</button>
-                        <file>
+                        <file class="mar10-l">
                             <label><input id="imp_file" type="file" accept=".properties"/><a class="btn minor w80">导入</a></label>
                         </file>
                     </c:if>

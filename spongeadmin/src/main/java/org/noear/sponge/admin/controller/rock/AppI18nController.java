@@ -5,6 +5,7 @@ import org.noear.rock.RockUtil;
 import org.noear.solon.Utils;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
+import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ModelAndView;
 import org.noear.solon.core.handle.UploadedFile;
 import org.noear.sponge.admin.controller.BaseController;
@@ -29,14 +30,16 @@ public class AppI18nController extends BaseController {
 
     //应用状态码跳转
     @Mapping("")
-    public ModelAndView apcode(Integer agroup_id, String sev) throws SQLException {
+    public ModelAndView apcode(Context ctx, Integer agroup_id, String sev) throws SQLException {
         //by noear 20180516::添加应用组的权限控制
         BcfTagChecker checker = new BcfTagChecker();
 
 
         Integer out_agroup_id = agroup_id;
         if (out_agroup_id == null) {
-            out_agroup_id = 0;
+            out_agroup_id = Integer.parseInt(ctx.cookie("spongeadmin_agroup", "0"));
+        }else {
+            ctx.cookieSet("spongeadmin_agroup", String.valueOf(out_agroup_id));
         }
 
         String out_sev = sev;
@@ -150,11 +153,11 @@ public class AppI18nController extends BaseController {
         String i18nStr = Utils.getString(file.content, "UTF-8");
         Properties i18n = Utils.buildProperties(i18nStr);
 
-        String agroup_id_str = i18n.getProperty("rock.agroup_id");
-        String service = i18n.getProperty("rock.service");
-        String lang = i18n.getProperty("rock.lang");
+        String agroup_id_str = i18n.getProperty("rock.i18n.agroup_id");
+        String service = i18n.getProperty("rock.i18n.service");
+        String lang = i18n.getProperty("rock.i18n.lang");
 
-        if (Utils.isEmpty(agroup_id_str) || Utils.isEmpty(service) || Utils.isEmpty(lang)) {
+        if (Utils.isEmpty(agroup_id_str) || Utils.isEmpty(service)) {
             return viewModel.code(0, "提示：缺少元信息配置");
         }
 
@@ -165,10 +168,14 @@ public class AppI18nController extends BaseController {
             return viewModel.code(0, "提示：应用组不存在");
         }
 
+        if(lang == null){
+            lang = "";
+        }
+
         //去除元信息
-        i18n.remove("rock.agroup_id");
-        i18n.remove("rock.service");
-        i18n.remove("rock.lang");
+        i18n.remove("rock.i18n.agroup_id");
+        i18n.remove("rock.i18n.service");
+        i18n.remove("rock.i18n.lang");
 
         for (Object k : i18n.keySet()) {
             if (k instanceof String) {
