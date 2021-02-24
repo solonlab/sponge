@@ -36,6 +36,8 @@ public class AppController extends BaseController {
         Integer out_agroup_id = agroup_id;
         if (out_agroup_id == null) {
             out_agroup_id = AgroupCookieUtil.cookieGet();
+        }else {
+            AgroupCookieUtil.cookieSet(agroup_id);
         }
 
         for (AppGroupModel ap : agroups) {
