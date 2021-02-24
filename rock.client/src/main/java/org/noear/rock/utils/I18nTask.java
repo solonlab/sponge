@@ -13,6 +13,7 @@ public class I18nTask implements TaskUtils.ITask {
 
     @Override
     public void exec() throws Throwable {
-
+        I18nUtils.updateCodeMap();
+        I18nUtils.updateNameMap();
     }
 }
