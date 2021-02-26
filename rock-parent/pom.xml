@@ -6,7 +6,7 @@
 
     <groupId>org.noear</groupId>
     <artifactId>rock-parent</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <packaging>pom</packaging>
 
     <name>${project.artifactId}</name>
@@ -51,7 +51,7 @@
         <jedis.ver>3.3.0</jedis.ver>
         <okhttp.ver>3.14.8</okhttp.ver>
 
-        <rock.ver>1.0.4</rock.ver>
+        <rock.ver>1.0.5</rock.ver>
     </properties>
 
     <dependencyManagement>
