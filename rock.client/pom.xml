@@ -26,12 +26,12 @@
         <dependency>
             <groupId>org.noear</groupId>
             <artifactId>nami.coder.fastjson</artifactId>
-            <version>${solon.ver}</version>
+            <version>${nami.ver}</version>
         </dependency>
         <dependency>
             <groupId>org.noear</groupId>
             <artifactId>nami.channel.http.okhttp</artifactId>
-            <version>${solon.ver}</version>
+            <version>${nami.ver}</version>
         </dependency>
 
         <!-- local start -->
