@@ -12,7 +12,7 @@ public class I18nUtils {
 
     private static I18nContext getContext() {
         if (context == null) {
-            synchronized (I18nUtils.context) {
+            synchronized (I18nUtils.class) {
                 if (context == null) {
                     context = new I18nContext(Solon.cfg().appName());
                 }
