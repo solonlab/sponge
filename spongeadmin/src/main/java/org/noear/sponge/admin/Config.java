@@ -1,10 +1,12 @@
 package org.noear.sponge.admin;
 
 import org.noear.solon.Solon;
+import org.noear.solon.annotation.Configuration;
 import org.noear.water.model.ConfigM;
 import org.noear.weed.DbContext;
 import org.noear.water.*;
 
+@Configuration
 public class Config {
     public static String track_uri() {
         return cfg("track_uri").value;
@@ -15,18 +17,6 @@ public class Config {
 
     public static final String push_suffix = "_push";
 
-    public static void tryInit() {
-        WaterClient.Config.getProperties("water_session").forEach((k, v) -> {
-            if (Solon.cfg().isDebugMode()) {
-                String key = k.toString();
-                if (key.indexOf(".session.") < 0) {
-                    Solon.cfg().put(k, v);
-                }
-            } else {
-                Solon.cfg().put(k, v);
-            }
-        });
-    }
 
     //================================
     //

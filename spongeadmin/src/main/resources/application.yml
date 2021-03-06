@@ -8,9 +8,12 @@ server.session.timeout: 7200
 #water.service.secretKey = fWiDsJsQLRz2JDwf
 
 solon.app:
-  group: sponge
-  name: spongeadmin
-  title: SPONGE
+  group: "sponge"
+  name: "spongeadmin"
+  title: "SPONGE"
 
 solon.cloud.water:
-  server: water
+  server: "water"
+  config:
+    loadGroup: "water_bcf"
+    loadKey: "bcf.yml"

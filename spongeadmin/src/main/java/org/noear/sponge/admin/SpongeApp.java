@@ -6,12 +6,7 @@ import org.noear.sponge.admin.dso.LogUtil;
 
 public class SpongeApp {
     public static void main(String[] args) {
-        Solon.start(SpongeApp.class, args, app -> {
-            //
-            // 在此处初始化配置
-            //
-            Config.tryInit();
-        }).onError((ex) -> {
+        Solon.start(SpongeApp.class, args).onError((ex) -> {
             Context ctx = Context.current();
 
             if (ctx != null) {
