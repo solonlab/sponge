@@ -115,7 +115,7 @@ public class AppModel {
     public AppSettingModel getSetting(String key) throws Exception {
         tryInitSetting(0);
 
-        if (_setting.get(0).contains(key)) {
+        if (_setting.get(0).containsKey(key)) {
             return _setting.get(0).get(key);
         } else {
             return null;
