@@ -1,12 +1,6 @@
 server.port: 8182
 server.session.timeout: 7200
 
-#water.host = water
-#water.logger = sponge_log_admin
-#water.service.tag=sponge
-#water.service.name = spongeadmin
-#water.service.secretKey = fWiDsJsQLRz2JDwf
-
 solon.app:
   group: "sponge"
   name: "spongeadmin"

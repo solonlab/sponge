@@ -1,10 +1,11 @@
 package org.noear.rock.model;
 
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
-public class AppSettingCollection extends HashMap<String, AppSettingModel> {
+public class AppSettingCollection extends HashMap<String, AppSettingModel> implements Serializable {
 
     public void bind(List<AppSettingModel> mod){
         for(AppSettingModel m:mod){

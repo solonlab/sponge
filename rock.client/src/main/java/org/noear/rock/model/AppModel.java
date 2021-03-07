@@ -2,13 +2,11 @@ package org.noear.rock.model;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import org.noear.rock.protocol.RockRpc;
-import org.noear.weed.GetHandlerEx;
-import org.noear.weed.IBinder;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class AppModel implements IBinder {
+public class AppModel {
     public static transient RockRpc rockclient;
 
     public int app_id;
@@ -24,28 +22,6 @@ public class AppModel implements IBinder {
     public int ar_is_examine;
     public int ar_examine_ver;
 
-    @Override
-    public void bind(GetHandlerEx s) {
-        //1.source:数据源
-        //
-        app_id = s.get("app_id").value(0);
-        app_key = s.get("app_key").value(null);
-        app_secret_key = s.get("app_secret_key").value(null);
-
-        agroup_id = s.get("agroup_id").value(0);
-        ugroup_id = s.get("ugroup_id").value(0);
-
-        name = s.get("name").value(null);
-        note = s.get("note").value(null);
-
-        ar_is_examine = s.get("ar_is_examine").value(0);
-        ar_examine_ver = s.get("ar_examine_ver").value(0);
-    }
-
-    @Override
-    public IBinder clone() {
-        return new AppModel();
-    }
 
     //是否为审核中
 

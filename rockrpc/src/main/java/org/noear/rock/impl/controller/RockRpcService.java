@@ -53,7 +53,9 @@ public final class RockRpcService implements RockRpc {
                 .set("name", name)
                 .insert();
 
-        return db().table("appx").where("app_id=?", app_id).select("*").getItem(new AppModel());
+        return db().table("appx")
+                .whereEq("app_id", app_id)
+                .selectItem("*", AppModel.class);
     }
 
     //更新应用的名称
@@ -90,7 +92,7 @@ public final class RockRpcService implements RockRpc {
                 .usingCache(60 * 10)
                 .cacheTag("app_" + appID);
 
-        return sp.getItem(new AppModel());
+        return sp.getItem(AppModel.class);
     }
 
     public AppModel getAppByIDNoCache(@NonNull Integer appID) throws SQLException {
@@ -98,7 +100,7 @@ public final class RockRpcService implements RockRpc {
 
         sp.app_id = appID;
 
-        return sp.getItem(new AppModel());
+        return sp.getItem(AppModel.class);
     }
 
     //获取一个应用模型
@@ -109,7 +111,7 @@ public final class RockRpcService implements RockRpc {
         sp.caching(rock_cache)
                 .usingCache(60 * 10);
 
-        return sp.getItem(new AppModel(), (cu, m) -> {
+        return sp.getItem(AppModel.class, (cu, m) -> {
             cu.cacheTag("app_" + m.app_id);
         });
     }
@@ -128,7 +130,7 @@ public final class RockRpcService implements RockRpc {
                 .usingCache(60 * 10)
                 .cacheTag("app_list_" + agroupID);
 
-        return sp.getList(new AppModel());
+        return sp.getList(AppModel.class);
     }
 
     //获取一个应用组模型
@@ -147,7 +149,7 @@ public final class RockRpcService implements RockRpc {
                 .cacheTag("app_group_" + agroupID);
 
 
-        return sp.getItem(new AppGroupModel());
+        return sp.getItem(AppGroupModel.class);
     }
 
     //获取一个用户组模型
@@ -166,7 +168,7 @@ public final class RockRpcService implements RockRpc {
                 .cacheTag("user_group_" + ugroupID);
 
 
-        return sp.getItem(new UserGroupModel());
+        return sp.getItem(UserGroupModel.class);
     }
 
     //=======================
@@ -185,7 +187,7 @@ public final class RockRpcService implements RockRpc {
                 .usingCache(60 * 10)
                 .cacheTag("app_setting_" + appID);
 
-        List<AppSettingModel> tmp = sp.getList(new AppSettingModel());
+        List<AppSettingModel> tmp = sp.getList(AppSettingModel.class);
         List<AppSettingModel> mod = new ArrayList<>();
 
         //版本控制
@@ -217,7 +219,7 @@ public final class RockRpcService implements RockRpc {
                 .usingCache(60 * 10)
                 .cacheTag("app_setting_" + appID);
 
-        return sp.getItem(new AppSettingModel());
+        return sp.getItem(AppSettingModel.class);
     }
 
     @Override
@@ -230,7 +232,7 @@ public final class RockRpcService implements RockRpc {
         sp.app_id = appID;
         sp.name = name;
 
-        return sp.getItem(new AppSettingModel());
+        return sp.getItem(AppSettingModel.class);
     }
 
     //仅用于管理
@@ -300,7 +302,7 @@ public final class RockRpcService implements RockRpc {
                 .cacheTag("app_setting_by_name_" + name)
                 .cacheTag("app_setting_by_name_" + agroupID);
 
-        return sp.getList(new AppSettingModel());
+        return sp.getList(AppSettingModel.class);
     }
 
     //获取一个应用设置项 //如果没有去app_group_setting获取
@@ -371,7 +373,7 @@ public final class RockRpcService implements RockRpc {
                 .usingCache(60 * 10)
                 .cacheTag("app_group_setting_" + agroupID);
 
-        List<AppSettingModel> tmp = sp.getList(new AppSettingModel());
+        List<AppSettingModel> tmp = sp.getList(AppSettingModel.class);
         List<AppSettingModel> mod = new ArrayList<>();
 
         for (AppSettingModel m : tmp) {
@@ -401,7 +403,7 @@ public final class RockRpcService implements RockRpc {
                 .usingCache(60 * 10)
                 .cacheTag("app_group_setting_" + agroupID);
 
-        return sp.getItem(new AppSettingModel());
+        return sp.getItem(AppSettingModel.class);
     }
 
     @Override
@@ -414,7 +416,7 @@ public final class RockRpcService implements RockRpc {
         sp.agroup_id = agroupID;
         sp.name = name;
 
-        return sp.getItem(new AppSettingModel());
+        return sp.getItem(AppSettingModel.class);
     }
 
 
@@ -543,7 +545,7 @@ public final class RockRpcService implements RockRpc {
                 .cacheTag("app_group_ver_" + agroupID)
                 .cacheTag("app_ver_" + appID);
 
-        return sp.getItem(new AppVersionModel());
+        return sp.getItem(AppVersionModel.class);
     }
 
     //=======================
@@ -564,7 +566,7 @@ public final class RockRpcService implements RockRpc {
                 .usingCache(60 * 10)
                 .cacheTag("app_code_" + agroupID);
 
-        List<AppCodeModel> m = sp.getList(new AppCodeModel());
+        List<AppCodeModel> m = sp.getList(AppCodeModel.class);
 
         AppCodeCollection ac = new AppCodeCollection();
         ac.bind(m);
@@ -587,7 +589,7 @@ public final class RockRpcService implements RockRpc {
         AppCodeModel m = sp.caching(rock_cache)
                 .usingCache(60 * 10)
                 .cacheTag("app_code_" + agroupID)
-                .getItem(new AppCodeModel());
+                .getItem(AppCodeModel.class);
 
         if (m.note == null) {
             return "";
@@ -612,7 +614,7 @@ public final class RockRpcService implements RockRpc {
                 .usingCache(60 * 10)
                 .cacheTag("app_code_" + service);
 
-        List<AppCodeModel> m = sp.getList(new AppCodeModel());
+        List<AppCodeModel> m = sp.getList(AppCodeModel.class);
 
         AppCodeCollection ac = new AppCodeCollection();
         ac.bind(m);
@@ -634,7 +636,7 @@ public final class RockRpcService implements RockRpc {
         AppCodeModel m = sp.caching(rock_cache)
                 .usingCache(60 * 10)
                 .cacheTag("app_code_" + service)
-                .getItem(new AppCodeModel());
+                .getItem(AppCodeModel.class);
 
         if (m.note == null) {
             return "";
@@ -659,7 +661,7 @@ public final class RockRpcService implements RockRpc {
                 .usingCache(60 * 10)
                 .cacheTag("app_code_" + service);
 
-        List<AppI18nModel> m = sp.getList(new AppI18nModel());
+        List<AppI18nModel> m = sp.getList(AppI18nModel.class);
 
         AppI18nCollection ac = new AppI18nCollection();
         ac.bind(m);
@@ -681,7 +683,7 @@ public final class RockRpcService implements RockRpc {
         AppI18nModel m = sp.caching(rock_cache)
                 .usingCache(60 * 10)
                 .cacheTag("app_i18n_" + service)
-                .getItem(new AppI18nModel());
+                .getItem(AppI18nModel.class);
 
         if (m.note == null) {
             return "";

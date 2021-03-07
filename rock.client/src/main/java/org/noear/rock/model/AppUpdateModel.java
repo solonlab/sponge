@@ -1,7 +1,9 @@
 package org.noear.rock.model;
 
 
-public class AppUpdateModel {
+import java.io.Serializable;
+
+public class AppUpdateModel implements Serializable {
     public void bind(AppVersionModel version) {
         this.version = version;
         this.type = UpdateType.none;

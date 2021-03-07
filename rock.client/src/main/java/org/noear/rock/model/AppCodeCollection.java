@@ -1,11 +1,12 @@
 package org.noear.rock.model;
 
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AppCodeCollection  {
+public class AppCodeCollection  implements Serializable {
     public Map<Integer, String> data = new HashMap<>();
 
     public void bind(List<AppCodeModel> mod) {
