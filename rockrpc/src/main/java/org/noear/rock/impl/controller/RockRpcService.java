@@ -313,7 +313,7 @@ public final class RockRpcService implements RockRpc {
         }
 
         AppSettingModel item = getAppSettingItem(appID, name);
-        if (item.row_id > 0) {
+        if (item.app_id > 0) {
             return item;
         } else {
              Integer agroup_id = getAppByID(appID).agroup_id;

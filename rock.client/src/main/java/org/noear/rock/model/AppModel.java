@@ -6,20 +6,50 @@ import org.noear.rock.protocol.RockRpc;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 应用模型
+ * */
 public class AppModel {
     public static transient RockRpc rockclient;
 
+    /**
+     * 应用ID
+     * */
     public int app_id;
+    /**
+     * 应用标识
+     * */
     public String app_key;
+    /**
+     * 应用签名或加密密钥
+     * */
     public String app_secret_key;
 
+    /**
+     * 应用组ID
+     * */
     public int agroup_id;
+    /**
+     * 用户组ID
+     * */
     public int ugroup_id;
 
+    /**
+     * 应用名称
+     * */
     public String name;
+    /**
+     * 应用备注
+     * */
     public String note;
 
+    /**
+     * 是否在审核中
+     * */
     public int ar_is_examine;
+    /**
+     * 审核中的版本号
+     * */
     public int ar_examine_ver;
 
 

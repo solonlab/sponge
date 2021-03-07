@@ -10,15 +10,37 @@ import java.io.Serializable;
 import java.io.StringReader;
 import java.util.Properties;
 
+/**
+ * 应用设置
+ * */
 public class AppSettingModel implements Serializable {
-	public int row_id;
+	/**
+	 * 应用组ID
+	 * */
 	public int agroup_id;
+	/**
+	 * 应用ID
+	 * */
 	public int app_id;
+	/**
+	 * 是否输出到客户端
+	 * */
 	public int is_client;
+	/**
+	 * 设置名称
+	 * */
 	public String name;
-	//设置项值类型：0,文本；1,数字; 9,JSON
+	/**
+	 * 设置项值类型：0,文本；1,数字; 9,JSON
+	 * */
 	public int type;
+	/**
+	 * 值
+	 * */
 	public String value;
+	/**
+	 * 有效起始版本
+	 * */
 	public int ver_start;
 
 

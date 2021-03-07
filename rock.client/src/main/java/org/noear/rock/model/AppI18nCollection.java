@@ -1,12 +1,13 @@
 package org.noear.rock.model;
 
-
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * 国际化配置集合
+ * */
 public class AppI18nCollection implements Serializable {
     public Map<String, String> data = new HashMap<>();
 

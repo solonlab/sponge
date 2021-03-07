@@ -1,12 +1,21 @@
 package org.noear.rock.model;
 
-import org.noear.weed.GetHandlerEx;
-import org.noear.weed.IBinder;
-
 import java.io.Serializable;
 
+/**
+ * 应用组
+ * */
 public class AppGroupModel implements Serializable {
+	/**
+	 * 应用组ID
+	 * */
 	public int agroup_id;
-	public String name;
+	/**
+	 * 默认用户组ID
+	 * */
 	public int ugroup_id;
+	/**
+	 * 应用组名称
+	 * */
+	public String name;
 }

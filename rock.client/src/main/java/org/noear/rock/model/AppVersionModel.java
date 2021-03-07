@@ -1,15 +1,26 @@
 package org.noear.rock.model;
 
-import org.noear.weed.GetHandlerEx;
-import org.noear.weed.IBinder;
-
 import java.io.Serializable;
-import java.util.Date;
 
+/**
+ * 应用版本号
+ * */
 public class AppVersionModel implements Serializable {
+    /**
+     * 应用组ID
+     * */
     public int agroup_id;
+    /**
+     * 应用ID
+     * */
     public int app_id;
+    /**
+     * 版本号
+     * */
     public int ver;
+    /**
+     * 内容描述
+     * */
     public String content;
     /**
      * 更新方式（0：普通更新， 1：强制更新）
@@ -23,6 +34,12 @@ public class AppVersionModel implements Serializable {
      * x版本以下强制更新
      */
     public int force_ver;
+    /**
+     * 应用平台
+     * */
     public int platform;
+    /**
+     * 下载地址
+     * */
     public String url;
 }
