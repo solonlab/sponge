@@ -14,8 +14,12 @@ public class AppSettingCollection implements Serializable {
         }
     }
 
-    public AppSettingModel get(String name){
+    public AppSettingModel get(String name) {
         return data.get(name);
+    }
+
+    public boolean contains(String name) {
+        return data.containsKey(name);
     }
 
     @Override
