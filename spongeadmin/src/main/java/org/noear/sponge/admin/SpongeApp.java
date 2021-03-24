@@ -11,6 +11,8 @@ public class SpongeApp {
 
             if (ctx != null) {
                 LogUtil.error("global", ctx.path(), ctx.paramMap().toString(), ex);
+            }else{
+                LogUtil.error("global", "", "", ex);
             }
         });
     }

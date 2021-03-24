@@ -33,7 +33,7 @@ public class BcfInterceptor extends BcfInterceptorBase implements Handler {
         if (path.startsWith("/rock/") || path.startsWith("/auth/")) {
             String ip = IPUtils.getIP(ctx);
 
-            if(Solon.cfg().isWhiteMode()) {
+            if (Solon.cfg().isWhiteMode() && Solon.cfg().isFilesMode() == false) {
                 if (WaterClient.Whitelist.existsOfClientIp(ip) == false) {
                     ctx.setHandled(true);
                     ctx.output(ip + ",not is whitelist!");
@@ -44,5 +44,4 @@ public class BcfInterceptor extends BcfInterceptorBase implements Handler {
 
         super.verifyHandle(ctx);
     }
-
 }
