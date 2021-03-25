@@ -91,7 +91,7 @@ public class DbRockI18nApi {
         }
 
         if (isOk) {
-            RockUtil.delCacheForCodes(agroup_id);
+            RockUtil.delCacheForCodes(service);
         }
 
         return isOk;
@@ -172,7 +172,7 @@ public class DbRockI18nApi {
         }
 
         if (isOk) {
-            RockUtil.delCacheForCodes(agroup_id);
+            RockUtil.delCacheForI18ns(service);
         }
 
         return isOk;

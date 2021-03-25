@@ -659,7 +659,7 @@ public final class RockRpcService implements RockRpc {
 
         sp.caching(rock_cache)
                 .usingCache(60 * 10)
-                .cacheTag("app_code_" + service);
+                .cacheTag("app_i18n_" + service);
 
         List<AppI18nModel> m = sp.getList(AppI18nModel.class);
 

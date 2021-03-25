@@ -143,7 +143,7 @@ public class AppI18nController extends BaseController {
 
     //应用状态码新增编辑ajax保存功能
     @Mapping("edit/ajax/save")
-    public ViewModel saveApcode(Integer row_id, String name, String lang, String note, Integer agroup_id, String service) throws SQLException {
+    public ViewModel saveApi18n(Integer row_id, String name, String lang, String note, Integer agroup_id, String service) throws SQLException {
 
         boolean result = DbRockI18nApi.editApi18n(row_id, agroup_id, service, name, lang, note);
 
@@ -189,7 +189,7 @@ public class AppI18nController extends BaseController {
         }
 
         if(isOk) {
-            RockUtil.delCacheForCodes(agroup_id);
+            RockUtil.delCacheForI18ns(service);
         }
 
         return viewModel.code(1, "导入成功");

@@ -73,13 +73,22 @@ public class RockUtil {
         }
     }
 
-    public static void delCacheForCodes(int agroupID) {
+    public static void delCacheForCodes(String service) {
         if (_isService) {
             _cache.tags()
-                    .clear("app_code_" + agroupID);
+                    .clear("app_code_" + service);
         }
 
-        RockUtil.sendMessage("app_code_" + agroupID);
+        RockUtil.sendMessage("app_code_" + service);
+    }
+
+    public static void delCacheForI18ns(String service) {
+        if (_isService) {
+            _cache.tags()
+                    .clear("app_i18n_" + service);
+        }
+
+        RockUtil.sendMessage("app_i18n_" + service);
     }
 
     public static void delCacheForWhiteList(String tag, int type) {
