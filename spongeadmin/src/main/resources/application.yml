@@ -11,3 +11,5 @@ solon.cloud.water:
   config:
     loadGroup: "water_bcf"
     loadKey: "bcf.yml"
+  log:
+    default: sponge_log_admin
