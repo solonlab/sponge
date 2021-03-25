@@ -4,11 +4,14 @@ import org.noear.rock.RockClient;
 import org.noear.rock.model.AppCodeCollection;
 import org.noear.rock.model.AppI18nCollection;
 import org.noear.water.utils.TaskUtils;
+import org.noear.water.utils.TextUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
+import java.text.MessageFormat;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -47,6 +50,26 @@ public class I18nContext {
         return coll.get(code);
     }
 
+    public String getByCodeAndFormat(int code, String lang, Object[] args) throws SQLException {
+        if (TextUtils.isEmpty(lang)) {
+            return getByCodeAndFormat(code, lang, null, args);
+        } else {
+            return getByCodeAndFormat(code, lang, new Locale(lang), args);
+        }
+    }
+
+    public String getByCodeAndFormat(int code, String lang, Locale locale, Object[] args) throws SQLException {
+        String tml = getByCode(code, lang);
+
+        MessageFormat mf = new MessageFormat("");
+        mf.applyPattern(tml);
+        if (locale != null) {
+            mf.setLocale(locale);
+        }
+
+        return mf.format(args);
+    }
+
     public String getByName(String name, String lang) throws SQLException {
         if (lang == null) {
             lang = "";
@@ -65,6 +88,28 @@ public class I18nContext {
 
         return coll.get(name);
     }
+
+    public String getByNameAndFormat(String name, String lang, Object[] args) throws SQLException {
+        if (TextUtils.isEmpty(lang)) {
+            return getByNameAndFormat(name, lang, null, args);
+        } else {
+            return getByNameAndFormat(name, lang, new Locale(lang), args);
+        }
+    }
+
+    public String getByNameAndFormat(String name, String lang, Locale locale, Object[] args) throws SQLException {
+        String tml = getByName(name, lang);
+
+        MessageFormat mf = new MessageFormat("");
+        mf.applyPattern(tml);
+        if (locale != null) {
+            mf.setLocale(locale);
+        }
+
+        return mf.format(args);
+    }
+
+
 
     protected void updateCodeMap() throws SQLException {
         Map<String, AppCodeCollection> codeMap2 = new HashMap<>();
