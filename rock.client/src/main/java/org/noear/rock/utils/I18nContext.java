@@ -36,13 +36,15 @@ public class I18nContext {
             lang = "";
         }
 
-        AppCodeCollection coll = codeMap.get(lang);
+        String lang_key = lang.toLowerCase(Locale.ROOT);
+
+        AppCodeCollection coll = codeMap.get(lang_key);
         if (coll == null) {
             synchronized (lang.intern()) {
-                coll = codeMap.get(lang);
+                coll = codeMap.get(lang_key);
                 if (coll == null) {
                     coll = RockClient.getServiceCodesByLang(service, lang);
-                    codeMap.put(lang, coll);
+                    codeMap.put(lang_key, coll);
                 }
             }
         }
@@ -75,13 +77,15 @@ public class I18nContext {
             lang = "";
         }
 
-        AppI18nCollection coll = nameMap.get(lang);
+        String lang_key = lang.toLowerCase(Locale.ROOT);
+
+        AppI18nCollection coll = nameMap.get(lang_key);
         if (coll == null) {
             synchronized (lang.intern()) {
-                coll = nameMap.get(lang);
+                coll = nameMap.get(lang_key);
                 if (coll == null) {
                     coll = RockClient.getServiceI18nsByLang(service, lang);
-                    nameMap.put(lang, coll);
+                    nameMap.put(lang_key, coll);
                 }
             }
         }
@@ -116,7 +120,7 @@ public class I18nContext {
 
         for (Map.Entry<String, AppCodeCollection> kv : codeMap.entrySet()) {
             AppCodeCollection coll = RockClient.getServiceCodesByLang(service, kv.getKey());
-            codeMap2.put(kv.getKey(), coll);
+            codeMap2.put(kv.getKey().toLowerCase(Locale.ROOT), coll);
         }
 
         codeMap = codeMap2;
@@ -127,7 +131,7 @@ public class I18nContext {
 
         for (Map.Entry<String, AppI18nCollection> kv : nameMap.entrySet()) {
             AppI18nCollection coll = RockClient.getServiceI18nsByLang(service, kv.getKey());
-            nameMap2.put(kv.getKey(), coll);
+            nameMap2.put(kv.getKey().toLowerCase(Locale.ROOT), coll);
         }
 
         nameMap = nameMap2;
