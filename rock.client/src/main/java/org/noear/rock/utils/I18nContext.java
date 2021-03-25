@@ -34,17 +34,17 @@ public class I18nContext {
     public String getByCode(int code, String lang) throws SQLException {
         if (lang == null) {
             lang = "";
+        } else {
+            lang = lang.toLowerCase(Locale.ROOT);
         }
 
-        String lang_key = lang.toLowerCase(Locale.ROOT);
-
-        AppCodeCollection coll = codeMap.get(lang_key);
+        AppCodeCollection coll = codeMap.get(lang);
         if (coll == null) {
             synchronized (lang.intern()) {
-                coll = codeMap.get(lang_key);
+                coll = codeMap.get(lang);
                 if (coll == null) {
                     coll = RockClient.getServiceCodesByLang(service, lang);
-                    codeMap.put(lang_key, coll);
+                    codeMap.put(lang, coll);
                 }
             }
         }
@@ -75,17 +75,17 @@ public class I18nContext {
     public String getByName(String name, String lang) throws SQLException {
         if (lang == null) {
             lang = "";
+        } else {
+            lang = lang.toLowerCase(Locale.ROOT);
         }
 
-        String lang_key = lang.toLowerCase(Locale.ROOT);
-
-        AppI18nCollection coll = nameMap.get(lang_key);
+        AppI18nCollection coll = nameMap.get(lang);
         if (coll == null) {
             synchronized (lang.intern()) {
-                coll = nameMap.get(lang_key);
+                coll = nameMap.get(lang);
                 if (coll == null) {
                     coll = RockClient.getServiceI18nsByLang(service, lang);
-                    nameMap.put(lang_key, coll);
+                    nameMap.put(lang, coll);
                 }
             }
         }
@@ -112,7 +112,6 @@ public class I18nContext {
 
         return mf.format(args);
     }
-
 
 
     protected void updateCodeMap() throws SQLException {
