@@ -23,12 +23,6 @@
     <dependencies>
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>srww.base</artifactId>
-            <version>${srww.ver}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.noear</groupId>
             <artifactId>solon.boot.jetty</artifactId>
             <version>${solon.ver}</version>
         </dependency>
