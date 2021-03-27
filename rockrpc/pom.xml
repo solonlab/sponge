@@ -17,7 +17,6 @@
 
 
     <dependencies>
-
         <dependency>
             <groupId>org.noear</groupId>
             <artifactId>solon.boot.jetty</artifactId>
@@ -40,6 +39,12 @@
             <groupId>org.noear</groupId>
             <artifactId>rock.client</artifactId>
             <version>${rock.ver}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>water-solon-plugin</artifactId>
+            <version>${solon.ver}</version>
         </dependency>
 
         <dependency>
