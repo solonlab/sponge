@@ -39,12 +39,12 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <solon.ver>1.3.17</solon.ver>
+        <solon.ver>1.3.18-m8</solon.ver>
         <weed3.ver>3.3.6</weed3.ver>
 
         <snack3.ver>3.1.14</snack3.ver>
         <bcf.ver>2.0.12</bcf.ver>
-        <srww.ver>1.0.6-m18</srww.ver>
+        <srww.ver>1.0.6-m26</srww.ver>
 
         <fastjson.ver>1.2.75</fastjson.ver>
         <jedis.ver>3.3.0</jedis.ver>
@@ -125,7 +125,7 @@
             <dependency>
                 <groupId>com.zaxxer</groupId>
                 <artifactId>HikariCP</artifactId>
-                <version>3.4.5</version>
+                <version>4.0.3</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
