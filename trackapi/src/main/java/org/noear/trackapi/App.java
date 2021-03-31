@@ -8,14 +8,6 @@ public class App {
     public static void main(String[] args) {
         Solon.start(App.class, args, (app) -> {
             Config.tryInit();
-        }).onError((ex) -> {
-            Context ctx = Context.current();
-
-            if (ctx != null) {
-                LogUtil.error(ctx.path(), "", "", ctx.paramMap().toString(), ex);
-            } else {
-                LogUtil.error("global", ex);
-            }
         });
     }
 }
