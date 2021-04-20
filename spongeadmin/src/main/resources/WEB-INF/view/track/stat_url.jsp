@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="${css}/main.css"/>
     <script src="/_session/domain.js"></script>
     <script src="${js}/lib.js"></script>
-    <script src="https://static.kdz6.cn/lib/echarts.all.min.js"></script>
+    <script src="//mirror.noear.org/lib/echarts.all.min.js"></script>
     <script src="${js}/china.js"></script>
     <script src="${js}/macarons.js"></script>
     <script>
