@@ -37,6 +37,12 @@
 
         <dependency>
             <groupId>org.noear</groupId>
+            <artifactId>water.client</artifactId>
+            <version>${water.ver}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
             <artifactId>solon.extend.jetty.jsp</artifactId>
             <version>${solon.ver}</version>
         </dependency>
