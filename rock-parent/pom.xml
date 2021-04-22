@@ -39,8 +39,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <solon.ver>1.3.22</solon.ver>
-        <srww.ver>1.0.10-m1</srww.ver>
+        <solon.ver>1.3.24-m1</solon.ver>
+        <srww.ver>1.0.10-m4</srww.ver>
 
         <weed3.ver>3.3.7</weed3.ver>
         <water.ver>2.0.26</water.ver>
