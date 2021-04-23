@@ -39,14 +39,14 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <solon.ver>1.3.26-m1</solon.ver>
+        <solon.ver>1.3.26</solon.ver>
         <srww.ver>1.0.10-m7</srww.ver>
 
         <weed3.ver>3.3.7</weed3.ver>
-        <water.ver>2.0.26</water.ver>
+        <water.ver>2.0.27</water.ver>
 
         <snack3.ver>3.1.14</snack3.ver>
-        <bcf.ver>2.0.15</bcf.ver>
+        <bcf.ver>2.0.16</bcf.ver>
 
         <fastjson.ver>1.2.75</fastjson.ver>
         <jedis.ver>3.3.0</jedis.ver>
