@@ -40,10 +40,10 @@ public class RockRpcTest {
 
     @Test
     public void test1() throws Exception {
-        AppModel app = RockClient.getAppByID(48);
+        AppModel app = RockClient.getAppByID(1);
 
         assert app != null;
-        assert app.app_id == 48;
+        assert app.app_id == 1;
 
 
         System.out.println(ONode.stringify(app));
@@ -68,4 +68,15 @@ public class RockRpcTest {
 
         System.out.println(obj);
     }
+
+//    @Test
+//    public void test4() throws Exception {
+//        while (true) {
+//            String obj = RockClient.getAppGroupSettingItem(999999, "demo.name").value;
+//
+//            System.out.println(obj);
+//
+//            Thread.sleep(1000);
+//        }
+//    }
 }
