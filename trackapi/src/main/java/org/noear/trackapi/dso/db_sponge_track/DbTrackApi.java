@@ -112,9 +112,9 @@ public class DbTrackApi {
         return codeIp;
     }
 
-    public static void addUrlLog(String table, DataItem item) throws SQLException {
-        db().table(table).insert(item);
-    }
+//    public static void addUrlLog(String table, DataItem item) throws SQLException {
+//        db().table(table).insert(item);
+//    }
 
     public static void addUrlLogAll(String table, List<DataItem> list) throws SQLException {
         db().table(table).insertList(list);
