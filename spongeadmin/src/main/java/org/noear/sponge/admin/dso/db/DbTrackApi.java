@@ -163,7 +163,7 @@ public class DbTrackApi {
     }
 
     //更新短网址
-    public static void updateUrl(Integer url_id,String url_name,String url_partner_key,String url_val,String track_params,
+    public static void updateUrl(long url_id,String url_name,String url_partner_key,String url_val,String track_params,
                                  String trans_params,String note,String user_field,String build_link,int is_disable) throws SQLException{
 
         int trackParamsNum = 0;
@@ -199,7 +199,7 @@ public class DbTrackApi {
         }
     }
 
-    public static ShortUrlModel getShortUrlsByUrlId(int url_id) throws SQLException{
+    public static ShortUrlModel getShortUrlsByUrlId(long url_id) throws SQLException{
         return db().table("short_url")
                 .where("url_id = ?",url_id)
                 .select("*")

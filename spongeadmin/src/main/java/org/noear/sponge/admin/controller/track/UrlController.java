@@ -107,7 +107,7 @@ public class UrlController extends BaseController {
 
     //编辑短网址
     @Mapping("track/url/edit")
-    public ModelAndView editUrl(Integer url_id) throws SQLException{
+    public ModelAndView editUrl(long url_id) throws SQLException{
         ShortUrlModel url = DbTrackApi.getShortUrlsByUrlId(url_id);
         TrackTagModel tag = DbTrackApi.getTag(url.tag_id);
         viewModel.put("url",url);
@@ -118,7 +118,7 @@ public class UrlController extends BaseController {
 
     //编辑短网址-保存编辑
     @Mapping("track/url/edit/ajax/save")
-    public BaseResp saveEditShortUrl(Integer url_id, String url_name, String url_partner_key,String url_val, String track_params,
+    public BaseResp saveEditShortUrl(long url_id, String url_name, String url_partner_key,String url_val, String track_params,
                                      String trans_params, String note, String user_field, String build_link,Integer is_disable) throws SQLException{
         BaseResp resp = new BaseResp();
         if (DbTrackApi.checkBuildLink(build_link) == false){
