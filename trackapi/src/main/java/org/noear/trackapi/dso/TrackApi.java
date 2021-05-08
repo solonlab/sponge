@@ -28,6 +28,10 @@ public class TrackApi {
         String user_key = null;
         if (TextUtils.isEmpty(url.user_field) == false) {
             user_key = requestX.getParameter(url.user_field, true);
+
+            if (TextUtils.isEmpty(user_key)) {
+                user_key = requestX.getHeader(url.user_field);
+            }
         }
 
         if (TextUtils.isEmpty(user_key)) {

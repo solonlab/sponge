@@ -14,6 +14,11 @@ import org.noear.water.utils.TextUtils;
 @Controller
 public class UrlHandler{
 
+    @Mapping("/ua/")
+    public String ua(Context ctx){
+        return ctx.userAgent();
+    }
+
     @Mapping("/{key}")
     public void handle(Context cxt, String key) {
         try {
