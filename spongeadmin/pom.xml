@@ -43,6 +43,12 @@
 
         <dependency>
             <groupId>org.noear</groupId>
+            <artifactId>snowflake-id-solon-plugin</artifactId>
+            <version>${solon.ver}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
             <artifactId>solon.extend.jetty.jsp</artifactId>
             <version>${solon.ver}</version>
         </dependency>

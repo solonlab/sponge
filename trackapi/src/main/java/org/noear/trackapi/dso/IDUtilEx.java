@@ -1,6 +1,7 @@
 package org.noear.trackapi.dso;
 
 
+import org.noear.solon.cloud.CloudClient;
 import org.noear.water.utils.IDUtils;
 
 import java.util.Random;
@@ -34,37 +35,41 @@ public class IDUtilEx {
     //
     //
     public static long buildUaID(){
-        return getID("ua_id") + 10000;
+        return CloudClient.id().generate();
+        //return getID("ua_id") + 10000;
     }
 
     public static long buildIpID(){
-        return getID("ip_id") + 20000;
+        return CloudClient.id().generate();
+        //return getID("ip_id") + 20000;
     }
 
     public static long buildUrlID(){
-        return getID("url_id") + 1000000;
+        return CloudClient.id().generate();
+        //return getID("url_id") + 1000000;
     }
 
     public static long buildLogID(String tag) {
-        return getID(tag) + 1000000;
+        return CloudClient.id().generate();
+        //return getID(tag) + 1000000;
     }
 
 
-    public static long getID(String tag) {
-        try {
-            return IDUtils.newID("SPONGE_ID", tag, 3600 * 24 * 365);
-        } catch (Exception ex) {
-            ex.printStackTrace();
+//    public static long getID(String tag) {
+//        try {
+//            return IDUtils.newID("SPONGE_ID", tag, 3600 * 24 * 365);
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//
+//            LogUtil.error("IDUtil", "", "","getID", ex);
+//
+//            return getByTime();
+//        }
+//    }
 
-            LogUtil.error("IDUtil", "", "","getID", ex);
 
-            return getByTime();
-        }
-    }
-
-
-    private static long getByTime(){
-        return System.currentTimeMillis() * 10000 + new Random(1000).nextInt();
-    }
+//    private static long getByTime(){
+//        return System.currentTimeMillis() * 10000 + new Random(1000).nextInt();
+//    }
 
 }
