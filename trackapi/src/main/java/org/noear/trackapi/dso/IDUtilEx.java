@@ -44,10 +44,10 @@ public class IDUtilEx {
         //return getID("ip_id") + 20000;
     }
 
-    public static long buildUrlID(){
-        return CloudClient.id().generate();
-        //return getID("url_id") + 1000000;
-    }
+//    public static long buildUrlID(){
+//        return CloudClient.id().generate();
+//        //return getID("url_id") + 1000000;
+//    }
 
     public static long buildLogID(String tag) {
         return CloudClient.id().generate();

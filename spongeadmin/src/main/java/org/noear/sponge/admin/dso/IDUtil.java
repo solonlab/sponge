@@ -58,8 +58,8 @@ public class IDUtil {
 //    }
 
     public static long buildUrlID(){
-        return CloudClient.id().generate();
-        //return getID("url_id") + 1000000;
+        //return CloudClient.id().generate();
+        return getID("url_id") + 1000000;
     }
 
 //    public static long buildLogID(String tag) {
@@ -77,9 +77,9 @@ public class IDUtil {
 //    }
 //
 //
-//    public static long getID(String tag) {
-//        return IDUtils.newID("SPONGE_ID", tag);
-//    }
+    public static long getID(String tag) {
+        return IDUtils.newID("SPONGE_ID", tag);
+    }
 //
 //
 //    private static long getByTime(){
