@@ -6,12 +6,14 @@ import org.noear.sponge.admin.dso.LogUtil;
 
 public class SpongeApp {
     public static void main(String[] args) {
-        Solon.start(SpongeApp.class, args).onError((ex) -> {
+        Solon.start(SpongeApp.class, args, app -> {
+            app.pluginAdd(0, new InitPlugin());
+        }).onError((ex) -> {
             Context ctx = Context.current();
 
             if (ctx != null) {
                 LogUtil.error("global", ctx.path(), ctx.paramMap().toString(), ex);
-            }else{
+            } else {
                 LogUtil.error("global", "", "", ex);
             }
         });
