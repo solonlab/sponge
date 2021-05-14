@@ -48,12 +48,6 @@
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon.view.freemarker</artifactId>
-            <version>${solon.ver}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.noear</groupId>
             <artifactId>bcfclient-solon-plugin</artifactId>
             <version>${bcf.ver}</version>
         </dependency>
@@ -76,14 +70,6 @@
             <version>${solon.ver}</version>
         </dependency>
 
-
-        <dependency>
-            <groupId>org.noear</groupId>
-            <artifactId>solon.extend.staticfiles</artifactId>
-            <version>${solon.ver}</version>
-        </dependency>
-
-
         <dependency>
             <groupId>org.noear</groupId>
             <artifactId>solon.boot.jetty</artifactId>
@@ -100,12 +86,6 @@
             <groupId>org.noear</groupId>
             <artifactId>solon.view.jsp</artifactId>
             <version>${solon.ver}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.73</version>
         </dependency>
 
         <dependency>
@@ -131,18 +111,6 @@
             <artifactId>HikariCP</artifactId>
             <version>4.0.3</version>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>com.aliyun.oss</groupId>-->
-<!--            <artifactId>aliyun-sdk-oss</artifactId>-->
-<!--            <version>2.7.0</version>-->
-<!--        </dependency>-->
-
-<!--        <dependency>-->
-<!--            <groupId>org.apache.poi</groupId>-->
-<!--            <artifactId>poi</artifactId>-->
-<!--            <version>4.0.1</version>-->
-<!--        </dependency>-->
 
         <dependency>
             <groupId>org.projectlombok</groupId>
