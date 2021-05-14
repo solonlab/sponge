@@ -1,6 +1,5 @@
 package org.noear.sponge.admin.controller.rock;
 
-import org.apache.http.util.TextUtils;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.Context;
@@ -12,6 +11,7 @@ import org.noear.sponge.admin.model.others.resp.BaseResp;
 import org.noear.sponge.admin.model.rock.AppExVersionModel;
 import org.noear.sponge.admin.model.rock.AppGroupModel;
 import org.noear.sponge.admin.controller.BaseController;
+import org.noear.water.utils.TextUtils;
 
 import java.sql.SQLException;
 import java.util.LinkedHashMap;

@@ -1,7 +1,5 @@
 package org.noear.sponge.admin.controller.track;
 
-import org.apache.http.util.TextUtils;
-
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.core.handle.ModelAndView;
@@ -16,6 +14,7 @@ import org.noear.sponge.admin.model.others.resp.BaseResp;
 import org.noear.sponge.admin.model.others.resp.UrlListResp;
 import org.noear.sponge.admin.model.rock.AppGroupModel;
 import org.noear.sponge.admin.model.sponge_track.TrackTagModel;
+import org.noear.water.utils.TextUtils;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

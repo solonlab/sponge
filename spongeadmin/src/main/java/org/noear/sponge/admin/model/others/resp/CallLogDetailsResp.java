@@ -1,7 +1,7 @@
 package org.noear.sponge.admin.model.others.resp;
 
 import lombok.Getter;
-import org.apache.http.util.TextUtils;
+import org.noear.water.utils.TextUtils;
 
 /**
  * @Author:Fei.chu

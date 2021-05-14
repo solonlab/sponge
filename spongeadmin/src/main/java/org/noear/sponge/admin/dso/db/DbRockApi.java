@@ -4,9 +4,9 @@ import org.noear.sponge.admin.dso.CacheUtil;
 import org.noear.sponge.admin.model.TagCountsModel;
 import org.noear.sponge.admin.model.rock.*;
 import org.noear.rock.RockUtil;
+import org.noear.water.utils.TextUtils;
 import org.noear.weed.DbContext;
 import org.noear.weed.DbTableQuery;
-import org.apache.http.util.TextUtils;
 import org.noear.sponge.admin.Config;
 
 import java.sql.SQLException;

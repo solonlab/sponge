@@ -1,7 +1,7 @@
 package org.noear.sponge.admin.widget;
 
-import org.apache.http.util.TextUtils;
 import org.noear.solon.core.handle.Context;
+import org.noear.water.utils.TextUtils;
 
 
 import javax.servlet.jsp.JspException;
