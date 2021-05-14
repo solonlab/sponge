@@ -17,11 +17,20 @@ public class Config {
 
     public static final String push_suffix = "_push";
 
+    //是否使用标答检查器？
+    public static boolean is_use_tag_checker() {
+        return "1".equals(cfg("water","enable_tag_checker").getString());
+    }
+
 
     //================================
     //
     //获取一个数据库配置
     public static ConfigM cfg(String key) {
-        return WaterClient.Config.get(Solon.cfg().appGroup(), key);
+        return cfg(Solon.cfg().appGroup(), key);
+    }
+
+    public static ConfigM cfg(String group, String key) {
+        return WaterClient.Config.get(group, key);
     }
 }

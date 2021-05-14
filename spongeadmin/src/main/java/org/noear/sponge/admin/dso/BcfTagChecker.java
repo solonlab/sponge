@@ -2,6 +2,7 @@ package org.noear.sponge.admin.dso;
 
 import org.noear.bcf.BcfClient;
 import org.noear.bcf.models.BcfResourceModel;
+import org.noear.sponge.admin.Config;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -28,6 +29,14 @@ public class BcfTagChecker {
     public boolean find(String tag) throws SQLException {
         if (tag == null) {
             return false;
+        }
+
+        if(Session.current().getIsAdmin()==1){
+            return true;
+        }
+
+        if (Config.is_use_tag_checker() == false) {
+            return true;
         }
 
         tryLoadTagByUser();
