@@ -1,9 +1,7 @@
 package org.noear.sponge.admin.dso;
 
-import org.noear.solon.cloud.CloudClient;
 import org.noear.water.utils.IDUtils;
 
-import java.util.Random;
 import java.util.UUID;
 
 public class IDUtil {
@@ -40,42 +38,15 @@ public class IDUtil {
         return Long.toString(code,36);
     }
 
-    public String getIDByCode(String code){
-        return "";
-    }
 
-    //
     //
     //==================================================
     //
-    //
     public static long buildUrlID(){
-        //return CloudClient.id().generate();
         return getID("url_id") + 1000000;
     }
 
-//    public static long buildLogID(String tag) {
-//        return getID(tag) + 1000000;
-//    }
-//
-//    private static long getID1(String tag) {
-//        long max = 1000000;
-//
-//        return buildID(tag, max);
-//    }
-
-//    private static long buildID(String tag,long startIndex) {
-//        return IDUtils.newID("BEAUTY_ID", tag) + startIndex;
-//    }
-//
-//
     public static long getID(String tag) {
         return IDUtils.newID("SPONGE_ID", tag);
     }
-//
-//
-//    private static long getByTime(){
-//        return System.currentTimeMillis() * 10000 + new Random(1000).nextInt();
-//    }
-
 }

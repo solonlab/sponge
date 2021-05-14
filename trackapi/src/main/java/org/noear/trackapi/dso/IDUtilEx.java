@@ -22,14 +22,8 @@ public class IDUtilEx {
         return Long.toString(code,36);
     }
 
-    public String getIDByCode(String code){
-        return "";
-    }
-
-    //
     //
     //==================================================
-    //
     //
     public static long buildUaID(){
         return CloudClient.id().generate();
