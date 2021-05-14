@@ -52,7 +52,6 @@ public class AppGroupSettingController extends BaseController {
             if (apGmap.containsKey(aps.agroup_id)) {
                 AppGroupModel apG = apGmap.get(aps.agroup_id);
                 apG.counts = aps.counts;
-                apGmap.put(aps.agroup_id, apG);
             }
         }
 
