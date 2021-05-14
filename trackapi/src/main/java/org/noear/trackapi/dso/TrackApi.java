@@ -8,6 +8,7 @@ import org.noear.trackapi.model.CodeIpModel;
 import org.noear.trackapi.model.CodeUaModel;
 import org.noear.trackapi.model.ShortUrlModel;
 import org.noear.water.utils.Datetime;
+import org.noear.water.utils.SnowflakeUtils;
 import org.noear.water.utils.TextUtils;
 import org.noear.weed.DataItem;
 import org.noear.weed.DbContext;
@@ -20,7 +21,8 @@ public class TrackApi {
     }
 
     public static void addUrlLog(ShortUrlModel url, HttpRequestX requestX) throws SQLException {
-        long log_id = IDUtilEx.buildLogID("short_redirect_log");
+        long log_id = SnowflakeUtils.genId(); //IDUtilEx.buildLogID("short_redirect_log");
+
         String ua = requestX.getUserAgent();
         String ip = requestX.getUserIP();
 

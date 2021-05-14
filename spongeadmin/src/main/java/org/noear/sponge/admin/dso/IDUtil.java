@@ -49,14 +49,6 @@ public class IDUtil {
     //==================================================
     //
     //
-//    public static long buildUaID(){
-//        return getID("ua_id") + 10000;
-//    }
-//
-//    public static long buildIpID(){
-//        return getID("ip_id") + 20000;
-//    }
-
     public static long buildUrlID(){
         //return CloudClient.id().generate();
         return getID("url_id") + 1000000;
