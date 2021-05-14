@@ -15,5 +15,12 @@ solon.cloud.water:
     default: sponge_log_admin
 
 
+solon.logging.logger:
+  "org.eclipse.jetty.*":
+    level: INFO
+  "com.zaxxer.hikari.*":
+    level: INFO
+  "org.apache.*":
+    level: INFO
 
 srww.weed.track.enable: false
