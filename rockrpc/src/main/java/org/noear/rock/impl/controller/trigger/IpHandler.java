@@ -2,12 +2,12 @@ package org.noear.rock.impl.controller.trigger;
 
 import org.noear.solon.Solon;
 import org.noear.solon.annotation.Component;
+import org.noear.solon.cloud.CloudClient;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.Handler;
 import org.noear.rock.impl.utils.IpUtil;
 import org.noear.solon.logging.utils.TagsMDC;
 import org.noear.water.WaterClient;
-import org.noear.water.utils.FromUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,11 +18,11 @@ public class IpHandler implements Handler {
 
     @Override
     public void handle(Context ctx) throws Throwable {
-        String ip = IpUtil.getIP(ctx);
+        String ip = ctx.realIp();
 
         if (Solon.cfg().isWhiteMode()) {
             if (WaterClient.Whitelist.existsOfServerIp(ip) == false) {
-                String _from = FromUtils.getFrom(ctx);
+                String _from = CloudClient.trace().getFromId();
                 String warn = ip + " is not whitelist!";
 
                 TagsMDC.tag0(ctx.path()).tag3(_from);

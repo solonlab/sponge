@@ -2,12 +2,12 @@ package org.noear.rock.impl.controller.trigger;
 
 import org.noear.snack.ONode;
 import org.noear.solon.annotation.Component;
+import org.noear.solon.cloud.CloudClient;
 import org.noear.solon.cloud.model.Instance;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.Handler;
 import org.noear.solon.logging.utils.TagsMDC;
 import org.noear.water.WaterClient;
-import org.noear.water.utils.FromUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +21,7 @@ public class EndHandler implements Handler {
         long start = ctx.attr("_start", 0L);
         long times = System.currentTimeMillis() - start;
         String _node = Instance.local().address();
-        String _from = FromUtils.getFrom(ctx);
+        String _from = CloudClient.trace().getFromId();
 
         WaterClient.Track.track(Instance.local().service(), "rpc", ctx.path(), times, _node, _from);
 

@@ -8,7 +8,6 @@ import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.Handler;
 import org.noear.water.WaterClient;
-import org.noear.water.utils.IPUtils;
 import org.noear.sponge.admin.dso.Session;
 
 @Mapping(value = "**", before = true)
@@ -31,7 +30,7 @@ public class BcfInterceptor extends BcfInterceptorBase implements Handler {
         String path = ctx.path();
 
         if (path.startsWith("/rock/") || path.startsWith("/auth/")) {
-            String ip = IPUtils.getIP(ctx);
+            String ip = ctx.realIp();
 
             if (Solon.cfg().isWhiteMode() && Solon.cfg().isFilesMode() == false) {
                 if (WaterClient.Whitelist.existsOfClientIp(ip) == false) {
