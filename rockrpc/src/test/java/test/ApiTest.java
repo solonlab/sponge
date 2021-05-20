@@ -3,6 +3,8 @@ package test;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.noear.rock.RockClient;
+import org.noear.rock.model.AppModel;
+import org.noear.snack.ONode;
 import org.noear.solon.test.SolonJUnit4ClassRunner;
 
 /**
@@ -20,5 +22,14 @@ public class ApiTest {
 
         assert  RockClient.getAppByKey("73f0759694a9441980562788a9e4256b").app_id == 4;
         assert  RockClient.getAppByKey("73f0759694a9441980562788a9e4256b").getSetting("_img_pre_path").value != null;
+    }
+
+    @Test
+    public void test2() throws Exception {
+        AppModel app = RockClient.getAppByID(1);
+
+        System.out.println(ONode.stringify(app));
+
+        assert app.app_id == 1;
     }
 }
