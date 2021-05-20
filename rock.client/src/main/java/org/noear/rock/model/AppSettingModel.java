@@ -1,10 +1,7 @@
 package org.noear.rock.model;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import org.noear.snack.ONode;
 import org.noear.water.utils.CallUtils;
-import org.noear.weed.GetHandlerEx;
-import org.noear.weed.IBinder;
 
 import java.io.Serializable;
 import java.io.StringReader;
@@ -45,7 +42,6 @@ public class AppSettingModel implements Serializable {
 
 
 	//获取数字类型的值
-	@JSONField(serialize = false)
 	public long getLong() {
 		if (type == 1) {
 			return Long.parseLong(value);
@@ -55,7 +51,6 @@ public class AppSettingModel implements Serializable {
 	}
 
 	//获取数字类型的值
-	@JSONField(serialize = false)
 	public int getInt() {
 		if (type == 1) {
 			return Integer.parseInt(value);
@@ -66,7 +61,6 @@ public class AppSettingModel implements Serializable {
 
 
 	//获取JSON类型的值里的属性
-	@JSONField(serialize = false)
 	public ONode get(String name) {
 		if (_node_x == null) {
 			_node_x = getNode();
@@ -78,7 +72,6 @@ public class AppSettingModel implements Serializable {
 	private transient ONode _node_x;
 
 	//转为JSON对象
-	@JSONField(serialize = false)
 	public ONode getNode() {
 		if (type == 1) {
 			if (value == null || value.length() == 0) {
@@ -103,7 +96,6 @@ public class AppSettingModel implements Serializable {
 	 */
 	private transient Properties _prop;
 
-	@JSONField(serialize = false)
 	public Properties getProp() {
 		if (_prop == null) {
 			_prop = new Properties();
