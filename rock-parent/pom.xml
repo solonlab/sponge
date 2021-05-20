@@ -45,7 +45,7 @@
         <water.ver>2.1.1</water.ver>
 
         <snack3.ver>3.1.17</snack3.ver>
-        <bcf.ver>2.0.18</bcf.ver>
+        <bcf.ver>2.0.19</bcf.ver>
 
         <jedis.ver>3.3.0</jedis.ver>
         <okhttp.ver>3.14.8</okhttp.ver>
