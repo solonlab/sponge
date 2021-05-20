@@ -25,6 +25,11 @@
         </dependency>
         <dependency>
             <groupId>org.noear</groupId>
+            <artifactId>nami.coder.snack3</artifactId>
+            <version>${solon.ver}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.noear</groupId>
             <artifactId>nami.channel.http.okhttp</artifactId>
             <version>${solon.ver}</version>
         </dependency>
