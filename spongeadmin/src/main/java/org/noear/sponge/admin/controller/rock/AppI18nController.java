@@ -155,8 +155,8 @@ public class AppI18nController extends BaseController {
     }
 
     @Mapping("ajax/import")
-    public ViewModel importFile(int agroup_id,UploadedFile file) throws SQLException{
-        String i18nStr = Utils.getString(file.content, "UTF-8");
+    public ViewModel importFile(int agroup_id,UploadedFile file) throws Exception{
+        String i18nStr = Utils.transferToString(file.content, "UTF-8");
         Properties i18n = Utils.buildProperties(i18nStr);
 
         String service = i18n.getProperty("rock.i18n.service");
