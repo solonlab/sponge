@@ -4,6 +4,7 @@ import org.noear.snack.ONode;
 import org.noear.solon.Solon;
 import org.noear.solon.SolonApp;
 import org.noear.solon.Utils;
+import org.noear.solon.cloud.CloudClient;
 import org.noear.solon.core.Plugin;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.logging.utils.TagsMDC;
@@ -94,7 +95,7 @@ public class InitPlugin implements Plugin {
                     tag = "sql";
                 }
 
-                WaterClient.Track.track(service_name() + "_sql", tag, cmd.text, cmd.timespan());
+                CloudClient.metric().addMeter(service_name() + "_sql", tag, cmd.text, cmd.timespan(), true);
             }
         });
     }
@@ -136,7 +137,7 @@ public class InitPlugin implements Plugin {
                     tag = "sql";
                 }
 
-                WaterClient.Track.track(service_name() + "_sql", tag, cmd.text, cmd.timespan());
+                CloudClient.metric().addMeter(service_name() + "_sql", tag, cmd.text, cmd.timespan(), true);
             }
         });
     }

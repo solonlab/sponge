@@ -20,11 +20,11 @@ public class EndHandler implements Handler {
     public void handle(Context ctx) throws Exception {
         long start = ctx.attr("_start", 0L);
         long times = System.currentTimeMillis() - start;
-        String _node = Instance.local().address();
+
+        CloudClient.metric().addMeter("rpc", ctx.path(), times, false);
+
+
         String _from = CloudClient.trace().getFromId();
-
-        WaterClient.Track.track(Instance.local().service(), "rpc", ctx.path(), times, _node, _from);
-
         String _out = ctx.attr("output", "");
         String _in = ONode.stringify(ctx.paramMap());
 
@@ -33,10 +33,8 @@ public class EndHandler implements Handler {
 
         if (_out != null && _out.startsWith("warn::")) {
             log.warn("::{}\r\n::{}", _in, _out);
-            //WaterClient.Log.append("rock_log", Level.WARN, ctx.path(), null, null, _from, _in, _out);
         } else {
             log.info("::{}\r\n::{}", _in, _out);
-            //WaterClient.Log.append("rock_log", Level.INFO, ctx.path(), null, null, _from, _in, _out);
         }
     }
 }
