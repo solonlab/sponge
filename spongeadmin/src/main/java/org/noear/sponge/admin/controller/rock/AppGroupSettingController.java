@@ -3,9 +3,11 @@ package org.noear.sponge.admin.controller.rock;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.ModelAndView;
+import org.noear.solon.extend.auth.annotation.AuthRoles;
 import org.noear.sponge.admin.controller.ViewModel;
 import org.noear.sponge.admin.dso.AgroupCookieUtil;
 import org.noear.sponge.admin.dso.BcfTagChecker;
+import org.noear.sponge.admin.dso.SessionRoles;
 import org.noear.sponge.admin.dso.db.DbRockApi;
 import org.noear.sponge.admin.controller.BaseController;
 import org.noear.sponge.admin.model.rock.AppExSettingModel;
@@ -95,6 +97,7 @@ public class AppGroupSettingController extends BaseController {
     }
 
     //ajax保存编辑
+    @AuthRoles(SessionRoles.role_admin)
     @Mapping("agsets/edit/ajax/save")
     public ViewModel saveAgsets(Integer row_id, String name, Integer type, String value, String note, Integer is_client, Integer ver_start, Integer agroup_id) throws SQLException {
 

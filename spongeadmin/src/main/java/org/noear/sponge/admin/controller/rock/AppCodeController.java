@@ -4,9 +4,11 @@ import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ModelAndView;
+import org.noear.solon.extend.auth.annotation.AuthRoles;
 import org.noear.sponge.admin.controller.ViewModel;
 import org.noear.sponge.admin.dso.AgroupCookieUtil;
 import org.noear.sponge.admin.dso.BcfTagChecker;
+import org.noear.sponge.admin.dso.SessionRoles;
 import org.noear.sponge.admin.dso.db.DbRockApi;
 import org.noear.sponge.admin.dso.db.DbRockI18nApi;
 import org.noear.sponge.admin.model.TagCountsModel;
@@ -34,7 +36,7 @@ public class AppCodeController extends BaseController {
         Integer out_agroup_id = agroup_id;
         if (out_agroup_id == null) {
             out_agroup_id = AgroupCookieUtil.cookieGet();
-        }else {
+        } else {
             AgroupCookieUtil.cookieSet(agroup_id);
         }
 
@@ -138,6 +140,7 @@ public class AppCodeController extends BaseController {
     }
 
     //应用状态码新增编辑ajax保存功能
+    @AuthRoles(SessionRoles.role_admin)
     @Mapping("edit/ajax/save")
     public ViewModel saveApcode(Integer row_id, Integer code, String lang, String note, Integer agroup_id, String service) throws SQLException {
 

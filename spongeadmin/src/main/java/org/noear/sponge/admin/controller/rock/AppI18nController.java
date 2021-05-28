@@ -7,10 +7,12 @@ import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ModelAndView;
 import org.noear.solon.core.handle.UploadedFile;
+import org.noear.solon.extend.auth.annotation.AuthRoles;
 import org.noear.sponge.admin.controller.BaseController;
 import org.noear.sponge.admin.controller.ViewModel;
 import org.noear.sponge.admin.dso.AgroupCookieUtil;
 import org.noear.sponge.admin.dso.BcfTagChecker;
+import org.noear.sponge.admin.dso.SessionRoles;
 import org.noear.sponge.admin.dso.db.DbRockApi;
 import org.noear.sponge.admin.dso.db.DbRockI18nApi;
 import org.noear.sponge.admin.model.TagCountsModel;
@@ -142,6 +144,7 @@ public class AppI18nController extends BaseController {
     }
 
     //应用状态码新增编辑ajax保存功能
+    @AuthRoles(SessionRoles.role_admin)
     @Mapping("edit/ajax/save")
     public ViewModel saveApi18n(Integer row_id, String name, String lang, String note, Integer agroup_id, String service) throws SQLException {
 
@@ -154,6 +157,7 @@ public class AppI18nController extends BaseController {
         }
     }
 
+    @AuthRoles(SessionRoles.role_admin)
     @Mapping("ajax/import")
     public ViewModel importFile(int agroup_id,UploadedFile file) throws Exception{
         String i18nStr = Utils.transferToString(file.content, "UTF-8");

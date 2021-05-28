@@ -4,9 +4,11 @@ import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ModelAndView;
+import org.noear.solon.extend.auth.annotation.AuthRoles;
 import org.noear.sponge.admin.dso.AgroupCookieUtil;
 import org.noear.sponge.admin.dso.BcfTagChecker;
 import org.noear.sponge.admin.dso.IDUtil;
+import org.noear.sponge.admin.dso.SessionRoles;
 import org.noear.sponge.admin.dso.db.DbRockApi;
 import org.noear.sponge.admin.model.others.resp.BaseResp;
 import org.noear.sponge.admin.model.rock.AppGroupModel;
@@ -140,6 +142,7 @@ public class AppController extends BaseController {
     }
 
     //应用新增编辑ajax保存功能
+    @AuthRoles(SessionRoles.role_admin)
     @Mapping("app/edit/ajax/save")
     public BaseResp saveApp(Integer app_id, String name, Integer agroup_id, Integer ugroup_id, String app_key, String app_secret_key, Integer ar_is_examine, Integer ar_is_setting, String note, Integer ar_examine_ver) throws SQLException {
         BaseResp resp = new BaseResp();

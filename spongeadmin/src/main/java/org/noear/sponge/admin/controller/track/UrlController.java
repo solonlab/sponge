@@ -3,8 +3,10 @@ package org.noear.sponge.admin.controller.track;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.core.handle.ModelAndView;
+import org.noear.solon.extend.auth.annotation.AuthRoles;
 import org.noear.sponge.admin.dso.BcfTagChecker;
 import org.noear.sponge.admin.dso.GroupUtil;
+import org.noear.sponge.admin.dso.SessionRoles;
 import org.noear.sponge.admin.dso.db.DbRockApi;
 import org.noear.sponge.admin.model.sponge_track.ShortUrlModel;
 import org.noear.sponge.admin.Config;
@@ -70,6 +72,7 @@ public class UrlController extends BaseController {
 
 
     //新增短网址-保存新增
+    @AuthRoles({SessionRoles.role_operator, SessionRoles.role_admin})
     @Mapping("track/url/add/ajax/save")
     public BaseResp saveAddShortUrl(Integer tag_id,String url_name,String url_val,String track_params,
                                     String trans_params,String note,String user_field,String build_link,
@@ -116,6 +119,7 @@ public class UrlController extends BaseController {
 
 
     //编辑短网址-保存编辑
+    @AuthRoles({SessionRoles.role_operator, SessionRoles.role_admin})
     @Mapping("track/url/edit/ajax/save")
     public BaseResp saveEditShortUrl(long url_id, String url_name, String url_partner_key,String url_val, String track_params,
                                      String trans_params, String note, String user_field, String build_link,Integer is_disable) throws SQLException{

@@ -4,8 +4,10 @@ import org.noear.solon.annotation.Mapping;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ModelAndView;
+import org.noear.solon.extend.auth.annotation.AuthRoles;
 import org.noear.sponge.admin.dso.BcfTagChecker;
 import org.noear.sponge.admin.dso.GroupUtil;
+import org.noear.sponge.admin.dso.SessionRoles;
 import org.noear.sponge.admin.dso.db.DbRockApi;
 import org.noear.sponge.admin.model.others.resp.TagResp;
 import org.noear.sponge.admin.controller.BaseController;
@@ -76,6 +78,7 @@ public class TagController extends BaseController {
     }
 
     //保存标签
+    @AuthRoles({SessionRoles.role_operator, SessionRoles.role_admin})
     @Mapping("track/tag/add/ajax/save")
     public BaseResp saveTag(String tagName,String tagHost,int agroup_id,String note,String t_user_field,String t_track_params,
 
@@ -122,6 +125,7 @@ public class TagController extends BaseController {
     }
 
     //保存标签编辑
+    @AuthRoles({SessionRoles.role_operator, SessionRoles.role_admin})
     @Mapping("track/tag/edit/ajax/save")
     public BaseResp saveEdit(Integer tag_id,int agroup_id,String tag_name,String tag_host,String note,String t_user_field,
                              String t_track_params,String t_trans_params,String t_build_link) throws SQLException{
@@ -151,6 +155,5 @@ public class TagController extends BaseController {
             resp.msg = "修改成功";
             return resp;
         }
-
     }
 }

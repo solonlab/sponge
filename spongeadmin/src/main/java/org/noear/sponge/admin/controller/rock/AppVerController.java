@@ -4,8 +4,10 @@ import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ModelAndView;
+import org.noear.solon.extend.auth.annotation.AuthRoles;
 import org.noear.sponge.admin.dso.AgroupCookieUtil;
 import org.noear.sponge.admin.dso.BcfTagChecker;
+import org.noear.sponge.admin.dso.SessionRoles;
 import org.noear.sponge.admin.dso.db.DbRockApi;
 import org.noear.sponge.admin.model.others.resp.BaseResp;
 import org.noear.sponge.admin.model.rock.AppExVersionModel;
@@ -101,6 +103,7 @@ public class AppVerController extends BaseController {
     }
 
 
+    @AuthRoles(SessionRoles.role_admin)
     @Mapping("apver/edit/ajax/save")
     public BaseResp editApver(Integer app_id, Integer row_id, Integer ver, String content, Integer type, Integer alert_ver, Integer force_ver, Integer platform, String url, Integer is_enable, Integer agroup_id) throws SQLException {
         BaseResp resp = new BaseResp();
