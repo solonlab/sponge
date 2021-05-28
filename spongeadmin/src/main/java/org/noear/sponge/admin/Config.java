@@ -1,5 +1,6 @@
 package org.noear.sponge.admin;
 
+import org.noear.snack.ONode;
 import org.noear.solon.Solon;
 import org.noear.solon.annotation.Bean;
 import org.noear.solon.annotation.Configuration;
@@ -59,9 +60,9 @@ public class Config {
                         return false;
                     }
                 })
+                .authProcessor(new AuthProcessorBcfImpl())
                 .authOnFailure((ctx, rst) -> {
-                    ctx.output("{code:0,msg:'没有权限'}");
-                })
-                .authProcessor(new AuthProcessorBcfImpl());
+                    ctx.outputAsJson(new ONode().set("code", 403).set("msg", "没有权限").toJson());
+                });
     }
 }

@@ -18,14 +18,12 @@ import org.noear.sponge.admin.dso.Session;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 public class LoginController extends BaseController {
     @Mapping("login") //视图 返回
-    public ModelAndView login() {
+    public ModelAndView login(Context ctx) {
+        ctx.sessionClear();
         return view("login");
     }
 
