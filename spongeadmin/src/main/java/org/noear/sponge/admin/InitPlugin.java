@@ -95,7 +95,7 @@ public class InitPlugin implements Plugin {
                     tag = "sql";
                 }
 
-                CloudClient.metric().addMeter(service_name() + "_sql", tag, cmd.text, cmd.timespan(), true);
+                CloudClient.metric().addMeter(service_name() + "_sql", tag, cmd.text, cmd.timespan());
             }
         });
     }
@@ -137,7 +137,7 @@ public class InitPlugin implements Plugin {
                     tag = "sql";
                 }
 
-                CloudClient.metric().addMeter(service_name() + "_sql", tag, cmd.text, cmd.timespan(), true);
+                CloudClient.metric().addMeter(service_name() + "_sql", tag, cmd.text, cmd.timespan());
             }
         });
     }
