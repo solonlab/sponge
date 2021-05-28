@@ -3,7 +3,6 @@ package org.noear.sponge.admin.dso.auth;
 import org.noear.bcf.BcfClient;
 import org.noear.solon.extend.auth.AuthProcessor;
 import org.noear.solon.extend.auth.annotation.Logical;
-import org.noear.solon.extend.auth.model.Subject;
 import org.noear.sponge.admin.dso.Session;
 
 /**
@@ -12,24 +11,6 @@ import org.noear.sponge.admin.dso.Session;
 public class AuthProcessorBcfImpl implements AuthProcessor {
     private int puid() {
         return Session.current().getPUID();
-    }
-
-    @Override
-    public Subject login(String username, String password) {
-        try {
-            return new SubjectBcfImpl(BcfClient.login(username, password));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    public void loginLoad(Subject subject) {
-        try {
-            Session.current().loadModel(((SubjectBcfImpl) subject).getUser());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override
