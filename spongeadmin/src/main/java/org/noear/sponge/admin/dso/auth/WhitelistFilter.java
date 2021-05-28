@@ -26,9 +26,9 @@ public class WhitelistFilter implements Filter {
             }
         }
 
-        int puid = Session.global().getPUID();
+        int puid = Session.current().getPUID();
         if (puid > 0) {
-            ctx.attrSet("user_puid", "" +puid);
+            ctx.attrSet("user_puid", "" + puid);
             ctx.attrSet("user_name", BcfSessionBase.global().getUserName());
         }
 
