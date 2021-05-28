@@ -21,6 +21,10 @@ public class AuthProcessorBcfImpl implements AuthProcessor {
     @Override
     public boolean verifyUrl(String url, String method) {
         try {
+            if (url.contains("@")) {
+                return true;
+            }
+
             if (BcfClient.hasUrlpath(url)) {
                 return BcfClient.hasUrlpathByUser(puid(), url);
             }else{

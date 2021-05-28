@@ -45,15 +45,7 @@ public class Config {
     public void init() {
         AuthAdapter.global()
                 .loginUrl("/login")
-                .loginProcessingUrl("/login/ajax/check")
-                .logoutUrl("/login")
-                .usernameParam("userName")
-                .passwordParam("passWord")
                 .authUrlMatchers(url -> {
-                    if (url.contains("@")) {
-                        return false;
-                    }
-
                     if (url.startsWith("/rock/") || url.startsWith("/track/")) {
                         return true;
                     } else {

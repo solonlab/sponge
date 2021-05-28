@@ -1,12 +1,13 @@
-package org.noear.sponge.admin.controller._bcf;
+package org.noear.sponge.admin.dso.auth;
 
-import org.noear.bcf.BcfInterceptorBase;
+import org.noear.bcf.BcfSessionBase;
 import org.noear.solon.Solon;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.cloud.CloudClient;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.Filter;
 import org.noear.solon.core.handle.FilterChain;
+import org.noear.sponge.admin.dso.Session;
 
 /**
  * @author noear 2021/5/28 created
@@ -23,6 +24,12 @@ public class WhitelistFilter implements Filter {
                 ctx.output(ip + ", not is whitelist!");
                 return;
             }
+        }
+
+        int puid = Session.global().getPUID();
+        if (puid > 0) {
+            ctx.attrSet("user_puid", "" +puid);
+            ctx.attrSet("user_name", BcfSessionBase.global().getUserName());
         }
 
         chain.doFilter(ctx);
