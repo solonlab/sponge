@@ -2,9 +2,10 @@ package org.noear.sponge.admin;
 
 import org.noear.snack.ONode;
 import org.noear.solon.Solon;
+import org.noear.solon.annotation.Bean;
 import org.noear.solon.annotation.Configuration;
-import org.noear.solon.annotation.Init;
 import org.noear.solon.extend.auth.AuthAdapter;
+import org.noear.solon.extend.auth.AuthUtil;
 import org.noear.sponge.admin.dso.auth.AuthInterceptorImpl;
 import org.noear.sponge.admin.dso.auth.AuthProcessorImpl;
 import org.noear.water.model.ConfigM;
@@ -39,12 +40,12 @@ public class Config {
         return WaterClient.Config.get(group, key);
     }
 
-    @Init
-    public void init() {
-        AuthAdapter.global()
+    @Bean
+    public AuthAdapter init() {
+        return new AuthAdapter()
                 .loginUrl("/login")
-                .authUrlMatchers((ctx, url) -> {
-                    if (url.startsWith("/login") || ctx.action() == null) {
+                .authPathMatchers((ctx, path) -> {
+                    if (path.startsWith("/login") || ctx.action() == null) {
                         return false;
                     } else {
                         return true;
