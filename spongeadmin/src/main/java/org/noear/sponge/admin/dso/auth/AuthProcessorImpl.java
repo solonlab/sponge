@@ -8,7 +8,7 @@ import org.noear.sponge.admin.dso.Session;
 /**
  * @author noear 2021/5/28 created
  */
-public class AuthProcessorBcfImpl implements AuthProcessor {
+public class AuthProcessorImpl implements AuthProcessor {
     private int puid() {
         return Session.current().getPUID();
     }

@@ -5,7 +5,8 @@ import org.noear.solon.Solon;
 import org.noear.solon.annotation.Configuration;
 import org.noear.solon.annotation.Init;
 import org.noear.solon.extend.auth.AuthAdapter;
-import org.noear.sponge.admin.dso.auth.AuthProcessorBcfImpl;
+import org.noear.sponge.admin.dso.auth.AuthInterceptorImpl;
+import org.noear.sponge.admin.dso.auth.AuthProcessorImpl;
 import org.noear.water.model.ConfigM;
 import org.noear.weed.DbContext;
 import org.noear.water.*;
@@ -49,7 +50,8 @@ public class Config {
                         return true;
                     }
                 })
-                .authProcessor(new AuthProcessorBcfImpl())
+                .authInterceptor(new AuthInterceptorImpl())
+                .authProcessor(new AuthProcessorImpl())
                 .authOnFailure((ctx, rst) -> {
                     ctx.outputAsJson(new ONode().set("code", 403).set("msg", "没有权限").toJson());
                 });
