@@ -5,7 +5,6 @@ import org.noear.solon.Solon;
 import org.noear.solon.annotation.Bean;
 import org.noear.solon.annotation.Configuration;
 import org.noear.solon.extend.auth.AuthAdapter;
-import org.noear.solon.extend.auth.AuthUtil;
 import org.noear.sponge.admin.dso.auth.AuthInterceptorImpl;
 import org.noear.sponge.admin.dso.auth.AuthProcessorImpl;
 import org.noear.water.model.ConfigM;

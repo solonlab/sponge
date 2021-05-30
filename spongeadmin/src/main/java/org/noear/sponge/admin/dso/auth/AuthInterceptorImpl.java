@@ -4,14 +4,13 @@ import org.noear.bcf.BcfSessionBase;
 import org.noear.solon.Solon;
 import org.noear.solon.cloud.CloudClient;
 import org.noear.solon.core.handle.Context;
-import org.noear.solon.extend.auth.AuthInterceptorLogined;
-import org.noear.solon.extend.auth.AuthInterceptorUrl;
+import org.noear.solon.extend.auth.AuthInterceptorPath;
 import org.noear.sponge.admin.dso.Session;
 
 /**
  * @author noear 2021/5/29 created
  */
-public class AuthInterceptorImpl extends AuthInterceptorUrl {
+public class AuthInterceptorImpl extends AuthInterceptorPath {
     @Override
     public void handle(Context ctx) throws Throwable {
         String ip = ctx.realIp();
