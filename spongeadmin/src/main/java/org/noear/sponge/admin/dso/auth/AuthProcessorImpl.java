@@ -20,7 +20,9 @@ public class AuthProcessorImpl implements AuthProcessor {
     @Override
     public boolean verifyIp(String ip) {
         if (Solon.cfg().isWhiteMode() && Solon.cfg().isFilesMode() == false) {
-            return CloudClient.list().inListOfClientIp(ip);
+            if (CloudClient.list().inListOfClientIp(ip) == false) {
+                return false;
+            }
         }
 
         int puid = puid();
