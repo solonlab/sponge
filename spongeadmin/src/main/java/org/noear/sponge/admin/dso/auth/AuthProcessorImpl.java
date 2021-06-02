@@ -20,7 +20,7 @@ public class AuthProcessorImpl implements AuthProcessor {
     @Override
     public boolean verifyIp(String ip) {
         if (Solon.cfg().isWhiteMode() && Solon.cfg().isFilesMode() == false) {
-            if (CloudClient.list().inListOfClientIp(ip) == false) {
+            if (CloudClient.list().inListOfClientAndServerIp(ip) == false) {
                 return false;
             }
         }
@@ -50,7 +50,7 @@ public class AuthProcessorImpl implements AuthProcessor {
 
             if (BcfClient.hasUrlpath(path)) {
                 return BcfClient.hasUrlpathByUser(puid(), path);
-            }else{
+            } else {
                 return true;
             }
         } catch (Exception e) {
