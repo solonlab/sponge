@@ -1,6 +1,10 @@
 package org.noear.sponge.admin.dso.auth;
 
 import org.noear.bcf.BcfClient;
+import org.noear.bcf.BcfSessionBase;
+import org.noear.solon.Solon;
+import org.noear.solon.cloud.CloudClient;
+import org.noear.solon.core.handle.Context;
 import org.noear.solon.extend.auth.AuthProcessor;
 import org.noear.solon.extend.auth.annotation.Logical;
 import org.noear.sponge.admin.dso.Session;
@@ -11,6 +15,23 @@ import org.noear.sponge.admin.dso.Session;
 public class AuthProcessorImpl implements AuthProcessor {
     private int puid() {
         return Session.current().getPUID();
+    }
+
+    @Override
+    public boolean verifyIp(String ip) {
+        if (Solon.cfg().isWhiteMode() && Solon.cfg().isFilesMode() == false) {
+            return CloudClient.list().inListOfClientIp(ip);
+        }
+
+        int puid = puid();
+
+        if (puid > 0) {
+            Context ctx = Context.current();
+            ctx.attrSet("user_puid", "" + puid);
+            ctx.attrSet("user_name", BcfSessionBase.global().getUserName());
+        }
+
+        return true;
     }
 
     @Override

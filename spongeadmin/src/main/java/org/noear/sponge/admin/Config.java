@@ -5,7 +5,6 @@ import org.noear.solon.Solon;
 import org.noear.solon.annotation.Bean;
 import org.noear.solon.annotation.Configuration;
 import org.noear.solon.extend.auth.AuthAdapter;
-import org.noear.sponge.admin.dso.auth.AuthInterceptorImpl;
 import org.noear.sponge.admin.dso.auth.AuthProcessorImpl;
 import org.noear.water.model.ConfigM;
 import org.noear.weed.DbContext;
@@ -43,17 +42,11 @@ public class Config {
     public AuthAdapter init() {
         return new AuthAdapter()
                 .loginUrl("/login")
-                .authPathMatchers((ctx, path) -> {
-                    if (path.startsWith("/login") || ctx.action() == null) {
-                        return false;
-                    } else {
-                        return true;
-                    }
-                })
-                .authInterceptor(new AuthInterceptorImpl())
-                .authProcessor(new AuthProcessorImpl())
-                .authOnFailure((ctx, rst) -> {
-                    ctx.outputAsJson(new ONode().set("code", 403).set("msg", "没有权限").toJson());
+                .addRule(r -> r.include("**").verifyIp().failure((c, t) -> c.output(", not")))
+                .addRule(r -> r.exclude("/login**").verifyPath())
+                .processor(new AuthProcessorImpl())
+                .failure((ctx, rst) -> {
+                    ctx.outputAsJson(new ONode().set("code", 403).set("msg", rst.getDescription()).toJson());
                 });
     }
 }
