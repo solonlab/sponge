@@ -46,7 +46,7 @@ public class Config {
                 .addRule(r -> r.exclude("/login**").verifyPath())
                 .processor(new AuthProcessorImpl())
                 .failure((ctx, rst) -> {
-                    ctx.outputAsJson(new ONode().set("code", 403).set("msg", rst.getDescription()).toJson());
+                    ctx.outputAsJson(new ONode().set("code", 403).set("msg", "没有权限").toJson());
                 });
     }
 }
