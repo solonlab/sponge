@@ -6,7 +6,7 @@
 
     <groupId>org.noear</groupId>
     <artifactId>rock-parent</artifactId>
-    <version>1.0.12</version>
+    <version>1.0.13</version>
     <packaging>pom</packaging>
 
     <name>${project.artifactId}</name>
@@ -42,15 +42,15 @@
         <solon.ver>1.4.9</solon.ver>
 
         <weed3.ver>3.3.14</weed3.ver>
-        <water.ver>2.1.4</water.ver>
+        <water.ver>2.1.5</water.ver>
 
         <snack3.ver>3.1.17</snack3.ver>
-        <bcf.ver>2.0.20</bcf.ver>
+        <bcf.ver>2.0.21</bcf.ver>
 
         <jedis.ver>3.3.0</jedis.ver>
         <okhttp.ver>3.14.8</okhttp.ver>
 
-        <rock.ver>1.0.12</rock.ver>
+        <rock.ver>1.0.13</rock.ver>
     </properties>
 
     <dependencyManagement>
