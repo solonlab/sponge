@@ -43,7 +43,7 @@ public class Config {
         return new AuthAdapter()
                 .loginUrl("/login")
                 .addRule(r -> r.include("**").verifyIp().failure((c, t) -> c.output(", not")))
-                .addRule(r -> r.exclude("/login**").exclude("/run/*").exclude("/msg/*").exclude("/_session/*").verifyPath())
+                .addRule(r -> r.exclude("/login**").exclude("/run/**").exclude("/msg/**").exclude("/_session/**").verifyPath())
                 .processor(new AuthProcessorImpl())
                 .failure((ctx, rst) -> {
                     ctx.outputAsJson(new ONode().set("code", 403).set("msg", "没有权限").toJson());
