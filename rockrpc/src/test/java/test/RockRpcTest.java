@@ -18,7 +18,7 @@ public class RockRpcTest {
 
     @Test
     public void test0() throws Exception {
-        RockRpc rpc = Nami.builder().interceptorAdd(inv -> {
+        RockRpc rpc = Nami.builder().filterAdd(inv -> {
             inv.headers.put(WW.http_header_trace, WaterClient.waterTraceId());
             inv.headers.put(WW.http_header_from, WaterClient.localServiceHost());
 
