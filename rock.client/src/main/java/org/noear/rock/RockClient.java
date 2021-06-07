@@ -34,9 +34,11 @@ public class RockClient {
         if (_instance == null) {
             synchronized (_lock) {
                 if (_instance == null) {
-                    _instance = Nami.builder().filterAdd((cfg, m, url, h, a) -> {
-                        h.put(WW.http_header_trace, WaterClient.waterTraceId());
-                        h.put(WW.http_header_from, WaterClient.localServiceHost());
+                    _instance = Nami.builder().interceptorAdd(inv -> {
+                        inv.headers.put(WW.http_header_trace, WaterClient.waterTraceId());
+                        inv.headers.put(WW.http_header_from, WaterClient.localServiceHost());
+
+                        return inv.invoke();
                     }).create(RockRpc.class);
 
                     AppModel.rockclient = _instance;

@@ -18,9 +18,11 @@ public class RockRpcTest {
 
     @Test
     public void test0() throws Exception {
-        RockRpc rpc = Nami.builder().filterAdd((cfg, m, url, h, a) -> {
-            h.put(WW.http_header_trace, WaterClient.waterTraceId());
-            h.put(WW.http_header_from, WaterClient.localServiceHost());
+        RockRpc rpc = Nami.builder().interceptorAdd(inv -> {
+            inv.headers.put(WW.http_header_trace, WaterClient.waterTraceId());
+            inv.headers.put(WW.http_header_from, WaterClient.localServiceHost());
+
+            return inv.invoke();
         }).create(RockRpc.class);
 //        RockRpc rpc = Fairy.builder().server("http://12.12.1.1").create(RockRpc.class);
 
