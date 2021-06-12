@@ -7,7 +7,7 @@ import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ModelAndView;
 import org.noear.solon.core.handle.UploadedFile;
-import org.noear.solon.extend.auth.annotation.AuthRoles;
+import org.noear.solon.auth.annotation.AuthRoles;
 import org.noear.sponge.admin.controller.BaseController;
 import org.noear.sponge.admin.controller.ViewModel;
 import org.noear.sponge.admin.dso.AgroupCookieUtil;

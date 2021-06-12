@@ -3,7 +3,7 @@ package org.noear.sponge.admin.controller.track;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.core.handle.ModelAndView;
-import org.noear.solon.extend.auth.annotation.AuthRoles;
+import org.noear.solon.auth.annotation.AuthRoles;
 import org.noear.sponge.admin.dso.BcfTagChecker;
 import org.noear.sponge.admin.dso.GroupUtil;
 import org.noear.sponge.admin.dso.SessionRoles;

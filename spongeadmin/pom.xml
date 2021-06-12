@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.noear</groupId>
         <artifactId>rock-parent</artifactId>
-        <version>1.0.14</version>
+        <version>1.1.0</version>
         <relativePath>../rock-parent/pom.xml</relativePath>
     </parent>
 
@@ -78,13 +78,13 @@
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon.extend.jetty.jsp</artifactId>
+            <artifactId>solon.boot.jetty.add.jsp</artifactId>
             <version>${solon.ver}</version>
         </dependency>
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon.extend.auth</artifactId>
+            <artifactId>solon.auth</artifactId>
             <version>${solon.ver}</version>
         </dependency>
 

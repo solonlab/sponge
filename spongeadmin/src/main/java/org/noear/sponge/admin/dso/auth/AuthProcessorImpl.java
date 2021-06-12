@@ -5,8 +5,8 @@ import org.noear.bcf.BcfSessionBase;
 import org.noear.solon.Solon;
 import org.noear.solon.cloud.CloudClient;
 import org.noear.solon.core.handle.Context;
-import org.noear.solon.extend.auth.AuthProcessor;
-import org.noear.solon.extend.auth.annotation.Logical;
+import org.noear.solon.auth.AuthProcessor;
+import org.noear.solon.auth.annotation.Logical;
 import org.noear.sponge.admin.dso.Session;
 
 /**
