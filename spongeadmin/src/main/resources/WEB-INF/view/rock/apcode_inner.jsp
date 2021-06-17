@@ -26,7 +26,7 @@
         <toolbar>
             <left>
                 <form>
-                    <input type="text" value="${code_num}" name="code_num" placeholder="状态码"/>&nbsp;&nbsp;
+                    <input type="text" class="w350" value="${code_num}" name="code_num" placeholder="状态码"/>&nbsp;&nbsp;
                     <input type="hidden" value="${agroup_id}" name="agroup_id" />
                     <input type="hidden" value="${service}" name="service" />
                     <button type="submit">查询</button>&nbsp;&nbsp;
