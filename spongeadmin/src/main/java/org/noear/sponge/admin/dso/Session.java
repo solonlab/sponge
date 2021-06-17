@@ -40,6 +40,10 @@ public final class Session extends BcfSessionBase {
         setIsOperator(is_operator ? 1 : 0);
     }
 
+    public final  boolean isAdmin() {
+        return getIsAdmin() == 1;
+    }
+
     public final int getIsAdmin() {
         return get("Is_Admin", 0);
     }

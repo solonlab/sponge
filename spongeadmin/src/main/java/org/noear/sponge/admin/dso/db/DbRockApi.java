@@ -162,6 +162,17 @@ public class DbRockApi {
         .getList(new AppExSettingModel());
     }
 
+    public static List<AppExSettingModel> getAppGroupSetsList(Integer agroup_id, List<Object> ids) throws SQLException {
+        if (agroup_id < 1) {
+            return new ArrayList<>();
+        }
+
+        return db().table("appx_ex_setting")
+                .where("agroup_id = ? AND app_id=0", agroup_id).andIn("row_id", ids)
+                .orderBy("name ASC")
+                .selectList("*", AppExSettingModel.class);
+    }
+
     //获取应用组设置分组 计数。
     public static List<AppExSettingModel> getAppGroupCounts() throws SQLException {
         return db().table("appx_ex_setting")
@@ -203,6 +214,21 @@ public class DbRockApi {
          }
 
          return isOk;
+    }
+
+    public static void impAgsets( Integer agroup_id, AppExSettingModel m) throws SQLException {
+        DbTableQuery tb = db().table("appx_ex_setting")
+                .set("name", m.name)
+                .set("type", m.type)
+                .set("value", m.value)
+                .set("note", m.note)
+                .set("is_client", m.is_client)
+                .set("ver_start", m.ver_start)
+                .set("agroup_id", agroup_id);
+
+        if (tb.whereEq("agroup_id", agroup_id).andEq("app_id", 0).andEq("name", m.name).selectExists()) {
+            tb.insert();
+        }
     }
 
     //获取app列表。
@@ -290,6 +316,17 @@ public class DbRockApi {
         .getList(new AppExSettingModel());
     }
 
+    public static List<AppExSettingModel> getAppSetsList(Integer app_id, List<Object> ids) throws SQLException {
+        if (app_id < 1) {
+            return new ArrayList<>();
+        }
+
+        return db().table("appx_ex_setting")
+                .where("app_id = ?", app_id).andIn("row_id", ids)
+                .orderBy("name ASC")
+                .selectList("*", AppExSettingModel.class);
+    }
+
     //根据id获取应用配置
     public static AppExSettingModel getAppsetsById(Integer row_id) throws SQLException {
             return db().table("appx_ex_setting")
@@ -325,6 +362,20 @@ public class DbRockApi {
         }
 
         return isOk;
+    }
+
+    public static void impAppsets(int agroup_id, int app_id, AppExSettingModel m) throws SQLException {
+        DbTableQuery tb = db().table("appx_ex_setting")
+                .set("name", m.name)
+                .set("type", m.type)
+                .set("value", m.value)
+                .set("note", m.note)
+                .set("is_client", m.is_client)
+                .set("ver_start", m.ver_start)
+                .set("agroup_id", agroup_id)
+                .set("app_id", app_id);
+
+        tb.insertBy("app_id,name");
     }
 
     //根据agroup_id 获取 app列表

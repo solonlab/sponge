@@ -2,21 +2,30 @@ package org.noear.sponge.admin.controller.rock;
 
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
+import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ModelAndView;
 import org.noear.solon.auth.annotation.AuthRoles;
+import org.noear.solon.core.handle.UploadedFile;
 import org.noear.sponge.admin.controller.ViewModel;
 import org.noear.sponge.admin.dso.AgroupCookieUtil;
 import org.noear.sponge.admin.dso.BcfTagChecker;
+import org.noear.sponge.admin.dso.Session;
 import org.noear.sponge.admin.dso.SessionRoles;
 import org.noear.sponge.admin.dso.db.DbRockApi;
 import org.noear.sponge.admin.controller.BaseController;
 import org.noear.sponge.admin.model.rock.AppExSettingModel;
 import org.noear.sponge.admin.model.rock.AppGroupModel;
+import org.noear.water.utils.Datetime;
+import org.noear.water.utils.IOUtils;
+import org.noear.water.utils.JsondEntity;
+import org.noear.water.utils.JsondUtils;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @Mapping("/rock/")
@@ -33,7 +42,7 @@ public class AppGroupSettingController extends BaseController {
         Integer out_agroup_id = agroup_id;
         if (out_agroup_id == null) {
             out_agroup_id = AgroupCookieUtil.cookieGet();
-        }else {
+        } else {
             AgroupCookieUtil.cookieSet(agroup_id);
         }
 
@@ -108,5 +117,44 @@ public class AppGroupSettingController extends BaseController {
         } else {
             return viewModel.code(0, "保存失败！");
         }
+    }
+
+    @Mapping("agsets/ajax/import")
+    public ViewModel ajaxImport(int agroup_id, UploadedFile file) throws Exception {
+        if (Session.current().isAdmin() == false) {
+            return viewModel.code(0, "没有权限！");
+        }
+
+        String jsonD = IOUtils.toString(file.content);
+        JsondEntity entity = JsondUtils.decode(jsonD);
+
+        if (entity == null || "agroup_setting".equals(entity.table) == false) {
+            return viewModel.code(0, "数据不对！");
+        }
+
+        List<AppExSettingModel> list = entity.data.toObjectList(AppExSettingModel.class);
+
+        for (AppExSettingModel m : list) {
+            DbRockApi.impAgsets(agroup_id, m);
+        }
+
+        return viewModel.code(1, "ok");
+    }
+
+    @Mapping("agsets/ajax/export")
+    public void ajaxExport(Context ctx, int agroup_id, String ids) throws Exception {
+        List<Object> ids2 = Arrays.asList(ids.split(","))
+                .stream()
+                .map(s -> Integer.parseInt(s))
+                .collect(Collectors.toList());
+
+        List<AppExSettingModel> list = DbRockApi.getAppGroupSetsList(agroup_id, ids2);
+
+        String jsonD = JsondUtils.encode("agroup_setting", list);
+
+        String filename2 = "agroup_setting" + agroup_id + "_" + Datetime.Now().getDate() + ".jsond";
+
+        ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
+        ctx.output(jsonD);
     }
 }
