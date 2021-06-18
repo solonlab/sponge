@@ -12,7 +12,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8 "/>
     <link rel="stylesheet" href="${css}/main.css"/>
     <script src="/_session/domain.js"></script>
-    <script src="${js}/lib.js"></script>
+    <script src="${js}/jtadmin.js"></script>
     <script>
         function addAgroup() {
             location.href="/rock/apsets/add?app_id=${app_id}";
@@ -79,11 +79,11 @@
         <c:if test="${app_id>0&&isOperator==1}">
             <button type="button" onclick="addAgroup()" class="edit">新增</button>
         </c:if>
-        <c:if test="${agroup_id>0&&isOperator==1}">
+        <c:if test="${app_id>0&&isOperator==1}">
             <div><file>
                 <label><input id="imp_file" type="file" accept=".jsond"/><a class="btn minor w80">导入</a></label>
             </file>
-                <button type='button' class="minor w80 mar10-l" onclick="exp('${app_id}')" >导出</button>
+                <button type='button' class="minor w80 mar10-l" onclick="exp()" >导出</button>
             </div>
         </c:if>
     </form>
