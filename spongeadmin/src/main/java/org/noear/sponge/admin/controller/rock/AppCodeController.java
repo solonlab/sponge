@@ -5,22 +5,27 @@ import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ModelAndView;
 import org.noear.solon.auth.annotation.AuthRoles;
+import org.noear.solon.core.handle.UploadedFile;
 import org.noear.sponge.admin.controller.ViewModel;
 import org.noear.sponge.admin.dso.AgroupCookieUtil;
 import org.noear.sponge.admin.dso.BcfTagChecker;
+import org.noear.sponge.admin.dso.Session;
 import org.noear.sponge.admin.dso.SessionRoles;
 import org.noear.sponge.admin.dso.db.DbRockApi;
 import org.noear.sponge.admin.dso.db.DbRockI18nApi;
 import org.noear.sponge.admin.model.TagCountsModel;
 import org.noear.sponge.admin.model.rock.AppExCodeModel;
 import org.noear.sponge.admin.controller.BaseController;
+import org.noear.sponge.admin.model.rock.AppExI18nModel;
 import org.noear.sponge.admin.model.rock.AppGroupModel;
-import org.noear.water.utils.TextUtils;
+import org.noear.water.utils.*;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @Mapping("/rock/apcode")
@@ -151,5 +156,49 @@ public class AppCodeController extends BaseController {
         } else {
             return viewModel.code(0, "保存失败！");
         }
+    }
+
+    @Mapping("agsets/ajax/export")
+    public void ajaxExport(Context ctx, int agroup_id, String service, String ids) throws Exception {
+        List<Object> ids2 = Arrays.asList(ids.split(","))
+                .stream()
+                .map(s -> Integer.parseInt(s))
+                .collect(Collectors.toList());
+
+        List<AppExI18nModel> list = DbRockI18nApi.getApi18nByService(service, ids2);
+
+        String jsonD = JsondUtils.encode("agroup_code", list);
+
+        String filename2 = "agroup_code_" + agroup_id + "_" + service + "_" + Datetime.Now().getDate() + ".jsond";
+
+        ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
+        ctx.output(jsonD);
+    }
+
+    @AuthRoles(SessionRoles.role_admin)
+    @Mapping("ajax/import")
+    public ViewModel importFile(int agroup_id, String service, UploadedFile file) throws Exception {
+        if (Session.current().isAdmin() == false) {
+            return viewModel.code(0, "没有权限！");
+        }
+
+        String jsonD = IOUtils.toString(file.content);
+        JsondEntity entity = JsondUtils.decode(jsonD);
+
+        if (entity == null || "agroup_code".equals(entity.table) == false) {
+            return viewModel.code(0, "数据不对！");
+        }
+
+        List<AppExI18nModel> list = entity.data.toObjectList(AppExI18nModel.class);
+
+        for (AppExI18nModel m : list) {
+            if (service == null) {
+                service = m.service;
+            }
+
+            DbRockI18nApi.impApi18n(agroup_id, service, m.name, m.lang, m.note);
+        }
+
+        return viewModel.code(1, "ok");
     }
 }

@@ -168,7 +168,7 @@ public class AppI18nController extends BaseController {
 
         String jsonD = JsondUtils.encode("agroup_i18n", list);
 
-        String filename2 = "agroup_i18n_" + agroup_id + "_" + Datetime.Now().getDate() + ".jsond";
+        String filename2 = "agroup_i18n_" + agroup_id + "_" + service + "_" + Datetime.Now().getDate() + ".jsond";
 
         ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
         ctx.output(jsonD);
