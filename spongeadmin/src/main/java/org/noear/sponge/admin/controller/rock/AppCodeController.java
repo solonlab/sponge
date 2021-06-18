@@ -16,7 +16,6 @@ import org.noear.sponge.admin.dso.db.DbRockI18nApi;
 import org.noear.sponge.admin.model.TagCountsModel;
 import org.noear.sponge.admin.model.rock.AppExCodeModel;
 import org.noear.sponge.admin.controller.BaseController;
-import org.noear.sponge.admin.model.rock.AppExI18nModel;
 import org.noear.sponge.admin.model.rock.AppGroupModel;
 import org.noear.water.utils.*;
 
@@ -165,7 +164,7 @@ public class AppCodeController extends BaseController {
                 .map(s -> Integer.parseInt(s))
                 .collect(Collectors.toList());
 
-        List<AppExI18nModel> list = DbRockI18nApi.i18nGetListByService(service, ids2);
+        List<AppExCodeModel> list = DbRockI18nApi.codeGetListByService(service, ids2);
 
         String jsonD = JsondUtils.encode("agroup_code", list);
 
@@ -189,14 +188,14 @@ public class AppCodeController extends BaseController {
             return viewModel.code(0, "数据不对！");
         }
 
-        List<AppExI18nModel> list = entity.data.toObjectList(AppExI18nModel.class);
+        List<AppExCodeModel> list = entity.data.toObjectList(AppExCodeModel.class);
 
-        for (AppExI18nModel m : list) {
+        for (AppExCodeModel m : list) {
             if (service == null) {
                 service = m.service;
             }
 
-            DbRockI18nApi.i18nImp(agroup_id, service, m.name, m.lang, m.note);
+            DbRockI18nApi.codeImp(agroup_id, service, m.code, m.lang, m.note);
         }
 
         return viewModel.code(1, "ok");
