@@ -134,7 +134,7 @@ public class AppSettingController extends BaseController {
         return resp;
     }
 
-    @Mapping("agsets/ajax/import")
+    @Mapping("apsets/ajax/import")
     public ViewModel ajaxImport(int app_id, UploadedFile file) throws Exception {
         if (Session.current().isAdmin() == false) {
             return viewModel.code(0, "没有权限！");
@@ -158,7 +158,7 @@ public class AppSettingController extends BaseController {
         return viewModel.code(1, "ok");
     }
 
-    @Mapping("agsets/ajax/export")
+    @Mapping("apsets/ajax/export")
     public void ajaxExport(Context ctx, int app_id, String ids) throws Exception {
         List<Object> ids2 = Arrays.asList(ids.split(","))
                 .stream()

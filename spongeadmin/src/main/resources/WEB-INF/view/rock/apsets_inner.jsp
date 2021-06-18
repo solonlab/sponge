@@ -29,7 +29,7 @@
 
             $.ajax({
                 type:"POST",
-                url:"ajax/import",
+                url:"./ajax/import",
                 data:fromData,
                 processData: false,
                 contentType: false,
@@ -53,7 +53,7 @@
                 return;
             }
 
-            window.open("ajax/export?app_id=${app_id}&ids=" + vm.sel_id, "_blank");
+            window.open("./ajax/export?app_id=${app_id}&ids=" + vm.sel_id, "_blank");
         }
 
         $(function(){
@@ -80,7 +80,7 @@
             <button type="button" onclick="addAgroup()" class="edit">新增</button>
         </c:if>
         <c:if test="${agroup_id>0&&isOperator==1}">
-            <div><a class="w60"></a><file>
+            <div><file>
                 <label><input id="imp_file" type="file" accept=".jsond"/><a class="btn minor w80">导入</a></label>
             </file>
                 <button type='button' class="minor w80 mar10-l" onclick="exp('${app_id}')" >导出</button>
@@ -104,7 +104,7 @@
             </c:if>
         </tr>
         </thead>
-        <tbody>
+        <tbody class="sel_from">
         <c:forEach var="apsets" items="${apsetsList}">
             <tr>
                 <td><checkbox><label><input type="checkbox" name="sel_id" value="${apsets.row_id}" /><a></a></label></checkbox></td>

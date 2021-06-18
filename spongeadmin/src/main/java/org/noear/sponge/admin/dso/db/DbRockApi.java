@@ -226,7 +226,7 @@ public class DbRockApi {
                 .set("ver_start", m.ver_start)
                 .set("agroup_id", agroup_id);
 
-        if (tb.whereEq("agroup_id", agroup_id).andEq("app_id", 0).andEq("name", m.name).selectExists()) {
+        if (tb.whereEq("agroup_id", agroup_id).andEq("app_id", 0).andEq("name", m.name).selectExists() == false) {
             tb.insert();
         }
     }
@@ -375,7 +375,9 @@ public class DbRockApi {
                 .set("agroup_id", agroup_id)
                 .set("app_id", app_id);
 
-        tb.insertBy("app_id,name");
+        if (tb.whereEq("app_id", app_id).andEq("name", m.name).selectExists() == false) {
+            tb.insert();
+        }
     }
 
     //根据agroup_id 获取 app列表
