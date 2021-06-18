@@ -108,6 +108,17 @@ public class DbRockI18nApi {
     }
 
 
+    public static void codeImp(int agroup_id, String service, Integer code, String lang, String note) throws SQLException {
+        db().table("appx_ex_code")
+                .set("agroup_id", agroup_id)
+                .set("code", code)
+                .set("service", service)
+                .set("lang", lang)
+                .set("note", note)
+                .upsertBy("agroup_id,service,code,lang");
+    }
+
+
     ///////////
     // i18n
     //////////
