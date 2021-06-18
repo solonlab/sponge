@@ -157,7 +157,7 @@ public class AppCodeController extends BaseController {
         }
     }
 
-    @Mapping("agsets/ajax/export")
+    @Mapping("ajax/export")
     public void ajaxExport(Context ctx, int agroup_id, String service, String ids) throws Exception {
         List<Object> ids2 = Arrays.asList(ids.split(","))
                 .stream()

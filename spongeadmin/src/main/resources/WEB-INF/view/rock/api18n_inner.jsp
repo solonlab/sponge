@@ -54,7 +54,7 @@
                 return;
             }
 
-            window.open("./ajax/export?agroup_id=${agroup_id}&ids=" + vm.sel_id, "_blank");
+            window.open("./ajax/export?service=${service}&agroup_id=${agroup_id}&ids=" + vm.sel_id, "_blank");
         }
 
         $(function(){
@@ -82,10 +82,13 @@
             <button type="submit">查询</button>&nbsp;&nbsp;
             <c:if test="${agroup_id>0&&isOperator==1}">
                 <button type="button" onclick="add()" class="edit">新增</button>
-                <file class="mar10-l">
+            </c:if>
+            <c:if test="${agroup_id>0&&isOperator==1}">
+                <div><file>
                     <label><input id="imp_file" type="file" accept=".properties,.jsond"/><a class="btn minor w80">导入</a></label>
-                </file>
-                <button type='button' class="minor w80 mar10-l" onclick="exp()" >导出</button>
+                    </file>
+                    <button type='button' class="minor w80 mar10-l" onclick="exp()" >导出</button>
+                </div>
             </c:if>
         </form>
     </left>
@@ -110,7 +113,7 @@
             </c:if>
         </tr>
         </thead>
-        <tbody>
+        <tbody class="sel_from">
         <c:forEach var="m1" items="${list}">
             <tr>
                 <td><checkbox><label><input type="checkbox" name="sel_id" value="${m1.row_id}" /><a></a></label></checkbox></td>

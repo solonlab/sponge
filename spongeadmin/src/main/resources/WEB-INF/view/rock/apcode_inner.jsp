@@ -25,6 +25,7 @@
 
             var fromData = new FormData();
             fromData.append("file", file);
+            fromData.append("service","${service}");
             fromData.append("agroup_id","${agroup_id}");
 
             $.ajax({
@@ -53,7 +54,7 @@
                 return;
             }
 
-            window.open("./ajax/export?agroup_id=${agroup_id}&ids=" + vm.sel_id, "_blank");
+            window.open("./ajax/export?service=${service}&agroup_id=${agroup_id}&ids=" + vm.sel_id, "_blank");
         }
 
         $(function(){
