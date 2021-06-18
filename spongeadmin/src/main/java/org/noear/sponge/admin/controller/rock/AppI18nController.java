@@ -176,7 +176,7 @@ public class AppI18nController extends BaseController {
     @AuthRoles(SessionRoles.role_admin)
     @Mapping("ajax/import")
     public ViewModel importFile(int agroup_id, String service, UploadedFile file) throws Exception {
-        if (file.extension == "jsond") {
+        if ("jsond".equals(file.extension)) {
             return importFileForJsond(agroup_id, service, file);
         } else {
             return importFileForProfile(agroup_id, service, file);
