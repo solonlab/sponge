@@ -18,7 +18,6 @@ import org.noear.sponge.admin.dso.db.DbRockApi;
 import org.noear.sponge.admin.dso.db.DbRockI18nApi;
 import org.noear.sponge.admin.model.TagCountsModel;
 import org.noear.sponge.admin.model.rock.AppExI18nModel;
-import org.noear.sponge.admin.model.rock.AppExSettingModel;
 import org.noear.sponge.admin.model.rock.AppGroupModel;
 import org.noear.water.utils.*;
 
@@ -64,7 +63,7 @@ public class AppI18nController extends BaseController {
         }
 
 
-        List<TagCountsModel> sevList = DbRockI18nApi.getApi18nCounts(out_agroup_id);
+        List<TagCountsModel> sevList = DbRockI18nApi.i18nGetCounts(out_agroup_id);
 
         if (TextUtils.isEmpty(out_sev) && sevList.size() > 0) {
             out_sev = sevList.get(0).tag;
@@ -87,7 +86,7 @@ public class AppI18nController extends BaseController {
             AgroupCookieUtil.cookieSet(agroup_id);
         }
 
-        List<TagCountsModel> langs = DbRockI18nApi.getApi18nLangsByService(service);
+        List<TagCountsModel> langs = DbRockI18nApi.i18nGetLangsByService(service);
         for (TagCountsModel m : langs) {
             if (TextUtils.isEmpty(m.tag)) {
                 m.tag = "default";
@@ -98,7 +97,7 @@ public class AppI18nController extends BaseController {
             lang = "";
         }
 
-        List<AppExI18nModel> list = DbRockI18nApi.getApi18nByService(service, name, lang);
+        List<AppExI18nModel> list = DbRockI18nApi.i18nGetListByService(service, name, lang);
 
         if (TextUtils.isEmpty(lang)) {
             lang = "default";
@@ -119,7 +118,7 @@ public class AppI18nController extends BaseController {
     //应用状态码编辑页面跳转
     @Mapping("edit")
     public ModelAndView editApcode(Integer row_id) throws SQLException {
-        AppExI18nModel model = DbRockI18nApi.getApi18nById(row_id);
+        AppExI18nModel model = DbRockI18nApi.i18nGetById(row_id);
         List<AppGroupModel> appGroups = DbRockApi.getAppGroup("");
         viewModel.put("app_groups", appGroups);
         viewModel.put("model", model);
@@ -148,7 +147,7 @@ public class AppI18nController extends BaseController {
     @Mapping("edit/ajax/save")
     public ViewModel saveApi18n(Integer row_id, String name, String lang, String note, Integer agroup_id, String service) throws SQLException {
 
-        boolean result = DbRockI18nApi.editApi18n(row_id, agroup_id, service, name, lang, note);
+        boolean result = DbRockI18nApi.i18nSave(row_id, agroup_id, service, name, lang, note);
 
         if (result) {
             return viewModel.code(1, "保存成功！");
@@ -164,7 +163,7 @@ public class AppI18nController extends BaseController {
                 .map(s -> Integer.parseInt(s))
                 .collect(Collectors.toList());
 
-        List<AppExI18nModel> list = DbRockI18nApi.getApi18nByService(service, ids2);
+        List<AppExI18nModel> list = DbRockI18nApi.i18nGetListByService(service, ids2);
 
         String jsonD = JsondUtils.encode("agroup_i18n", list);
 
@@ -203,7 +202,7 @@ public class AppI18nController extends BaseController {
                 service = m.service;
             }
 
-            DbRockI18nApi.impApi18n(agroup_id, service, m.name, m.lang, m.note);
+            DbRockI18nApi.i18nImp(agroup_id, service, m.name, m.lang, m.note);
         }
 
         return viewModel.code(1, "ok");
@@ -240,7 +239,7 @@ public class AppI18nController extends BaseController {
         for (Object k : i18n.keySet()) {
             if (k instanceof String) {
                 String name = (String) k;
-                DbRockI18nApi.impApi18n(agroup_id, service, name, lang, i18n.getProperty(name));
+                DbRockI18nApi.i18nImp(agroup_id, service, name, lang, i18n.getProperty(name));
                 isOk = true;
             }
         }

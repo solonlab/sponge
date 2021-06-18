@@ -23,7 +23,7 @@ public class DbRockI18nApi {
     }
 
     //对api_code 根据agroup_id分组
-    public static List<TagCountsModel> getApCodeCounts(int agroup_id) throws SQLException {
+    public static List<TagCountsModel> codeGetCounts(int agroup_id) throws SQLException {
         return db().table("appx_ex_code")
                 .whereEq("agroup_id", agroup_id)
                 .groupBy("service")
@@ -31,7 +31,7 @@ public class DbRockI18nApi {
     }
 
     //根据agroup_id获取列表。
-    public static List<AppExCodeModel> getApcodeByService(String service, Integer code, String lang) throws SQLException {
+    public static List<AppExCodeModel> codeGetListByService(String service, Integer code, String lang) throws SQLException {
         if (lang == null) {
             lang = "";
         }
@@ -53,8 +53,18 @@ public class DbRockI18nApi {
                 .getList(new AppExCodeModel());
     }
 
+    public static List<AppExCodeModel> codeGetListByService(String service, List<Object> ids) throws SQLException {
+        if (TextUtils.isEmpty(service)) {
+            return new ArrayList<>();
+        }
+
+        return db().table("appx_ex_code")
+                .whereEq("service", service).andIn("row_id", ids)
+                .selectList("*", AppExCodeModel.class);
+    }
+
     //根据agroup_id获取列表。
-    public static List<TagCountsModel> getApcodeLangsByService(String service) throws SQLException {
+    public static List<TagCountsModel> codeGetLangsByService(String service) throws SQLException {
         if (TextUtils.isEmpty(service)) {
             return new ArrayList<>();
         }
@@ -67,25 +77,15 @@ public class DbRockI18nApi {
                 .getList(TagCountsModel.class);
     }
 
-    public static List<AppExCodeModel> getApCodeByService(String service, List<Object> ids) throws SQLException {
-        if (TextUtils.isEmpty(service)) {
-            return new ArrayList<>();
-        }
-
-        return db().table("appx_ex_code")
-                .whereEq("service", service).andIn("row_id", ids)
-                .selectList("*", AppExCodeModel.class);
-    }
-
     //根据id获取对应状态码信息
-    public static AppExCodeModel getApCodeById(Integer row_id) throws SQLException {
+    public static AppExCodeModel codeGetById(Integer row_id) throws SQLException {
         return db().table("appx_ex_code")
                 .where("row_id = ?", row_id)
                 .select("*")
                 .getItem(new AppExCodeModel());
     }
 
-    public static boolean editApcode(Integer row_id, Integer agroup_id, String service, Integer code, String lang, String note) throws SQLException {
+    public static boolean codeSave(Integer row_id, Integer agroup_id, String service, Integer code, String lang, String note) throws SQLException {
         DbTableQuery tb = db().table("appx_ex_code")
                 .set("agroup_id", agroup_id)
                 .set("code", code)
@@ -114,7 +114,7 @@ public class DbRockI18nApi {
 
 
     //对api_code 根据agroup_id分组
-    public static List<TagCountsModel> getApi18nCounts(int agroup_id) throws SQLException {
+    public static List<TagCountsModel> i18nGetCounts(int agroup_id) throws SQLException {
         return db().table("appx_ex_i18n")
                 .whereEq("agroup_id", agroup_id)
                 .groupBy("service")
@@ -122,7 +122,7 @@ public class DbRockI18nApi {
     }
 
     //根据agroup_id获取列表。
-    public static List<AppExI18nModel> getApi18nByService(String service, String name, String lang) throws SQLException {
+    public static List<AppExI18nModel> i18nGetListByService(String service, String name, String lang) throws SQLException {
         if (lang == null) {
             lang = "";
         }
@@ -144,8 +144,19 @@ public class DbRockI18nApi {
                 .getList(new AppExI18nModel());
     }
 
+
+    public static List<AppExI18nModel> i18nGetListByService(String service, List<Object> ids) throws SQLException {
+        if (TextUtils.isEmpty(service)) {
+            return new ArrayList<>();
+        }
+
+        return db().table("appx_ex_i18n")
+                .whereEq("service", service).andIn("row_id", ids)
+                .selectList("*", AppExI18nModel.class);
+    }
+
     //根据agroup_id获取列表。
-    public static List<TagCountsModel> getApi18nLangsByService(String service) throws SQLException {
+    public static List<TagCountsModel> i18nGetLangsByService(String service) throws SQLException {
         if (TextUtils.isEmpty(service)) {
             return new ArrayList<>();
         }
@@ -158,25 +169,16 @@ public class DbRockI18nApi {
                 .getList(TagCountsModel.class);
     }
 
-    public static List<AppExI18nModel> getApi18nByService(String service, List<Object> ids) throws SQLException {
-        if (TextUtils.isEmpty(service)) {
-            return new ArrayList<>();
-        }
-
-        return db().table("appx_ex_i18n")
-                .whereEq("service", service).andIn("row_id", ids)
-                .selectList("*", AppExI18nModel.class);
-    }
 
     //根据id获取对应状态码信息
-    public static AppExI18nModel getApi18nById(Integer row_id) throws SQLException {
+    public static AppExI18nModel i18nGetById(Integer row_id) throws SQLException {
         return db().table("appx_ex_i18n")
                 .where("row_id = ?", row_id)
                 .select("*")
                 .getItem(new AppExI18nModel());
     }
 
-    public static boolean editApi18n(Integer row_id, Integer agroup_id, String service, String name, String lang, String note) throws SQLException {
+    public static boolean i18nSave(Integer row_id, Integer agroup_id, String service, String name, String lang, String note) throws SQLException {
         DbTableQuery tb = db().table("appx_ex_i18n")
                 .set("agroup_id", agroup_id)
                 .set("name", name)
@@ -198,7 +200,7 @@ public class DbRockI18nApi {
         return isOk;
     }
 
-    public static void impApi18n(int agroup_id, String service, String name, String lang, String note) throws SQLException {
+    public static void i18nImp(int agroup_id, String service, String name, String lang, String note) throws SQLException {
         db().table("appx_ex_i18n")
                 .set("agroup_id", agroup_id)
                 .set("name", name)

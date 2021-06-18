@@ -65,7 +65,7 @@ public class AppCodeController extends BaseController {
         }
 
 
-        List<TagCountsModel> sevList = DbRockI18nApi.getApCodeCounts(out_agroup_id);
+        List<TagCountsModel> sevList = DbRockI18nApi.codeGetCounts(out_agroup_id);
 
         if (TextUtils.isEmpty(out_sev) && sevList.size() > 0) {
             out_sev = sevList.get(0).tag;
@@ -82,7 +82,7 @@ public class AppCodeController extends BaseController {
 
     @Mapping("inner")
     public ModelAndView apcode_inner(Integer agroup_id, String service, Integer code_num, String lang) throws SQLException {
-        List<TagCountsModel> langs = DbRockI18nApi.getApcodeLangsByService(service);
+        List<TagCountsModel> langs = DbRockI18nApi.codeGetLangsByService(service);
         for (TagCountsModel m : langs) {
             if (TextUtils.isEmpty(m.tag)) {
                 m.tag = "default";
@@ -93,7 +93,7 @@ public class AppCodeController extends BaseController {
             lang = "";
         }
 
-        List<AppExCodeModel> list = DbRockI18nApi.getApcodeByService(service, code_num, lang);
+        List<AppExCodeModel> list = DbRockI18nApi.codeGetListByService(service, code_num, lang);
 
         if (TextUtils.isEmpty(lang)) {
             lang = "default";
@@ -120,7 +120,7 @@ public class AppCodeController extends BaseController {
     //应用状态码编辑页面跳转
     @Mapping("edit")
     public ModelAndView editApcode(Integer row_id) throws SQLException {
-        AppExCodeModel model = DbRockI18nApi.getApCodeById(row_id);
+        AppExCodeModel model = DbRockI18nApi.codeGetById(row_id);
         List<AppGroupModel> appGroups = DbRockApi.getAppGroup("");
         viewModel.put("app_groups", appGroups);
         viewModel.put("model", model);
@@ -149,7 +149,7 @@ public class AppCodeController extends BaseController {
     @Mapping("edit/ajax/save")
     public ViewModel saveApcode(Integer row_id, Integer code, String lang, String note, Integer agroup_id, String service) throws SQLException {
 
-        boolean result = DbRockI18nApi.editApcode(row_id, agroup_id, service, code, lang, note);
+        boolean result = DbRockI18nApi.codeSave(row_id, agroup_id, service, code, lang, note);
 
         if (result) {
             return viewModel.code(1, "保存成功！");
@@ -165,7 +165,7 @@ public class AppCodeController extends BaseController {
                 .map(s -> Integer.parseInt(s))
                 .collect(Collectors.toList());
 
-        List<AppExI18nModel> list = DbRockI18nApi.getApi18nByService(service, ids2);
+        List<AppExI18nModel> list = DbRockI18nApi.i18nGetListByService(service, ids2);
 
         String jsonD = JsondUtils.encode("agroup_code", list);
 
@@ -196,7 +196,7 @@ public class AppCodeController extends BaseController {
                 service = m.service;
             }
 
-            DbRockI18nApi.impApi18n(agroup_id, service, m.name, m.lang, m.note);
+            DbRockI18nApi.i18nImp(agroup_id, service, m.name, m.lang, m.note);
         }
 
         return viewModel.code(1, "ok");
