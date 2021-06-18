@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="${css}/main.css"/>
     <script src="/_session/domain.js"></script>
     <script src="${js}/jtadmin.js"></script>
+    <script src="${js}/layer.js"></script>
     <script>
         function add() {
             location.href="/rock/api18n/add?agroup_id=${agroup_id}&service=${service}";
@@ -22,6 +23,8 @@
             if(confirm("确定要导入吗？") == false){
                 return;
             }
+
+            layer.load(2);
 
             var fromData = new FormData();
             fromData.append("file", file);
@@ -35,6 +38,8 @@
                 processData: false,
                 contentType: false,
                 success:function (data) {
+                    layer.closeAll();
+
                     if(data.code==1) {
                         top.layer.msg('操作成功');
                         setTimeout(function(){
