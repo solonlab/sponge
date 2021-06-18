@@ -152,7 +152,7 @@ public class AppGroupSettingController extends BaseController {
 
         String jsonD = JsondUtils.encode("agroup_setting", list);
 
-        String filename2 = "agroup_setting" + agroup_id + "_" + Datetime.Now().getDate() + ".jsond";
+        String filename2 = "agroup_setting_" + agroup_id + "_" + Datetime.Now().getDate() + ".jsond";
 
         ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
         ctx.output(jsonD);

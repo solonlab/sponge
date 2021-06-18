@@ -12,19 +12,19 @@ import org.noear.sponge.admin.controller.BaseController;
 import org.noear.sponge.admin.controller.ViewModel;
 import org.noear.sponge.admin.dso.AgroupCookieUtil;
 import org.noear.sponge.admin.dso.BcfTagChecker;
+import org.noear.sponge.admin.dso.Session;
 import org.noear.sponge.admin.dso.SessionRoles;
 import org.noear.sponge.admin.dso.db.DbRockApi;
 import org.noear.sponge.admin.dso.db.DbRockI18nApi;
 import org.noear.sponge.admin.model.TagCountsModel;
 import org.noear.sponge.admin.model.rock.AppExI18nModel;
+import org.noear.sponge.admin.model.rock.AppExSettingModel;
 import org.noear.sponge.admin.model.rock.AppGroupModel;
-import org.noear.water.utils.TextUtils;
+import org.noear.water.utils.*;
 
 import java.sql.SQLException;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @Mapping("/rock/api18n")
@@ -40,7 +40,7 @@ public class AppI18nController extends BaseController {
         Integer out_agroup_id = agroup_id;
         if (out_agroup_id == null) {
             out_agroup_id = AgroupCookieUtil.cookieGet();
-        }else {
+        } else {
             AgroupCookieUtil.cookieSet(agroup_id);
         }
 
@@ -157,14 +157,67 @@ public class AppI18nController extends BaseController {
         }
     }
 
+    @Mapping("agsets/ajax/export")
+    public void ajaxExport(Context ctx, int agroup_id, String service, String ids) throws Exception {
+        List<Object> ids2 = Arrays.asList(ids.split(","))
+                .stream()
+                .map(s -> Integer.parseInt(s))
+                .collect(Collectors.toList());
+
+        List<AppExI18nModel> list = DbRockI18nApi.getApi18nByService(service, ids2);
+
+        String jsonD = JsondUtils.encode("agroup_i18n", list);
+
+        String filename2 = "agroup_i18n_" + agroup_id + "_" + Datetime.Now().getDate() + ".jsond";
+
+        ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
+        ctx.output(jsonD);
+    }
+
     @AuthRoles(SessionRoles.role_admin)
     @Mapping("ajax/import")
-    public ViewModel importFile(int agroup_id,UploadedFile file) throws Exception{
+    public ViewModel importFile(int agroup_id, String service, UploadedFile file) throws Exception {
+        if (file.extension == "jsond") {
+            return importFileForJsond(agroup_id, service, file);
+        } else {
+            return importFileForProfile(agroup_id, service, file);
+        }
+    }
+
+    private ViewModel importFileForJsond(int agroup_id, String service, UploadedFile file) throws Exception {
+        if (Session.current().isAdmin() == false) {
+            return viewModel.code(0, "没有权限！");
+        }
+
+        String jsonD = IOUtils.toString(file.content);
+        JsondEntity entity = JsondUtils.decode(jsonD);
+
+        if (entity == null || "agroup_i18n".equals(entity.table) == false) {
+            return viewModel.code(0, "数据不对！");
+        }
+
+        List<AppExI18nModel> list = entity.data.toObjectList(AppExI18nModel.class);
+
+        for (AppExI18nModel m : list) {
+            if (service == null) {
+                service = m.service;
+            }
+
+            DbRockI18nApi.impApi18n(agroup_id, service, m.name, m.lang, m.note);
+        }
+
+        return viewModel.code(1, "ok");
+    }
+
+    private ViewModel importFileForProfile(int agroup_id, String service, UploadedFile file) throws Exception {
         String i18nStr = Utils.transferToString(file.content, "UTF-8");
         Properties i18n = Utils.buildProperties(i18nStr);
 
-        String service = i18n.getProperty("rock.i18n.service");
+
         String lang = i18n.getProperty("rock.i18n.lang");
+        if (Utils.isEmpty(service)) {
+            service = i18n.getProperty("rock.i18n.service");
+        }
 
         if (Utils.isEmpty(service)) {
             return viewModel.code(0, "提示：缺少元信息配置");
@@ -172,11 +225,11 @@ public class AppI18nController extends BaseController {
 
         boolean isOk = false;
 
-        if(DbRockApi.getAppGroupById(agroup_id).agroup_id != agroup_id){
+        if (DbRockApi.getAppGroupById(agroup_id).agroup_id != agroup_id) {
             return viewModel.code(0, "提示：应用组不存在");
         }
 
-        if(lang == null){
+        if (lang == null) {
             lang = "";
         }
 
@@ -192,7 +245,7 @@ public class AppI18nController extends BaseController {
             }
         }
 
-        if(isOk) {
+        if (isOk) {
             RockUtil.delCacheForI18ns(service);
         }
 

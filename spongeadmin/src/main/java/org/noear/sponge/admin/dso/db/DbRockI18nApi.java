@@ -148,6 +148,17 @@ public class DbRockI18nApi {
                 .getList(TagCountsModel.class);
     }
 
+    //根据agroup_id获取列表。
+    public static List<AppExI18nModel> getApi18nByService(String service, List<Object> ids) throws SQLException {
+        if (TextUtils.isEmpty(service)) {
+            return new ArrayList<>();
+        }
+
+        return db().table("appx_ex_i18n")
+                .whereEq("service", service).andEq("row_id", ids)
+                .selectList("*", AppExI18nModel.class);
+    }
+
     //根据id获取对应状态码信息
     public static AppExI18nModel getApi18nById(Integer row_id) throws SQLException {
         return db().table("appx_ex_i18n")
