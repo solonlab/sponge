@@ -9,7 +9,7 @@ import org.noear.solon.core.handle.Handler;
  * @author noear 2021/5/26 created
  */
 @Slf4j
-@CloudJob("hello_test")
+@CloudJob(value = "hello_test", cron7x = "0 * * * * ? *")
 public class JOB_hello_test implements Handler {
     @Override
     public void handle(Context ctx) throws Throwable {
