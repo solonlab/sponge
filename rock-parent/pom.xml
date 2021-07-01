@@ -39,7 +39,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <solon.ver>1.5.8</solon.ver>
+        <solon.ver>1.5.9</solon.ver>
 
         <weed3.ver>3.3.17</weed3.ver>
         <water.ver>2.2.3</water.ver>
@@ -48,7 +48,7 @@
         <bcf.ver>2.1.2</bcf.ver>
 
         <jedis.ver>3.6.1</jedis.ver>
-        <okhttp.ver>3.14.8</okhttp.ver>
+        <okhttp.ver>3.14.9</okhttp.ver>
 
         <rock.ver>1.1.2</rock.ver>
     </properties>
