@@ -89,17 +89,17 @@ public class AppCodeController extends BaseController {
         }
 
         if ("default".equals(lang)) {
-            lang = "";
+            if (langs.size() > 0) {
+                lang = langs.get(0).tag;
+            } else {
+                lang = "";
+            }
         }
 
         List<AppExCodeModel> list = DbRockI18nApi.codeGetListByService(service, code_num, lang);
 
         if (TextUtils.isEmpty(lang)) {
-            if (langs.size() > 0) {
-                lang = langs.get(0).tag;
-            } else {
-                lang = "default";
-            }
+            lang = "default";
         }
 
         if (agroup_id == null) {

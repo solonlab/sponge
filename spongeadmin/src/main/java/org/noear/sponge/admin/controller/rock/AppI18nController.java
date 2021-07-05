@@ -94,17 +94,17 @@ public class AppI18nController extends BaseController {
         }
 
         if ("default".equals(lang)) {
-            lang = "";
+            if (langs.size() > 0) {
+                lang = langs.get(0).tag;
+            } else {
+                lang = "";
+            }
         }
 
         List<AppExI18nModel> list = DbRockI18nApi.i18nGetListByService(service, name, lang);
 
         if (TextUtils.isEmpty(lang)) {
-            if (langs.size() > 0) {
-                lang = langs.get(0).tag;
-            } else {
-                lang = "default";
-            }
+            lang = "default";
         }
 
         viewModel.put("lang", lang);
