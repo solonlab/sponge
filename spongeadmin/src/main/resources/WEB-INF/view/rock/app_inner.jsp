@@ -27,7 +27,7 @@
     <left>
         <form>
             <input type="hidden" name="agroup_id" value="${agroup_id}">
-            <input type="text" class="w350" value="${name}" name="name" id="name" placeholder="应用名称"/>&nbsp;&nbsp;
+            <input type="text" class="w250" value="${name}" name="name" id="name" placeholder="应用名称"/>&nbsp;&nbsp;
             <button type="submit">查询</button>&nbsp;&nbsp;
             <c:if test="${agroup_id>0&&isOperator==1}">
                 <button type="button" onclick="addApp()" class="edit">新增</button>
