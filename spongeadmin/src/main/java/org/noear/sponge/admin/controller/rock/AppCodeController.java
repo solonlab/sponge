@@ -82,6 +82,7 @@ public class AppCodeController extends BaseController {
     @Mapping("inner")
     public ModelAndView apcode_inner(Integer agroup_id, String service, Integer code_num, String lang) throws SQLException {
         List<TagCountsModel> langs = DbRockI18nApi.codeGetLangsByService(service);
+
         for (TagCountsModel m : langs) {
             if (TextUtils.isEmpty(m.tag)) {
                 m.tag = "default";
@@ -91,9 +92,11 @@ public class AppCodeController extends BaseController {
         if ("default".equals(lang)) {
             if (langs.size() > 0) {
                 lang = langs.get(0).tag;
-            } else {
-                lang = "";
             }
+        }
+
+        if ("default".equals(lang)) {
+            lang = "";
         }
 
         List<AppExCodeModel> list = DbRockI18nApi.codeGetListByService(service, code_num, lang);
