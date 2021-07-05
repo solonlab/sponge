@@ -95,7 +95,11 @@ public class AppCodeController extends BaseController {
         List<AppExCodeModel> list = DbRockI18nApi.codeGetListByService(service, code_num, lang);
 
         if (TextUtils.isEmpty(lang)) {
-            lang = "default";
+            if (list.size() > 0) {
+                lang = list.get(0).lang;
+            } else {
+                lang = "default";
+            }
         }
 
         if (agroup_id == null) {

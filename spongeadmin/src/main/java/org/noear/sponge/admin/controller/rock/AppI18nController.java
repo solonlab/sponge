@@ -100,7 +100,11 @@ public class AppI18nController extends BaseController {
         List<AppExI18nModel> list = DbRockI18nApi.i18nGetListByService(service, name, lang);
 
         if (TextUtils.isEmpty(lang)) {
-            lang = "default";
+            if (list.size() > 0) {
+                lang = list.get(0).lang;
+            } else {
+                lang = "default";
+            }
         }
 
         viewModel.put("lang", lang);

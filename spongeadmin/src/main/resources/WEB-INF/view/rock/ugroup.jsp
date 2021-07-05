@@ -28,7 +28,7 @@
 <toolbar>
     <left>
         <form>
-            <input type="text" class="w350" value="${name}" name="name" id="name" placeholder="用户组名称"/>
+            <input type="text" class="w250" value="${name}" name="name" id="name" placeholder="用户组名称"/>
             <button type="submit">查询</button>&nbsp;&nbsp;
             <c:if test="${isOperator==1}">
                 <button type="button" onclick="addUgroup()" class="edit">新增</button>
