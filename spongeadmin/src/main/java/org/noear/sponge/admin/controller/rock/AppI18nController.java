@@ -93,7 +93,7 @@ public class AppI18nController extends BaseController {
             }
         }
 
-        if ("default".equals(lang)) {
+        if (lang == null || "default".equals(lang)) {
             if (langs.size() > 0) {
                 lang = langs.get(0).tag;
             }
