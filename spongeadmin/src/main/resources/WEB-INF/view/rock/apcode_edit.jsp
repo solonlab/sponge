@@ -13,7 +13,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8 "/>
     <link rel="stylesheet" href="${css}/main.css"/>
     <script src="/_session/domain.js"></script>
-    <script src="${js}/lib.js"></script>
+    <script src="${js}/jtadmin.js"></script>
     <script src="${js}/layer.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script>
@@ -64,6 +64,10 @@
                 }
             });
         }
+
+        $(function (){
+            ctl_s_save_bind(document, saveEdit);
+        });
     </script>
     <style>
         #app li{margin-bottom: 4px;}
@@ -85,7 +89,8 @@
     <left class="ln30">
         <h2><a onclick="history.back(-1)" href="#" class="noline">应用状态码</a></h2> /  编辑
     </left>
-    <right>
+    <right class="form">
+        <n>ctrl + s 可快捷保存</n>
         <button type="button" onclick="saveEdit()">保存</button>
     </right>
 </toolbar>
@@ -115,7 +120,7 @@
                         </li>
                     </ul>
                     <div>
-                        <button type="button" @click="add" class="edit">添加</button>
+                        <button type="button" @click="add" class="minor">添加</button>
                     </div>
                 </td>
             </tr>
