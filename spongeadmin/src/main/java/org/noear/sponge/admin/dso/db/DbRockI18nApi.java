@@ -51,8 +51,7 @@ public class DbRockI18nApi {
                     }
                 })
                 .orderBy("code ASC")
-                .select("*")
-                .getList(new AppExCodeModel());
+                .selectList("*", AppExCodeModel.class);
     }
 
     public static List<AppExCodeModel> codeGetListByService(String service, List<Object> ids) throws SQLException {
@@ -167,8 +166,7 @@ public class DbRockI18nApi {
                     }
                 })
                 .orderBy("name ASC")
-                .select("*")
-                .getList(new AppExI18nModel());
+                .selectList("*", AppExI18nModel.class);
     }
 
 
