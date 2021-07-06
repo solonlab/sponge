@@ -41,15 +41,9 @@
                 return;
             }
 
-            if(row_id==null){
-                row_id=0
-            }
-
             var reg = "^[0-9]*$";
             var re = new RegExp(reg);
-            if (re.test(code)) {
-            }
-            else{
+            if (re.test(code) == false) {
                 top.layer.msg('应用状态码应为纯数字！');
                 return;
             }
@@ -72,6 +66,7 @@
         }
     </script>
     <style>
+        #app li{margin-bottom: 4px;}
     </style>
 </head>
 <body>
@@ -107,18 +102,21 @@
                 <td><input type="text" id="code" value="${model.code}"></td>
             </tr>
             <tr>
-                <th>描述配置</th>
-                <td>
+                <th class="top" style="padding-top: 45px;">描述配置</th>
+                <td id="app">
                     <div>
                         <left><n class="w100" style="display: inline-block">语言</n></left>
                         <right><n class="longtxt" style="display: inline-block">描述</n></right>
                     </div>
                     <ul>
-                        <li>
-                            <left><input class="w100" type="text" id="lang" list="lang_list" autocomplete="off" value="${model.lang}"></left>
-                            <right><input type="text" id="note" class="longtxt" value="${model.note}"/></right>
+                        <li v-for="m in items">
+                            <left><input class="w100" type="text" list="lang_list" autocomplete="off" v-model="m.lang"></left>
+                            <right><input type="text" class="longtxt" v-model="m.note"/></right>
                         </li>
                     </ul>
+                    <div>
+                        <button type="button" @click="add" class="edit">添加</button>
+                    </div>
                 </td>
             </tr>
         </table>
