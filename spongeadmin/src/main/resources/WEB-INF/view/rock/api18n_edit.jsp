@@ -17,7 +17,6 @@
     <script src="${js}/layer.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script>
-        var row_id = ${model.row_id};
         var agroup_id = "${model.agroup_id}";
         var nameOld = "${model.name}";
         var viewModel = {items: ${langs}};
@@ -42,15 +41,10 @@
                 return;
             }
 
-            if(row_id==null){
-                row_id=0
-            }
-
-
             $.ajax({
                 type:"POST",
                 url:"/rock/api18n/edit/ajax/save",
-                data:{"row_id":row_id, "agroup_id":agroup_id, "service":service, "name":name, "nameOld":nameOld, "items":items},
+                data:{"agroup_id":agroup_id, "service":service, "name":name, "nameOld":nameOld, "items":items},
                 success:function (data) {
                     if(data.code==1) {
                         top.layer.msg(data.msg);
