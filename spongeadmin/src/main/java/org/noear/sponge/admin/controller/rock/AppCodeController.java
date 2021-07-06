@@ -1,5 +1,6 @@
 package org.noear.sponge.admin.controller.rock;
 
+import org.noear.snack.ONode;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.Context;
@@ -17,13 +18,11 @@ import org.noear.sponge.admin.model.TagCountsModel;
 import org.noear.sponge.admin.model.rock.AppExCodeModel;
 import org.noear.sponge.admin.controller.BaseController;
 import org.noear.sponge.admin.model.rock.AppGroupModel;
+import org.noear.sponge.admin.model.rock.I18nModel;
 import org.noear.water.utils.*;
 
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -128,8 +127,14 @@ public class AppCodeController extends BaseController {
     public ModelAndView editApcode(Integer row_id) throws SQLException {
         AppExCodeModel model = DbRockI18nApi.codeGetById(row_id);
         List<AppGroupModel> appGroups = DbRockApi.getAppGroup("");
+
+        List<I18nModel> langs =  DbRockI18nApi.codeGetByName(model.service, model.code);
+
         viewModel.put("app_groups", appGroups);
         viewModel.put("model", model);
+        viewModel.put("langs", ONode.stringify(langs));
+        viewModel.put("agroup_id", model.agroup_id);
+
         return view("rock/apcode_edit");
     }
 
@@ -139,6 +144,10 @@ public class AppCodeController extends BaseController {
     public ModelAndView addApcode(Integer agroup_id, String service) throws SQLException {
         List<AppGroupModel> appGroups = DbRockApi.getAppGroup("");
         AppExCodeModel model = new AppExCodeModel();
+
+        List<I18nModel> langs = new ArrayList<>();
+        langs.add(new I18nModel());
+
         if (agroup_id != null) {
             model.agroup_id = agroup_id;
             model.service = service;
@@ -146,16 +155,23 @@ public class AppCodeController extends BaseController {
 
         viewModel.put("app_groups", appGroups);
         viewModel.put("model", model);
+        viewModel.put("langs", ONode.stringify(langs));
         viewModel.put("agroup_id", agroup_id);
+
         return view("rock/apcode_edit");
     }
 
     //应用状态码新增编辑ajax保存功能
     @AuthRoles(SessionRoles.role_admin)
     @Mapping("edit/ajax/save")
-    public ViewModel saveApcode(Integer row_id, Integer code, String lang, String note, Integer agroup_id, String service) throws SQLException {
+    public ViewModel saveApcode(Integer agroup_id, String service, Integer code, Integer codeOld, String items) throws SQLException {
+        List<I18nModel> itemList = ONode.loadStr(items).toObjectList(I18nModel.class);
 
-        boolean result = DbRockI18nApi.codeSave(row_id, agroup_id, service, code, lang, note);
+        boolean result = true;
+
+        for (I18nModel m : itemList) {
+            result = result && DbRockI18nApi.codeSave(agroup_id, service, code, codeOld, m.lang, m.note);
+        }
 
         if (result) {
             return viewModel.code(1, "保存成功！");

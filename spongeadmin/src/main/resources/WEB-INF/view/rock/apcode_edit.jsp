@@ -17,14 +17,19 @@
     <script src="${js}/layer.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script>
-        var row_id = ${model.row_id};
         var agroup_id = "${model.agroup_id}";
-        var row_id = ${model.row_id};
+        var codeOld = "${model.code}";
+        var viewModel = {items: ${langs}};
+
         function saveEdit() {
             var service = $('#service').val().trim();
             var code = $('#code').val().trim();
-            var note = $('#note').val().trim();
-            var lang = $('#lang').val();
+            var items = JSON.stringify(viewModel.items);
+
+            if(viewModel.items.length <1){
+                top.layer.msg("描述配置不能为空！");
+                return;
+            }
 
             if (!service) {
                 top.layer.msg("服务名不能为空！");
@@ -52,7 +57,7 @@
             $.ajax({
                 type:"POST",
                 url:"/rock/apcode/edit/ajax/save",
-                data:{"row_id":row_id,"agroup_id":agroup_id,"service":service,"note":note,"code":code,"lang":lang},
+                data:{"agroup_id":agroup_id, "service":service, "code":code, "codeOld":codeOld, "items":items},
                 success:function (data) {
                     if(data.code==1) {
                         top.layer.msg(data.msg);
@@ -119,6 +124,18 @@
         </table>
     </form>
 </detail>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: viewModel,
+        methods:{
+            add: function (){
+                this.items.push({lang:"",note:""})
+            }
+        }
+    })
+</script>
 
 </body>
 </html>

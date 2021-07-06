@@ -83,21 +83,35 @@ public class DbRockI18nApi {
     public static AppExCodeModel codeGetById(Integer row_id) throws SQLException {
         return db().table("appx_ex_code")
                 .where("row_id = ?", row_id)
-                .select("*")
-                .getItem(new AppExCodeModel());
+                .selectItem("*", AppExCodeModel.class);
     }
 
-    public static boolean codeSave(Integer row_id, Integer agroup_id, String service, Integer code, String lang, String note) throws SQLException {
+    public static List<I18nModel> codeGetByName(String service, int  code) throws SQLException {
+        if (TextUtils.isEmpty(service)) {
+            return new ArrayList<>();
+        } else {
+            return db().table("appx_ex_code")
+                    .whereEq("service", service).andEq("code", code)
+                    .selectList("lang,note", I18nModel.class);
+        }
+    }
+
+    public static boolean codeSave(Integer agroup_id, String service, Integer code, Integer codeOld, String lang, String note) throws SQLException {
         DbTableQuery tb = db().table("appx_ex_code")
                 .set("agroup_id", agroup_id)
-                .set("code", code)
                 .set("service", service)
+                .set("code", code)
                 .set("lang", lang)
                 .set("note", note);
 
         boolean isOk = true;
-        if (row_id > 0) {
-            isOk = tb.where("row_id = ?", row_id).update() > 0;
+
+        if (codeOld != null && tb.whereEq("agroup_id", agroup_id)
+                .andEq("service", service)
+                .andEq("code", codeOld)
+                .andEq("lang", lang)
+                .selectExists()) {
+            isOk = tb.update() > 0;
         } else {
             isOk = tb.insert() > 0;
         }
@@ -196,7 +210,7 @@ public class DbRockI18nApi {
         } else {
             return db().table("appx_ex_i18n")
                     .whereEq("service", service).andEq("name", name)
-                    .selectList("*", I18nModel.class);
+                    .selectList("lang,note", I18nModel.class);
         }
     }
 
