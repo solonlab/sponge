@@ -170,6 +170,10 @@ public class AppCodeController extends BaseController {
         boolean result = true;
 
         for (I18nModel m : itemList) {
+            if (TextUtils.isEmpty(m.lang) && TextUtils.isEmpty(m.note)) {
+                continue;
+            }
+
             result = result && DbRockI18nApi.codeSave(agroup_id, service, code, codeOld, m.lang, m.note);
         }
 

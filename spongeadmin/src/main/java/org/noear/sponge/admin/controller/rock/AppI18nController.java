@@ -171,6 +171,10 @@ public class AppI18nController extends BaseController {
         boolean result = true;
 
         for (I18nModel m : itemList) {
+            if (TextUtils.isEmpty(m.lang) && TextUtils.isEmpty(m.note)) {
+                continue;
+            }
+
             result = result && DbRockI18nApi.i18nSave(agroup_id, service, name, nameOld, m.lang, m.note);
         }
 
