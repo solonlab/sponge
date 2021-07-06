@@ -15,15 +15,14 @@
     <script src="/_session/domain.js"></script>
     <script src="${js}/lib.js"></script>
     <script src="${js}/layer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script>
-        $(function () {
-            document.getElementById('agroup_id').value="${model.agroup_id}";
-        });
+        var row_id = ${model.row_id};
+        var agroup_id = "${model.agroup_id}";
         var row_id = ${model.row_id};
         function saveEdit() {
             var service = $('#service').val().trim();
             var code = $('#code').val().trim();
-            var agroup_id = $('#agroup_id').val();
             var note = $('#note').val().trim();
             var lang = $('#lang').val();
 
@@ -86,6 +85,9 @@
     <left class="ln30">
         <h2><a onclick="history.back(-1)" href="#" class="noline">应用状态码</a></h2> /  编辑
     </left>
+    <right>
+        <button type="button" onclick="saveEdit()">保存</button>
+    </right>
 </toolbar>
 
 <detail>
@@ -100,28 +102,19 @@
                 <td><input type="text" id="code" value="${model.code}"></td>
             </tr>
             <tr>
-                <th>语言</th>
-                <td><input type="text" id="lang" list="lang_list" autocomplete="off" value="${model.lang}">
-                <n>（空表示默认语言）</n>
-                </td>
-            </tr>
-            <tr style="display: none;">
-                <th>所属应用组</th>
+                <th>描述配置</th>
                 <td>
-                    <select id="agroup_id" disabled="disabled">
-                        <c:forEach var="app_group" items="${app_groups}">
-                            <option value=${app_group.agroup_id}>${app_group.name}</option>
-                        </c:forEach>
-                    </select>
+                    <div>
+                        <left><n class="w100" style="display: inline-block">语言</n></left>
+                        <right><n class="longtxt" style="display: inline-block">描述</n></right>
+                    </div>
+                    <ul>
+                        <li>
+                            <left><input class="w100" type="text" id="lang" list="lang_list" autocomplete="off" value="${model.lang}"></left>
+                            <right><input type="text" id="note" class="longtxt" value="${model.note}"/></right>
+                        </li>
+                    </ul>
                 </td>
-            </tr>
-            <tr>
-                <th>描述信息</th>
-                <td><input type="text" id="note" class="longtxt" value="${model.note}"/></td>
-            </tr>
-            <tr>
-                <th></th>
-                <td><button type="button" onclick="saveEdit()">保存</button></td>
             </tr>
         </table>
     </form>

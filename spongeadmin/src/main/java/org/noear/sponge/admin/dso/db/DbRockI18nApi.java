@@ -5,11 +5,13 @@ import org.noear.sponge.admin.Config;
 import org.noear.sponge.admin.model.TagCountsModel;
 import org.noear.sponge.admin.model.rock.AppExCodeModel;
 import org.noear.sponge.admin.model.rock.AppExI18nModel;
+import org.noear.sponge.admin.model.rock.I18nModel;
 import org.noear.water.utils.TextUtils;
 import org.noear.weed.DbContext;
 import org.noear.weed.DbTableQuery;
 
 import javax.rmi.CORBA.Util;
+import javax.xml.soap.Text;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -185,21 +187,35 @@ public class DbRockI18nApi {
     public static AppExI18nModel i18nGetById(Integer row_id) throws SQLException {
         return db().table("appx_ex_i18n")
                 .where("row_id = ?", row_id)
-                .select("*")
-                .getItem(new AppExI18nModel());
+                .selectItem("*", AppExI18nModel.class);
     }
 
-    public static boolean i18nSave(Integer row_id, Integer agroup_id, String service, String name, String lang, String note) throws SQLException {
+    public static List<I18nModel> i18nGetByName(String service, String name) throws SQLException {
+        if (TextUtils.isEmpty(service) || TextUtils.isEmpty(name)) {
+            return new ArrayList<>();
+        } else {
+            return db().table("appx_ex_i18n")
+                    .whereEq("service", service).andEq("name", name)
+                    .selectList("*", I18nModel.class);
+        }
+    }
+
+    public static boolean i18nSave(Integer agroup_id, String service, String name, String nameOld, String lang, String note) throws SQLException {
         DbTableQuery tb = db().table("appx_ex_i18n")
                 .set("agroup_id", agroup_id)
-                .set("name", name)
                 .set("service", service)
+                .set("name", name)
                 .set("lang", lang)
                 .set("note", note);
 
         boolean isOk = true;
-        if (row_id > 0) {
-            isOk = tb.where("row_id = ?", row_id).update() > 0;
+
+        if (TextUtils.isNotEmpty(nameOld) && tb.whereEq("agroup_id", agroup_id)
+                .andEq("service", service)
+                .andEq("name", nameOld)
+                .andEq("lang", lang)
+                .selectExists()) {
+            isOk = tb.update() > 0;
         } else {
             isOk = tb.insert() > 0;
         }

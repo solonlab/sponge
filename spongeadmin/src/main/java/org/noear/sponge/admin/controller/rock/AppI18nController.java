@@ -1,6 +1,7 @@
 package org.noear.sponge.admin.controller.rock;
 
 import org.noear.rock.RockUtil;
+import org.noear.snack.ONode;
 import org.noear.solon.Utils;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
@@ -19,6 +20,7 @@ import org.noear.sponge.admin.dso.db.DbRockI18nApi;
 import org.noear.sponge.admin.model.TagCountsModel;
 import org.noear.sponge.admin.model.rock.AppExI18nModel;
 import org.noear.sponge.admin.model.rock.AppGroupModel;
+import org.noear.sponge.admin.model.rock.I18nModel;
 import org.noear.water.utils.*;
 
 import java.sql.SQLException;
@@ -126,8 +128,14 @@ public class AppI18nController extends BaseController {
     public ModelAndView editApcode(Integer row_id) throws SQLException {
         AppExI18nModel model = DbRockI18nApi.i18nGetById(row_id);
         List<AppGroupModel> appGroups = DbRockApi.getAppGroup("");
+
+        List<I18nModel> langs =  DbRockI18nApi.i18nGetByName(model.service, model.name);
+
         viewModel.put("app_groups", appGroups);
         viewModel.put("model", model);
+        viewModel.put("langs", ONode.stringify(langs));
+        viewModel.put("agroup_id", model.agroup_id);
+
         return view("rock/api18n_edit");
     }
 
@@ -137,6 +145,10 @@ public class AppI18nController extends BaseController {
     public ModelAndView addApcode(Integer agroup_id, String service) throws SQLException {
         List<AppGroupModel> appGroups = DbRockApi.getAppGroup("");
         AppExI18nModel model = new AppExI18nModel();
+
+        List<I18nModel> langs = new ArrayList<>();
+        langs.add(new I18nModel());
+
         if (agroup_id != null) {
             model.agroup_id = agroup_id;
             model.service = service;
@@ -144,16 +156,23 @@ public class AppI18nController extends BaseController {
 
         viewModel.put("app_groups", appGroups);
         viewModel.put("model", model);
+        viewModel.put("langs", ONode.stringify(langs));
         viewModel.put("agroup_id", agroup_id);
+
         return view("rock/api18n_edit");
     }
 
     //应用状态码新增编辑ajax保存功能
     @AuthRoles(SessionRoles.role_admin)
     @Mapping("edit/ajax/save")
-    public ViewModel saveApi18n(Integer row_id, String name, String lang, String note, Integer agroup_id, String service) throws SQLException {
+    public ViewModel saveApi18n(Integer agroup_id, String service, String name,  String nameOld,String items) throws SQLException {
+        List<I18nModel> itemList = ONode.loadStr(items).toObjectList(I18nModel.class);
 
-        boolean result = DbRockI18nApi.i18nSave(row_id, agroup_id, service, name, lang, note);
+        boolean result = true;
+
+        for (I18nModel m : itemList) {
+            result = result && DbRockI18nApi.i18nSave(agroup_id, service, name, nameOld, m.lang, m.note);
+        }
 
         if (result) {
             return viewModel.code(1, "保存成功！");

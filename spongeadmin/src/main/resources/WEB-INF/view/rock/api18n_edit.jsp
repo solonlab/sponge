@@ -15,15 +15,22 @@
     <script src="/_session/domain.js"></script>
     <script src="${js}/lib.js"></script>
     <script src="${js}/layer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script>
         var row_id = ${model.row_id};
         var agroup_id = "${model.agroup_id}";
+        var nameOld = "${model.name}";
+        var viewModel = {items: ${langs}};
 
         function saveEdit() {
             var service = $('#service').val().trim();
             var name = $('#name').val().trim();
-            var note = $('#note').val().trim();
-            var lang = $('#lang').val();
+            var items = JSON.stringify(viewModel.items);
+
+            if(viewModel.items.length <1){
+                top.layer.msg("描述配置不能为空！");
+                return;
+            }
 
             if (!service) {
                 top.layer.msg("服务名不能为空！");
@@ -43,7 +50,7 @@
             $.ajax({
                 type:"POST",
                 url:"/rock/api18n/edit/ajax/save",
-                data:{"row_id":row_id,"agroup_id":agroup_id,"service":service,"note":note,"name":name,"lang":lang},
+                data:{"row_id":row_id, "agroup_id":agroup_id, "service":service, "name":name, "nameOld":nameOld, "items":items},
                 success:function (data) {
                     if(data.code==1) {
                         top.layer.msg(data.msg);
@@ -58,6 +65,7 @@
         }
     </script>
     <style>
+        #app li{margin-bottom: 4px;}
     </style>
 </head>
 <body>
@@ -76,6 +84,9 @@
     <left class="ln30">
         <h2><a onclick="history.back(-1)" href="#" class="noline">应用状态码</a></h2> /  编辑
     </left>
+    <right>
+        <button type="button" onclick="saveEdit()">保存</button>
+    </right>
 </toolbar>
 
 <detail>
@@ -90,27 +101,38 @@
                 <td><input type="text" id="name" value="${model.name}"></td>
             </tr>
             <tr>
-                <th>描述配置</th>
-                <td>
+                <th class="top" style="padding-top: 45px;">描述配置</th>
+                <td id="app">
                     <div>
                         <left><n class="w100" style="display: inline-block">语言</n></left>
                         <right><n class="longtxt" style="display: inline-block">描述</n></right>
                     </div>
                     <ul>
-                        <li>
-                            <left><input class="w100" type="text" id="lang" list="lang_list" autocomplete="off" value="${model.lang}"></left>
-                            <right><input type="text" id="note" class="longtxt" value="${model.note}"/></right>
+                        <li v-for="m in items">
+                            <left><input class="w100" type="text" list="lang_list" autocomplete="off" v-model="m.lang"></left>
+                            <right><input type="text" class="longtxt" v-model="m.note"/></right>
                         </li>
                     </ul>
+                    <div>
+                        <button type="button" @click="add" class="edit">添加</button>
+                    </div>
                 </td>
-            </tr>
-            <tr>
-                <th></th>
-                <td><button type="button" onclick="saveEdit()">保存</button></td>
             </tr>
         </table>
     </form>
 </detail>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: viewModel,
+        methods:{
+            add: function (){
+                this.items.push({lang:"",note:""})
+            }
+        }
+    })
+</script>
 
 </body>
 </html>
