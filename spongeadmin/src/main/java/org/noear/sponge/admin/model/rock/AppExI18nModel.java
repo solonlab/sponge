@@ -16,5 +16,4 @@ public class AppExI18nModel{
     public String name;
     public String lang;
     public String note;
-    public int is_disabled;
 }
