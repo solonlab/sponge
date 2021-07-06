@@ -126,10 +126,10 @@ public class AppSettingController extends BaseController {
         boolean result = DbRockApi.editAppsets(row_id, name, type, value, note, is_client, ver_start, app_id);
         if (result) {
             resp.code = 1;
-            resp.msg = "保存成功！";
+            resp.msg = "操作成功";
         } else {
             resp.code = 0;
-            resp.msg = "保存失败！";
+            resp.msg = "操作失败";
         }
         return resp;
     }

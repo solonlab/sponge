@@ -151,10 +151,10 @@ public class AppController extends BaseController {
         boolean result = DbRockApi.editApp(app_id,name,agroup_id,ugroup_id,app_key,app_secret_key,ar_is_examine,ar_is_setting,note,ar_examine_ver);
         if (result){
             resp.code = 1;
-            resp.msg = "保存成功！";
+            resp.msg = "操作成功";
         } else {
             resp.code = 0;
-            resp.msg = "保存失败！";
+            resp.msg = "操作失败";
         }
         return resp;
     }

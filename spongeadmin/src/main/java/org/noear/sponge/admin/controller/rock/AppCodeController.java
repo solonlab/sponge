@@ -178,9 +178,9 @@ public class AppCodeController extends BaseController {
         }
 
         if (result) {
-            return viewModel.code(1, "保存成功！");
+            return viewModel.code(1, "操作成功");
         } else {
-            return viewModel.code(0, "保存失败！");
+            return viewModel.code(0, "操作失败");
         }
     }
 
@@ -190,9 +190,9 @@ public class AppCodeController extends BaseController {
         boolean result = DbRockI18nApi.codeDel(agroup_id, service, codeOld);
 
         if (result) {
-            return viewModel.code(1, "保存成功！");
+            return viewModel.code(1, "操作成功");
         } else {
-            return viewModel.code(0, "保存失败！");
+            return viewModel.code(0, "操作失败");
         }
     }
 

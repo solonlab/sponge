@@ -49,10 +49,10 @@ public class UserGroupController extends BaseController {
         Boolean result = DbRockApi.editUgroup(ugroup_id,name,new_ugroup_id,is_enabled);
         if (result){
             resp.code = 1;
-            resp.msg = "保存成功！";
+            resp.msg = "操作成功";
         } else {
             resp.code = 0;
-            resp.msg = "保存失败！";
+            resp.msg = "操作失败";
         }
         return resp;
     }
