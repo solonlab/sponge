@@ -67,6 +67,19 @@
                 return;
             }
 
+            var service = $('#service').val().trim();
+            var name = $('#name').val().trim();
+
+            if (!service) {
+                top.layer.msg("服务名不能为空！");
+                return;
+            }
+
+            if (!name) {
+                top.layer.msg("状态码不能为空！");
+                return;
+            }
+
             $.ajax({
                 type:"POST",
                 url:"/rock/api18n/edit/ajax/del",

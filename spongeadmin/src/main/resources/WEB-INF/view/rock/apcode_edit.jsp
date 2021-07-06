@@ -74,6 +74,19 @@
                 return;
             }
 
+            var service = $('#service').val().trim();
+            var code = $('#code').val().trim();
+
+            if (!service) {
+                top.layer.msg("服务名不能为空！");
+                return;
+            }
+
+            if (!code) {
+                top.layer.msg("状态码不能为空！");
+                return;
+            }
+
             $.ajax({
                 type:"POST",
                 url:"/rock/apcode/edit/ajax/del",
