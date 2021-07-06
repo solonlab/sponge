@@ -184,6 +184,18 @@ public class AppCodeController extends BaseController {
         }
     }
 
+    @AuthRoles(SessionRoles.role_admin)
+    @Mapping("edit/ajax/del")
+    public ViewModel delApcode(Integer agroup_id, String service, Integer code, Integer codeOld) throws SQLException {
+        boolean result = DbRockI18nApi.codeDel(agroup_id, service, codeOld);
+
+        if (result) {
+            return viewModel.code(1, "保存成功！");
+        } else {
+            return viewModel.code(0, "保存失败！");
+        }
+    }
+
     @Mapping("ajax/export")
     public void ajaxExport(Context ctx, int agroup_id, String service, String ids) throws Exception {
         List<Object> ids2 = Arrays.asList(ids.split(","))

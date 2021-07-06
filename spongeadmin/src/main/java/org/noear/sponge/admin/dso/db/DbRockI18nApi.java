@@ -122,6 +122,21 @@ public class DbRockI18nApi {
         return isOk;
     }
 
+    public static boolean codeDel(Integer agroup_id, String service, Integer code) throws SQLException {
+        DbTableQuery tb = db().table("appx_ex_code")
+                .whereEq("agroup_id", agroup_id)
+                .andEq("service", service)
+                .andEq("code", code);
+
+        boolean isOk = tb.delete() > 0;
+
+        if (isOk) {
+            RockUtil.delCacheForCodes(service);
+        }
+
+        return isOk;
+    }
+
 
     public static void codeImp(int agroup_id, String service, Integer code, String lang, String note) throws SQLException {
         db().table("appx_ex_code")
@@ -231,6 +246,21 @@ public class DbRockI18nApi {
         } else {
             isOk = tb.insert() > 0;
         }
+
+        if (isOk) {
+            RockUtil.delCacheForI18ns(service);
+        }
+
+        return isOk;
+    }
+
+    public static boolean i18nDel(Integer agroup_id, String service, String name) throws SQLException {
+        DbTableQuery tb = db().table("appx_ex_i18n")
+                .whereEq("agroup_id", agroup_id)
+                .andEq("service", service)
+                .andEq("name", name);
+
+        boolean isOk = tb.delete() > 0;
 
         if (isOk) {
             RockUtil.delCacheForI18ns(service);

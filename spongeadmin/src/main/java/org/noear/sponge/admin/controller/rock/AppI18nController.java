@@ -165,7 +165,7 @@ public class AppI18nController extends BaseController {
     //应用状态码新增编辑ajax保存功能
     @AuthRoles(SessionRoles.role_admin)
     @Mapping("edit/ajax/save")
-    public ViewModel saveApi18n(Integer agroup_id, String service, String name,  String nameOld,String items) throws SQLException {
+    public ViewModel saveApi18n(Integer agroup_id, String service, String name,  String nameOld, String items) throws SQLException {
         List<I18nModel> itemList = ONode.loadStr(items).toObjectList(I18nModel.class);
 
         boolean result = true;
@@ -177,6 +177,18 @@ public class AppI18nController extends BaseController {
 
             result = result && DbRockI18nApi.i18nSave(agroup_id, service, name, nameOld, m.lang, m.note);
         }
+
+        if (result) {
+            return viewModel.code(1, "保存成功！");
+        } else {
+            return viewModel.code(0, "保存失败！");
+        }
+    }
+
+    @AuthRoles(SessionRoles.role_admin)
+    @Mapping("edit/ajax/del")
+    public ViewModel delApi18n(Integer agroup_id, String service, String name,  String nameOld) throws SQLException {
+        boolean result = DbRockI18nApi.i18nDel(agroup_id, service, nameOld);
 
         if (result) {
             return viewModel.code(1, "保存成功！");

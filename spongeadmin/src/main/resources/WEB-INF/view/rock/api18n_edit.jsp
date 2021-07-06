@@ -58,6 +58,32 @@
             });
         }
 
+        function  del(){
+            if(!nameOld){
+                return;
+            }
+
+            if(!confirm("确定要删除吗？")){
+                return;
+            }
+
+            $.ajax({
+                type:"POST",
+                url:"/rock/api18n/edit/ajax/del",
+                data:{"agroup_id":agroup_id, "service":service, "name":name, "nameOld":nameOld},
+                success:function (data) {
+                    if(data.code==1) {
+                        top.layer.msg(data.msg);
+                        setTimeout(function(){
+                            parent.location.href="/rock/api18n?agroup_id="+agroup_id;
+                        },1000);
+                    }else{
+                        top.layer.msg(data.msg);
+                    }
+                }
+            });
+        }
+
         $(function (){
             ctl_s_save_bind(document, saveEdit);
         });
@@ -85,6 +111,9 @@
     <right class="form">
         <n>ctrl + s 可快捷保存</n>
         <button type="button" onclick="saveEdit()">保存</button>
+        <c:if test="${isAdmin == 1}">
+        <button type="button" class="minor" onclick="del()">删除</button>
+        </c:if>
     </right>
 </toolbar>
 
