@@ -141,7 +141,7 @@
     <form>
         <table>
             <tr>
-                <th>服务</th>
+                <th>服务名</th>
                 <td><input type="text" id="service" value="${model.service}"></td>
             </tr>
             <tr>

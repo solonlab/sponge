@@ -8,7 +8,7 @@
 <!DOCTYPE HTML>
 <html class="frm10">
 <head>
-    <title>${app} - 编辑状态码</title>
+    <title>${app} - 编辑国际化</title>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8 "/>
     <link rel="stylesheet" href="${css}/main.css"/>
@@ -119,7 +119,7 @@
 
 <toolbar class="blockquote">
     <left class="ln30">
-        <h2><a onclick="history.back(-1)" href="#" class="noline">应用状态码</a></h2> /  编辑
+        <h2><a onclick="history.back(-1)" href="#" class="noline">应用国际化</a></h2> /  编辑
     </left>
     <right class="form">
         <n>ctrl + s 可快捷保存</n>
@@ -134,7 +134,7 @@
     <form>
         <table>
             <tr>
-                <th>服务</th>
+                <th>服务名</th>
                 <td><input type="text" id="service" value="${model.service}"></td>
             </tr>
             <tr>
