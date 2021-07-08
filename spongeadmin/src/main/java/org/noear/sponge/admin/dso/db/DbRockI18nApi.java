@@ -10,8 +10,6 @@ import org.noear.water.utils.TextUtils;
 import org.noear.weed.DbContext;
 import org.noear.weed.DbTableQuery;
 
-import javax.rmi.CORBA.Util;
-import javax.xml.soap.Text;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
