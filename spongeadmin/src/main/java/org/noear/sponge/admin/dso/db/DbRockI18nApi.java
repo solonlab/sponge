@@ -95,6 +95,7 @@ public class DbRockI18nApi {
 
     public static boolean codeSave(Integer agroup_id, String service, Integer code, Integer codeOld, String lang, String note) throws SQLException {
         note = note.replace("\\\\", "\\");
+        note = note.replace("\\n", "\n");
 
         DbTableQuery tb = db().table("appx_ex_code")
                 .set("agroup_id", agroup_id)
@@ -140,6 +141,7 @@ public class DbRockI18nApi {
 
     public static void codeImp(int agroup_id, String service, Integer code, String lang, String note) throws SQLException {
         note = note.replace("\\\\", "\\");
+        note = note.replace("\\n", "\n");
 
         db().table("appx_ex_code")
                 .set("agroup_id", agroup_id)
@@ -232,6 +234,7 @@ public class DbRockI18nApi {
     public static boolean i18nSave(Integer agroup_id, String service, String name, String nameOld, String lang, String note) throws SQLException {
 
         note = note.replace("\\\\", "\\");
+        note = note.replace("\\n", "\n");
 
         DbTableQuery tb = db().table("appx_ex_i18n")
                 .set("agroup_id", agroup_id)
@@ -276,6 +279,7 @@ public class DbRockI18nApi {
 
     public static void i18nImp(int agroup_id, String service, String name, String lang, String note) throws SQLException {
         note = note.replace("\\\\", "\\");
+        note = note.replace("\\n", "\n");
 
         db().table("appx_ex_i18n")
                 .set("agroup_id", agroup_id)
