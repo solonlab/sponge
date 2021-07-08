@@ -131,6 +131,10 @@ public class AppI18nController extends BaseController {
 
         List<I18nModel> langs =  DbRockI18nApi.i18nGetByName(model.service, model.name);
 
+        if (TextUtils.isNotEmpty(model.note)) {
+            model.note = model.note.replace("\n", "\\n");
+        }
+
         viewModel.put("app_groups", appGroups);
         viewModel.put("model", model);
         viewModel.put("langs", ONode.stringify(langs));

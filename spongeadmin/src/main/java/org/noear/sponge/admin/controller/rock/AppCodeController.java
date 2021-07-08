@@ -128,7 +128,11 @@ public class AppCodeController extends BaseController {
         AppExCodeModel model = DbRockI18nApi.codeGetById(row_id);
         List<AppGroupModel> appGroups = DbRockApi.getAppGroup("");
 
-        List<I18nModel> langs =  DbRockI18nApi.codeGetByName(model.service, model.code);
+        List<I18nModel> langs = DbRockI18nApi.codeGetByName(model.service, model.code);
+
+        if (TextUtils.isNotEmpty(model.note)) {
+            model.note = model.note.replace("\n", "\\n");
+        }
 
         viewModel.put("app_groups", appGroups);
         viewModel.put("model", model);
