@@ -18,6 +18,7 @@ public class AppExSettingModel implements IBinder
     public int type;
     public String value;
     public String note;
+    public int is_disabled;
     public int ver_start;
 
     public long counts;

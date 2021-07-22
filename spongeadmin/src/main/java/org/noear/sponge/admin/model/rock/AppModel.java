@@ -18,6 +18,8 @@ public class AppModel implements IBinder
     public int agroup_id;
     public String name;
     public String note;
+    public int is_disabled;
+
     public Date log_fulltime;
 
     //管理是否开启设置

@@ -15,4 +15,5 @@ public class AppExCodeModel{
     public int code;
     public String lang;
     public String note;
+    public int is_disabled;
 }
