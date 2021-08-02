@@ -7,7 +7,7 @@ import org.noear.solon.cloud.model.Event;
 /**
  * @author noear 2021/4/22 created
  */
-@CloudEvent("hello.test2")
+@CloudEvent(value = "hello.test2", group = "rock")
 public class MSg_hello_test2 implements CloudEventHandler {
     @Override
     public boolean handler(Event event) throws Throwable {
