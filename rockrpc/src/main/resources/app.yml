@@ -1,10 +1,10 @@
 server.port: 8181
 
 solon.app:
-  group: sponge
-  name: rockrpc
+  group: "sponge"
+  name: "rockrpc"
 
 solon.cloud.water:
-  server: water
+  server: "waterapi.water"
   log:
     default: sponge_log_rock
