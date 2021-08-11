@@ -73,7 +73,7 @@ WantedBy=multi-user.target
 # systemctl stop waterapi     #停止服务
 ```
 
-* water域的nginx配置示例（注意真实的ip转发）
+* waterapi 域的nginx配置示例（注意真实的ip转发）
 
 ```ini
 upstream waterapi{
@@ -82,7 +82,7 @@ upstream waterapi{
 }
 server{
     listen 80;
-    server_name water;
+    server_name waterapi.water;
     
     location / {
         proxy_pass http://waterapi;
