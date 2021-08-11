@@ -9,10 +9,9 @@ solon.app:
 solon.cloud.water:
   server: "waterapi.water"
   config:
-    loadGroup: "water_bcf"
-    loadKey: "bcf.yml"
+    load: "water_bcf::bcf.yml"
   log:
-    default: sponge_log_admin
+    default: "sponge_log_admin"
 
 
 solon.logging.logger:
