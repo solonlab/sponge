@@ -18,8 +18,7 @@
 
     <description>trackapi project for java</description>
 
-
-
+    
     <dependencies>
         <dependency>
             <groupId>org.noear</groupId>
