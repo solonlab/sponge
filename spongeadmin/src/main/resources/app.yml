@@ -1,5 +1,5 @@
 server.port: 8182
-server.session.timeout: 7200
+server.session.timeout: 36000
 
 solon.app:
   group: "sponge"
@@ -12,7 +12,6 @@ solon.cloud.water:
     load: "water_bcf::bcf.yml"
   log:
     default: "sponge_log_admin"
-
 
 solon.logging.logger:
   "org.eclipse.jetty.*":
