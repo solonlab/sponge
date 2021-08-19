@@ -6,5 +6,7 @@ solon.app:
 
 solon.cloud.water:
   server: "waterapi"
+  config:
+    load: "rockrpc.yml" #预留扩展
   log:
     default: "sponge_log_rock"
