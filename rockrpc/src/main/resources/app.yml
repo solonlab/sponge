@@ -5,6 +5,6 @@ solon.app:
   name: "rockrpc"
 
 solon.cloud.water:
-  server: "waterapi.water"
+  server: "waterapi"
   log:
-    default: sponge_log_rock
+    default: "sponge_log_rock"
