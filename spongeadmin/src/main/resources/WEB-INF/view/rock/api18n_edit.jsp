@@ -32,7 +32,7 @@
             }
 
             if (!service) {
-                top.layer.msg("服务名不能为空！");
+                top.layer.msg("内容包名不能为空！");
                 return;
             }
 
@@ -71,7 +71,7 @@
             var name = $('#name').val().trim();
 
             if (!service) {
-                top.layer.msg("服务名不能为空！");
+                top.layer.msg("内容包名不能为空！");
                 return;
             }
 
@@ -134,7 +134,7 @@
     <form>
         <table>
             <tr>
-                <th>服务名</th>
+                <th>内容包名</th>
                 <td><input type="text" id="service" value="${model.service}"></td>
             </tr>
             <tr>
