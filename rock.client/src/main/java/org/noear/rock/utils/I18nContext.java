@@ -22,16 +22,22 @@ import java.util.Map;
 public class I18nContext {
     static Logger log = LoggerFactory.getLogger(I18nContext.class);
 
-    protected Map<String, AppCodeCollection> codeMap = new HashMap<>();
-    protected Map<String, AppI18nCollection> nameMap = new HashMap<>();
-    protected String service;
+    Map<String, AppCodeCollection> codeMap = new HashMap<>();
+    Map<String, AppI18nCollection> nameMap = new HashMap<>();
+    String service;
+    boolean serviceOnlyName;
 
     public I18nContext(String service) {
+        this(service, false);
+    }
+
+    public I18nContext(String service, boolean onlyName) {
         this.service = service;
+        this.serviceOnlyName = onlyName;
         TaskUtils.run(10 * 1000, 10 * 1000, this::update);
     }
 
-    public Map<Integer, String> getCodeMap(String lang) throws SQLException{
+    public Map<Integer, String> getCodeMap(String lang) throws SQLException {
         if (lang == null) {
             lang = "";
         } else {
@@ -77,7 +83,7 @@ public class I18nContext {
     }
 
 
-    public Map<String,String> getNameMap(String lang) throws SQLException{
+    public Map<String, String> getNameMap(String lang) throws SQLException {
         if (lang == null) {
             lang = "";
         } else {
@@ -123,7 +129,6 @@ public class I18nContext {
     }
 
 
-
     protected void updateCodeMap() throws SQLException {
         Map<String, AppCodeCollection> codeMap2 = new HashMap<>();
 
@@ -147,8 +152,10 @@ public class I18nContext {
     }
 
     protected void update() throws SQLException {
-        updateCodeMap();
         updateNameMap();
+        if (serviceOnlyName == false) {
+            updateCodeMap();
+        }
 
         log.debug("{}: {}", service, "i18n context update succeed!");
     }
