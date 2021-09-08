@@ -29,6 +29,10 @@ public class I18nContextFactory {
         }
     }
 
+
+    /**
+     * 获取代码国际化上下文
+     */
     public static CodeContext getCodeContext(String service) {
         CodeContext tmp = instance.codeLib.get(service);
         if (tmp == null) {
@@ -44,14 +48,17 @@ public class I18nContextFactory {
         return tmp;
     }
 
-    public static NameContext getNameContext(String service) {
-        NameContext tmp = instance.nameLib.get(service);
+    /**
+     * 获取名字国际化上下文
+     */
+    public static NameContext getNameContext(String bundleName) {
+        NameContext tmp = instance.nameLib.get(bundleName);
         if (tmp == null) {
-            synchronized (service.intern()) {
-                tmp = instance.nameLib.get(service);
+            synchronized (bundleName.intern()) {
+                tmp = instance.nameLib.get(bundleName);
                 if (tmp == null) {
-                    tmp = new NameContext(service);
-                    instance.nameLib.put(service, tmp);
+                    tmp = new NameContext(bundleName);
+                    instance.nameLib.put(bundleName, tmp);
                 }
             }
         }
