@@ -7,6 +7,8 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
+ * 适配 solon.i18n 规范
+ *
  * @author noear 2021/9/8 created
  */
 public class I18nBundleImpl implements I18nBundle {
