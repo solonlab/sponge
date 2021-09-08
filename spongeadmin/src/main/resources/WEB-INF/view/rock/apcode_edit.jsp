@@ -56,7 +56,7 @@
                     if(data.code==1) {
                         top.layer.msg(data.msg);
                         setTimeout(function(){
-                            parent.location.href="/rock/apcode?agroup_id="+agroup_id;
+                            parent.location.href="/rock/apcode?agroup_id="+agroup_id+"&sev="+service;
                         },1000);
                     }else{
                         top.layer.msg(data.msg);
@@ -95,7 +95,7 @@
                     if(data.code==1) {
                         top.layer.msg(data.msg);
                         setTimeout(function(){
-                            parent.location.href="/rock/apcode?agroup_id="+agroup_id;
+                            parent.location.href="/rock/apcode?agroup_id="+agroup_id+"&sev="+service;
                         },1000);
                     }else{
                         top.layer.msg(data.msg);
