@@ -22,9 +22,9 @@ import java.util.Map;
 public class I18nContext {
     static Logger log = LoggerFactory.getLogger(I18nContext.class);
 
-    Map<String, AppCodeCollection> codeMap = new HashMap<>();
-    Map<String, AppI18nCollection> nameMap = new HashMap<>();
-    String service;
+    protected Map<String, AppCodeCollection> codeMap = new HashMap<>();
+    protected Map<String, AppI18nCollection> nameMap = new HashMap<>();
+    protected String service;
 
     public I18nContext(String service) {
         this.service = service;
