@@ -115,13 +115,9 @@
 <body>
 
 <datalist id="lang_list">
-    <option value="en">en 英语</option>
-    <option value="en_US">en_US 英语(美国)</option>
-    <option value="en_IN">en_IN 英语(印度)</option>
-    <option value="hi_IN">hi_IN 印度语</option>
-    <option value="zh_CN">zh_CN 中文(中国)</option>
-    <option value="zh_HK">zh_HK 中文(香港地区)</option>
-    <option value="zh_TW">zh_TW 中文(台湾地区)</option>
+    <c:forEach var="m1" items="${lang_type}">
+        <option value="${m1.key}">${m1.value}</option>
+    </c:forEach>
 </datalist>
 
 <toolbar class="blockquote">

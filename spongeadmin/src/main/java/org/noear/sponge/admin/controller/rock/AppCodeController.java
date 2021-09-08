@@ -1,5 +1,6 @@
 package org.noear.sponge.admin.controller.rock;
 
+import org.apache.commons.codec.StringEncoderComparator;
 import org.noear.snack.ONode;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
@@ -7,6 +8,7 @@ import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ModelAndView;
 import org.noear.solon.auth.annotation.AuthRoles;
 import org.noear.solon.core.handle.UploadedFile;
+import org.noear.sponge.admin.Config;
 import org.noear.sponge.admin.controller.ViewModel;
 import org.noear.sponge.admin.dso.AgroupCookieUtil;
 import org.noear.sponge.admin.dso.BcfTagChecker;
@@ -19,6 +21,7 @@ import org.noear.sponge.admin.model.rock.AppExCodeModel;
 import org.noear.sponge.admin.controller.BaseController;
 import org.noear.sponge.admin.model.rock.AppGroupModel;
 import org.noear.sponge.admin.model.rock.I18nModel;
+import org.noear.sponge.admin.utils.MapKeyComparator;
 import org.noear.water.utils.*;
 
 import java.sql.SQLException;
@@ -134,8 +137,13 @@ public class AppCodeController extends BaseController {
             model.note = model.note.replace("\n", "\\n");
         }
 
+
+        Map lang_type = new TreeMap(new MapKeyComparator());
+        lang_type.putAll(Config.cfg("lang_type").getProp().toMap());
+
         viewModel.put("app_groups", appGroups);
         viewModel.put("model", model);
+        viewModel.put("lang_type", lang_type);
         viewModel.put("langs", ONode.stringify(langs));
         viewModel.put("agroup_id", model.agroup_id);
 
@@ -157,8 +165,12 @@ public class AppCodeController extends BaseController {
             model.service = service;
         }
 
+        Map lang_type = new TreeMap(new MapKeyComparator());
+        lang_type.putAll(Config.cfg("lang_type").getProp().toMap());
+
         viewModel.put("app_groups", appGroups);
         viewModel.put("model", model);
+        viewModel.put("lang_type", lang_type);
         viewModel.put("langs", ONode.stringify(langs));
         viewModel.put("agroup_id", agroup_id);
 

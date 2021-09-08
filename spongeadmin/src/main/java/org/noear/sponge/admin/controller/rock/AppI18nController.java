@@ -9,6 +9,7 @@ import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ModelAndView;
 import org.noear.solon.core.handle.UploadedFile;
 import org.noear.solon.auth.annotation.AuthRoles;
+import org.noear.sponge.admin.Config;
 import org.noear.sponge.admin.controller.BaseController;
 import org.noear.sponge.admin.controller.ViewModel;
 import org.noear.sponge.admin.dso.AgroupCookieUtil;
@@ -21,6 +22,8 @@ import org.noear.sponge.admin.model.TagCountsModel;
 import org.noear.sponge.admin.model.rock.AppExI18nModel;
 import org.noear.sponge.admin.model.rock.AppGroupModel;
 import org.noear.sponge.admin.model.rock.I18nModel;
+import org.noear.sponge.admin.utils.MapKeyComparator;
+import org.noear.water.WaterClient;
 import org.noear.water.utils.*;
 
 import java.sql.SQLException;
@@ -135,8 +138,12 @@ public class AppI18nController extends BaseController {
             model.note = model.note.replace("\n", "\\n");
         }
 
+        Map lang_type = new TreeMap(new MapKeyComparator());
+        lang_type.putAll(Config.cfg("lang_type").getProp().toMap());
+
         viewModel.put("app_groups", appGroups);
         viewModel.put("model", model);
+        viewModel.put("lang_type", lang_type);
         viewModel.put("langs", ONode.stringify(langs));
         viewModel.put("agroup_id", model.agroup_id);
 
@@ -158,8 +165,12 @@ public class AppI18nController extends BaseController {
             model.service = service;
         }
 
+        Map lang_type = new TreeMap(new MapKeyComparator());
+        lang_type.putAll(Config.cfg("lang_type").getProp().toMap());
+
         viewModel.put("app_groups", appGroups);
         viewModel.put("model", model);
+        viewModel.put("lang_type", lang_type);
         viewModel.put("langs", ONode.stringify(langs));
         viewModel.put("agroup_id", agroup_id);
 
