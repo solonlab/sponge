@@ -23,6 +23,7 @@
             <version>${solon.ver}</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>org.noear</groupId>
             <artifactId>nami.coder.snack3</artifactId>

@@ -9,41 +9,54 @@ import java.util.Locale;
  * @author noear 2021/2/24 created
  */
 public class I18nUtils {
-    static I18nContext context;
+    static CodeContext codeContext;
+    static NameContext nameContext;
 
-    private static I18nContext getContext() {
-        if (context == null) {
+    private static CodeContext getCodeContext() {
+        if (codeContext == null) {
             synchronized (I18nUtils.class) {
-                if (context == null) {
-                    context = new I18nContext(Solon.cfg().appName());
+                if (codeContext == null) {
+                    codeContext = I18nContextFactory.getCodeContext(Solon.cfg().appName());
                 }
             }
         }
 
-        return context;
+        return codeContext;
+    }
+
+    private static NameContext getNameContext() {
+        if (nameContext == null) {
+            synchronized (I18nUtils.class) {
+                if (nameContext == null) {
+                    nameContext = I18nContextFactory.getNameContext(Solon.cfg().appName());
+                }
+            }
+        }
+
+        return nameContext;
     }
 
     public static String getByCode(int code, String lang) throws SQLException {
-        return getContext().getByCode(code, lang);
+        return getCodeContext().get(code, lang);
     }
 
     public static String getByCodeAndFormat(int code, String lang, Object... args) throws SQLException {
-        return getContext().getByCodeAndFormat(code, lang, args);
+        return getCodeContext().getAndFormat(code, lang, args);
     }
 
     public static String getByCodeAndFormat(int code, String lang, Locale locale, Object... args) throws SQLException {
-        return getContext().getByCodeAndFormat(code, lang, locale, args);
+        return getCodeContext().getAndFormat(code, lang, locale, args);
     }
 
     public static String getByName(String name, String lang) throws SQLException {
-        return getContext().getByName(name, lang);
+        return getNameContext().get(name, lang);
     }
 
     public static String getByNameAndFormat(String name, String lang, Object... args) throws SQLException {
-        return getContext().getByNameAndFormat(name, lang, args);
+        return getNameContext().getAndFormat(name, lang, args);
     }
 
     public static String getByNameAndFormat(String name, String lang, Locale locale, Object... args) throws SQLException {
-        return getContext().getByNameAndFormat(name, lang, locale, args);
+        return getNameContext().getAndFormat(name, lang, locale, args);
     }
 }
