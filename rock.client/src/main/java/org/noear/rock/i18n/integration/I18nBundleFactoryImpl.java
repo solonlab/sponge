@@ -1,6 +1,6 @@
-package org.noear.rock.integration;
+package org.noear.rock.i18n.integration;
 
-import org.noear.rock.utils.I18nContextManager;
+import org.noear.rock.i18n.I18nContextManager;
 import org.noear.solon.i18n.I18nBundle;
 import org.noear.solon.i18n.I18nBundleFactory;
 

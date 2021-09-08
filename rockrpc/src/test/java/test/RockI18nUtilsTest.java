@@ -2,10 +2,8 @@ package test;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.noear.rock.utils.I18nUtils;
+import org.noear.rock.i18n.I18nUtils;
 import org.noear.solon.test.SolonJUnit4ClassRunner;
-
-import java.sql.SQLException;
 
 /**
  * @author noear 2021/2/24 created

@@ -1,4 +1,4 @@
-package org.noear.rock.utils;
+package org.noear.rock.i18n;
 
 import org.noear.water.utils.TaskUtils;
 

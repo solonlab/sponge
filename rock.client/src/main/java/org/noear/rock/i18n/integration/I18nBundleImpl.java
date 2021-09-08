@@ -1,6 +1,6 @@
-package org.noear.rock.integration;
+package org.noear.rock.i18n.integration;
 
-import org.noear.rock.utils.MessageContext;
+import org.noear.rock.i18n.MessageContext;
 import org.noear.solon.i18n.I18nBundle;
 
 import java.util.Locale;

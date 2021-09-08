@@ -1,4 +1,4 @@
-package org.noear.rock.utils;
+package org.noear.rock.i18n;
 
 import org.noear.rock.RockClient;
 import org.noear.rock.model.AppI18nCollection;
