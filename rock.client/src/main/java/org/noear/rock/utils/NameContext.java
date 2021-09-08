@@ -23,11 +23,11 @@ public class NameContext {
     Map<String, AppI18nCollection> nameMap = new HashMap<>();
     String service;
 
-    protected NameContext(String service) {
-        this.service = service;
+    protected NameContext(String bundleName) {
+        this.service = bundleName;
     }
 
-    public Map<String, String> getMap(String lang) throws SQLException {
+    public Map<String, String> getMap(String lang) {
         if (lang == null) {
             lang = "";
         } else {
@@ -39,8 +39,12 @@ public class NameContext {
             synchronized (lang.intern()) {
                 coll = nameMap.get(lang);
                 if (coll == null) {
-                    coll = RockClient.getServiceI18nsByLang(service, lang);
-                    nameMap.put(lang, coll);
+                    try {
+                        coll = RockClient.getServiceI18nsByLang(service, lang);
+                        nameMap.put(lang, coll);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         }
@@ -48,11 +52,11 @@ public class NameContext {
         return coll.data;
     }
 
-    public String get(String name, String lang) throws SQLException {
+    public String get(String name, String lang) {
         return getMap(lang).get(name);
     }
 
-    public String getAndFormat(String name, String lang, Object[] args) throws SQLException {
+    public String getAndFormat(String name, String lang, Object[] args) {
         if (TextUtils.isEmpty(lang)) {
             return getAndFormat(name, lang, null, args);
         } else {
@@ -60,7 +64,7 @@ public class NameContext {
         }
     }
 
-    public String getAndFormat(String name, String lang, Locale locale, Object[] args) throws SQLException {
+    public String getAndFormat(String name, String lang, Locale locale, Object[] args) {
         String tml = get(name, lang);
 
         MessageFormat mf = new MessageFormat("");

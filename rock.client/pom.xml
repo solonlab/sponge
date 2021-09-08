@@ -26,6 +26,13 @@
 
         <dependency>
             <groupId>org.noear</groupId>
+            <artifactId>solon.i18n</artifactId>
+            <version>${solon.ver}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
             <artifactId>nami.coder.snack3</artifactId>
             <version>${solon.ver}</version>
         </dependency>

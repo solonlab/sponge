@@ -27,7 +27,7 @@ public class CodeContext {
         this.service = service;
     }
 
-    public Map<Integer, String> getMap(String lang) throws SQLException {
+    public Map<Integer, String> getMap(String lang) {
         if (lang == null) {
             lang = "";
         } else {
@@ -39,8 +39,12 @@ public class CodeContext {
             synchronized (lang.intern()) {
                 coll = codeMap.get(lang);
                 if (coll == null) {
-                    coll = RockClient.getServiceCodesByLang(service, lang);
-                    codeMap.put(lang, coll);
+                    try {
+                        coll = RockClient.getServiceCodesByLang(service, lang);
+                        codeMap.put(lang, coll);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         }
@@ -48,11 +52,11 @@ public class CodeContext {
         return coll.data;
     }
 
-    public String get(int code, String lang) throws SQLException {
+    public String get(int code, String lang) {
         return getMap(lang).get(code);
     }
 
-    public String getAndFormat(int code, String lang, Object[] args) throws SQLException {
+    public String getAndFormat(int code, String lang, Object[] args) {
         if (TextUtils.isEmpty(lang)) {
             return getAndFormat(code, lang, null, args);
         } else {
@@ -60,7 +64,7 @@ public class CodeContext {
         }
     }
 
-    public String getAndFormat(int code, String lang, Locale locale, Object[] args) throws SQLException {
+    public String getAndFormat(int code, String lang, Locale locale, Object[] args) {
         String tml = get(code, lang);
 
         MessageFormat mf = new MessageFormat("");
