@@ -31,7 +31,7 @@ public class I18nContext {
         TaskUtils.run(10 * 1000, 10 * 1000, this::update);
     }
 
-    public String getByCode(int code, String lang) throws SQLException {
+    public Map<Integer, String> getCodeMap(String lang) throws SQLException{
         if (lang == null) {
             lang = "";
         } else {
@@ -49,7 +49,11 @@ public class I18nContext {
             }
         }
 
-        return coll.get(code);
+        return coll.data;
+    }
+
+    public String getByCode(int code, String lang) throws SQLException {
+        return getCodeMap(lang).get(code);
     }
 
     public String getByCodeAndFormat(int code, String lang, Object[] args) throws SQLException {
@@ -72,7 +76,8 @@ public class I18nContext {
         return mf.format(args);
     }
 
-    public String getByName(String name, String lang) throws SQLException {
+
+    public Map<String,String> getNameMap(String lang) throws SQLException{
         if (lang == null) {
             lang = "";
         } else {
@@ -90,7 +95,11 @@ public class I18nContext {
             }
         }
 
-        return coll.get(name);
+        return coll.data;
+    }
+
+    public String getByName(String name, String lang) throws SQLException {
+        return getNameMap(lang).get(name);
     }
 
     public String getByNameAndFormat(String name, String lang, Object[] args) throws SQLException {
@@ -112,6 +121,7 @@ public class I18nContext {
 
         return mf.format(args);
     }
+
 
 
     protected void updateCodeMap() throws SQLException {
