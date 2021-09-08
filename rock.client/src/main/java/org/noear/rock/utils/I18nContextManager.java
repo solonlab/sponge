@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class I18nContextManager {
     Map<String, CodeContext> codeLib = new HashMap<>();
-    Map<String, NameContext> nameLib = new HashMap<>();
+    Map<String, MessageContext> messageLib = new HashMap<>();
 
     private static final I18nContextManager instance = new I18nContextManager();
 
@@ -24,7 +24,7 @@ public class I18nContextManager {
             c.update();
         }
 
-        for (NameContext c : nameLib.values()) {
+        for (MessageContext c : messageLib.values()) {
             c.update();
         }
     }
@@ -51,14 +51,14 @@ public class I18nContextManager {
     /**
      * 获取名字国际化上下文
      */
-    public static NameContext getNameContext(String bundleName) {
-        NameContext tmp = instance.nameLib.get(bundleName);
+    public static MessageContext getMessageContext(String bundleName) {
+        MessageContext tmp = instance.messageLib.get(bundleName);
         if (tmp == null) {
             synchronized (bundleName.intern()) {
-                tmp = instance.nameLib.get(bundleName);
+                tmp = instance.messageLib.get(bundleName);
                 if (tmp == null) {
-                    tmp = new NameContext(bundleName);
-                    instance.nameLib.put(bundleName, tmp);
+                    tmp = new MessageContext(bundleName);
+                    instance.messageLib.put(bundleName, tmp);
                 }
             }
         }

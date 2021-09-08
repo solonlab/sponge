@@ -1,6 +1,6 @@
 package org.noear.rock.integration;
 
-import org.noear.rock.utils.NameContext;
+import org.noear.rock.utils.MessageContext;
 import org.noear.solon.i18n.I18nBundle;
 
 import java.util.Locale;
@@ -12,11 +12,11 @@ import java.util.Map;
  * @author noear 2021/9/8 created
  */
 public class I18nBundleImpl implements I18nBundle {
-    final NameContext context;
+    final MessageContext context;
     final Locale locale;
     final String locale_lang;
 
-    public I18nBundleImpl(NameContext context, Locale locale) {
+    public I18nBundleImpl(MessageContext context, Locale locale) {
         this.context = context;
         this.locale = locale;
         this.locale_lang = locale.toString();

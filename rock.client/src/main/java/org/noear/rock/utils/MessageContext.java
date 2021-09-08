@@ -17,13 +17,13 @@ import java.util.Map;
  *
  * @author noear 2021/2/26 created
  */
-public class NameContext {
-    static Logger log = LoggerFactory.getLogger(NameContext.class);
+public class MessageContext {
+    static Logger log = LoggerFactory.getLogger(MessageContext.class);
 
     Map<String, AppI18nCollection> nameMap = new HashMap<>();
     String service;
 
-    protected NameContext(String bundleName) {
+    protected MessageContext(String bundleName) {
         this.service = bundleName;
     }
 
@@ -87,6 +87,6 @@ public class NameContext {
 
         nameMap = nameMap2;
 
-        log.debug("{}: {}", service, "i18n name context update succeed!");
+        log.debug("{}: {}", service, "i18n message context update succeed!");
     }
 }

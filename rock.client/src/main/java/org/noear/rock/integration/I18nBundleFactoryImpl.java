@@ -14,6 +14,6 @@ import java.util.Locale;
 public class I18nBundleFactoryImpl implements I18nBundleFactory {
     @Override
     public I18nBundle create(String bundleName, Locale locale) {
-        return new I18nBundleImpl(I18nContextManager.getNameContext(bundleName), locale);
+        return new I18nBundleImpl(I18nContextManager.getMessageContext(bundleName), locale);
     }
 }

@@ -10,7 +10,7 @@ import java.util.Locale;
  */
 public class I18nUtils {
     static CodeContext codeContext;
-    static NameContext nameContext;
+    static MessageContext nameContext;
 
     private static CodeContext getCodeContext() {
         if (codeContext == null) {
@@ -24,11 +24,11 @@ public class I18nUtils {
         return codeContext;
     }
 
-    private static NameContext getNameContext() {
+    private static MessageContext getMessageContext() {
         if (nameContext == null) {
             synchronized (I18nUtils.class) {
                 if (nameContext == null) {
-                    nameContext = I18nContextManager.getNameContext(Solon.cfg().appName());
+                    nameContext = I18nContextManager.getMessageContext(Solon.cfg().appName());
                 }
             }
         }
@@ -49,14 +49,14 @@ public class I18nUtils {
     }
 
     public static String getByName(String name, String lang) throws SQLException {
-        return getNameContext().get(name, lang);
+        return getMessageContext().get(name, lang);
     }
 
     public static String getByNameAndFormat(String name, String lang, Object... args) throws SQLException {
-        return getNameContext().getAndFormat(name, lang, args);
+        return getMessageContext().getAndFormat(name, lang, args);
     }
 
     public static String getByNameAndFormat(String name, String lang, Locale locale, Object... args) throws SQLException {
-        return getNameContext().getAndFormat(name, lang, locale, args);
+        return getMessageContext().getAndFormat(name, lang, locale, args);
     }
 }
