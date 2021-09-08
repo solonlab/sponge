@@ -16,7 +16,7 @@ public class I18nUtils {
         if (codeContext == null) {
             synchronized (I18nUtils.class) {
                 if (codeContext == null) {
-                    codeContext = I18nContextFactory.getCodeContext(Solon.cfg().appName());
+                    codeContext = I18nContextManager.getCodeContext(Solon.cfg().appName());
                 }
             }
         }
@@ -28,7 +28,7 @@ public class I18nUtils {
         if (nameContext == null) {
             synchronized (I18nUtils.class) {
                 if (nameContext == null) {
-                    nameContext = I18nContextFactory.getNameContext(Solon.cfg().appName());
+                    nameContext = I18nContextManager.getNameContext(Solon.cfg().appName());
                 }
             }
         }

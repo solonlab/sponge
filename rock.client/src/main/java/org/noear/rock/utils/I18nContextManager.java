@@ -9,13 +9,13 @@ import java.util.Map;
 /**
  * @author noear 2021/9/8 created
  */
-public class I18nContextFactory {
+public class I18nContextManager {
     Map<String, CodeContext> codeLib = new HashMap<>();
     Map<String, NameContext> nameLib = new HashMap<>();
 
-    private static final I18nContextFactory instance = new I18nContextFactory();
+    private static final I18nContextManager instance = new I18nContextManager();
 
-    private I18nContextFactory() {
+    private I18nContextManager() {
         TaskUtils.run(30 * 1000, 30 * 1000, this::update);
     }
 
