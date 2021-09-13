@@ -109,7 +109,7 @@
         <tr>
             <td width="20px"><checkbox><label><input type="checkbox" id="sel_all" /><a></a></label></checkbox></td>
             <td width="100px">状态码</td>
-            <td width="100px">语言</td>
+            <td width="80px">语言</td>
             <td>描述信息</td>
             <c:if test="${isOperator==1}">
                 <td width="50px">操作</td>
