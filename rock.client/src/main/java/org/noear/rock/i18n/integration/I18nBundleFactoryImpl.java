@@ -1,8 +1,10 @@
 package org.noear.rock.i18n.integration;
 
 import org.noear.rock.i18n.I18nContextManager;
+import org.noear.solon.Solon;
 import org.noear.solon.i18n.I18nBundle;
 import org.noear.solon.i18n.I18nBundleFactory;
+import org.noear.solon.i18n.I18nUtil;
 
 import java.util.Locale;
 
@@ -14,6 +16,10 @@ import java.util.Locale;
 public class I18nBundleFactoryImpl implements I18nBundleFactory {
     @Override
     public I18nBundle create(String bundleName, Locale locale) {
-        return new I18nBundleImpl(I18nContextManager.getMessageContext(bundleName), locale);
+        if (I18nUtil.getMessageBundleName().equals(bundleName)) {
+            return new I18nBundleImpl(I18nContextManager.getMessageContext(Solon.cfg().appName()), locale);
+        } else {
+            return new I18nBundleImpl(I18nContextManager.getMessageContext(bundleName), locale);
+        }
     }
 }
