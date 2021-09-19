@@ -17,9 +17,9 @@ public class I18nBundleFactoryImpl implements I18nBundleFactory {
     @Override
     public I18nBundle create(String bundleName, Locale locale) {
         if (I18nUtil.getMessageBundleName().equals(bundleName)) {
-            return new I18nBundleImpl(I18nContextManager.getMessageContext(Solon.cfg().appName()), locale);
-        } else {
-            return new I18nBundleImpl(I18nContextManager.getMessageContext(bundleName), locale);
+            bundleName = Solon.cfg().appName();
         }
+
+        return new I18nBundleImpl(I18nContextManager.getMessageContext(bundleName), locale);
     }
 }
