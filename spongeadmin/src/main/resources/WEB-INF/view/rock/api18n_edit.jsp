@@ -50,7 +50,7 @@
                         top.layer.msg(data.msg);
                         setTimeout(function(){
                             if(nameOld){
-                                location.href="/rock/api18n/inner?agroup_id="+agroup_id+"&sev="+service;
+                                location.href="/rock/api18n/inner?agroup_id="+agroup_id+"&service="+service;
                             }else{
                                 parent.location.href="/rock/api18n?agroup_id="+agroup_id+"&sev="+service;
                             }
