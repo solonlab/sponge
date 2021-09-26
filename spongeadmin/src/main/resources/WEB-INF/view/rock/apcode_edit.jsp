@@ -56,7 +56,11 @@
                     if(data.code==1) {
                         top.layer.msg(data.msg);
                         setTimeout(function(){
-                            parent.location.href="/rock/apcode?agroup_id="+agroup_id+"&sev="+service;
+                            if(codeOld){
+                                location.href="/rock/apcode/inner?agroup_id="+agroup_id+"&sev="+service;
+                            }else{
+                                parent.location.href="/rock/apcode?agroup_id="+agroup_id+"&sev="+service;
+                            }
                         },1000);
                     }else{
                         top.layer.msg(data.msg);

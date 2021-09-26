@@ -49,7 +49,11 @@
                     if(data.code==1) {
                         top.layer.msg(data.msg);
                         setTimeout(function(){
-                            parent.location.href="/rock/api18n?agroup_id="+agroup_id+"&sev="+service;
+                            if(nameOld){
+                                location.href="/rock/api18n/inner?agroup_id="+agroup_id+"&sev="+service;
+                            }else{
+                                parent.location.href="/rock/api18n?agroup_id="+agroup_id+"&sev="+service;
+                            }
                         },1000);
                     }else{
                         top.layer.msg(data.msg);
