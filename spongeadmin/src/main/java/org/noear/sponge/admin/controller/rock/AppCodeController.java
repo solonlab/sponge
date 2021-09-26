@@ -2,6 +2,7 @@ package org.noear.sponge.admin.controller.rock;
 
 import org.apache.commons.codec.StringEncoderComparator;
 import org.noear.snack.ONode;
+import org.noear.solon.Utils;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.Context;
@@ -82,7 +83,7 @@ public class AppCodeController extends BaseController {
     }
 
     @Mapping("inner")
-    public ModelAndView apcode_inner(Integer agroup_id, String service, Integer code_num, String lang) throws SQLException {
+    public ModelAndView apcode_inner(Context ctx, Integer agroup_id, String service, Integer code_num, String lang) throws SQLException {
         List<TagCountsModel> langs = DbRockI18nApi.codeGetLangsByService(service);
 
         for (TagCountsModel m : langs) {
@@ -91,7 +92,13 @@ public class AppCodeController extends BaseController {
             }
         }
 
-        if (lang == null || "default".equals(lang)) {
+        if (Utils.isEmpty(lang) || "default".equals(lang)) {
+            lang = ctx.session("lang","");
+        }else{
+            ctx.sessionSet("lang",lang);
+        }
+
+        if (Utils.isEmpty(lang) || "default".equals(lang)) {
             if (langs.size() > 0) {
                 lang = langs.get(0).tag;
             }

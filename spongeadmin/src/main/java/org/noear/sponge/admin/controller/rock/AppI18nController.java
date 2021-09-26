@@ -84,7 +84,7 @@ public class AppI18nController extends BaseController {
     }
 
     @Mapping("inner")
-    public ModelAndView apcode_inner(Integer agroup_id, String service, String name, String lang) throws SQLException {
+    public ModelAndView apcode_inner(Context ctx, Integer agroup_id, String service, String name, String lang) throws SQLException {
         if (agroup_id == null) {
             agroup_id = 0;
         } else {
@@ -98,7 +98,13 @@ public class AppI18nController extends BaseController {
             }
         }
 
-        if (lang == null || "default".equals(lang)) {
+        if (Utils.isEmpty(lang) || "default".equals(lang)) {
+            lang = ctx.session("lang","");
+        }else{
+            ctx.sessionSet("lang",lang);
+        }
+
+        if (Utils.isEmpty(lang) || "default".equals(lang)) {
             if (langs.size() > 0) {
                 lang = langs.get(0).tag;
             }
