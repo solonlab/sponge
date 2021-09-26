@@ -99,9 +99,7 @@ public class AppI18nController extends BaseController {
         }
 
         if (Utils.isEmpty(lang) || "default".equals(lang)) {
-            lang = ctx.session("lang","");
-        }else{
-            ctx.sessionSet("lang",lang);
+            lang = ctx.cookie("lang");
         }
 
         if (Utils.isEmpty(lang) || "default".equals(lang)) {
@@ -119,6 +117,8 @@ public class AppI18nController extends BaseController {
         if (TextUtils.isEmpty(lang)) {
             lang = "default";
         }
+
+        ctx.cookieSet("lang",lang);
 
         viewModel.put("lang", lang);
         viewModel.put("langs", langs);

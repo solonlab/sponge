@@ -93,9 +93,7 @@ public class AppCodeController extends BaseController {
         }
 
         if (Utils.isEmpty(lang) || "default".equals(lang)) {
-            lang = ctx.session("lang","");
-        }else{
-            ctx.sessionSet("lang",lang);
+            lang = ctx.cookie("lang");
         }
 
         if (Utils.isEmpty(lang) || "default".equals(lang)) {
@@ -119,6 +117,8 @@ public class AppCodeController extends BaseController {
         } else {
             AgroupCookieUtil.cookieSet(agroup_id);
         }
+
+        ctx.cookieSet("lang",lang);
 
         viewModel.put("lang", lang);
         viewModel.put("langs", langs);
