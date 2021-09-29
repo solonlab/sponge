@@ -1,5 +1,5 @@
 server.port: 8182
-server.session.timeout: 36000
+server.session.timeout: 360000 #10h
 
 solon.app:
   group: "sponge"
