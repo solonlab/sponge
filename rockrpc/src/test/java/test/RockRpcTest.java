@@ -34,7 +34,7 @@ public class RockRpcTest {
         System.out.println("RockClient.getApp(48)::成功!!!");
 
 
-        int cont = CloudLoadBalanceFactory.instance.get("rockrpc").getDiscovery().clusterSize();
+        int cont = CloudLoadBalanceFactory.instance.get("","rockrpc").getDiscovery().clusterSize();
         assert cont > 0;
 
         System.out.println("upstream>>" + cont);
