@@ -1,8 +1,8 @@
 package org.noear.trackapi.dso;
 
+import org.noear.solon.Utils;
 import org.noear.water.WaterClient;
 import org.noear.water.log.Level;
-import org.noear.water.utils.ThrowableUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -20,7 +20,7 @@ public class LogUtil {
 
     public static void error(String tag, String tag1, String tag2,String label , Throwable ex) {
         StringBuilder sb = new StringBuilder();
-        sb.append(ex.toString()).append("\r\n").append(ThrowableUtils.getString(ex));
+        sb.append(ex.toString()).append("\r\n").append(Utils.throwableToString(ex));
 
         WaterClient.Log.append("sponge_log_track", Level.ERROR, tag, tag1, tag2, label, sb.toString());
 
