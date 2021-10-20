@@ -79,26 +79,16 @@
 <body>
 
 <toolbar>
-    <div>
-        <left>
-            <form>
-                <input type="text" class="w250" value="${code_num}" name="code_num" placeholder="状态码"/>&nbsp;&nbsp;
-                <input type="hidden" value="${agroup_id}" name="agroup_id" />
-                <input type="hidden" value="${service}" name="service" />
-                <button type="submit">查询</button>&nbsp;&nbsp;
-                <c:if test="${agroup_id>0&&isOperator==1}">
-                    <button type="button" onclick="add()" class="edit">新增</button>
-                </c:if>
-
-            </form>
-        </left>
-        <right>
-            <selector>
-                <c:forEach var="l" items="${langs}">
-                    <a class='noline ${l.tag == lang ? "sel":"" }' href="./inner?lang=${l.tag}&agroup_id=${agroup_id}&service=${service}">${l.tag}(${l.counts})</a>
-                </c:forEach>
-            </selector>
-        </right>
+    <div class="center">
+        <form>
+            <input type="text" class="w250" value="${code_num}" name="code_num" placeholder="键值"/>&nbsp;&nbsp;
+            <input type="hidden" value="${agroup_id}" name="agroup_id" />
+            <input type="hidden" value="${service}" name="service" />
+            <button type="submit">查询</button>&nbsp;&nbsp;
+            <c:if test="${agroup_id>0&&isOperator==1}">
+                <button type="button" onclick="add()" class="edit">新增</button>
+            </c:if>
+        </form>
     </div>
     <div>
         <left>
@@ -110,7 +100,11 @@
             </c:if>
         </left>
         <right>
-
+            <selector>
+                <c:forEach var="l" items="${langs}">
+                    <a class='noline ${l.tag == lang ? "sel":"" }' href="./inner?lang=${l.tag}&agroup_id=${agroup_id}&service=${service}">${l.tag}(${l.counts})</a>
+                </c:forEach>
+            </selector>
         </right>
     </div>
 </toolbar>

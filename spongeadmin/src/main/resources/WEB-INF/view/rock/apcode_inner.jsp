@@ -77,7 +77,7 @@
 <body>
 
 <toolbar>
-    <left>
+    <div class="center">
         <form>
             <input type="text" class="w250" value="${code_num}" name="code_num" placeholder="状态码"/>&nbsp;&nbsp;
             <input type="hidden" value="${agroup_id}" name="agroup_id" />
@@ -86,22 +86,25 @@
             <c:if test="${agroup_id>0&&isOperator==1}">
                 <button type="button" onclick="add()" class="edit">新增</button>
             </c:if>
+        </form>
+    </div>
+    <div>
+        <left>
             <c:if test="${agroup_id>0&&isOperator==1}">
-                <div><file>
+                <file>
                     <label><input id="imp_file" type="file" accept=".jsond"/><a class="btn minor w80">导入</a></label>
                 </file>
                     <button type='button' class="minor w80 mar10-l" onclick="exp()" >导出</button>
-                </div>
             </c:if>
-        </form>
-    </left>
-    <right>
-        <selector>
-            <c:forEach var="l" items="${langs}">
-                <a class='noline ${l.tag == lang ? "sel":"" }' href="./inner?lang=${l.tag}&agroup_id=${agroup_id}&service=${service}">${l.tag}(${l.counts})</a>
-            </c:forEach>
-        </selector>
-    </right>
+        </left>
+        <right>
+            <selector>
+                <c:forEach var="l" items="${langs}">
+                    <a class='noline ${l.tag == lang ? "sel":"" }' href="./inner?lang=${l.tag}&agroup_id=${agroup_id}&service=${service}">${l.tag}(${l.counts})</a>
+                </c:forEach>
+            </selector>
+        </right>
+    </div>
 </toolbar>
 <datagrid>
     <table>
