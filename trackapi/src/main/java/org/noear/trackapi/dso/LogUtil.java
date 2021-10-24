@@ -1,72 +1,28 @@
 package org.noear.trackapi.dso;
 
-import org.noear.solon.Utils;
-import org.noear.water.WaterClient;
-import org.noear.water.log.Level;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
+import org.noear.solon.logging.utils.TagsMDC;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by xun on 17/5/2.
  */
 public class LogUtil {
-
-
-    public static void error(String tag, Throwable ex) {
-        error(tag, "", "", "", ex);
-    }
+    static Logger log = LoggerFactory.getLogger("sponge_log_track");
 
     public static void error(String tag, String tag1, String tag2,String label , Throwable ex) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(ex.toString()).append("\r\n").append(Utils.throwableToString(ex));
+        TagsMDC.tag0(tag);
+        TagsMDC.tag1(tag1);
+        TagsMDC.tag2(tag2);
 
-        WaterClient.Log.append("sponge_log_track", Level.ERROR, tag, tag1, tag2, label, sb.toString());
-
-        System.out.print(tag + "::\r\n");
-        System.out.print(sb.toString());
-        System.out.print("\r\n");
+        log.error("{}\r\n{}", label, ex);
     }
-
-    public static void error(String tag, String tag1, String label , String txt) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(txt);
-
-        WaterClient.Log.append("sponge_log_track", Level.ERROR,  tag, tag1, label, sb.toString());
-
-        System.out.print(tag + "::\r\n");
-        System.out.print(sb.toString());
-        System.out.print("\r\n");
-    }
-
 
     public static void debug(String tag, String tag1, String tag2, String label , String txt) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(txt);
+        TagsMDC.tag0(tag);
+        TagsMDC.tag1(tag1);
+        TagsMDC.tag2(tag2);
 
-        WaterClient.Log.append("sponge_log_track", Level.DEBUG, tag, tag1, tag2, label, sb.toString());
-
-        System.out.print(tag + "::\r\n");
-        System.out.print(sb.toString());
-        System.out.print("\r\n");
+        log.debug("{}\r\n{}", label, txt);
     }
-
-    public static void output(String tag, String tag1, String tag2, String label , String txt) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(txt);
-
-        WaterClient.Log.append("sponge_log_track", Level.TRACE, tag, tag1, tag2, label, sb.toString());
-
-        System.out.print(tag + "::\r\n");
-        System.out.print(sb.toString());
-        System.out.print("\r\n");
-    }
-
-    public static String getFullStackTrace(Throwable e) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        e.printStackTrace(new PrintStream(baos));
-        return baos.toString();
-    }
-
 }
