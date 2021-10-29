@@ -23,7 +23,6 @@ import org.noear.sponge.admin.model.rock.AppExI18nModel;
 import org.noear.sponge.admin.model.rock.AppGroupModel;
 import org.noear.sponge.admin.model.rock.I18nModel;
 import org.noear.sponge.admin.utils.MapKeyComparator;
-import org.noear.water.WaterClient;
 import org.noear.water.utils.*;
 
 import java.sql.SQLException;
@@ -200,6 +199,8 @@ public class AppI18nController extends BaseController {
         }
 
         if (result) {
+            RockUtil.delCacheForI18ns(service);
+
             return viewModel.code(1, "操作成功");
         } else {
             return viewModel.code(0, "操作失败");
@@ -267,6 +268,8 @@ public class AppI18nController extends BaseController {
             DbRockI18nApi.i18nImp(agroup_id, service, m.name, m.lang, m.note);
         }
 
+        RockUtil.delCacheForI18ns(service);
+
         return viewModel.code(1, "ok");
     }
 
@@ -284,7 +287,6 @@ public class AppI18nController extends BaseController {
             return viewModel.code(0, "提示：缺少元信息配置");
         }
 
-        boolean isOk = false;
 
         if (DbRockApi.getAppGroupById(agroup_id).agroup_id != agroup_id) {
             return viewModel.code(0, "提示：应用组不存在");
@@ -293,6 +295,9 @@ public class AppI18nController extends BaseController {
         if (lang == null) {
             lang = "";
         }
+
+
+        boolean isOk = false;
 
         //去除元信息
         i18n.remove("rock.i18n.service");

@@ -76,19 +76,19 @@ public class RockUtil {
     public static void delCacheForCodes(String service) {
         if (_isService) {
             _cache.tags()
-                    .clear("app_code_" + service);
+                    .clear("app_code:" + service);
         }
 
-        RockUtil.sendMessage("app_code_" + service);
+        RockUtil.sendMessage("app_code:" + service);
     }
 
     public static void delCacheForI18ns(String service) {
         if (_isService) {
             _cache.tags()
-                    .clear("app_i18n_" + service);
+                    .clear("app_i18n:" + service);
         }
 
-        RockUtil.sendMessage("app_i18n_" + service);
+        RockUtil.sendMessage("app_i18n:" + service);
     }
 
     public static void delCacheForWhiteList(String tag, int type) {

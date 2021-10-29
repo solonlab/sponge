@@ -1,6 +1,6 @@
 package org.noear.sponge.admin.controller.rock;
 
-import org.apache.commons.codec.StringEncoderComparator;
+import org.noear.rock.RockUtil;
 import org.noear.snack.ONode;
 import org.noear.solon.Utils;
 import org.noear.solon.annotation.Controller;
@@ -118,7 +118,7 @@ public class AppCodeController extends BaseController {
             AgroupCookieUtil.cookieSet(agroup_id);
         }
 
-        ctx.cookieSet("lang",lang);
+        ctx.cookieSet("lang", lang);
 
         viewModel.put("lang", lang);
         viewModel.put("langs", langs);
@@ -201,6 +201,8 @@ public class AppCodeController extends BaseController {
         }
 
         if (result) {
+            RockUtil.delCacheForCodes(service);
+
             return viewModel.code(1, "操作成功");
         } else {
             return viewModel.code(0, "操作失败");
@@ -213,6 +215,8 @@ public class AppCodeController extends BaseController {
         boolean result = DbRockI18nApi.codeDel(agroup_id, service, codeOld);
 
         if (result) {
+            RockUtil.delCacheForCodes(service);
+
             return viewModel.code(1, "操作成功");
         } else {
             return viewModel.code(0, "操作失败");
@@ -252,12 +256,20 @@ public class AppCodeController extends BaseController {
 
         List<AppExCodeModel> list = entity.data.toObjectList(AppExCodeModel.class);
 
+
+        boolean isOk = false;
+
         for (AppExCodeModel m : list) {
             if (service == null) {
                 service = m.service;
             }
 
             DbRockI18nApi.codeImp(agroup_id, service, m.code, m.lang, m.note);
+            isOk = true;
+        }
+
+        if (isOk) {
+            RockUtil.delCacheForCodes(service);
         }
 
         return viewModel.code(1, "ok");

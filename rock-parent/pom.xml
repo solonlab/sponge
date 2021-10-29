@@ -6,7 +6,7 @@
 
     <groupId>org.noear</groupId>
     <artifactId>rock-parent</artifactId>
-    <version>1.2.8</version>
+    <version>1.2.9</version>
     <packaging>pom</packaging>
 
     <name>${project.artifactId}</name>
@@ -46,7 +46,7 @@
 
         <bcf.ver>2.1.14</bcf.ver>
 
-        <rock.ver>1.2.8</rock.ver>
+        <rock.ver>1.2.9</rock.ver>
     </properties>
 
     <dependencyManagement>
@@ -54,6 +54,11 @@
             <dependency>
                 <groupId>org.noear</groupId>
                 <artifactId>rock.client</artifactId>
+                <version>${rock.ver}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.noear</groupId>
+                <artifactId>rock.client-solon-plugin</artifactId>
                 <version>${rock.ver}</version>
             </dependency>
 
@@ -220,6 +225,7 @@
 
     <modules>
         <module>../rock.client</module>
+        <module>../rock.client-solon-plugin</module>
     </modules>
 
 </project>

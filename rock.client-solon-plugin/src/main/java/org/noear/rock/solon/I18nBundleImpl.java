@@ -1,4 +1,4 @@
-package org.noear.rock.i18n.integration;
+package org.noear.rock.solon;
 
 import org.noear.rock.i18n.MessageContext;
 import org.noear.solon.i18n.I18nBundle;

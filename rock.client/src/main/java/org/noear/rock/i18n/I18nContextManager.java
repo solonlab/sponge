@@ -1,7 +1,5 @@
 package org.noear.rock.i18n;
 
-import org.noear.water.utils.TaskUtils;
-
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,20 +13,37 @@ public class I18nContextManager {
 
     private static final I18nContextManager instance = new I18nContextManager();
 
+    public static I18nContextManager getInstance() {
+        return instance;
+    }
+
     private I18nContextManager() {
-        TaskUtils.run(30 * 1000, 30 * 1000, this::update);
+        //TaskUtils.run(30 * 1000, 30 * 1000, this::update);
     }
 
-    private void update() throws SQLException {
-        for (CodeContext c : codeLib.values()) {
-            c.update();
-        }
+//    private void update() throws SQLException {
+//        for (CodeContext c : codeLib.values()) {
+//            c.update();
+//        }
+//
+//        for (MessageContext c : messageLib.values()) {
+//            c.update();
+//        }
+//    }
 
-        for (MessageContext c : messageLib.values()) {
+    public void updateCodeContext(String service) throws SQLException{
+        CodeContext c = codeLib.get(service);
+        if (c != null) {
             c.update();
         }
     }
 
+    public void updateMessageContext(String service) throws SQLException {
+        MessageContext c = messageLib.get(service);
+        if (c != null) {
+            c.update();
+        }
+    }
 
     /**
      * 获取代码国际化上下文
