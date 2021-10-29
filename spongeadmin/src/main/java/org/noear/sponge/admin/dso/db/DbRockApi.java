@@ -85,25 +85,6 @@ public class DbRockApi {
                 .selectList("*", AppGroupModel.class);
     }
 
-//    public static List<AppGroupModel> getAppGroupOfTrack(String name) throws SQLException {
-//        return db().table("appx_agroup")
-//                .where("enable_track=1")
-//                .build((tb) -> {
-//                    if (TextUtils.isEmpty(name) == false) {
-//                        tb.and("name like ?", name + "%");
-//                    }
-//                })
-//                .select("*")
-//                .getList(new AppGroupModel());
-//    }
-
-    public static List<AppGroupModel> getAppGroupWithTag() throws SQLException {
-        return db().table("appx_agroup")
-                .where("`tag` IS NOT NULL")
-                .and("`tag` != ''")
-                .selectList("*", AppGroupModel.class);
-    }
-
     //根据id获取应用组
     public static AppGroupModel getAppGroupById(Integer agroup_id) throws SQLException {
         if(agroup_id<1){
@@ -274,15 +255,15 @@ public class DbRockApi {
     //保存app信息
     public static boolean editApp(Integer app_id, String name, Integer agroup_id, Integer ugroup_id, String app_key,String app_secret_key, Integer ar_is_examine,Integer ar_is_setting, String note, Integer ar_examine_ver) throws SQLException {
         DbTableQuery tb = db().table("appx")
-                .set("`name`",name)
-                .set("`agroup_id`",agroup_id)
-                .set("`ugroup_id`",ugroup_id)
-                .set("`app_key`",app_key)
-                .set("`app_secret_key`",app_secret_key)
-                .set("`ar_is_examine`",ar_is_examine)
-                .set("`ar_is_setting`",ar_is_setting)
-                .set("`note`",note)
-                .set("`ar_examine_ver`",ar_examine_ver);
+                .set("name",name)
+                .set("agroup_id",agroup_id)
+                .set("ugroup_id",ugroup_id)
+                .set("app_key",app_key)
+                .set("app_secret_key",app_secret_key)
+                .set("ar_is_examine",ar_is_examine)
+                .set("ar_is_setting",ar_is_setting)
+                .set("note",note)
+                .set("ar_examine_ver",ar_examine_ver);
 
         boolean isOk = true;
         if(app_id>0){
@@ -448,10 +429,10 @@ public class DbRockApi {
     //新增或修改安全白名单
     public static Boolean editWhiteList(Integer row_id,Integer type,String value,String note,String tag) throws SQLException {
         DbTableQuery db = db().table("appx_whitelist")
-                .set("`type`", type)
-                .set("`value`", value)
-                .set("`note`", note)
-                .set("`tag`", tag);
+                .set("type", type)
+                .set("value", value)
+                .set("note", note)
+                .set("tag", tag);
 
         boolean isOk = true;
 
@@ -520,22 +501,22 @@ public class DbRockApi {
 
     public static Boolean editApver(Integer app_id,Integer row_id, Integer ver, String content, Integer type, Integer alert_ver,Integer force_ver,Integer platform, String url, Integer is_enable,Integer agroup_id) throws SQLException {
         DbTableQuery db = db().table("appx_ex_version")
-                .set("`app_id`", app_id)
-                .set("`ver`", ver)
-                .set("`content`", content)
-                .set("`type`", type)
-                .set("`alert_ver`", alert_ver)
-                .set("`force_ver`", force_ver)
-                .set("`platform`", platform)
-                .set("`url`", url)
-                .set("`is_enable`", is_enable)
-                .set("`agroup_id`", agroup_id);
+                .set("app_id", app_id)
+                .set("ver", ver)
+                .set("content", content)
+                .set("type", type)
+                .set("alert_ver", alert_ver)
+                .set("force_ver", force_ver)
+                .set("platform", platform)
+                .set("url", url)
+                .set("is_enable", is_enable)
+                .set("agroup_id", agroup_id);
 
         boolean isOk = true;
         if (row_id > 0) {
             isOk = db.where("row_id = ?", row_id).update() > 0;
         } else {
-            db.set("`log_fulltime`", "$NOW()");
+            db.set("log_fulltime", "$NOW()");
             isOk = db.insert() > 0;
         }
 
