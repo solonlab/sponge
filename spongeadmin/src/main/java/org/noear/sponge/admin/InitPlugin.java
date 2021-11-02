@@ -48,13 +48,8 @@ public class InitPlugin implements Plugin {
      * 初始化Weed监听事件
      */
     protected void initWeed() {
-        Class<?> bcfClz = Utils.loadClass(WW.clz_BcfClient);
 
-        if (bcfClz == null) {
-            initWeedForApi();
-        } else {
-            initWeedForAdmin();
-        }
+        initWeedForAdmin();
 
 
         WeedConfig.onException((cmd, err) -> {
