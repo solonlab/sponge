@@ -42,6 +42,7 @@
         <thead>
         <tr>
             <td width="70px">应用ID</td>
+            <td width="280px">应用标识（appKey）</td>
             <td >应用名称</td>
             <td width="60px">应用组ID</td>
             <td width="60px">用户组ID</td>
@@ -57,7 +58,7 @@
         <c:forEach var="app" items="${appList}">
             <tr>
                 <td style="text-align: left">${app.app_id}</td>
-                <td style="text-align: left">${app.app_secret_key}</td>
+                <td style="text-align: left">${app.app_key}</td>
                 <td style="text-align: left">${app.name}</td>
                 <td>${app.agroup_id}</td>
                 <td>${app.ugroup_id}</td>
