@@ -109,11 +109,14 @@
             </tr>
             <tr>
                 <th>应用标识</th>
-                <td><input disabled="disabled" type="text" id="app_key"  value="${appEdit.app_key}"/></td>
+                <td><input disabled="disabled" type="text" id="app_key"  value="${appEdit.app_key}"/>
+                <n>（appKey）</n>
+                </td>
             </tr>
             <tr>
                 <th>密钥</th>
                 <td><input disabled="disabled" type="text" id="app_secret_key"  value="${appEdit.app_secret_key}"/>
+                    <n>（appSecretKey）</n>
                 </td>
             </tr>
             <tr style="display: none">

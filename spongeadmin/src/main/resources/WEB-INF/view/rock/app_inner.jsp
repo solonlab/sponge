@@ -42,7 +42,6 @@
         <thead>
         <tr>
             <td width="70px">应用ID</td>
-            <td width="180px">密钥</td>
             <td >应用名称</td>
             <td width="60px">应用组ID</td>
             <td width="60px">用户组ID</td>
