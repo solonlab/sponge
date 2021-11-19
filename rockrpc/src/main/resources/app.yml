@@ -5,7 +5,7 @@ solon.app:
   name: "rockrpc"
 
 solon.cloud.water:
-  server: "waterapi"
+  server: "waterapi:9371"
   config:
     load: "rockrpc.yml" #预留扩展
   log:
