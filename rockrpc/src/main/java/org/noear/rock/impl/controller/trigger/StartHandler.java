@@ -8,7 +8,7 @@ import org.noear.solon.core.handle.Handler;
 @Component
 public class StartHandler implements Handler {
     @Override
-    public void handle(Context context) throws Exception {
-        context.attrSet("_start", System.currentTimeMillis());
+    public void handle(Context ctx) throws Exception {
+        ctx.attrSet("_start", System.currentTimeMillis());
     }
 }

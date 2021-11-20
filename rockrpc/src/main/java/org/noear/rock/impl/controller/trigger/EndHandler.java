@@ -29,20 +29,24 @@ public class EndHandler implements Handler {
         CloudClient.metric().addMeter(service, "rpc", ctx.path(), times);
         CloudClient.metric().addMeter(WW.track_service, service, _node, times);
         CloudClient.metric().addMeter(WW.track_from, service, _from, times);
-        //WaterClient.Track.track(Instance.local().service(), "rpc", ctx.path(), times, _node, _from);
 
         String _out = ctx.attr("output", "");
         String _in = ONode.stringify(ctx.paramMap());
 
+        StringBuilder buf = new StringBuilder();
+        buf.append("> Param: ").append(_in).append("\n");
+        buf.append("T Elapsed time: ").append(times).append("ms");
+        buf.append("\n\n");
+        buf.append("< Body: ").append(_out);
 
-        TagsMDC.tag0(ctx.path()).tag3(_from);
+
+        TagsMDC.tag0(ctx.path());
+        TagsMDC.tag3(_from);
 
         if (_out != null && _out.startsWith("warn::")) {
-            log.warn("::{}\r\n::{}", _in, _out);
-            //WaterClient.Log.append("rock_log", Level.WARN, ctx.path(), null, null, _from, _in, _out);
+            log.warn(buf.toString());
         } else {
-            log.info("::{}\r\n::{}", _in, _out);
-            //WaterClient.Log.append("rock_log", Level.INFO, ctx.path(), null, null, _from, _in, _out);
+            log.info(buf.toString());
         }
     }
 }
