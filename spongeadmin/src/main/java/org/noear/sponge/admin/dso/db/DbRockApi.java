@@ -253,13 +253,14 @@ public class DbRockApi {
     }
 
     //保存app信息
-    public static boolean editApp(Integer app_id, String name, Integer agroup_id, Integer ugroup_id, String app_key,String app_secret_key, Integer ar_is_examine,Integer ar_is_setting, String note, Integer ar_examine_ver) throws SQLException {
+    public static boolean editApp(Integer app_id, String name, Integer agroup_id, Integer ugroup_id, String app_key,String app_secret_key, String app_secret_salt,Integer ar_is_examine,Integer ar_is_setting, String note, Integer ar_examine_ver) throws SQLException {
         DbTableQuery tb = db().table("appx")
                 .set("name",name)
                 .set("agroup_id",agroup_id)
                 .set("ugroup_id",ugroup_id)
                 .set("app_key",app_key)
                 .set("app_secret_key",app_secret_key)
+                .set("app_secret_salt", app_secret_salt)
                 .set("ar_is_examine",ar_is_examine)
                 .set("ar_is_setting",ar_is_setting)
                 .set("note",note)

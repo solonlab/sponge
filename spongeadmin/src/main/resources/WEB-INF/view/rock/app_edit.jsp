@@ -27,6 +27,7 @@
             var ugroup_id = $('#user_group').val();
             var app_key = $('#app_key').val();
             var app_secret_key = $('#app_secret_key').val();
+            var app_secret_salt = $('#app_secret_salt').val();
             var ar_is_setting = $('#ar_is_setting').prop("checked")?1:0;
             var ar_is_examine = $('#ar_is_examine').prop("checked")?1:0;
             var note = $('#note').val();
@@ -54,7 +55,19 @@
             $.ajax({
                 type:"POST",
                 url:"/rock/app/edit/ajax/save",
-                data:{"app_id":app_id,"name":name,"agroup_id":agroup_id,"ugroup_id":ugroup_id,"app_key":app_key,"app_secret_key":app_secret_key,"ar_is_examine":ar_is_examine,"ar_is_setting":ar_is_setting,"note":note,"ar_examine_ver":ar_examine_ver},
+                data:{
+                    "app_id":app_id,
+                    "name":name,
+                    "agroup_id":agroup_id,
+                    "ugroup_id":ugroup_id,
+                    "app_key":app_key,
+                    "app_secret_key":app_secret_key,
+                    "app_secret_salt":app_secret_salt,
+                    "ar_is_examine":ar_is_examine,
+                    "ar_is_setting":ar_is_setting,
+                    "note":note,
+                    "ar_examine_ver":ar_examine_ver
+                },
                 success:function (data) {
                     if(data.code==1) {
                         top.layer.msg(data.msg);
@@ -117,6 +130,12 @@
                 <th>密钥</th>
                 <td><input disabled="disabled" type="text" id="app_secret_key"  value="${appEdit.app_secret_key}"/>
                     <n>（appSecretKey）</n>
+                </td>
+            </tr>
+            <tr>
+                <th>密钥-盐</th>
+                <td><input disabled="disabled" type="text" id="app_secret_salt"  value="${appEdit.app_secret_salt}"/>
+                    <n>（appSecretSalt）</n>
                 </td>
             </tr>
             <tr style="display: none">

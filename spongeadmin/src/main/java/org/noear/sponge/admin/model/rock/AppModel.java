@@ -9,11 +9,12 @@ import java.util.*;
 /// 
 /// </summary>
 @Getter
-public class AppModel implements IBinder
-{
+public class AppModel implements IBinder {
     public int app_id;
     public String app_key;
     public String app_secret_key;
+    public String app_secret_salt;
+
     public int ugroup_id;
     public int agroup_id;
     public String name;
@@ -29,13 +30,16 @@ public class AppModel implements IBinder
     //管理审核版本号
     public int ar_examine_ver;
     public long counts;
-	public void bind(GetHandlerEx s)
-	{
-		//1.source:数据源
-		//
+
+    public void bind(GetHandlerEx s) {
+        //1.source:数据源
+        //
         app_id = s.get("app_id").value(0);
+
         app_key = s.get("app_key").value(null);
         app_secret_key = s.get("app_secret_key").value(null);
+        app_secret_salt = s.get("app_secret_salt").value(null);
+
         ugroup_id = s.get("ugroup_id").value(0);
         agroup_id = s.get("agroup_id").value(0);
         name = s.get("name").value(null);
@@ -49,10 +53,9 @@ public class AppModel implements IBinder
 
         counts = s.get("counts").value(0L);
 
-	}
-	
-	public IBinder clone()
-	{
-		return new AppModel();
-	}
+    }
+
+    public IBinder clone() {
+        return new AppModel();
+    }
 }

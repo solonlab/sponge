@@ -144,12 +144,15 @@ public class AppController extends BaseController {
     //应用新增编辑ajax保存功能
     @AuthRoles(SessionRoles.role_admin)
     @Mapping("app/edit/ajax/save")
-    public BaseResp saveApp(Integer app_id, String name, Integer agroup_id, Integer ugroup_id, String app_key, String app_secret_key, Integer ar_is_examine, Integer ar_is_setting, String note, Integer ar_examine_ver) throws SQLException {
+    public BaseResp saveApp(Integer app_id, String name, Integer agroup_id, Integer ugroup_id, String app_key, String app_secret_key,String app_secret_salt, Integer ar_is_examine, Integer ar_is_setting, String note, Integer ar_examine_ver) throws SQLException {
         BaseResp resp = new BaseResp();
-        app_key.trim();
-        app_secret_key.trim();
-        boolean result = DbRockApi.editApp(app_id,name,agroup_id,ugroup_id,app_key,app_secret_key,ar_is_examine,ar_is_setting,note,ar_examine_ver);
-        if (result){
+        app_key = app_key.trim();
+        app_secret_key = app_secret_key.trim();
+        app_secret_salt = app_secret_salt.trim();
+
+        boolean result = DbRockApi.editApp(app_id, name, agroup_id, ugroup_id, app_key, app_secret_key, app_secret_salt, ar_is_examine, ar_is_setting, note, ar_examine_ver);
+
+        if (result) {
             resp.code = 1;
             resp.msg = "操作成功";
         } else {

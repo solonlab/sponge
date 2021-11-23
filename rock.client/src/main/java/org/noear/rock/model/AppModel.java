@@ -20,9 +20,13 @@ public class AppModel {
      * */
     public String app_key;
     /**
-     * 应用签名或加密密钥
+     * 应用密钥（签名或加密用）
      * */
     public String app_secret_key;
+    /**
+     * 应用密钥-盐
+     * */
+    public String app_secret_salt;
 
     /**
      * 应用组ID
