@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 //不能用静态函数
-public class BcfTagChecker {
+public class TagChecker {
     private Map<String,String> tmpCache = null;
 
     private void tryLoadTagByUser() throws SQLException {

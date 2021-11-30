@@ -3,7 +3,7 @@ package org.noear.sponge.admin.controller.track;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.core.handle.ModelAndView;
-import org.noear.sponge.admin.dso.BcfTagChecker;
+import org.noear.sponge.admin.dso.TagChecker;
 import org.noear.sponge.admin.dso.GroupUtil;
 import org.noear.sponge.admin.dso.db.DbRockApi;
 import org.noear.sponge.admin.dso.db.DbTrackApi;
@@ -28,7 +28,7 @@ public class StatController extends BaseController {
     @Mapping("track/stat")
     public ModelAndView urlStatistics(Integer tag_id,Integer agroup_id) throws SQLException{
         //by noear 20180516::添加应用组的权限控制
-        BcfTagChecker checker = new BcfTagChecker();
+        TagChecker checker = new TagChecker();
 
         //应用组cookie记忆处理
         Integer out_agroup_id = agroup_id;

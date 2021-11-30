@@ -5,7 +5,7 @@ import org.noear.solon.annotation.Controller;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ModelAndView;
 import org.noear.solon.auth.annotation.AuthPermissions;
-import org.noear.sponge.admin.dso.BcfTagChecker;
+import org.noear.sponge.admin.dso.TagChecker;
 import org.noear.sponge.admin.dso.GroupUtil;
 import org.noear.sponge.admin.dso.SessionPerms;
 import org.noear.sponge.admin.dso.db.DbRockApi;
@@ -28,7 +28,7 @@ public class TagController extends BaseController {
     @Mapping("track/tag")
     public ModelAndView tag(Integer agroup_id) throws SQLException{
         //by noear 20180516::添加应用组的权限控制
-        BcfTagChecker checker = new BcfTagChecker();
+        TagChecker checker = new TagChecker();
 
         //应用组cookie记忆处理
         Integer out_agroup_id = agroup_id;

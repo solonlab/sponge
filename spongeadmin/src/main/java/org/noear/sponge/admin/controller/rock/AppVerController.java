@@ -6,7 +6,7 @@ import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ModelAndView;
 import org.noear.solon.auth.annotation.AuthPermissions;
 import org.noear.sponge.admin.dso.AgroupCookieUtil;
-import org.noear.sponge.admin.dso.BcfTagChecker;
+import org.noear.sponge.admin.dso.TagChecker;
 import org.noear.sponge.admin.dso.SessionPerms;
 import org.noear.sponge.admin.dso.db.DbRockApi;
 import org.noear.sponge.admin.model.others.resp.BaseResp;
@@ -28,7 +28,7 @@ public class AppVerController extends BaseController {
     @Mapping("apver")
     public ModelAndView apver(Context ctx, Integer agroup_id) throws SQLException {
         //by noear 20180516::添加应用组的权限控制
-        BcfTagChecker checker = new BcfTagChecker();
+        TagChecker checker = new TagChecker();
 
         List<AppGroupModel> agroups = DbRockApi.getAppGroup("");
         List<AppExVersionModel> apverCounts = DbRockApi.getApverCounts();

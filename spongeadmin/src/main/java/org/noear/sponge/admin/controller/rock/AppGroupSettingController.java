@@ -8,7 +8,7 @@ import org.noear.solon.auth.annotation.AuthPermissions;
 import org.noear.solon.core.handle.UploadedFile;
 import org.noear.sponge.admin.controller.ViewModel;
 import org.noear.sponge.admin.dso.AgroupCookieUtil;
-import org.noear.sponge.admin.dso.BcfTagChecker;
+import org.noear.sponge.admin.dso.TagChecker;
 import org.noear.sponge.admin.dso.Session;
 import org.noear.sponge.admin.dso.SessionPerms;
 import org.noear.sponge.admin.dso.db.DbRockApi;
@@ -34,7 +34,7 @@ public class AppGroupSettingController extends BaseController {
     public ModelAndView agesets(Integer agroup_id) throws SQLException {
 
         //by noear 20180516::添加应用组的权限控制
-        BcfTagChecker checker = new BcfTagChecker();
+        TagChecker checker = new TagChecker();
 
         List<AppGroupModel> agroups = DbRockApi.getAppGroup("");
         List<AppExSettingModel> apsetting = DbRockApi.getAppGroupCounts();

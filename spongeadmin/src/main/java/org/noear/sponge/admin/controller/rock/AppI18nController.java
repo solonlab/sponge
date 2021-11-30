@@ -13,7 +13,7 @@ import org.noear.sponge.admin.Config;
 import org.noear.sponge.admin.controller.BaseController;
 import org.noear.sponge.admin.controller.ViewModel;
 import org.noear.sponge.admin.dso.AgroupCookieUtil;
-import org.noear.sponge.admin.dso.BcfTagChecker;
+import org.noear.sponge.admin.dso.TagChecker;
 import org.noear.sponge.admin.dso.Session;
 import org.noear.sponge.admin.dso.SessionPerms;
 import org.noear.sponge.admin.dso.db.DbRockApi;
@@ -37,7 +37,7 @@ public class AppI18nController extends BaseController {
     @Mapping("")
     public ModelAndView apcode(Context ctx, Integer agroup_id, String sev) throws SQLException {
         //by noear 20180516::添加应用组的权限控制
-        BcfTagChecker checker = new BcfTagChecker();
+        TagChecker checker = new TagChecker();
 
 
         Integer out_agroup_id = agroup_id;
