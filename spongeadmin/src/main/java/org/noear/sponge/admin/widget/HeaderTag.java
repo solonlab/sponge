@@ -1,12 +1,13 @@
 package org.noear.sponge.admin.widget;
 
-import org.noear.bcf.BcfClient;
-import org.noear.bcf.BcfUtil;
-import org.noear.bcf.models.BcfGroupModel;
-import org.noear.bcf.models.BcfResourceModel;
+import org.noear.grit.client.GritClient;
+import org.noear.grit.client.GritUtil;
+import org.noear.grit.model.domain.Resource;
+import org.noear.grit.model.domain.ResourceEntity;
+import org.noear.grit.model.domain.ResourceGroup;
 import org.noear.solon.Solon;
+import org.noear.solon.Utils;
 import org.noear.solon.core.handle.Context;
-import org.noear.sponge.admin.Config;
 import org.noear.sponge.admin.dso.Session;
 import org.noear.water.utils.TextUtils;
 
@@ -19,57 +20,60 @@ public class HeaderTag extends TagSupport {
     public int doStartTag() throws JspException {
         try {
 
-            //当前视图path //此处改过，noear，20180831
-            Context context = Context.current();
-            String cPath = context.path();
+            Context ctx = Context.current();
+            long subjectId = Session.current().getSubjectId();
+            String path = ctx.pathNew();
 
-
-            if (Session.current().getPUID() == 0) {   //检查用户是已登录
-                Context.current().redirect("/login");
+            if (subjectId == 0) {
+                //如果用户未登录
+                ctx.redirect("/login");
                 return super.doStartTag();
             }
 
-            List<BcfGroupModel> list = BcfClient.getUserPacks(Session.current().getPUID());
+            List<ResourceGroup> groupList = GritClient.global().auth().getUriGroupListBySpace(subjectId);
 
-            if(list.size() == 0){
-                Context.current().redirect("/login");
+            if (groupList.size() == 0) {
+                ctx.redirect("/login");
                 return super.doStartTag();
             }
 
 
-            StringBuffer sb = new StringBuffer();
-            sb.append("<header>");
+            StringBuilder buf = new StringBuilder();
+            buf.append("<header>");
 
-            sb.append("<label>"); //new
-            sb.append(Solon.cfg().appTitle());
-            sb.append("</label>\n");//new
+            buf.append("<label>"); //new
+            buf.append(Solon.cfg().appTitle());
+            buf.append("</label>\n");//new
 
 
-            sb.append("<nav>");
+            buf.append("<nav>");
 
-            for(BcfGroupModel g :list) {
-                BcfResourceModel res = BcfClient.getUserFirstResourceByPack(Session.current().getPUID(), g.pgid);
+            for (ResourceGroup group : groupList) {
+                ResourceEntity res = GritClient.global().auth().getUriFristByGroup(subjectId, group.resource_id);
 
-                if (TextUtils.isEmpty(res.uri_path) == false) {
-                    buildItem(sb, g.cn_name, res, cPath, g.uri_path); //::en_name 改为 uri_path
+                if (Utils.isEmpty(res.link_uri) == false) {
+                    buildGroupItem(buf, group, res, path);
                 }
             }
 
-            sb.append("</nav>\n");
+            buf.append("</nav>\n");
 
-            sb.append("<aside>");//new
-            String temp = Session.current().getUserName();
-            if(temp!=null) {
-                sb.append("<i class='fa fa-user'></i> ");
-                sb.append(temp);
+            buf.append("<aside>");//new
+
+            String userDisplayName = Session.current().getDisplayName();
+            if (Utils.isNotEmpty(userDisplayName)) {
+                buf.append("<a>");
+                buf.append("<i class='fa fa-user'></i> ");
+                buf.append(userDisplayName);
+                buf.append("</a>");
             }
 
-            sb.append("<a class='logout' href='/'><i class='fa fa-fw fa-circle-o-notch'></i>退出</a>");
-            sb.append("</aside>");//new
+            buf.append("<a class='split' href='/'><i class='fa fa-fw fa-circle-o-notch'></i>退出</a>");
+            buf.append("</aside>");//new
 
-            sb.append("</header>\n");
+            buf.append("</header>\n");
 
-            pageContext.getOut().write(sb.toString());
+            pageContext.getOut().write(buf.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -77,23 +81,17 @@ public class HeaderTag extends TagSupport {
         return super.doStartTag();
     }
 
-    private void buildItem(StringBuffer sb,String title,BcfResourceModel res,String cPath,String pack) {
+    private void buildGroupItem(StringBuilder buf, ResourceGroup resourceGroup, Resource res, String path) {
+        String newUrl = GritUtil.buildDockUri(res);
 
-        //此处改过，noear，201811(uadmin)
-        String newUrl = BcfUtil.buildBcfUnipath(res);
-
-        if(cPath.indexOf(pack)==0)
-        {
-            sb.append("<a class='sel' href='" + newUrl + "'>");
-            sb.append(title);
-            sb.append("</a>");
+        if (path.indexOf(resourceGroup.link_uri) == 0) {
+            buf.append("<a class='sel' href='" + newUrl + "'>");
+            buf.append(resourceGroup.display_name);
+            buf.append("</a>");
+        } else {
+            buf.append("<a href='" + newUrl + "'>");
+            buf.append(resourceGroup.display_name);
+            buf.append("</a>");
         }
-        else
-        {
-            sb.append("<a href='" + newUrl + "'>");
-            sb.append(title);
-            sb.append("</a>");
-        }
-
     }
 }

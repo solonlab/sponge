@@ -4,7 +4,6 @@ import org.noear.solon.Solon;
 import org.noear.solon.annotation.Singleton;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ModelAndView;
-import org.noear.sponge.admin.Config;
 import org.noear.sponge.admin.dso.Session;
 
 @Singleton(false)
@@ -14,11 +13,10 @@ public abstract class BaseController {
     protected ViewModel viewModel = new ViewModel();
 
     /*
-    * @return 输出一个视图（自动放置viewModel）
-    * @param viewName 视图名字(内部uri)
-    * */
-    public ModelAndView view(String viewName)
-    {
+     * @return 输出一个视图（自动放置viewModel）
+     * @param viewName 视图名字(内部uri)
+     * */
+    public ModelAndView view(String viewName) {
         //设置必要参数
         viewModel.put("root", "");
 
@@ -29,19 +27,26 @@ public abstract class BaseController {
         viewModel.put("img", "/_static/img");
         viewModel.put("title", Solon.cfg().appTitle());
 
-        //viewModel.put("push_suffix", Config.push_suffix);
 
-        //当前用户信息(示例)
-        viewModel.put("puid", Session.current().getPUID());
-        viewModel.put("cn_name", Session.current().getUserName());
+        //当前用户信息, old //将弃用
+        viewModel.put("puid", Session.current().getSubjectId());
+        viewModel.put("cn_name", Session.current().getDisplayName());
 
-        //操作权限
-        int isAdmin = Session.current().getIsAdmin();
-        int isOperator = Session.current().getIsOperator();
-        viewModel.put("isOperator",isAdmin==1||isOperator==1?1:0);
-        viewModel.put("isAdmin",isAdmin);
+        //当前用户信息, new
+        viewModel.put("user_id", Session.current().getSubjectId());
+        viewModel.put("user_display_name", Session.current().getDisplayName());
 
-        return viewModel.view(viewName+".jsp");
+        ///操作权限
+        int is_admin = Session.current().getIsAdmin();
+        int is_operator = Session.current().getIsOperator();
+        if (is_admin == 1) {
+            is_operator = 1;
+        }
+
+        viewModel.put("isOperator", is_operator);
+        viewModel.put("isAdmin", is_admin);
+
+        return viewModel.view(viewName + ".jsp");
     }
 
     /*
@@ -51,7 +56,7 @@ public abstract class BaseController {
     public void redirect(String url) {
         try {
             Context.current().redirect(url);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }

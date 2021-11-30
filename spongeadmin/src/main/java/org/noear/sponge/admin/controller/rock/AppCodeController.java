@@ -5,16 +5,17 @@ import org.noear.snack.ONode;
 import org.noear.solon.Utils;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
+import org.noear.solon.auth.annotation.AuthPermissions;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ModelAndView;
-import org.noear.solon.auth.annotation.AuthRoles;
+import org.noear.solon.auth.annotation.AuthPermissions;
 import org.noear.solon.core.handle.UploadedFile;
 import org.noear.sponge.admin.Config;
 import org.noear.sponge.admin.controller.ViewModel;
 import org.noear.sponge.admin.dso.AgroupCookieUtil;
 import org.noear.sponge.admin.dso.BcfTagChecker;
 import org.noear.sponge.admin.dso.Session;
-import org.noear.sponge.admin.dso.SessionRoles;
+import org.noear.sponge.admin.dso.SessionPerms;
 import org.noear.sponge.admin.dso.db.DbRockApi;
 import org.noear.sponge.admin.dso.db.DbRockI18nApi;
 import org.noear.sponge.admin.model.TagCountsModel;
@@ -185,7 +186,7 @@ public class AppCodeController extends BaseController {
     }
 
     //应用状态码新增编辑ajax保存功能
-    @AuthRoles(SessionRoles.role_admin)
+    @AuthPermissions(SessionPerms.admin)
     @Mapping("edit/ajax/save")
     public ViewModel saveApcode(Integer agroup_id, String service, Integer code, Integer codeOld, String items) throws SQLException {
         List<I18nModel> itemList = ONode.loadStr(items).toObjectList(I18nModel.class);
@@ -209,7 +210,7 @@ public class AppCodeController extends BaseController {
         }
     }
 
-    @AuthRoles(SessionRoles.role_admin)
+    @AuthPermissions(SessionPerms.admin)
     @Mapping("edit/ajax/del")
     public ViewModel delApcode(Integer agroup_id, String service, Integer code, Integer codeOld) throws SQLException {
         boolean result = DbRockI18nApi.codeDel(agroup_id, service, codeOld);
@@ -240,7 +241,7 @@ public class AppCodeController extends BaseController {
         ctx.output(jsonD);
     }
 
-    @AuthRoles(SessionRoles.role_admin)
+    @AuthPermissions(SessionPerms.admin)
     @Mapping("ajax/import")
     public ViewModel importFile(int agroup_id, String service, UploadedFile file) throws Exception {
         if (Session.current().isAdmin() == false) {

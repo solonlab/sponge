@@ -23,24 +23,41 @@
     main > p{margin: 10px;line-height: 30px;}
   </style>
   <script type="text/javascript">
-    function checkClick(){
+    function checkClick() {
       $.ajax({
-        url:"/login/ajax/check",
-        data:$("form").serialize(),
-        success:function(data){
-          if(data.code==1){
-            location.href=data.url;
+        url: "/login/ajax/check",
+        data: $("form").serialize(),
+        success: function (rst) {
+          if (rst.code == 200) {
+            location.href = rst.data;
+          } else {
+            alert(rst.description);
           }
-          else
-            alert(data.msg);
         }
       });
+
       return false;
     }
+
     function checkKey() {
-      if (window.event.keyCode == 13)
+      if (window.event.keyCode == 13) {
         checkClick();
+      }
     }
+
+    //自动跳到合适的登录面
+    try {
+      if (window.top != window.self) {
+        let top_host = window.top.location.hostname;
+        let self_host = window.self.location.hostname;
+
+        if (top_host == self_host) {
+          window.top.location = window.self.location;
+        } else {
+          window.top.location.reload();
+        }
+      }
+    } catch (err){}
 
   </script>
 </head>
@@ -64,7 +81,6 @@
             <img src="/login/validation/img"
                  onclick="this.src='/login/validation/img?d='+Math.random();"/></td>
         </tr>
-
         <tr>
           <th></th>
           <td colspan="2">

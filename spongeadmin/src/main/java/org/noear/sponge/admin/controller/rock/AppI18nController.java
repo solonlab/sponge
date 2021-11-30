@@ -8,14 +8,14 @@ import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.ModelAndView;
 import org.noear.solon.core.handle.UploadedFile;
-import org.noear.solon.auth.annotation.AuthRoles;
+import org.noear.solon.auth.annotation.AuthPermissions;
 import org.noear.sponge.admin.Config;
 import org.noear.sponge.admin.controller.BaseController;
 import org.noear.sponge.admin.controller.ViewModel;
 import org.noear.sponge.admin.dso.AgroupCookieUtil;
 import org.noear.sponge.admin.dso.BcfTagChecker;
 import org.noear.sponge.admin.dso.Session;
-import org.noear.sponge.admin.dso.SessionRoles;
+import org.noear.sponge.admin.dso.SessionPerms;
 import org.noear.sponge.admin.dso.db.DbRockApi;
 import org.noear.sponge.admin.dso.db.DbRockI18nApi;
 import org.noear.sponge.admin.model.TagCountsModel;
@@ -183,7 +183,7 @@ public class AppI18nController extends BaseController {
     }
 
     //应用状态码新增编辑ajax保存功能
-    @AuthRoles(SessionRoles.role_admin)
+    @AuthPermissions(SessionPerms.admin)
     @Mapping("edit/ajax/save")
     public ViewModel saveApi18n(Integer agroup_id, String service, String name,  String nameOld, String items) throws SQLException {
         List<I18nModel> itemList = ONode.loadStr(items).toObjectList(I18nModel.class);
@@ -207,7 +207,7 @@ public class AppI18nController extends BaseController {
         }
     }
 
-    @AuthRoles(SessionRoles.role_admin)
+    @AuthPermissions(SessionPerms.admin)
     @Mapping("edit/ajax/del")
     public ViewModel delApi18n(Integer agroup_id, String service, String name,  String nameOld) throws SQLException {
         boolean result = DbRockI18nApi.i18nDel(agroup_id, service, nameOld);
@@ -236,7 +236,7 @@ public class AppI18nController extends BaseController {
         ctx.output(jsonD);
     }
 
-    @AuthRoles(SessionRoles.role_admin)
+    @AuthPermissions(SessionPerms.admin)
     @Mapping("ajax/import")
     public ViewModel importFile(int agroup_id, String service, UploadedFile file) throws Exception {
         if ("jsond".equals(file.extension)) {

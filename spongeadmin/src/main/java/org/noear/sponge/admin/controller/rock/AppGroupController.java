@@ -3,9 +3,9 @@ package org.noear.sponge.admin.controller.rock;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.ModelAndView;
-import org.noear.solon.auth.annotation.AuthRoles;
+import org.noear.solon.auth.annotation.AuthPermissions;
 import org.noear.sponge.admin.controller.BaseController;
-import org.noear.sponge.admin.dso.SessionRoles;
+import org.noear.sponge.admin.dso.SessionPerms;
 import org.noear.sponge.admin.dso.db.DbRockApi;
 import org.noear.sponge.admin.model.others.resp.BaseResp;
 import org.noear.sponge.admin.model.rock.AppGroupModel;
@@ -54,7 +54,7 @@ public class AppGroupController extends BaseController {
     }
 
     //编辑或新增用户组
-    @AuthRoles(SessionRoles.role_admin)
+    @AuthPermissions(SessionPerms.admin)
     @Mapping("agroup/edit/ajax/save")
     public BaseResp editAgroup(Integer agroup_id, Integer new_agroup_id, String name, String tag, Integer ugroup_id,Integer enable_track, Integer is_enabled) throws SQLException {
         BaseResp resp = new BaseResp();

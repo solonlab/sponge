@@ -1,17 +1,13 @@
 package org.noear.sponge.admin.widget;
 
-
-import org.noear.bcf.BcfClient;
-import org.noear.bcf.models.BcfGroupModel;
-import org.noear.bcf.models.BcfResourceModel;
+import org.noear.grit.client.GritClient;
+import org.noear.grit.model.domain.Resource;
+import org.noear.grit.model.domain.ResourceEntity;
 import org.noear.solon.core.handle.Context;
 import org.noear.sponge.admin.dso.Session;
 
-
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -31,25 +27,30 @@ public class ToolmenuTag extends TagSupport {
     @Override
     public int doStartTag() throws JspException {
         try {
-            //当前视图path
-            HttpServletRequest request = ((HttpServletRequest) pageContext.getRequest());
-            String cPath = Context.current().path();
-            ;
+            String groupCode = getPack();
 
-            StringBuffer sb = new StringBuffer();
+            Context ctx = Context.current();
+            String path = ctx.pathNew();
+            StringBuffer buf = new StringBuffer();
 
-            BcfGroupModel gPack = BcfClient.getGroupByCode(pack);
 
-            if (gPack.pgid > 0) {
-                sb.append("<toolmenu>");
-                sb.append("<tabbar>");
+            Resource resourceGroup = GritClient.global().resource().getResourceByCode(groupCode);
 
-                forPack(request, gPack.pgid, sb, cPath);
+            if (resourceGroup.resource_id > 0) {
+                buf.append("<toolmenu>");
+                buf.append("<tabbar>");
 
-                sb.append("</tabbar>");
-                sb.append("</toolmenu>");
+                List<ResourceEntity> list = GritClient.global().auth()
+                        .getUriListByGroup(Session.current().getSubjectId(), resourceGroup.resource_id);
 
-                pageContext.getOut().write(sb.toString());
+                for (Resource r : list) {
+                    buildItem(ctx, buf, r.display_name, r.link_uri, path);
+                }
+
+                buf.append("</tabbar>");
+                buf.append("</toolmenu>");
+
+                pageContext.getOut().write(buf.toString());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -63,16 +64,9 @@ public class ToolmenuTag extends TagSupport {
         return super.doEndTag();
     }
 
-    private void forPack(HttpServletRequest request, int packID, StringBuffer sb, String cPath) throws SQLException {
-        List<BcfResourceModel> list = BcfClient.getUserResourcesByPack(Session.current().getPUID(), packID);
 
-        for (BcfResourceModel r : list) {
-            buildItem(request, sb, r.cn_name, r.uri_path, cPath);
-        }
-    }
-
-    private void buildItem(HttpServletRequest request, StringBuffer sb, String title, String url, String cPath) {
-        String url2 = url + "?" + request.getQueryString();
+    private void buildItem(Context ctx, StringBuffer sb, String title, String url, String cPath) {
+        String url2 = url + "?" + ctx.uri().getQuery();
 
         if (cPath.indexOf(url) > 0) {
             sb.append("<button onclick=\"location='" + url2 + "'\" class='sel'>");

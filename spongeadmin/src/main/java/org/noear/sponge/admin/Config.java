@@ -6,6 +6,7 @@ import org.noear.solon.annotation.Bean;
 import org.noear.solon.annotation.Configuration;
 import org.noear.solon.auth.AuthAdapter;
 import org.noear.solon.extend.health.HealthHandler;
+import org.noear.sponge.admin.dso.SessionPerms;
 import org.noear.sponge.admin.dso.auth.AuthProcessorImpl;
 import org.noear.water.model.ConfigM;
 import org.noear.weed.DbContext;
@@ -45,6 +46,7 @@ public class Config {
                 .loginUrl("/login")
                 .addRule(r -> r.include("**").verifyIp().failure((c, t) -> c.output(", not")))
                 .addRule(r -> r.exclude("/login**").exclude(HealthHandler.HANDLER_PATH).exclude("/run/**").exclude("/msg/**").exclude("/_session/**").verifyPath())
+                .addRule(r -> r.include("/grit/**").verifyPermissions(SessionPerms.admin))
                 .processor(new AuthProcessorImpl())
                 .failure((ctx, rst) -> {
                     ctx.outputAsJson(new ONode().set("code", 403).set("msg", "没有权限").toJson());
