@@ -9,7 +9,7 @@ solon.app:
 solon.cloud.water:
   server: "waterapi:9371"
   config:
-    load: "water_bcf::bcf.yml"
+    load: "grit:grit.yml,grit:gritclient.yml"
   log:
     default: "sponge_log_admin"
 
