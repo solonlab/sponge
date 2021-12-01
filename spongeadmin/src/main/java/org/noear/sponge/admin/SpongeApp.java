@@ -1,21 +1,15 @@
 package org.noear.sponge.admin;
 
 import org.noear.solon.Solon;
-import org.noear.solon.core.handle.Context;
-import org.noear.sponge.admin.dso.LogUtil;
+import org.noear.sponge.admin.dso.ErrorListener;
+import org.noear.sponge.admin.dso.InitPlugin;
 
 public class SpongeApp {
     public static void main(String[] args) {
-        Solon.start(SpongeApp.class, args, app -> {
-            app.pluginAdd(0, new InitPlugin());
-        }).onError((ex) -> {
-            Context ctx = Context.current();
-
-            if (ctx != null) {
-                LogUtil.error("global", ctx.path(), ctx.paramMap().toString(), ex);
-            } else {
-                LogUtil.error("global", "", "", ex);
-            }
+        Solon.start(SpongeApp.class, args, x -> {
+            x.enableErrorAutoprint(false);
+            x.onError(new ErrorListener());
+            x.pluginAdd(0, new InitPlugin());
         });
     }
 }

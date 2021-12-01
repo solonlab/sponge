@@ -1,5 +1,6 @@
-package org.noear.sponge.admin;
+package org.noear.sponge.admin.dso;
 
+import lombok.extern.slf4j.Slf4j;
 import org.noear.snack.ONode;
 import org.noear.solon.Solon;
 import org.noear.solon.SolonApp;
@@ -8,19 +9,17 @@ import org.noear.solon.cloud.CloudClient;
 import org.noear.solon.core.Plugin;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.logging.utils.TagsMDC;
-import org.noear.water.WW;
 import org.noear.water.WaterClient;
 import org.noear.water.utils.TextUtils;
 import org.noear.weed.WeedConfig;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
- * @author noear 2021/5/14 created
+ * 行为跟踪初始化
+ *
+ * @author noear 2021/12/1 created
  */
+@Slf4j
 public class InitPlugin implements Plugin {
-    static Logger log = LoggerFactory.getLogger(InitPlugin.class);
-
     boolean isDebugMode;
     boolean isWeedStyle2;
     boolean isTrackEnable;
@@ -36,21 +35,15 @@ public class InitPlugin implements Plugin {
 
         String style = Solon.cfg().get("srww.weed.print.style");
         isWeedStyle2 = "sql".equals(style);
-        isTrackEnable = Solon.cfg().getBool("srww.weed.track.enable", true);
+        isTrackEnable = Solon.cfg().getBool("srww.weed.track.enable", isDebugMode);
         isErrorLogEnable = Solon.cfg().getBool("srww.weed.error.log.enable", true);
 
 
         initWeed();
     }
 
-
-    /**
-     * 初始化Weed监听事件
-     */
-    protected void initWeed() {
-
+    private void initWeed() {
         initWeedForAdmin();
-
 
         WeedConfig.onException((cmd, err) -> {
             TagsMDC.tag0("weed");
@@ -71,30 +64,6 @@ public class InitPlugin implements Plugin {
         });
     }
 
-    private void initWeedForApi() {
-        //api项目
-        WeedConfig.onExecuteAft(cmd -> {
-            if (isDebugMode) {
-                if (isWeedStyle2) {
-                    log.debug(cmd.toSqlString());
-                } else {
-                    log.debug(cmd.text + "\r\n" + ONode.stringify(cmd.paramMap()));
-                }
-            }
-
-            WaterClient.Track.track(service_name(), cmd, 1000);
-
-            if (isTrackEnable) {
-                String tag = cmd.context.schema();
-                if (TextUtils.isEmpty(tag)) {
-                    tag = "sql";
-                }
-
-                CloudClient.metric().addMeter(service_name() + "_sql", tag, cmd.text, cmd.timespan());
-            }
-        });
-    }
-
     private void initWeedForAdmin() {
         //admin 项目
         WeedConfig.onExecuteAft((cmd) -> {
@@ -111,19 +80,18 @@ public class InitPlugin implements Plugin {
             }
 
             Context ctx = Context.current();
-            String user_name = user_name(ctx);
-            int user_puid = user_puid(ctx);
 
-//            if (user_name == null) {
-//                return;
-//            }
-
+            if (ctx == null) {
+                return;
+            }
 
             String sqlUp = cmd.text.toUpperCase();
-            String chkUp = "User_Id=? AND Pass_Wd=? AND Is_Disabled=0".toUpperCase();
 
-            if (cmd.timespan() > 2000 || cmd.isLog > 0 || sqlUp.indexOf("INSERT INTO ") >= 0 || sqlUp.indexOf("UPDATE ") >= 0 || sqlUp.indexOf("DELETE ") >= 0 || sqlUp.indexOf(chkUp) >= 0) {
-                WaterClient.Track.track(service_name(), cmd, ctx.userAgent(), ctx.pathNew(), user_puid + "." + user_name, ctx.realIp());
+            if (cmd.timespan() > 2000 || cmd.isLog > 0 || sqlUp.contains("INSERT INTO ") || sqlUp.contains("UPDATE ") || sqlUp.contains("DELETE ")) {
+                String userDisplayName = getUserDisplayName(ctx);
+                String userId = getUserId(ctx);
+
+                WaterClient.Track.trackOfBehavior(Solon.cfg().appName(), cmd, ctx.userAgent(), ctx.pathNew(), userId + "." + userDisplayName, ctx.realIp());
             }
 
             if (isTrackEnable) {
@@ -132,28 +100,20 @@ public class InitPlugin implements Plugin {
                     tag = "sql";
                 }
 
-                CloudClient.metric().addMeter(service_name() + "_sql", tag, cmd.text, cmd.timespan());
+                CloudClient.metric().addMeter(Solon.cfg().appName() + "_sql", tag, cmd.text, cmd.timespan());
+                //WaterClient.Track.track(service_name() + "_sql", tag, cmd.text, cmd.timespan());
             }
         });
     }
 
-    public String service_name() {
-        return Solon.cfg().appName();
-    }
-
     //用于作行为记录
-    public int user_puid(Context ctx) {
-        if (ctx != null) {
-            String tmp = ctx.attr("user_puid", "0");
-            return Integer.parseInt(tmp);
-        } else {
-            return 0;
-        }
+    public String getUserId(Context ctx) {
+        return ctx.attr("user_id", "0");
     }
 
-    public String user_name(Context ctx) {
+    public String getUserDisplayName(Context ctx) {
         if (ctx != null) {
-            return ctx.attr("user_name", null);
+            return ctx.attr("user_display_name", null);
         } else {
             return null;
         }
