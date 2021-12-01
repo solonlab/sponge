@@ -30,7 +30,7 @@ public class HeaderTag extends TagSupport {
                 return super.doStartTag();
             }
 
-            List<ResourceGroup> groupList = GritClient.global().auth().getUriGroupListBySpace(subjectId);
+            List<ResourceGroup> groupList = GritClient.global().auth().getUriGroupList(subjectId);
 
             if (groupList.size() == 0) {
                 ctx.redirect("/login");

@@ -26,7 +26,7 @@ public class LeftmenuTag extends TagSupport {
 
             StringBuilder buf = new StringBuilder();
 
-            List<ResourceGroup> groupList = GritClient.global().auth().getUriGroupListBySpace(subjectId);
+            List<ResourceGroup> groupList = GritClient.global().auth().getUriGroupList(subjectId);
             long groupId = 0;
             for (ResourceGroup group : groupList) {
                 if (path.startsWith(group.link_uri)) {
