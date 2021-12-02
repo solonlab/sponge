@@ -1,6 +1,6 @@
 package org.noear.sponge.admin.dso.auth;
 
-import org.noear.solon.extend.grit.GritAuthProcessor;
+import org.noear.grit.solon.GritAuthProcessor;
 import org.noear.sponge.admin.dso.Session;
 
 /**
