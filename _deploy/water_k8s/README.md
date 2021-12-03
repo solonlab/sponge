@@ -36,6 +36,17 @@
 * 4，打开 http://x.x.x ，进入跨系统统一管理后台
 
 
+同时要求 gritdock, wateradmin, spongeadmin 在同一个根域或二级域下，例：
+
+* gritdock 服务：http://admin.dev.x.x
+* wateradmin 服务：http://admin.water.dev.x.x
+* spongeadmin 服务：http://admin.sponge.dev.x.x
+
+那它们的共同二级域为：dev.x.x.x
+
+
+**附：**
+
 gritdock 项目地址：https://gitee.com/noear/grit
 
 
