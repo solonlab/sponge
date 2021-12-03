@@ -17,13 +17,12 @@
     <script src="${js}/layer.js"></script>
     <script>
         $(function () {
-            document.getElementById('app_group').value="${appEdit.agroup_id}";
             document.getElementById('user_group').value="${appEdit.ugroup_id}";
         });
         var app_id = ${appEdit.app_id};
         function saveEdit() {
             var name = $('#name').val();
-            var agroup_id = $('#app_group').val();
+            var agroup_id = "${agroup_id}";
             var ugroup_id = $('#user_group').val();
             var app_key = $('#app_key').val();
             var app_secret_key = $('#app_secret_key').val();
@@ -99,16 +98,6 @@
             <tr>
                 <th>应用名称</th>
                 <td><input type="text" id="name" value="${appEdit.name}"></td>
-            </tr>
-            <tr style="display: none;">
-                <th>所属应用组</th>
-                <td>
-                    <select id="app_group" disabled="disabled">
-                        <c:forEach var="app_group" items="${app_groups}">
-                            <option value=${app_group.agroup_id}>${app_group.name}</option>
-                        </c:forEach>
-                    </select>
-                </td>
             </tr>
             <tr>
                 <th>所属用户组</th>

@@ -99,7 +99,6 @@ public class AppController extends BaseController {
         AppModel app = DbRockApi.getAppById(app_id);
 
         List<UserGroupModel> userGroups = DbRockApi.getUserGroup("");
-        List<AppGroupModel> appGroups = DbRockApi.getAppGroup("");
 
         //如果被禁了，则尝试添加
         if (app.ugroup_id > 0 && userGroups.stream().noneMatch(m -> m.ugroup_id == app.ugroup_id)) {
@@ -109,16 +108,8 @@ public class AppController extends BaseController {
             }
         }
 
-        //如果被禁了，则尝试添加
-        if (app.agroup_id > 0 && appGroups.stream().noneMatch(m -> m.agroup_id == app.agroup_id)) {
-            AppGroupModel am = DbRockApi.getAppGroupById(app.agroup_id);
-            if (am.agroup_id > 0) {
-                appGroups.add(am);
-            }
-        }
-
         viewModel.put("user_groups", userGroups);
-        viewModel.put("app_groups", appGroups);
+        viewModel.put("agroup_id", app.agroup_id);
         viewModel.put("appEdit", app);
 
         return view("rock/app_edit");
@@ -126,11 +117,10 @@ public class AppController extends BaseController {
 
     //应用新增编辑页面跳转
     @Mapping("app/add")
-    public ModelAndView addApp(Integer agroup_id) throws SQLException {
+    public ModelAndView addApp(int agroup_id) throws SQLException {
         List<UserGroupModel> userGroups = DbRockApi.getUserGroup("");
-        List<AppGroupModel> appGroups = DbRockApi.getAppGroup("");
         AppModel appEdit = new AppModel();
-        if (agroup_id != null) {
+        if (agroup_id > 0) {
             appEdit.agroup_id = agroup_id;
         }
 
@@ -139,7 +129,7 @@ public class AppController extends BaseController {
         appEdit.app_secret_salt = IDUtil.getAppSecretkey();
 
         viewModel.put("user_groups", userGroups);
-        viewModel.put("app_groups", appGroups);
+        viewModel.put("agroup_id", agroup_id);
         viewModel.put("appEdit", appEdit);
 
         return view("rock/app_edit");
