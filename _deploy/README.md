@@ -19,7 +19,15 @@
 
 #### 2) 进入 Water 配置管理，修改配置
 
-修改 sponge 下的相关
+进入 water 控制台，修改 sponge 配置组下的相关配置
+
+| 配置组 | 配置键 | 说明 |
+| -------- | -------- | -------- |
+| sponge     | sponge_cache     | memcached 链接配置（可以与water的复用）     |
+| sponge     | sponge_redis     | redis 链接配置（可以与water的复用）     |
+| sponge     | sponge_rock     | sponge_rock 数据库的链接配置     |
+| sponge     | sponge_track     | sponge_track 数据库的链接配置     |
+| sponge     | track_uri     | 价值跟踪的服务地址     |
 
 
 #### 3) 使用镜像做需要的部署
