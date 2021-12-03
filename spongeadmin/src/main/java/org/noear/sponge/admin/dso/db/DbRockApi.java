@@ -500,7 +500,7 @@ public class DbRockApi {
     }
 
 
-    public static Boolean editApver(Integer app_id,Integer row_id, Integer ver, String content, Integer type, Integer alert_ver,Integer force_ver,Integer platform, String url, Integer is_enable,Integer agroup_id) throws SQLException {
+    public static Boolean editApver(Integer app_id,Integer row_id, Integer ver, String content, Integer type, Integer alert_ver,Integer force_ver,Integer platform, String url, Integer is_disabled,Integer agroup_id) throws SQLException {
         DbTableQuery db = db().table("appx_ex_version")
                 .set("app_id", app_id)
                 .set("ver", ver)
@@ -510,7 +510,7 @@ public class DbRockApi {
                 .set("force_ver", force_ver)
                 .set("platform", platform)
                 .set("url", url)
-                .set("is_enable", is_enable)
+                .set("is_disabled", is_disabled)
                 .set("agroup_id", agroup_id);
 
         boolean isOk = true;

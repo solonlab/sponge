@@ -30,7 +30,7 @@
             <button type="button" onclick="addApver()" class="edit">新建更新</button>
         </c:if>
     </left>
-    <right><ct:stateselector state="1" items="全部,有效,无效"/></right>
+    <right><ct:stateselector state="0" items="全部,启用,禁用"/></right>
 </toolbar>
 
 <datagrid>
@@ -63,10 +63,10 @@
                 <c:if test="${apver.platform==0||apver.platform==null}"><td>未知</td></c:if>
                 <td><fmt:formatDate value="${apver.log_fulltime}" pattern="yyyy-MM-dd HH:mm:dd"/></td>
                 <c:if test="${apver.is_disabled==1}">
-                    <td>无效</td>
+                    <td>禁用</td>
                 </c:if>
                 <c:if test="${apver.is_disabled==0}">
-                    <td>有效</td>
+                    <td>启用</td>
                 </c:if>
                 <c:if test="${isOperator==1}">
                     <td><a href="/rock/apver/edit?row_id=${apver.row_id}&agroup_id=${agroup_id}" style="color: blue;">编辑</a></td>

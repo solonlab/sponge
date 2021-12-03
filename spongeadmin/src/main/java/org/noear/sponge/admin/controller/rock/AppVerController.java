@@ -105,12 +105,14 @@ public class AppVerController extends BaseController {
 
     @AuthPermissions(SessionPerms.admin)
     @Mapping("apver/edit/ajax/save")
-    public BaseResp editApver(Integer app_id, Integer row_id, Integer ver, String content, Integer type, Integer alert_ver, Integer force_ver, Integer platform, String url, Integer is_enable, Integer agroup_id) throws SQLException {
+    public BaseResp editApver(Integer app_id, Integer row_id, Integer ver, String content, Integer type, Integer alert_ver, Integer force_ver, Integer platform, String url, Integer is_disabled, Integer agroup_id) throws SQLException {
         BaseResp resp = new BaseResp();
         if (TextUtils.isEmpty(content) == false) {
             content = content.trim();
         }
-        boolean result = DbRockApi.editApver(app_id, row_id, ver, content, type, alert_ver, force_ver, platform, url, is_enable, agroup_id);
+
+        boolean result = DbRockApi.editApver(app_id, row_id, ver, content, type, alert_ver, force_ver, platform, url, is_disabled, agroup_id);
+
         if (result) {
             resp.code = 1;
             resp.msg = "操作成功";

@@ -30,6 +30,7 @@
             var platform = $('#platform').val();
             var url = $('#url').val();
             var is_disabled = $('#is_disabled').prop("checked")?1:0;
+
             if (!ver || ver==null) {
                 top.layer.msg("版本号不能为空！");
                 return;
@@ -50,10 +51,17 @@
             $.ajax({
                 type:"POST",
                 url:"/rock/apver/edit/ajax/save",
-                data:{"app_id":app_id,"row_id":row_id,"ver":ver,"content":content,"type":type,
-                    alert_ver:$('#alert_ver').val(),
-                    force_ver:$('#force_ver').val(),
-                    "platform":platform,"url":url,"is_disabled":is_disabled,"agroup_id":agroup_id},
+                data:{"app_id":app_id,
+                    "row_id":row_id,
+                    "ver":ver,
+                    "content":content,"type":type,
+                    "alert_ver":$('#alert_ver').val(),
+                    "force_ver":$('#force_ver').val(),
+                    "platform":platform,
+                    "url":url,
+                    "is_disabled":is_disabled,
+                    "agroup_id":agroup_id
+                },
                 success:function (data) {
                     if(data.code==1) {
                         top.layer.msg(data.msg);
@@ -124,7 +132,7 @@
                 <td><input type="text" id="url" value="${apver.url}" class="longtxt" placeholder="请输入更新地址"></td>
             </tr>
             <tr>
-                <th>是否生效</th>
+                <th>是否禁用</th>
                 <td>
                     <switcher>
                         <label><input id="is_disabled" value="1" type="checkbox" ${apver.is_disabled == 1?"checked":""}><a></a></label>
