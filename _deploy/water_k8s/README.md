@@ -24,7 +24,13 @@
   * 不需要配置外网访问
 
 
+## 二、补充
 
+建议再部署：gritdock，实现跨系统统一管理。大概流程：
 
+* 1，部署 gritdock （假如配置域名为：x.x.x）
+* 2，进入 http://x.x.x/grit/ ，登录后修改 spongeadmin 与 wateradmin 资源空间的地址
+* 3，进入 water 配置管理/属性配置 grit/gritclient.yml 的 server.session.state.domain 值为 多系统公共的根域名
+* 4，打开 http://x.x.x ，进入跨系统统一管理后台
 
 
