@@ -15,7 +15,7 @@
 * 新建 sponge_track 库，并执行脚本 sql/sponge_track.sql
 
 
-编码：utf8mb4；排序：utf8mb4_general_ci
+建库编码：utf8mb4；排序：utf8mb4_general_ci
 
 #### 2) 进入 Water 配置管理，修改配置
 
