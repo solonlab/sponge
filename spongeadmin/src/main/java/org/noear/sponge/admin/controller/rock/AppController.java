@@ -1,5 +1,6 @@
 package org.noear.sponge.admin.controller.rock;
 
+import org.noear.solon.Utils;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.Context;
@@ -38,7 +39,7 @@ public class AppController extends BaseController {
         Integer out_agroup_id = agroup_id;
         if (out_agroup_id == null) {
             out_agroup_id = AgroupCookieUtil.cookieGet();
-        }else {
+        } else {
             AgroupCookieUtil.cookieSet(agroup_id);
         }
 
@@ -68,7 +69,7 @@ public class AppController extends BaseController {
     }
 
     @Mapping("app/inner")
-    public ModelAndView app_inner(String name,Integer agroup_id,Integer _state) throws SQLException {
+    public ModelAndView app_inner(String name, Integer agroup_id, Integer _state) throws SQLException {
         Integer ar_is_examine = null;
         if (_state != null) {
             viewModel.put("_state", _state);
@@ -103,7 +104,7 @@ public class AppController extends BaseController {
         //如果被禁了，则尝试添加
         if (app.ugroup_id > 0 && userGroups.stream().noneMatch(m -> m.ugroup_id == app.ugroup_id)) {
             UserGroupModel um = DbRockApi.getUserGroupById(app.ugroup_id);
-            if(um.ugroup_id > 0) {
+            if (um.ugroup_id > 0) {
                 userGroups.add(um);
             }
         }
@@ -111,14 +112,15 @@ public class AppController extends BaseController {
         //如果被禁了，则尝试添加
         if (app.agroup_id > 0 && appGroups.stream().noneMatch(m -> m.agroup_id == app.agroup_id)) {
             AppGroupModel am = DbRockApi.getAppGroupById(app.agroup_id);
-            if(am.agroup_id > 0) {
+            if (am.agroup_id > 0) {
                 appGroups.add(am);
             }
         }
 
-        viewModel.put("user_groups",userGroups);
-        viewModel.put("app_groups",appGroups);
-        viewModel.put("appEdit",app);
+        viewModel.put("user_groups", userGroups);
+        viewModel.put("app_groups", appGroups);
+        viewModel.put("appEdit", app);
+
         return view("rock/app_edit");
     }
 
@@ -128,27 +130,41 @@ public class AppController extends BaseController {
         List<UserGroupModel> userGroups = DbRockApi.getUserGroup("");
         List<AppGroupModel> appGroups = DbRockApi.getAppGroup("");
         AppModel appEdit = new AppModel();
-        if (agroup_id!=null) {
+        if (agroup_id != null) {
             appEdit.agroup_id = agroup_id;
         }
 
         appEdit.app_key = IDUtil.buildGuid();
         appEdit.app_secret_key = IDUtil.getAppSecretkey();
+        appEdit.app_secret_salt = IDUtil.getAppSecretkey();
 
-        viewModel.put("user_groups",userGroups);
-        viewModel.put("app_groups",appGroups);
-        viewModel.put("appEdit",appEdit);
+        viewModel.put("user_groups", userGroups);
+        viewModel.put("app_groups", appGroups);
+        viewModel.put("appEdit", appEdit);
+
         return view("rock/app_edit");
     }
 
     //应用新增编辑ajax保存功能
     @AuthPermissions(SessionPerms.admin)
     @Mapping("app/edit/ajax/save")
-    public BaseResp saveApp(Integer app_id, String name, Integer agroup_id, Integer ugroup_id, String app_key, String app_secret_key,String app_secret_salt, Integer ar_is_examine, Integer ar_is_setting, String note, Integer ar_examine_ver) throws SQLException {
+    public BaseResp saveApp(Integer app_id, String name, Integer agroup_id, Integer ugroup_id, String app_key, String app_secret_key, String app_secret_salt, Integer ar_is_examine, Integer ar_is_setting, String note, Integer ar_examine_ver) throws SQLException {
         BaseResp resp = new BaseResp();
         app_key = app_key.trim();
         app_secret_key = app_secret_key.trim();
         app_secret_salt = app_secret_salt.trim();
+
+        if (Utils.isEmpty(app_key)) {
+            app_key = IDUtil.buildGuid();
+        }
+
+        if (Utils.isEmpty(app_secret_key)) {
+            app_secret_key = IDUtil.getAppSecretkey();
+        }
+
+        if (Utils.isEmpty(app_secret_salt)) {
+            app_secret_salt = IDUtil.getAppSecretkey();
+        }
 
         boolean result = DbRockApi.editApp(app_id, name, agroup_id, ugroup_id, app_key, app_secret_key, app_secret_salt, ar_is_examine, ar_is_setting, note, ar_examine_ver);
 
