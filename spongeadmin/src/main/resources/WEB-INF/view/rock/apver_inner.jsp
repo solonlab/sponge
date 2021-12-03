@@ -43,7 +43,7 @@
             <td width="70px">更新方式</td>
             <td width="60px">平台</td>
             <td width="90px">更新时间</td>
-            <td width="70px">是否有效</td>
+            <td width="70px">是否禁用</td>
             <c:if test="${isOperator==1}">
                 <td width="50px">操作</td>
             </c:if>

@@ -65,18 +65,17 @@ public class AppVerController extends BaseController {
 
 
     @Mapping("apver/inner")
-    public ModelAndView apver_inner(Integer agroup_id, Integer _state) throws SQLException {
+    public ModelAndView apver_inner(int agroup_id, int _state) throws SQLException {
         Integer is_disabled = null;
-        if (_state != null) {
-            viewModel.put("_state", _state);
 
-            if (_state == 1) {
-                is_disabled = 0;
-            } else if (_state == 2) {
-                is_disabled = 1;
-            }
+        viewModel.put("_state", _state);
+
+        if (_state == 1) {
+            is_disabled = 0;
+        } else if (_state == 2) {
+            is_disabled = 1;
         } else {
-            is_disabled = 0; //默认只显示有效的
+            is_disabled = null; //默认显示全部
         }
 
         List<AppExVersionModel> apverList = DbRockApi.getApvers(agroup_id, is_disabled);
