@@ -5,11 +5,27 @@ version: '3'
 # 2.打开 http://localhost:7281/grit/
 
 services:
-  gritdock:
-    image: noearorg/gritdock:latest
-    container_name: gritdock
+  spongeadmin:
+    image: noearorg/spongeadmin:latest
+    container_name: spongeadmin
     environment:
       - solon.cloud.water.server=waterapi:9371    # Water 服务地址
       - TZ=Asia/Shanghai
     ports:
-      - 8080:8080
+      - 8182:8080
+  trackapi:
+    image: noearorg/trackapi:latest
+    container_name: trackapi
+    environment:
+      - solon.cloud.water.server=waterapi:9371    # Water 服务地址
+      - TZ=Asia/Shanghai
+    ports:
+      - 8183:8080
+  rockrpc:
+    image: noearorg/rockrpc:latest
+    container_name: rockrpc
+    environment:
+      - solon.cloud.water.server=waterapi:9371    # Water 服务地址
+      - TZ=Asia/Shanghai
+    ports:
+      - 8181:8080
