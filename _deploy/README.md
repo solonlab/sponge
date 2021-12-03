@@ -21,12 +21,12 @@
 
 进入 water 控制台，修改 sponge 配置组下的相关配置
 
-| 配置组 | 配置键 | 说明                   |
-| -------- | -------- |----------------------|
-| sponge     | sponge_cache     | 缓存链接配置（可以与water的复用）  |
-| sponge     | sponge_rock     | sponge_rock 数据库的链接配置 |
-| sponge     | sponge_track     | sponge_track 数据库的链接配置 |
-| sponge     | track_uri     | 价值跟踪的服务地址            |
+| 配置组 | 配置键 | 说明                              |
+| -------- | -------- |---------------------------------|
+| sponge     | sponge_cache     | 缓存链接配置（可以与water的复用）             |
+| sponge     | sponge_rock     | sponge_rock 数据库的链接配置            |
+| sponge     | sponge_track     | sponge_track 数据库的链接配置           |
+| sponge     | track_uri     | 价值跟踪的服务地址，在trackapi服务域名安排好后再来修改 |
 
 
 其中，sponge/sponge_redis 配置已弃用。
