@@ -14,6 +14,9 @@
 * 新建 sponge_rock 库，并执行脚本 sql/sponge_rock.sql
 * 新建 sponge_track 库，并执行脚本 sql/sponge_track.sql
 
+
+编码：utf8mb4；排序：utf8mb4_general_ci
+
 #### 2) 进入 Water 配置管理，修改配置
 
 修改 sponge 下的相关
@@ -21,8 +24,8 @@
 
 #### 3) 使用镜像做需要的部署
 
-| 镜像  | 描述          | 备注                      |
-|-----|-------------|-------------------------|
-| noearorg/spongeadmin | sponge 管理台后 | 管理后台                    |
-| noearorg/trackapi | 价值跟踪服务      | 一个短地址统计服务               |
-| noearorg/rockrpc | 应用控制服务 | 一个rpc服务，是srww框架的主人体依赖之一 |
+| 镜像  | 描述          | 备注                                    |
+|-----|-------------|---------------------------------------|
+| noearorg/spongeadmin | sponge 管理台后 | 管理后台                                  |
+| noearorg/trackapi | 价值跟踪服务      | 一个短地址统计服务                             |
+| noearorg/rockrpc | 应用控制服务 | 一个rpc服务，是srww框架的主要依赖（提供渠道配置与国际化配置等能力） |
