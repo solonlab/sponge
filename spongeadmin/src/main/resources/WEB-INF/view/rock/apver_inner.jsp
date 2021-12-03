@@ -30,7 +30,7 @@
             <button type="button" onclick="addApver()" class="edit">新建更新</button>
         </c:if>
     </left>
-    <right><ct:stateselector state="0" items="全部,启用,禁用"/></right>
+    <right><ct:stateselector state="0" items="启用,未启用"/></right>
 </toolbar>
 
 <datagrid>
@@ -43,7 +43,7 @@
             <td width="70px">更新方式</td>
             <td width="60px">平台</td>
             <td width="90px">更新时间</td>
-            <td width="70px">是否禁用</td>
+            <td width="70px">是否启用</td>
             <c:if test="${isOperator==1}">
                 <td width="50px">操作</td>
             </c:if>

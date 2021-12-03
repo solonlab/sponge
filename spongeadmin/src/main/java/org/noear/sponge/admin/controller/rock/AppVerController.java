@@ -71,11 +71,9 @@ public class AppVerController extends BaseController {
         viewModel.put("_state", _state);
 
         if (_state == 1) {
-            is_disabled = 0;
-        } else if (_state == 2) {
-            is_disabled = 1;
+            is_disabled = 1; //禁用
         } else {
-            is_disabled = null; //默认显示全部
+            is_disabled = 0; //默认显示启用
         }
 
         List<AppExVersionModel> apverList = DbRockApi.getApvers(agroup_id, is_disabled);
