@@ -44,8 +44,8 @@ public class Config {
     public AuthAdapter init() {
         return new AuthAdapter()
                 .loginUrl("/login")
-                .addRule(r -> r.include("**").verifyIp().failure((c, t) -> c.output(", not")))
-                .addRule(r -> r.exclude("/login**").exclude(HealthHandler.HANDLER_PATH).exclude("/run/**").exclude("/msg/**").exclude("/_session/**").verifyPath())
+                .addRule(r -> r.include("**").verifyIp().failure((c, t) -> c.output(c.realIp() + ", not safelist!")))
+                .addRule(r -> r.exclude("/login**").exclude(HealthHandler.HANDLER_PATH).exclude("/_**").verifyPath())
                 .addRule(r -> r.include("/grit/**").verifyPermissions(SessionPerms.admin))
                 .processor(new AuthProcessorImpl())
                 .failure((ctx, rst) -> {
