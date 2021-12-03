@@ -1,10 +1,5 @@
 
-
--- ----------------------------
--- Table structure for appx
--- ----------------------------
-DROP TABLE IF EXISTS `appx`;
-CREATE TABLE `appx`  (
+CREATE TABLE IF NOT EXISTS `appx`  (
   `app_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '应用ID',
   `app_key` varchar(40)  NULL DEFAULT NULL COMMENT '应用标识',
   `app_secret_key` varchar(255)  NULL DEFAULT NULL COMMENT '应用密钥',
@@ -19,14 +14,10 @@ CREATE TABLE `appx`  (
   `ar_examine_ver` int(11) NOT NULL DEFAULT 0 COMMENT '审核 中的版本号',
   `log_fulltime` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`app_id`) USING BTREE,
-  UNIQUE INDEX `IX_app_key`(`app_key`) USING BTREE
+  UNIQUE KEY `IX_app_key`(`app_key`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '应用表' ROW_FORMAT = Compact;
 
--- ----------------------------
--- Table structure for appx_agroup
--- ----------------------------
-DROP TABLE IF EXISTS `appx_agroup`;
-CREATE TABLE `appx_agroup`  (
+CREATE TABLE IF NOT EXISTS `appx_agroup`  (
   `agroup_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '应用组ID',
   `name` varchar(40)  NULL DEFAULT NULL COMMENT '应用组名称',
   `tag` varchar(40)  NULL DEFAULT '' COMMENT '技术代号',
@@ -38,11 +29,7 @@ CREATE TABLE `appx_agroup`  (
   PRIMARY KEY (`agroup_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1000000 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
 
--- ----------------------------
--- Table structure for appx_ex_code
--- ----------------------------
-DROP TABLE IF EXISTS `appx_ex_code`;
-CREATE TABLE `appx_ex_code`  (
+CREATE TABLE IF NOT EXISTS `appx_ex_code`  (
   `row_id` int(11) NOT NULL AUTO_INCREMENT,
   `agroup_id` int(11) NOT NULL DEFAULT 0,
   `service` varchar(40)  NOT NULL DEFAULT '' COMMENT '服务名',
@@ -52,16 +39,12 @@ CREATE TABLE `appx_ex_code`  (
   `is_disabled` int(1) NOT NULL DEFAULT 0 COMMENT '禁用',
   `log_fulltime` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`row_id`) USING BTREE,
-  UNIQUE INDEX `IX_key`(`agroup_id`, `service`, `code`, `lang`) USING BTREE,
-  INDEX `IX_agroup_id`(`agroup_id`) USING BTREE,
-  INDEX `IX_service`(`service`, `lang`) USING BTREE
+  UNIQUE KEY `IX_key`(`agroup_id`, `service`, `code`, `lang`) USING BTREE,
+  KEY `IX_agroup_id`(`agroup_id`) USING BTREE,
+  KEY `IX_service`(`service`, `lang`) USING BTREE
 ) ENGINE = InnoDB  CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'dwd' ROW_FORMAT = Compact;
 
--- ----------------------------
--- Table structure for appx_ex_i18n
--- ----------------------------
-DROP TABLE IF EXISTS `appx_ex_i18n`;
-CREATE TABLE `appx_ex_i18n`  (
+CREATE TABLE IF NOT EXISTS `appx_ex_i18n`  (
   `row_id` int(11) NOT NULL AUTO_INCREMENT,
   `agroup_id` int(11) NOT NULL DEFAULT 0,
   `service` varchar(40)  NOT NULL DEFAULT '' COMMENT '服务名',
@@ -71,38 +54,30 @@ CREATE TABLE `appx_ex_i18n`  (
   `is_disabled` int(1) NOT NULL DEFAULT 0 COMMENT '禁用',
   `log_fulltime` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`row_id`) USING BTREE,
-  UNIQUE INDEX `IX_key`(`agroup_id`, `service`, `name`, `lang`) USING BTREE,
-  INDEX `IX_agroup_id`(`agroup_id`) USING BTREE,
-  INDEX `IX_service`(`service`, `lang`) USING BTREE
+  UNIQUE KEY `IX_key`(`agroup_id`, `service`, `name`, `lang`) USING BTREE,
+  KEY `IX_agroup_id`(`agroup_id`) USING BTREE,
+  KEY `IX_service`(`service`, `lang`) USING BTREE
 ) ENGINE = InnoDB  CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'dwd' ROW_FORMAT = Compact;
 
--- ----------------------------
--- Table structure for appx_ex_setting
--- ----------------------------
-DROP TABLE IF EXISTS `appx_ex_setting`;
-CREATE TABLE `appx_ex_setting`  (
+CREATE TABLE IF NOT EXISTS `appx_ex_setting`  (
   `row_id` int(11) NOT NULL AUTO_INCREMENT,
   `agroup_id` int(11) NOT NULL DEFAULT 0 COMMENT '应用组ID',
   `app_id` int(11) NOT NULL DEFAULT 0 COMMENT '应用ID',
   `is_client` int(11) NOT NULL DEFAULT 1 COMMENT '是否输出到客户端',
   `name` varchar(40)  NULL DEFAULT NULL COMMENT '设置项名称',
   `type` int(11) NULL DEFAULT 0 COMMENT '设置项值类型：0,文本；1,数字; 9,JSON',
-  `value` varchar(4000)  NULL DEFAULT NULL COMMENT '设置项值',
+  `value` varchar(5000)  NULL DEFAULT NULL COMMENT '设置项值',
   `note` varchar(255)  NULL DEFAULT NULL COMMENT '备注',
   `is_disabled` int(1) NOT NULL DEFAULT 0 COMMENT '禁用',
   `ver_start` int(11) NOT NULL DEFAULT 0 COMMENT '从哪个版本开始支持',
   `log_fulltime` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`row_id`) USING BTREE,
-  UNIQUE INDEX `IX_key`(`agroup_id`, `app_id`, `name`) USING BTREE,
-  INDEX `IX_agroup`(`agroup_id`) USING BTREE,
-  INDEX `IX_app`(`app_id`) USING BTREE
+  UNIQUE KEY `IX_key`(`agroup_id`, `app_id`, `name`) USING BTREE,
+  KEY `IX_agroup`(`agroup_id`) USING BTREE,
+  KEY `IX_app`(`app_id`) USING BTREE
 ) ENGINE = InnoDB  CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '应用组设置表' ROW_FORMAT = Compact;
 
--- ----------------------------
--- Table structure for appx_ex_version
--- ----------------------------
-DROP TABLE IF EXISTS `appx_ex_version`;
-CREATE TABLE `appx_ex_version`  (
+CREATE TABLE IF NOT EXISTS `appx_ex_version`  (
   `row_id` int(11) NOT NULL AUTO_INCREMENT,
   `agroup_id` int(11) NOT NULL DEFAULT 0 COMMENT 'agroup_id',
   `app_id` int(11) NOT NULL DEFAULT 0,
@@ -118,11 +93,7 @@ CREATE TABLE `appx_ex_version`  (
   PRIMARY KEY (`row_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = 'app版本更新记录' ROW_FORMAT = Compact;
 
--- ----------------------------
--- Table structure for appx_ugroup
--- ----------------------------
-DROP TABLE IF EXISTS `appx_ugroup`;
-CREATE TABLE `appx_ugroup`  (
+CREATE TABLE IF NOT EXISTS `appx_ugroup`  (
   `ugroup_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(40)  NULL DEFAULT NULL,
   `is_disabled` int(11) NOT NULL DEFAULT 0 COMMENT '禁用',
