@@ -278,13 +278,13 @@ public class AppI18nController extends BaseController {
         String i18nStr = Utils.transferToString(file.content, "UTF-8");
         Properties i18n = Utils.buildProperties(i18nStr);
 
-        //初始化 i18n.lang
+        //初始化 _i18n.lang
         String lang = i18n.getProperty("_i18n.lang");
         if(Utils.isEmpty(lang)){
             lang = i18n.getProperty("rock.i18n.lang"); //兼容旧的
         }
 
-        //初始化 i18n.bundle
+        //初始化 _i18n.bundle
         if (Utils.isEmpty(service)) {
             service = i18n.getProperty("_i18n.bundle");
 
