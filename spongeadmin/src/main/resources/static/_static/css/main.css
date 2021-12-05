@@ -162,9 +162,9 @@ selector a{text-decoration:none;}
 
 
 .btn-group{position: fixed; display:inline-block;}
-.btn-group .dropdown-toggle{display: none; background: #f5f6fa;}
-.btn-group:hover .dropdown-toggle{display: inline-block; position:absolute; z-index:99; left:0px; top:40px; }
+.btn-group .dropdown-toggle{display: none; background: #D9DEE4; box-shadow: 0 3px 5px rgba(0, 0, 0, .125);}
 .btn-group .dropdown-toggle .btn-link{display:block;cursor: default; line-height:1.5em;}
+.btn-group:hover .dropdown-toggle{display: inline-block; position:absolute; z-index:99; left:0px; top:40px; }
 
 
 .op{color: #999}
