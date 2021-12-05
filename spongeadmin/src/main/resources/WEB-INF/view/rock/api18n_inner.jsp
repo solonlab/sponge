@@ -52,14 +52,16 @@
             });
         }
 
-        function exp() {
-            var vm = formToMap(".sel_from");
+        function exp(f) {
+            let vm = formToMap(".sel_from");
             if(!vm.sel_id){
                 alert("请选择..");
                 return;
             }
 
-            window.open("./ajax/export?service=${service}&agroup_id=${agroup_id}&ids=" + vm.sel_id, "_blank");
+            let baseUrl = "./ajax/export?service=${service}&agroup_id=${agroup_id}";
+
+            window.open(url + "&f=" + f + "&ids=" + vm.sel_id, "_blank");
         }
 
         $(function(){
@@ -96,7 +98,16 @@
                 <file>
                     <label><input id="imp_file" type="file" accept=".yml,.json,.properties,.jsond"/><a class="btn minor w80">导入</a></label>
                 </file>
-                <button type='button' class="minor w80 mar10-l" onclick="exp()" >导出</button>
+                <div class="btn-group">
+                    <a class="btn minor w80 mar10-l" >导出</a>
+                    <div class="dropdown-toggle mar10-l w100">
+                        <a class="btn-link mar10" onclick="exp('yml')">导出为Yml</a>
+                        <a class="btn-link mar10" onclick="exp('json')">导出为Json</a>
+                        <a class="btn-link mar10" onclick="exp('properties')">导出为Properties</a>
+                        <hr class="mar10-l mar10-r"/>
+                        <a class="btn-link mar10" onclick="exp('jdond')">导出为JsonD</a>
+                    </div>
+                </div>
             </c:if>
         </left>
         <right>

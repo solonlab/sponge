@@ -221,20 +221,63 @@ public class AppI18nController extends BaseController {
     }
 
     @Mapping("ajax/export")
-    public void ajaxExport(Context ctx, int agroup_id, String service, String ids) throws Exception {
+    public void ajaxExport(Context ctx, int agroup_id, String service, String f, String ids) throws Exception {
         List<Object> ids2 = Arrays.asList(ids.split(","))
                 .stream()
                 .map(s -> Integer.parseInt(s))
                 .collect(Collectors.toList());
 
         List<AppExI18nModel> list = DbRockI18nApi.i18nGetListByService(service, ids2);
+        String filename = "agroup_i18n_" + agroup_id + "_" + service + "_" + Datetime.Now().getDate();
 
-        String jsonD = JsondUtils.encode("agroup_i18n", list);
+        if("jsond".equals(f)) {
+            String data = JsondUtils.encode("agroup_i18n", list);
+            String filename2 = filename + ".jsond";
 
-        String filename2 = "agroup_i18n_" + agroup_id + "_" + service + "_" + Datetime.Now().getDate() + ".jsond";
+            ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
+            ctx.output(data);
+            return;
+        }
 
-        ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
-        ctx.output(jsonD);
+        if("json".equals(f)){
+            Map<String, String> map = new LinkedHashMap<>();
+            for(AppExI18nModel m1 : list){
+                map.put(m1.name, m1.note);
+            }
+
+            String data = ONode.stringify(map);
+            String filename2 = filename + ".json";
+
+            ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
+            ctx.output(data);
+            return;
+        }
+
+        if("properties".equals(f)){
+            StringBuilder data = new StringBuilder();
+            for(AppExI18nModel m1 : list){
+                data.append(m1.name).append("=").append(m1.note.replace("\n","\\n")).append("\n");
+            }
+
+            String filename2 = filename + ".properties";
+
+            ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
+            ctx.output(data.toString());
+            return;
+        }
+
+        if("yml".equals(f)){
+            StringBuilder data = new StringBuilder();
+            for(AppExI18nModel m1 : list){
+                data.append(m1.name).append(": '").append(m1.note.replace("\n","\\n")).append("'\n");
+            }
+
+            String filename2 = filename + ".yml";
+
+            ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
+            ctx.output(data.toString());
+            return;
+        }
     }
 
     @AuthPermissions(SessionPerms.admin)
