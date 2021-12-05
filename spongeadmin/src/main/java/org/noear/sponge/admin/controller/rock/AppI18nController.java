@@ -22,6 +22,7 @@ import org.noear.sponge.admin.model.TagCountsModel;
 import org.noear.sponge.admin.model.rock.AppExI18nModel;
 import org.noear.sponge.admin.model.rock.AppGroupModel;
 import org.noear.sponge.admin.model.rock.I18nModel;
+import org.noear.sponge.admin.utils.JsonUtils;
 import org.noear.sponge.admin.utils.MapKeyComparator;
 import org.noear.water.utils.*;
 
@@ -244,7 +245,7 @@ public class AppI18nController extends BaseController {
                 map.put(m1.name, m1.note);
             }
 
-            String data = ONode.stringify(map);
+            String data = JsonUtils.format(ONode.stringify(map));//格式化一下好看些
             String filename2 = filename + ".json";
 
             ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
