@@ -94,7 +94,7 @@
         <left>
             <c:if test="${agroup_id>0&&isOperator==1}">
                 <file>
-                    <label><input id="imp_file" type="file" accept=".properties,.jsond"/><a class="btn minor w80">导入</a></label>
+                    <label><input id="imp_file" type="file" accept=".yml,.json,.properties,.jsond"/><a class="btn minor w80">导入</a></label>
                 </file>
                 <button type='button' class="minor w80 mar10-l" onclick="exp()" >导出</button>
             </c:if>
