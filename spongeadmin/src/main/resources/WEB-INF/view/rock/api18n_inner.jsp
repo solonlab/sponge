@@ -60,8 +60,7 @@
             }
 
             let baseUrl = "./ajax/export?service=${service}&agroup_id=${agroup_id}";
-
-            window.open(url + "&fmt=" + fmt + "&ids=" + vm.sel_id, "_blank");
+            window.open(baseUrl + "&fmt=" + fmt + "&ids=" + vm.sel_id, "_blank");
         }
 
         $(function(){
