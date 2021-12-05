@@ -1,6 +1,7 @@
 package org.noear.sponge.admin.controller.rock;
 
 import org.noear.rock.RockUtil;
+import org.noear.rock.i18n.I18nUtils;
 import org.noear.snack.ONode;
 import org.noear.solon.Utils;
 import org.noear.solon.annotation.Controller;
@@ -283,9 +284,9 @@ public class AppI18nController extends BaseController {
             lang = i18n.getProperty("rock.i18n.lang"); //兼容旧的
         }
 
-        //初始化 i18n.service
+        //初始化 i18n.bundle
         if (Utils.isEmpty(service)) {
-            service = i18n.getProperty("i18n.service");
+            service = i18n.getProperty("i18n.bundle");
 
             if (Utils.isEmpty(service)) {
                 service = i18n.getProperty("rock.i18n.service"); //兼容旧的
