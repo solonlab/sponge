@@ -196,6 +196,7 @@ public class DbRockI18nApi {
 
         return db().table("appx_ex_i18n")
                 .whereEq("service", service).andIn("row_id", ids)
+                .orderBy("name ASC")
                 .selectList("*", AppExI18nModel.class);
     }
 
