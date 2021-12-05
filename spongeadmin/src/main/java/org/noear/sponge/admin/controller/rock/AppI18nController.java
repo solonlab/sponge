@@ -221,7 +221,7 @@ public class AppI18nController extends BaseController {
     }
 
     @Mapping("ajax/export")
-    public void ajaxExport(Context ctx, int agroup_id, String service, String f, String ids) throws Exception {
+    public void ajaxExport(Context ctx, int agroup_id, String service, String fmt, String ids) throws Exception {
         List<Object> ids2 = Arrays.asList(ids.split(","))
                 .stream()
                 .map(s -> Integer.parseInt(s))
@@ -230,7 +230,7 @@ public class AppI18nController extends BaseController {
         List<AppExI18nModel> list = DbRockI18nApi.i18nGetListByService(service, ids2);
         String filename = "agroup_i18n_" + agroup_id + "_" + service + "_" + Datetime.Now().getDate();
 
-        if("jsond".equals(f)) {
+        if("jsond".equals(fmt)) {
             String data = JsondUtils.encode("agroup_i18n", list);
             String filename2 = filename + ".jsond";
 
@@ -239,7 +239,7 @@ public class AppI18nController extends BaseController {
             return;
         }
 
-        if("json".equals(f)){
+        if("json".equals(fmt)){
             Map<String, String> map = new LinkedHashMap<>();
             for(AppExI18nModel m1 : list){
                 map.put(m1.name, m1.note);
@@ -253,7 +253,7 @@ public class AppI18nController extends BaseController {
             return;
         }
 
-        if("properties".equals(f)){
+        if("properties".equals(fmt)){
             StringBuilder data = new StringBuilder();
             for(AppExI18nModel m1 : list){
                 data.append(m1.name).append("=").append(m1.note.replace("\n","\\n")).append("\n");
@@ -266,7 +266,7 @@ public class AppI18nController extends BaseController {
             return;
         }
 
-        if("yml".equals(f)){
+        if("yml".equals(fmt)){
             StringBuilder data = new StringBuilder();
             for(AppExI18nModel m1 : list){
                 data.append(m1.name).append(": '").append(m1.note.replace("\n","\\n")).append("'\n");

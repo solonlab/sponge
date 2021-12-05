@@ -52,7 +52,7 @@
             });
         }
 
-        function exp(f) {
+        function exp(fmt) {
             let vm = formToMap(".sel_from");
             if(!vm.sel_id){
                 alert("请选择..");
@@ -61,7 +61,7 @@
 
             let baseUrl = "./ajax/export?service=${service}&agroup_id=${agroup_id}";
 
-            window.open(url + "&f=" + f + "&ids=" + vm.sel_id, "_blank");
+            window.open(url + "&fmt=" + fmt + "&ids=" + vm.sel_id, "_blank");
         }
 
         $(function(){
