@@ -104,7 +104,7 @@
                         <a class="btn-link mar10" onclick="exp('json')">导出为Json</a>
                         <a class="btn-link mar10" onclick="exp('properties')">导出为Properties</a>
                         <hr class="mar10-l mar10-r"/>
-                        <a class="btn-link mar10" onclick="exp('jdond')">导出为JsonD</a>
+                        <a class="btn-link mar10" onclick="exp('jsond')">导出为JsonD</a>
                     </div>
                 </div>
             </c:if>

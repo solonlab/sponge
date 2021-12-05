@@ -267,8 +267,13 @@ public class AppI18nController extends BaseController {
 
         if("yml".equals(fmt)){
             StringBuilder data = new StringBuilder();
-            for(AppExI18nModel m1 : list){
-                data.append(m1.name).append(": '").append(m1.note.replace("\n","\\n")).append("'\n");
+            for(AppExI18nModel m1 : list) {
+                data.append(m1.name);
+                if (m1.note.contains("'")) { // 如果有单引号，则用双引号
+                    data.append(": \"").append(m1.note.replace("\n", "\\n")).append("\"\n");
+                } else {
+                    data.append(": '").append(m1.note.replace("\n", "\\n")).append("'\n");
+                }
             }
 
             String filename2 = filename + ".yml";
