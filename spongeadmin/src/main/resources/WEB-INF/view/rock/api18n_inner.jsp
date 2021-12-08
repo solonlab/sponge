@@ -100,7 +100,7 @@
                 </file>
                 <div class="btn-group">
                     <a class="btn minor w80 mar10-l" >导出</a>
-                    <div class="dropdown-toggle mar10-l w150">
+                    <div class="btn-dropdown mar10-l w150">
                         <a class="btn-link mar10" onclick="exp('yml')">导出为 Yml</a>
                         <a class="btn-link mar10" onclick="exp('json')">导出为 Json</a>
                         <a class="btn-link mar10" onclick="exp('properties')">导出为 Properties</a>
