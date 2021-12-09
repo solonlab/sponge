@@ -63,7 +63,7 @@ public final class Session extends SessionBase {
     }
 
     public String getValidation() {
-        return localGet("Validation_String", null);
+        return localGet("Validation_String", "");
     }
 
     public void setValidation(String validation) {

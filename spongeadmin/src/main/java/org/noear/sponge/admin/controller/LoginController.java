@@ -1,5 +1,6 @@
 package org.noear.sponge.admin.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.noear.grit.client.GritClient;
 import org.noear.grit.client.GritUtil;
 import org.noear.grit.model.domain.Resource;
@@ -14,11 +15,13 @@ import org.noear.solon.core.handle.Result;
 import org.noear.water.utils.ImageUtils;
 import org.noear.water.utils.RandomUtils;
 import org.noear.sponge.admin.dso.Session;
+import org.slf4j.MDC;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+@Slf4j
 @Controller
 public class LoginController extends BaseController {
     @Mapping("login") //视图 返回
@@ -37,13 +40,21 @@ public class LoginController extends BaseController {
 
     //$共享SESSOIN$::自动跳转
     @Mapping("/login/auto")
-    public void login_auto() throws Exception {
+    public void login_auto(Context ctx) throws Exception {
         long subjectId = Session.current().getSubjectId();
 
         if (subjectId > 0) {
             String link_uri = GritClient.global().auth().getUriFrist(subjectId).link_uri;
 
             if (Utils.isEmpty(link_uri) == false) {
+                //日志一下
+                String userName = Session.current().getLoginName();
+
+                MDC.put("tag1", ctx.path());
+                MDC.put("tag2", userName);
+
+                log.info("userName={}, ip={}, 自动登录成功...", userName, ctx.realIp());
+
                 redirect(link_uri);
                 return;
             }
@@ -53,15 +64,25 @@ public class LoginController extends BaseController {
     }
 
     @Mapping("/login/ajax/check")  // Map<,> 返回[json]  (ViewModel 是 Map<String,Object> 的子类)
-    public Result login_ajax_check(String userName, String passWord, String captcha) throws Exception {
+    public Result login_ajax_check(Context ctx,String userName, String passWord, String captcha) throws Exception {
 
-        //验证码检查
-        if (!captcha.toLowerCase().equals(Session.current().getValidation())) {
-            return Result.failure("提示：验证码错误！");
+        //空内容检查
+        if (Utils.isEmpty(captcha)) {
+            return Result.failure("提示：请输入验证码！");
         }
 
         if (Utils.isEmpty(userName) || Utils.isEmpty(passWord)) {
             return Result.failure("提示：请输入账号和密码！");
+        }
+
+        //验证码检查
+        MDC.put("tag1", ctx.path());
+        MDC.put("tag2", userName);
+
+        String captchaOfSessoin = Session.current().getValidation();
+        if (captcha.equalsIgnoreCase(captchaOfSessoin) == false) {
+            log.info("userName={}, captcha={}, captchaOfSessoin={}", userName, captcha, captchaOfSessoin);
+            return Result.failure("提示：验证码错误！");
         }
 
         Subject subject = GritClient.global().auth().login(userName, passWord);
@@ -69,7 +90,9 @@ public class LoginController extends BaseController {
         if (Subject.isEmpty(subject)) {
             return Result.failure("提示：账号或密码不对！");
         } else {
+            log.info("userName={}, ip={}, 登录成功...", userName, ctx.realIp());
 
+            //用户登录::成功
             Session.current().loadSubject(subject);
             Resource res = GritClient.global().auth().getUriFrist(subject.subject_id);
 
