@@ -1,4 +1,4 @@
-server.port: 8182
+server.port: 8171
 server.session.timeout: 360000 #10h
 
 solon.app:
