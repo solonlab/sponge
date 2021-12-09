@@ -11,15 +11,7 @@ services:
       - solon.cloud.water.server=waterapi:9371    # Water 服务地址
       - TZ=Asia/Shanghai
     ports:
-      - 8182:8080
-  trackapi:
-    image: noearorg/trackapi:latest
-    container_name: trackapi
-    environment:
-      - solon.cloud.water.server=waterapi:9371    # Water 服务地址
-      - TZ=Asia/Shanghai
-    ports:
-      - 8183:8080
+      - 8171:8171
   rockrpc:
     image: noearorg/rockrpc:latest
     container_name: rockrpc
@@ -27,4 +19,12 @@ services:
       - solon.cloud.water.server=waterapi:9371    # Water 服务地址
       - TZ=Asia/Shanghai
     ports:
-      - 8181:8080
+      - 8181:8181
+  trackapi:
+    image: noearorg/trackapi:latest
+    container_name: trackapi
+    environment:
+      - solon.cloud.water.server=waterapi:9371    # Water 服务地址
+      - TZ=Asia/Shanghai
+    ports:
+      - 8182:8182
