@@ -7,7 +7,7 @@
 
 * 添加 water/spongeadmin 服务（镜像：noearorg/spongeadmin:latest）
   * 镜像端口：8171
-  * 对外端口：8171
+  * 对外端口：8171 或其它
   * 建议1个副本即可
   * 要配置外网访问地址，建议加域名
   
