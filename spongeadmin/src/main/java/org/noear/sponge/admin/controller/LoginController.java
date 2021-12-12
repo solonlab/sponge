@@ -24,15 +24,16 @@ import java.io.IOException;
 @Slf4j
 @Controller
 public class LoginController extends BaseController {
+
+    @Mapping("/")
+    public void index(Context ctx) {
+        ctx.forward("/login");
+    }
+
     @Mapping("login") //视图 返回
     public ModelAndView login() {
         Session.current().clear();
         return view("login");
-    }
-
-    @Mapping("/")
-    public void index() {
-        redirect("/login");
     }
     //-----------------
 
@@ -55,12 +56,12 @@ public class LoginController extends BaseController {
 
                 log.info("userName={}, ip={}, 自动登录成功...", userName, ctx.realIp());
 
-                redirect(link_uri);
+                ctx.redirect(link_uri);
                 return;
             }
         }
 
-        redirect("/login");
+        ctx.forward("/login");
     }
 
     @Mapping("/login/ajax/check")  // Map<,> 返回[json]  (ViewModel 是 Map<String,Object> 的子类)
