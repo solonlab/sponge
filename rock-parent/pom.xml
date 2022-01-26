@@ -39,12 +39,12 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <solon.ver>1.6.14</solon.ver>
+        <solon.ver>1.6.19</solon.ver>
 
-        <weed3.ver>3.4.12</weed3.ver>
-        <snack3.ver>3.2.7</snack3.ver>
+        <weed3.ver>3.4.16</weed3.ver>
+        <snack3.ver>3.2.11</snack3.ver>
 
-        <grit.ver>1.0.5</grit.ver>
+        <grit.ver>1.0.6</grit.ver>
 
         <rock.ver>2.0.3</rock.ver>
     </properties>
