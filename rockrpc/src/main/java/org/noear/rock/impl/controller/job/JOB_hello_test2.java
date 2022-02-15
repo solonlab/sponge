@@ -14,7 +14,6 @@ import org.noear.solon.core.handle.Handler;
 public class JOB_hello_test2 implements Handler {
     @Override
     public void handle(Context ctx) throws Throwable {
-        log.info(ONode.stringify(ctx.paramMap()));
         throw new IllegalArgumentException("异常测试");
     }
 }
