@@ -1,6 +1,7 @@
 package org.noear.rock.impl.controller.job;
 
 import lombok.extern.slf4j.Slf4j;
+import org.noear.snack.ONode;
 import org.noear.solon.cloud.annotation.CloudJob;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.core.handle.Handler;
@@ -13,6 +14,7 @@ import org.noear.solon.core.handle.Handler;
 public class JOB_hello_test2 implements Handler {
     @Override
     public void handle(Context ctx) throws Throwable {
-        throw new IllegalArgumentException("没有参数");
+        log.info(ONode.stringify(ctx.paramMap()));
+        throw new IllegalArgumentException("异常测试");
     }
 }
