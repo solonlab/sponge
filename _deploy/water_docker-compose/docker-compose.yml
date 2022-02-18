@@ -8,7 +8,7 @@ services:
     image: noearorg/spongeadmin:latest
     container_name: spongeadmin
     environment:
-      - solon.cloud.water.server=waterapi:9371    # Water 服务地址
+      - solon.cloud.water.server=waterapi:9371    # 要改成具体的 Water 服务地址（一般要换成ip）
       - TZ=Asia/Shanghai
     ports:
       - 8171:8171
@@ -16,7 +16,7 @@ services:
     image: noearorg/rockrpc:latest
     container_name: rockrpc
     environment:
-      - solon.cloud.water.server=waterapi:9371    # Water 服务地址
+      - solon.cloud.water.server=waterapi:9371    # 要改成具体的 Water 服务地址（一般要换成ip）
       - TZ=Asia/Shanghai
     ports:
       - 8181:8181
@@ -24,7 +24,7 @@ services:
     image: noearorg/trackapi:latest
     container_name: trackapi
     environment:
-      - solon.cloud.water.server=waterapi:9371    # Water 服务地址
+      - solon.cloud.water.server=waterapi:9371    # 要改成具体的 Water 服务地址（一般要换成ip）
       - TZ=Asia/Shanghai
     ports:
       - 8182:8182
