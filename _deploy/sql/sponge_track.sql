@@ -36,6 +36,22 @@ CREATE TABLE IF NOT EXISTS `code_enum`  (
   INDEX `IX_key`(`value`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 45 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
+
+INSERT INTO `code_enum`(`row_id`, `type`, `value`, `title`, `keyword`) VALUES (1001, 1, 1, 'Window', '%Windows%');
+INSERT INTO `code_enum`(`row_id`, `type`, `value`, `title`, `keyword`) VALUES (1002, 1, 3, 'Andorid', '%Android%');
+INSERT INTO `code_enum`(`row_id`, `type`, `value`, `title`, `keyword`) VALUES (1003, 1, 4, 'iPhone', '%iPhone%');
+INSERT INTO `code_enum`(`row_id`, `type`, `value`, `title`, `keyword`) VALUES (1004, 1, 5, 'iPad', '%iPad%');
+INSERT INTO `code_enum`(`row_id`, `type`, `value`, `title`, `keyword`) VALUES (1005, 1, 2, 'Mac', '%Mac%');
+INSERT INTO `code_enum`(`row_id`, `type`, `value`, `title`, `keyword`) VALUES (2001, 2, 101, 'QQ', '%QQ/%');
+INSERT INTO `code_enum`(`row_id`, `type`, `value`, `title`, `keyword`) VALUES (2002, 2, 102, '微信', '%MicroMessenger/%');
+INSERT INTO `code_enum`(`row_id`, `type`, `value`, `title`, `keyword`) VALUES (2101, 2, 1, 'Edge', '%Edg/%');
+INSERT INTO `code_enum`(`row_id`, `type`, `value`, `title`, `keyword`) VALUES (2102, 2, 2, 'MSIE', '%Trident/%');
+INSERT INTO `code_enum`(`row_id`, `type`, `value`, `title`, `keyword`) VALUES (2103, 2, 3, 'Firefox', '%Firefox/%');
+INSERT INTO `code_enum`(`row_id`, `type`, `value`, `title`, `keyword`) VALUES (2104, 2, 4, 'Opera', '%Opera/%');
+INSERT INTO `code_enum`(`row_id`, `type`, `value`, `title`, `keyword`) VALUES (2105, 2, 5, 'Chrome', '%Chrome%');
+INSERT INTO `code_enum`(`row_id`, `type`, `value`, `title`, `keyword`) VALUES (2106, 2, 6, 'Safari', '%Safari/%');
+
+
 CREATE TABLE IF NOT EXISTS `code_ip`  (
   `ip_id` bigint(20) NOT NULL,
   `ip_val` varchar(100)  NOT NULL DEFAULT '',
