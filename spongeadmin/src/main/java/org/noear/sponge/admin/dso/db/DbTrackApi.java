@@ -215,14 +215,14 @@ public class DbTrackApi {
         return name;
     }
 
-    public static List<UrlStatResp> getAllShortUrlExStat(int tag_id) throws SQLException{
+    public static List<UrlStatResp> getAllShortUrlExStat(int tag_id) throws SQLException {
         return db().table("short_url u")
                 .innerJoin("short_url_ex_stat s")
                 .on("u.url_id = s.url_id")
-                .where("s.tag_id = ? AND u.is_disable=0",tag_id)
-                .orderBy("s.uv_today desc")
-                .select("u.url_name,u.track_params,s.*")
-                .getList(new UrlStatResp());
+                .where("s.tag_id = ? AND u.is_disable=0", tag_id)
+                .orderBy("s.pv_today desc")
+                .limit(1000)//todo: 保护一下
+                .selectList("u.url_name,u.track_params,s.*", UrlStatResp.class);
     }
 
     public static List<UrlStatResp> getAllShortUrlExStatResp(List<UrlStatResp> urlStatResp){
@@ -302,16 +302,17 @@ public class DbTrackApi {
         return true;
     }
 
-    public static List<TrackTagExTrackStatModel> getTrackTagExTrackStatByVi(int vi, int tag_id) throws SQLException{
+    public static List<TrackTagExTrackStatModel> getTrackTagExTrackStatByVi(int vi, int tag_id) throws SQLException {
 
         return db().table("track_tag_ex_track_stat")
-                .where("vi = ?",vi)
-                .and("tag_id = ?",tag_id)
-                .orderBy("uv_today desc")
-                .select("*,vd as url_name")
+                .where("vi = ?", vi)
+                .and("tag_id = ?", tag_id)
+                .orderBy("pv_today desc")
+                .limit(1000) //todo: 保护一下
                 .caching(CacheUtil.dataCache)
                 .cacheTag("track_tag_ex_track_stat"+vi+tag_id)
-                .getList(new TrackTagExTrackStatModel());
+                .selectList("*,vd as url_name", TrackTagExTrackStatModel.class);
+
     }
 
 
@@ -346,22 +347,21 @@ public class DbTrackApi {
         return resp;
     }
 
-    public static List<ShortUrlExTrackStatModel> getShortUrlExTrackStatList(Integer url_id,Integer vi) throws SQLException{
+    public static List<ShortUrlExTrackStatModel> getShortUrlExTrackStatList(Integer url_id,Integer vi) throws SQLException {
         return db().table("short_url_ex_track_stat")
-                .where("url_id = ?",url_id)
-                .and("vi = ?",vi)
-                .orderBy("uv_today desc")
-                .select("*,vd as url_name")
+                .where("url_id = ?", url_id)
+                .and("vi = ?", vi)
+                .orderBy("pv_today desc")
+                .limit(1000) //todo: 保护一下，免得太多了
                 .caching(CacheUtil.dataCache)
                 .cacheTag("short_url_ex_track_stat"+url_id+vi)
-                .getList(new ShortUrlExTrackStatModel());
+                .selectList("*,vd as url_name", ShortUrlExTrackStatModel.class);
     }
 
     public static ShortUrlModel getTargIdByUrlId(Integer url_id) throws SQLException{
         return db().table("short_url s")
                 .where("url_id = ?",url_id)
-                .select("s.tag_id")
-                .getItem(new ShortUrlModel());
+                .selectItem("s.tag_id", ShortUrlModel.class);
     }
 
     public static TrackTagVIResp getTrackParamsNoUrl(int url_id,int _state) throws SQLException{
@@ -397,45 +397,41 @@ public class DbTrackApi {
         return resp;
     }
 
-    public static List<UserIpModel> getIP() throws SQLException{
-       return db().table("user_ip")
-                .select("*")
-                .getList(new UserIpModel());
+    public static List<UserIpModel> getIP() throws SQLException {
+        return db().table("user_ip")
+                .selectList("*", UserIpModel.class);
     }
 
     //获取短地址 uv pv ip 小时数据
-    public static List<StatDateHourPvUvIpModel> getHourPUIListByTagId(int tag_id, int log_date) throws SQLException{
+    public static List<StatDateHourPvUvIpModel> getHourPUIListByTagId(int tag_id, int log_date) throws SQLException {
         return db().table("stat_date_hour_pv_uv_ip")
-                .where("tag_id = ?",tag_id)
-                .and("log_date = ?",log_date)
-                .and("url_id = ?",-1)
-                .and("log_hour >= ?",0)
-                .select("*")
-                .caching(CacheUtil.dataCache).cacheTag("stat_date_hour_pv_uv_ip"+tag_id+log_date)
-                .getList(new StatDateHourPvUvIpModel());
+                .where("tag_id = ?", tag_id)
+                .and("log_date = ?", log_date)
+                .and("url_id = ?", -1)
+                .and("log_hour >= ?", 0)
+                .caching(CacheUtil.dataCache).cacheTag("stat_date_hour_pv_uv_ip" + tag_id + log_date)
+                .selectList("*", StatDateHourPvUvIpModel.class);
     }
 
-    public static List<StatDateHourPvUvIpModel> getHourPUIListByUrlId(int url_id,int log_date) throws SQLException{
+    public static List<StatDateHourPvUvIpModel> getHourPUIListByUrlId(int url_id,int log_date) throws SQLException {
         return db().table("stat_date_hour_pv_uv_ip")
-                .where("url_id = ?",url_id)
-                .and("log_date = ?",log_date)
-                .and("log_hour >= ?",0)
-                .select("*")
-                .caching(CacheUtil.dataCache).cacheTag("stat_date_hour_pv_uv_ip"+url_id+log_date)
-                .getList(new StatDateHourPvUvIpModel());
+                .where("url_id = ?", url_id)
+                .and("log_date = ?", log_date)
+                .and("log_hour >= ?", 0)
+                .caching(CacheUtil.dataCache).cacheTag("stat_date_hour_pv_uv_ip" + url_id + log_date)
+                .selectList("*", StatDateHourPvUvIpModel.class);
     }
 
     //根据url_id，vi，vd查询短地址小时统计
-    public static List<StatDateHourPvUvIpModel> getHourPUIListByUrlIdViVd(int url_id,int vi,String vd,int log_date) throws SQLException{
+    public static List<StatDateHourPvUvIpModel> getHourPUIListByUrlIdViVd(int url_id,int vi,String vd,int log_date) throws SQLException {
         return db().table("stat_track_date_hour_pv_uv_ip")
-                .where("url_id = ?",url_id)
-                .and("vi = ?",vi)
-                .and("vd = ?",vd)
-                .and("log_date = ?",log_date)
-                .and("log_hour >= ?",0)
-                .select("*")
-                .caching(CacheUtil.dataCache).cacheTag("stat_date_hour_pv_uv_ip"+url_id+log_date)
-                .getList(new StatDateHourPvUvIpModel());
+                .where("url_id = ?", url_id)
+                .and("vi = ?", vi)
+                .and("vd = ?", vd)
+                .and("log_date = ?", log_date)
+                .and("log_hour >= ?", 0)
+                .caching(CacheUtil.dataCache).cacheTag("stat_date_hour_pv_uv_ip" + url_id + log_date)
+                .selectList("*", StatDateHourPvUvIpModel.class);
     }
 
     //处理短地址 uv pv ip 小时 图表渲染数据
@@ -635,42 +631,30 @@ public class DbTrackApi {
 
     //获取tag_id对应的省份的 uv pv ip 数据。
     private static List<StatCityDatePvUvIpModel> getProvincePUIList(int id, int yesterday,String upi) throws SQLException {
-        List<StatCityDatePvUvIpModel> list =  db().table("stat_city_date_pv_uv_ip")
+        List<StatCityDatePvUvIpModel> list = db().table("stat_city_date_pv_uv_ip")
                 .where("url_id =-1")
-                .and("tag_id = ?",id)
-                .and("(log_date >= ?)",yesterday)
+                .and("tag_id = ?", id)
+                .and("(log_date >= ?)", yesterday)
                 .and("province_code >0")
                 .groupBy("province_code")
-//                .orderBy(upi+" desc")
-                .select("province_code,SUM("+upi+") _val")
                 .caching(CacheUtil.dataCache)
-                .getList(new StatCityDatePvUvIpModel());
-
-        if(db().lastCommand.text==null){
-            return list;
-        }
+//                .orderBy(upi+" desc")
+                .selectList("province_code,SUM(" + upi + ") _val", StatCityDatePvUvIpModel.class);
 
         return list;
     }
 
-    public static List<StatCityDatePvUvIpModel> getProvincePUIListByUrl(int url_id,int yesterday,String upi)throws SQLException{
+    public static List<StatCityDatePvUvIpModel> getProvincePUIListByUrl(int url_id,int yesterday,String upi)throws SQLException {
         List<StatCityDatePvUvIpModel> list = db().table("stat_city_date_pv_uv_ip")
-                .where("url_id = ?",url_id)
-                .and("(log_date >= ?)",yesterday)
+                .where("url_id = ?", url_id)
+                .and("(log_date >= ?)", yesterday)
                 .and("province_code >0")
                 .groupBy("province_code")
-                //.orderBy(upi+" desc")
-                .select("province_code,SUM("+upi+") _val")
                 .caching(CacheUtil.dataCache)
-                .getList(new StatCityDatePvUvIpModel());
-
-        if(db().lastCommand.text==null){
-            return list;
-        }
+                //.orderBy(upi+" desc")
+                .selectList("province_code,SUM(" + upi + ") _val", StatCityDatePvUvIpModel.class);
 
         return list;
-
-
     }
 
     private static String fieldOfType(int type){
@@ -875,8 +859,7 @@ public class DbTrackApi {
         return db().table("short_url")
                 .where("url_partner_key = ?",url_partner_key)
                 .and("tag_id = ?",tag_id)
-                .select("*")
-                .getItem(new ShortUrlModel());
+                .selectItem("*", ShortUrlModel.class);
     }
 
     public static void updateShortUrl(ShortUrlModel url) throws SQLException{
