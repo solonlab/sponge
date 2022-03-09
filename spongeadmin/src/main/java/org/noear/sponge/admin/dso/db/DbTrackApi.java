@@ -774,9 +774,10 @@ public class DbTrackApi {
                     }
                 })
                 .groupBy("ua_client")
-                .orderBy(tField + " desc")
                 .select("ua_client,sum(" + tField + ") _val")
                 .getList(new StatUaClientDatePvUvIpModel());
+
+        clients.sort(Comparator.comparingLong(m -> -m._val));//倒排用负数
 
         Map<String, Object> defs = new LinkedHashMap<>(); //用于数据按序位补齐（min=6）
         defs.put("Chrome", getDataVal("Chrome", 0));
