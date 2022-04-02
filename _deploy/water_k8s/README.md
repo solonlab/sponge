@@ -5,19 +5,19 @@
 
 ## 一、开始部署服务
 
-* 添加 water/spongeadmin 服务（镜像：noearorg/spongeadmin:latest）
+* 添加 water/spongeadmin 服务（镜像：noearorg/spongeadmin:2.0.6）
   * 镜像端口：8171
   * 对外端口：8171 或其它
   * 建议1个副本即可
   * 要配置外网访问地址，建议加域名
   
-* 添加 water/rockrpc 服务（镜像：noearorg/rockrpc:latest）
+* 添加 water/rockrpc 服务（镜像：noearorg/rockrpc:2.0.6）
   * 镜像端口：8181
   * 对外端口：8181
   * 建议2个副本起步
   * 不需要配置外网访问
 
-* 添加 water/trackapi 服务（镜像：noearorg/trackapi:latest）
+* 添加 water/trackapi 服务（镜像：noearorg/trackapi:2.0.6）
   * 镜像端口：8182
   * 对外端口：8182
   * 建议1个副本起步
