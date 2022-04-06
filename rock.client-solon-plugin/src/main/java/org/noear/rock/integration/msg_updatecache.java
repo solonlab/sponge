@@ -13,7 +13,7 @@ import org.noear.water.utils.TextUtils;
 @CloudEvent(topic = "water.cache.update", level = EventLevel.instance)
 public class msg_updatecache implements CloudEventHandler {
     @Override
-    public boolean handler(Event event) throws Throwable {
+    public boolean handle(Event event) throws Throwable {
         if (event.content().contains("app_")) {
             for (String tag : event.content().split(";")) {
                 if (TextUtils.isEmpty(tag) == false) {

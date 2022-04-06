@@ -10,7 +10,7 @@ import org.noear.solon.cloud.model.Event;
 @CloudEvent("hello.test")
 public class MSg_hello_test implements CloudEventHandler {
     @Override
-    public boolean handler(Event event) throws Throwable {
+    public boolean handle(Event event) throws Throwable {
         return false;
     }
 }
