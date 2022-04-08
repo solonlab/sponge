@@ -34,6 +34,8 @@ import java.util.stream.Collectors;
 @Controller
 @Mapping("/rock/apcode")
 public class AppCodeController extends BaseController {
+    static final String _i18n_lang = "_i18n.lang";
+    static final String _i18n_bundle = "_i18n.bundle";
 
     //应用状态码跳转
     @Mapping("")
@@ -244,13 +246,17 @@ public class AppCodeController extends BaseController {
             return;
         }
 
-        if("json".equals(fmt)){
-            Map<String, String> map = new LinkedHashMap<>();
-            for(AppExCodeModel m1 : list){
-                map.put(String.valueOf(m1.code), m1.note);
-            }
+        Map<String, String> i18nMap = new LinkedHashMap<>();
+        for (AppExCodeModel m1 : list) {
+            i18nMap.put(String.valueOf(m1.code), m1.note);
+        }
 
-            String data = JsonUtils.format(ONode.stringify(map));//格式化一下好看些
+        if(i18nMap.containsKey(_i18n_lang) == false){
+            i18nMap.put(_i18n_lang, list.get(0).lang);
+        }
+
+        if("json".equals(fmt)){
+            String data = JsonUtils.format(ONode.stringify(i18nMap));//格式化一下好看些
             String filename2 = filename + ".json";
 
             ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
@@ -260,9 +266,9 @@ public class AppCodeController extends BaseController {
 
         if("properties".equals(fmt)){
             StringBuilder data = new StringBuilder();
-            for(AppExCodeModel m1 : list){
-                data.append(m1.code).append("=").append(m1.note.replace("\n","\\n")).append("\n");
-            }
+            i18nMap.forEach((name, value)->{
+                data.append(name).append("=").append(value.replace("\n","\\n")).append("\n");
+            });
 
             String filename2 = filename + ".properties";
 
@@ -273,14 +279,14 @@ public class AppCodeController extends BaseController {
 
         if("yml".equals(fmt)){
             StringBuilder data = new StringBuilder();
-            for(AppExCodeModel m1 : list) {
-                data.append(m1.code);
-                if (m1.note.contains("'")) { // 如果有单引号，则用双引号
-                    data.append(": \"").append(m1.note.replace("\n", "\\n")).append("\"\n");
+            i18nMap.forEach((name, value)->{
+                data.append(name);
+                if (value.contains("'")) { // 如果有单引号，则用双引号
+                    data.append(": \"").append(value.replace("\n", "\\n")).append("\"\n");
                 } else {
-                    data.append(": '").append(m1.note.replace("\n", "\\n")).append("'\n");
+                    data.append(": '").append(value.replace("\n", "\\n")).append("'\n");
                 }
-            }
+            });
 
             String filename2 = filename + ".yml";
 
