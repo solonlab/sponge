@@ -14,7 +14,7 @@ import org.noear.solon.cloud.model.Job;
 @Component
 public class JobInterceptor implements CloudJobInterceptor {
     @Override
-    public void doInterceptor(Job job, CloudJobHandler handler) throws Throwable {
+    public void doIntercept(Job job, CloudJobHandler handler) throws Throwable {
         long start = System.currentTimeMillis();
         log.info("interceptor job: {} start", job.getName());
 
