@@ -20,8 +20,10 @@ import org.noear.sponge.admin.dso.db.DbRockI18nApi;
 import org.noear.sponge.admin.model.TagCountsModel;
 import org.noear.sponge.admin.model.rock.AppExCodeModel;
 import org.noear.sponge.admin.controller.BaseController;
+import org.noear.sponge.admin.model.rock.AppExI18nModel;
 import org.noear.sponge.admin.model.rock.AppGroupModel;
 import org.noear.sponge.admin.model.rock.I18nModel;
+import org.noear.sponge.admin.utils.JsonUtils;
 import org.noear.sponge.admin.utils.MapKeyComparator;
 import org.noear.water.utils.*;
 
@@ -224,20 +226,73 @@ public class AppCodeController extends BaseController {
     }
 
     @Mapping("ajax/export")
-    public void ajaxExport(Context ctx, int agroup_id, String service, String ids) throws Exception {
+    public void ajaxExport(Context ctx, int agroup_id, String service, String fmt, String ids) throws Exception {
         List<Object> ids2 = Arrays.asList(ids.split(","))
                 .stream()
                 .map(s -> Integer.parseInt(s))
                 .collect(Collectors.toList());
 
         List<AppExCodeModel> list = DbRockI18nApi.codeGetListByService(service, ids2);
+        String filename = "agroup_code_" + agroup_id + "_" + service + "_" + Datetime.Now().getDate();
 
-        String jsonD = JsondUtils.encode("agroup_code", list);
+        if("jsond".equals(fmt)) {
+            String data = JsondUtils.encode("agroup_code", list);
+            String filename2 = filename + ".jsond";
 
-        String filename2 = "agroup_code_" + agroup_id + "_" + service + "_" + Datetime.Now().getDate() + ".jsond";
+            ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
+            ctx.output(data);
+            return;
+        }
 
-        ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
-        ctx.output(jsonD);
+        if("json".equals(fmt)){
+            Map<String, String> map = new LinkedHashMap<>();
+            for(AppExCodeModel m1 : list){
+                map.put(String.valueOf(m1.code), m1.note);
+            }
+
+            String data = JsonUtils.format(ONode.stringify(map));//格式化一下好看些
+            String filename2 = filename + ".json";
+
+            ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
+            ctx.output(data);
+            return;
+        }
+
+        if("properties".equals(fmt)){
+            StringBuilder data = new StringBuilder();
+            for(AppExCodeModel m1 : list){
+                data.append(m1.code).append("=").append(m1.note.replace("\n","\\n")).append("\n");
+            }
+
+            String filename2 = filename + ".properties";
+
+            ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
+            ctx.output(data.toString());
+            return;
+        }
+
+        if("yml".equals(fmt)){
+            StringBuilder data = new StringBuilder();
+            for(AppExCodeModel m1 : list) {
+                data.append(m1.code);
+                if (m1.note.contains("'")) { // 如果有单引号，则用双引号
+                    data.append(": \"").append(m1.note.replace("\n", "\\n")).append("\"\n");
+                } else {
+                    data.append(": '").append(m1.note.replace("\n", "\\n")).append("'\n");
+                }
+            }
+
+            String filename2 = filename + ".yml";
+
+            ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
+            ctx.output(data.toString());
+            return;
+        }
+
+//        String jsonD = JsondUtils.encode("agroup_code", list);
+//        String filename2 = "agroup_code_" + agroup_id + "_" + service + "_" + Datetime.Now().getDate() + ".jsond";
+//        ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
+//        ctx.output(jsonD);
     }
 
     @AuthPermissions(SessionPerms.admin)
