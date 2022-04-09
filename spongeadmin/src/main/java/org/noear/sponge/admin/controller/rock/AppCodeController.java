@@ -251,6 +251,10 @@ public class AppCodeController extends BaseController {
             i18nMap.put(String.valueOf(m1.code), m1.note);
         }
 
+        if(i18nMap.containsKey(_i18n_bundle) == false) {
+            i18nMap.put(_i18n_bundle, service + "_code");
+        }
+
         if(i18nMap.containsKey(_i18n_lang) == false){
             i18nMap.put(_i18n_lang, list.get(0).lang);
         }

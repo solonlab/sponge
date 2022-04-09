@@ -246,6 +246,10 @@ public class AppI18nController extends BaseController {
             i18nMap.put(m1.name, m1.note);
         }
 
+        if(i18nMap.containsKey(_i18n_bundle) == false) {
+            i18nMap.put(_i18n_bundle, service);
+        }
+
         if(i18nMap.containsKey(_i18n_lang) == false){
             i18nMap.put(_i18n_lang, list.get(0).lang);
         }
