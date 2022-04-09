@@ -15,10 +15,7 @@
     <artifactId>trackapi</artifactId>
     <packaging>jar</packaging>
 
-
     <description>trackapi project for java</description>
-
-
 
     <dependencies>
         <dependency>
