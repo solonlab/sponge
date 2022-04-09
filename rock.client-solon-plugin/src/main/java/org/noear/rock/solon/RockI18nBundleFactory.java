@@ -14,10 +14,20 @@ import java.util.Locale;
  * @author noear 2021/9/8 created
  */
 public class RockI18nBundleFactory implements I18nBundleFactory {
+    private final String codeBundleNameDef;
+
+    public RockI18nBundleFactory() {
+        codeBundleNameDef = Solon.cfg().appName() + "_code";
+    }
+
     @Override
     public I18nBundle create(String bundleName, Locale locale) {
         if (I18nUtil.getMessageBundleName().equals(bundleName)) {
             bundleName = Solon.cfg().appName();
+        }
+
+        if (bundleName.equals(codeBundleNameDef)) {
+            return new RockCodeI18nBundle(I18nContextManager.getCodeContext(bundleName), locale);
         }
 
         return new RockI18nBundle(I18nContextManager.getMessageContext(bundleName), locale);
