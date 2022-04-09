@@ -11,12 +11,12 @@ import java.util.Map;
  *
  * @author noear 2021/9/8 created
  */
-public class RockI18nBundle implements I18nBundle {
+public class RockNameI18nBundle implements I18nBundle {
     final MessageContext context;
     final Locale locale;
     final String locale_lang;
 
-    public RockI18nBundle(MessageContext context, Locale locale) {
+    public RockNameI18nBundle(MessageContext context, Locale locale) {
         this.context = context;
         this.locale = locale;
         this.locale_lang = locale.toString();
