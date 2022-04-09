@@ -303,11 +303,13 @@ public class RockClient {
     /**
      * 获取接口状态码
      */
+    @Deprecated
     public static AppCodeCollection getAppCodes(int agroupID) throws SQLException {
         return cacheLocal.getBy("getAppCodes_" + agroupID, (ru) ->
                 instance().getAppCodes(agroupID));
     }
 
+    @Deprecated
     public static AppCodeCollection getAppCodes(int agroupID, String lang) throws SQLException {
         return cacheLocal.getBy("getAppCodes_" + agroupID + "_" + lang, (ru) ->
                 instance().getAppCodesByLang(agroupID, lang));
@@ -350,14 +352,25 @@ public class RockClient {
     /**
      * 获取接口状态码
      */
+    @Deprecated
     public static AppCodeCollection getServiceCodes(String service) throws SQLException {
         return getServiceCodesByLang(service, "");
     }
-
+    @Deprecated
     public static AppCodeCollection getServiceCodesByLang(String service, String lang) throws SQLException {
         return cacheLocal.getBy("getServiceCodesByLang_" + service + "_" + lang, (ru) ->
                 instance().getServiceCodesByLang(service, lang));
     }
+
+    public static AppI18nCollection getServiceCodes2(String service) throws SQLException {
+        return getServiceCodesByLang2(service, "");
+    }
+
+    public static AppI18nCollection getServiceCodesByLang2(String service, String lang) throws SQLException {
+        return cacheLocal.getBy("getServiceCodesByLang_" + service + "_" + lang, (ru) ->
+                instance().getServiceCodesByLang2(service, lang));
+    }
+
 
     /**
      * 获取一个Api Code 的描述

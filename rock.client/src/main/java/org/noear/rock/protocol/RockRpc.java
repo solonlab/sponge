@@ -138,8 +138,10 @@ public interface RockRpc {
     /**
      * 获取接口状态码
      */
+    @Deprecated
     AppCodeCollection getAppCodes(Integer agroupID) throws SQLException;
 
+    @Deprecated
     AppCodeCollection getAppCodesByLang(Integer agroupID, String lang) throws SQLException;
 
     /**
@@ -155,9 +157,15 @@ public interface RockRpc {
     /**
      * 获取接口状态码
      */
+    @Deprecated
     AppCodeCollection getServiceCodes(String service) throws SQLException;
 
+    @Deprecated
     AppCodeCollection getServiceCodesByLang(String service, String lang) throws SQLException;
+
+    AppI18nCollection getServiceCodes2(String service) throws SQLException;
+
+    AppI18nCollection getServiceCodesByLang2(String service, String lang) throws SQLException;
 
     /**
      * 获取一个Api Code 的描述

@@ -17,6 +17,12 @@ public class AppI18nCollection implements Serializable {
         }
     }
 
+    public void bindOfCode(List<AppCodeModel> mod) {
+        for (AppCodeModel m : mod) {
+            data.put(String.valueOf(m.code), m.note);
+        }
+    }
+
     public String get(String name) {
         return data.get(name);
     }

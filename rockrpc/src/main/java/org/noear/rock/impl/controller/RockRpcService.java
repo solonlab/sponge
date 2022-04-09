@@ -622,6 +622,28 @@ public final class RockRpcService implements RockRpc {
     }
 
     @Override
+    public AppI18nCollection getServiceCodes2(String service) throws SQLException {
+        return getServiceCodesByLang2(service, "");
+    }
+
+    @Override
+    public AppI18nCollection getServiceCodesByLang2(String service, String lang) throws SQLException {
+        app_ex_get_codes2 sp = new app_ex_get_codes2(rock_db);
+        sp.service = service;
+        sp.lang = lang;
+
+        sp.caching(rock_cache)
+                .usingCache(60 * 10)
+                .cacheTag("app_code:" + service);
+
+        List<AppCodeModel> m = sp.getList(AppCodeModel.class);
+
+        AppI18nCollection ac = new AppI18nCollection();
+        ac.bindOfCode(m);
+        return ac;
+    }
+
+    @Override
     public String getServiceCode(String service, Integer code) throws SQLException {
         return getServiceCodeByLang(service, code, "");
     }
