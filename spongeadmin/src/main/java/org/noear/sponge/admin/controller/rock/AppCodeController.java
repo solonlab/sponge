@@ -294,11 +294,6 @@ public class AppCodeController extends BaseController {
             ctx.output(data.toString());
             return;
         }
-
-//        String jsonD = JsondUtils.encode("agroup_code", list);
-//        String filename2 = "agroup_code_" + agroup_id + "_" + service + "_" + Datetime.Now().getDate() + ".jsond";
-//        ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
-//        ctx.output(jsonD);
     }
 
     @AuthPermissions(SessionPerms.admin)

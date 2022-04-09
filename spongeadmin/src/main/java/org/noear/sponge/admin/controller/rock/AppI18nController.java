@@ -334,14 +334,14 @@ public class AppI18nController extends BaseController {
         Properties i18n = Utils.buildProperties(i18nStr);
 
         //初始化 _i18n.lang (_开头可以排序在前)
-        String lang = i18n.getProperty("_i18n.lang");
+        String lang = i18n.getProperty(_i18n_lang);
         if(Utils.isEmpty(lang)){
             lang = i18n.getProperty("rock.i18n.lang"); //兼容旧的
         }
 
         //初始化 _i18n.bundle
         if (Utils.isEmpty(service)) {
-            service = i18n.getProperty("_i18n.bundle");
+            service = i18n.getProperty(_i18n_bundle);
 
             if (Utils.isEmpty(service)) {
                 service = i18n.getProperty("rock.i18n.service"); //兼容旧的
@@ -367,6 +367,8 @@ public class AppI18nController extends BaseController {
         //去除元信息
         i18n.remove("rock.i18n.service");
         i18n.remove("rock.i18n.lang");
+        i18n.remove(_i18n_bundle);
+        i18n.remove(_i18n_lang);
 
         for (Object k : i18n.keySet()) {
             if (k instanceof String) {
