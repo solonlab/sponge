@@ -17,7 +17,7 @@ public class RockCodeI18nBundleFactory implements I18nBundleFactory {
     private final String codeBundleNameDef;
 
     public RockCodeI18nBundleFactory() {
-        codeBundleNameDef = Solon.cfg().appName() + "_code";
+        codeBundleNameDef = Solon.cfg().appName() + "__code";
     }
 
     @Override

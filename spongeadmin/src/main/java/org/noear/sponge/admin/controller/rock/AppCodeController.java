@@ -252,7 +252,7 @@ public class AppCodeController extends BaseController {
         }
 
         if(i18nMap.containsKey(_i18n_bundle) == false) {
-            i18nMap.put(_i18n_bundle, service + "_code");
+            i18nMap.put(_i18n_bundle, service + "__code");
         }
 
         if(i18nMap.containsKey(_i18n_lang) == false){
