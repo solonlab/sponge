@@ -243,7 +243,7 @@ public class AppI18nController extends BaseController {
 
         Map<String, String> i18nMap = new LinkedHashMap<>();
         for (AppExI18nModel m1 : list) {
-            i18nMap.put(m1.name, m1.name);
+            i18nMap.put(m1.name, m1.note);
         }
 
         if(i18nMap.containsKey(_i18n_lang) == false){
