@@ -30,6 +30,6 @@ public class RockI18nBundleFactory implements I18nBundleFactory {
             return new RockCodeI18nBundle(I18nContextManager.getCodeContext(bundleName), locale);
         }
 
-        return new RockNameI18nBundle(I18nContextManager.getMessageContext(bundleName), locale);
+        return new RockI18nBundle(I18nContextManager.getMessageContext(bundleName), locale);
     }
 }
