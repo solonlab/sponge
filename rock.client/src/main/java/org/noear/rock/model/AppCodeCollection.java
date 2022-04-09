@@ -8,6 +8,7 @@ import java.util.Map;
 /**
  * 应用状态码集合
  * */
+@Deprecated
 public class AppCodeCollection  implements Serializable {
     public Map<Integer, String> data = new HashMap<>();
 
