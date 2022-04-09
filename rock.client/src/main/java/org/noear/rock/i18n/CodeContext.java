@@ -1,7 +1,7 @@
 package org.noear.rock.i18n;
 
 import org.noear.rock.RockClient;
-import org.noear.rock.model.AppCodeCollection;
+import org.noear.rock.model.AppI18nCollection;
 import org.noear.water.utils.TextUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,27 +20,27 @@ import java.util.Map;
 public class CodeContext {
     static Logger log = LoggerFactory.getLogger(CodeContext.class);
 
-    Map<String, AppCodeCollection> codeMap = new HashMap<>();
+    Map<String, AppI18nCollection> codeMap = new HashMap<>();
     String service;
 
     protected CodeContext(String service) {
         this.service = service;
     }
 
-    public Map<Integer, String> getMap(String lang) {
+    public Map<String, String> getMap(String lang) {
         if (lang == null) {
             lang = "";
         } else {
             lang = lang.toLowerCase(Locale.ROOT);
         }
 
-        AppCodeCollection coll = codeMap.get(lang);
+        AppI18nCollection coll = codeMap.get(lang);
         if (coll == null) {
             synchronized (lang.intern()) {
                 coll = codeMap.get(lang);
                 if (coll == null) {
                     try {
-                        coll = RockClient.getServiceCodesByLang(service, lang);
+                        coll = RockClient.getServiceCodesByLang2(service, lang);
                         codeMap.put(lang, coll);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
@@ -52,11 +52,11 @@ public class CodeContext {
         return coll.data;
     }
 
-    public String get(int code, String lang) {
+    public String get(String code, String lang) {
         return getMap(lang).get(code);
     }
 
-    public String getAndFormat(int code, String lang, Object[] args) {
+    public String getAndFormat(String code, String lang, Object[] args) {
         if (TextUtils.isEmpty(lang)) {
             return getAndFormat(code, lang, null, args);
         } else {
@@ -64,7 +64,7 @@ public class CodeContext {
         }
     }
 
-    public String getAndFormat(int code, String lang, Locale locale, Object[] args) {
+    public String getAndFormat(String code, String lang, Locale locale, Object[] args) {
         String tml = get(code, lang);
 
         MessageFormat mf = new MessageFormat("");
@@ -77,10 +77,10 @@ public class CodeContext {
     }
 
     protected void update() throws SQLException {
-        Map<String, AppCodeCollection> codeMap2 = new HashMap<>();
+        Map<String, AppI18nCollection> codeMap2 = new HashMap<>();
 
-        for (Map.Entry<String, AppCodeCollection> kv : codeMap.entrySet()) {
-            AppCodeCollection coll = RockClient.getServiceCodesByLang(service, kv.getKey());
+        for (Map.Entry<String, AppI18nCollection> kv : codeMap.entrySet()) {
+            AppI18nCollection coll = RockClient.getServiceCodesByLang2(service, kv.getKey());
             codeMap2.put(kv.getKey().toLowerCase(Locale.ROOT), coll);
         }
 

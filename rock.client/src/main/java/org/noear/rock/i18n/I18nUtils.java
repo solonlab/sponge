@@ -37,15 +37,15 @@ public class I18nUtils {
     }
 
     public static String getByCode(int code, String lang) throws SQLException {
-        return getCodeContext().get(code, lang);
+        return getCodeContext().get(String.valueOf(code), lang);
     }
 
     public static String getByCodeAndFormat(int code, String lang, Object... args) throws SQLException {
-        return getCodeContext().getAndFormat(code, lang, args);
+        return getCodeContext().getAndFormat(String.valueOf(code), lang, args);
     }
 
     public static String getByCodeAndFormat(int code, String lang, Locale locale, Object... args) throws SQLException {
-        return getCodeContext().getAndFormat(code, lang, locale, args);
+        return getCodeContext().getAndFormat(String.valueOf(code), lang, locale, args);
     }
 
     public static String getByName(String name, String lang) throws SQLException {

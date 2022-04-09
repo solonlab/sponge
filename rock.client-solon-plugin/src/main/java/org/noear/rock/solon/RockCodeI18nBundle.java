@@ -3,7 +3,6 @@ package org.noear.rock.solon;
 import org.noear.rock.i18n.CodeContext;
 import org.noear.solon.i18n.I18nBundle;
 
-import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -23,14 +22,7 @@ public class RockCodeI18nBundle implements I18nBundle {
 
     @Override
     public Map<String, String> toMap() {
-        Map<Integer, String> tmp = context.getMap(locale_lang);
-        Map<String, String> tmp2 = new LinkedHashMap<>(tmp.size());
-
-        tmp.forEach((k, v) -> {
-            tmp2.put(String.valueOf(k), v);
-        });
-
-        return tmp2;
+        return context.getMap(locale_lang);
     }
 
     @Override
@@ -40,6 +32,6 @@ public class RockCodeI18nBundle implements I18nBundle {
 
     @Override
     public String get(String key) {
-        return context.get(Integer.parseInt(key), locale_lang);
+        return context.get(key, locale_lang);
     }
 }
