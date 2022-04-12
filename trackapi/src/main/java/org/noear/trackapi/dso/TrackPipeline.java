@@ -25,7 +25,7 @@ public class TrackPipeline extends EventPipeline<DataItem> {
     }
 
     @Override
-    protected void handler(List<DataItem> list) {
+    protected void handle(List<DataItem> list) {
         try {
             DbTrackApi.addUrlLogAll("short_redirect_log_30d", list);
         } catch (Exception ex) {

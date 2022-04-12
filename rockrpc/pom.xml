@@ -106,27 +106,14 @@
             </plugin>
 
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.3.0</version>
-                <configuration>
-                    <finalName>${project.artifactId}</finalName>
-                    <appendAssemblyId>false</appendAssemblyId>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                    <archive>
-                        <manifest>
-                            <mainClass>org.noear.rock.impl.App</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
+                <groupId>org.noear</groupId>
+                <artifactId>solon-maven-plugin</artifactId>
+                <version>1.0.0</version>
                 <executions>
                     <execution>
-                        <id>make-assembly</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>single</goal>
+                            <goal>repackage</goal>
                         </goals>
                     </execution>
                 </executions>
