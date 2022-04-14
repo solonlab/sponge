@@ -27,7 +27,8 @@ public class RockCodeI18nBundleFactory implements I18nBundleFactory {
         }
 
         if (bundleName.equals(codeBundleNameDef)) {
-            return new RockCodeI18nBundle(I18nContextManager.getCodeContext(bundleName), locale);
+            String bundleName2 = bundleName.substring(0, bundleName.length()-6);
+            return new RockCodeI18nBundle(I18nContextManager.getCodeContext(bundleName2), locale);
         }
 
         return new RockI18nBundle(I18nContextManager.getMessageContext(bundleName), locale);
