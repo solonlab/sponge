@@ -28,9 +28,9 @@
     <left>
         <form>
             <input type="text" class="w250" value="${name}" name="name" id="name" placeholder="应用组名称"/>
-            <button type="submit">查询</button>&nbsp;&nbsp;
+            <button type="submit">查询</button>
             <c:if test="${isOperator==1}">
-                <button type="button" onclick="addAgroup()" class="edit">新增</button>
+                <button type="button" onclick="addAgroup()" class="edit mar10-l">新增</button>
             </c:if>
         </form>
     </left>

@@ -83,12 +83,12 @@
 <toolbar>
     <div class="center">
         <form>
-            <input type="text" class="w250" value="${name}" name="name" placeholder="键值"/>&nbsp;&nbsp;
+            <input type="text" class="w250" value="${name}" name="name" placeholder="键值"/>
             <input type="hidden" value="${agroup_id}" name="agroup_id" />
             <input type="hidden" value="${service}" name="service" />
-            <button type="submit">查询</button>&nbsp;&nbsp;
+            <button type="submit">查询</button>
             <c:if test="${agroup_id>0&&isOperator==1}">
-                <button type="button" onclick="add()" class="edit">新增</button>
+                <button type="button" onclick="add()" class="edit mar10-l">新增</button>
             </c:if>
         </form>
     </div>

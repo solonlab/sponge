@@ -80,9 +80,9 @@
     <form>
         <input type="text" class="w250" value="${name}" name="name" id="name" value="${name}" placeholder="设置项名称"/>
         <input type="hidden"  name="app_id"  value="${app_id}"/>
-        <button type="submit">查询</button>&nbsp;&nbsp;
+        <button type="submit">查询</button>
         <c:if test="${app_id>0&&isOperator==1}">
-            <button type="button" onclick="addAgroup()" class="edit">新增</button>
+            <button type="button" onclick="addAgroup()" class="edit mar10-l">新增</button>
         </c:if>
         <c:if test="${app_id>0&&isOperator==1}">
             <div><file>
