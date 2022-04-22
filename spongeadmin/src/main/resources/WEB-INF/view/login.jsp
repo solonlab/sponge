@@ -64,7 +64,7 @@
 <body onkeydown="checkKey()">
 
 <main>
-  <p>${title}</p>
+  <p>${title}<sup>${_version}</sup></p>
   <br />
   <section>
     <form>
