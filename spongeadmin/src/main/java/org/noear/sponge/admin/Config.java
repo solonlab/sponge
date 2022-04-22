@@ -14,6 +14,9 @@ import org.noear.water.*;
 
 @Configuration
 public class Config {
+
+    public static final String sponge_version = "v2.1.3";
+
     public static String track_uri() {
         return cfg("track_uri").value;
     }

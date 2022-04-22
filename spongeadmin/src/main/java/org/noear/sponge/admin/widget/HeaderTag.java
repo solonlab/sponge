@@ -8,7 +8,9 @@ import org.noear.grit.model.domain.ResourceGroup;
 import org.noear.solon.Solon;
 import org.noear.solon.Utils;
 import org.noear.solon.core.handle.Context;
+import org.noear.sponge.admin.Config;
 import org.noear.sponge.admin.dso.Session;
+import org.noear.water.WW;
 import org.noear.water.utils.TextUtils;
 
 import javax.servlet.jsp.JspException;
@@ -41,7 +43,7 @@ public class HeaderTag extends TagSupport {
             StringBuilder buf = new StringBuilder();
             buf.append("<header>");
 
-            buf.append("<label>"); //new
+            buf.append("<label title='").append(Config.sponge_version).append("'>"); //new
             buf.append(Solon.cfg().appTitle());
             buf.append("</label>\n");//new
 
