@@ -36,6 +36,10 @@ public class DbRockI18nApi {
             lang = "";
         }
 
+        if ("default".equals(lang)) {
+            lang = "";
+        }
+
         if (TextUtils.isEmpty(service)) {
             return new ArrayList<>();
         }
@@ -169,6 +173,10 @@ public class DbRockI18nApi {
     //根据agroup_id获取列表。
     public static List<AppExI18nModel> i18nGetListByService(String service, String name, String lang) throws SQLException {
         if (lang == null) {
+            lang = "";
+        }
+
+        if ("default".equals(lang)) {
             lang = "";
         }
 

@@ -96,18 +96,22 @@ public class AppCodeController extends BaseController {
             }
         }
 
-        if (Utils.isEmpty(lang) || "default".equals(lang)) {
+        if (Utils.isEmpty(lang)) {
             lang = ctx.cookie("lang");
         }
 
-        if (Utils.isEmpty(lang) || "default".equals(lang)) {
-            if (langs.size() > 0) {
-                lang = langs.get(0).tag;
+        if (Utils.isNotEmpty(lang)) {
+            String lang1 = lang;
+            long langCount = langs.stream().filter(m -> m.tag.equals(lang1)).count();
+            if (langCount == 0L) {
+                lang = null;
             }
         }
 
-        if ("default".equals(lang)) {
-            lang = "";
+        if (Utils.isEmpty(lang)) {
+            if (langs.size() > 0) {
+                lang = langs.get(0).tag;
+            }
         }
 
         List<AppExCodeModel> list = DbRockI18nApi.codeGetListByService(service, code_num, lang);

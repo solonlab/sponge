@@ -100,19 +100,24 @@ public class AppI18nController extends BaseController {
             }
         }
 
-        if (Utils.isEmpty(lang) || "default".equals(lang)) {
+        if (Utils.isEmpty(lang)) {
             lang = ctx.cookie("lang");
         }
 
-        if (Utils.isEmpty(lang) || "default".equals(lang)) {
+        if (Utils.isNotEmpty(lang)) {
+            String lang1 = lang;
+            long langCount = langs.stream().filter(m -> m.tag.equals(lang1)).count();
+            if (langCount == 0L) {
+                lang = null;
+            }
+        }
+
+        if (Utils.isEmpty(lang)) {
             if (langs.size() > 0) {
                 lang = langs.get(0).tag;
             }
         }
 
-        if ("default".equals(lang)) {
-            lang = "";
-        }
 
         List<AppExI18nModel> list = DbRockI18nApi.i18nGetListByService(service, name, lang);
 
