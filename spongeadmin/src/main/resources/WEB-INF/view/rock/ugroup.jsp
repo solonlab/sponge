@@ -34,7 +34,7 @@
         </left>
         <middle  class="col-4">
             <form>
-                <input type="text" class="w250" value="${name}" name="name" id="name" placeholder="用户组名称"/>
+                <input type="text" class="w200" value="${name}" name="name" id="name" placeholder="用户组名称"/>
                 <button type="submit">查询</button>
             </form>
         </middle>

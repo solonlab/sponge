@@ -83,7 +83,7 @@
 <toolbar>
     <div class="center">
         <form>
-            <input type="text" class="w250" value="${name}" name="name" placeholder="键值"/>
+            <input type="text" class="w200" value="${name}" name="name" placeholder="键值"/>
             <input type="hidden" value="${agroup_id}" name="agroup_id" />
             <input type="hidden" value="${service}" name="service" />
             <button type="submit">查询</button>

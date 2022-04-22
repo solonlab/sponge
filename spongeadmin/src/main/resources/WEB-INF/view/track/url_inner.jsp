@@ -46,7 +46,7 @@
             </c:if>
         </left>
         <middle  class="col-4">
-            <input type="text" class="w250" value="${url_name}" id="url_name" placeholder="名称"/>
+            <input type="text" class="w200" value="${url_name}" id="url_name" placeholder="名称"/>
             <button onclick="query()">查询</button>
         </middle>
         <right  class="col-4">

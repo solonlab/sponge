@@ -87,7 +87,7 @@
         </left>
         <middle  class="col-4">
             <form>
-                <input type="text" class="w250" value="${name}" name="name" id="name" value="${name}" placeholder="设置项名称"/>
+                <input type="text" class="w200" value="${name}" name="name" id="name" value="${name}" placeholder="设置项名称"/>
                 <input type="hidden"  name="agroup_id"  value="${agroup_id}"/>
                 <button type="submit">查询</button>
             </form>
