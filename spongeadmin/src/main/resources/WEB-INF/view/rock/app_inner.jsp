@@ -24,17 +24,23 @@
 <body>
 
 <toolbar>
-    <left>
-        <form>
-            <input type="hidden" name="agroup_id" value="${agroup_id}">
-            <input type="text" class="w250" value="${name}" name="name" id="name" placeholder="应用名称"/>
-            <button type="submit">查询</button>
+    <flex>
+        <left class="col-4">
             <c:if test="${agroup_id>0&&isOperator==1}">
-                <button type="button" onclick="addApp()" class="edit mar10-l">新增</button>
+                <button type="button" onclick="addApp()" class="edit">新增</button>
             </c:if>
-        </form>
-    </left>
-    <right><ct:stateselector items="全部,已过审,审核中"/></right>
+        </left>
+        <middle  class="col-4">
+            <form>
+                <input type="hidden" name="agroup_id" value="${agroup_id}">
+                <input type="text" class="w250" value="${name}" name="name" id="name" placeholder="应用名称"/>
+                <button type="submit">查询</button>
+            </form>
+        </middle>
+        <right  class="col-4">
+            <ct:stateselector items="全部,已过审,审核中"/>
+        </right>
+    </flex>
 </toolbar>
 
 <datagrid>

@@ -87,11 +87,9 @@
             <input type="hidden" value="${agroup_id}" name="agroup_id" />
             <input type="hidden" value="${service}" name="service" />
             <button type="submit">查询</button>
-            <c:if test="${agroup_id>0&&isOperator==1}">
-                <button type="button" onclick="add()" class="edit mar10-l">新增</button>
-            </c:if>
         </form>
     </div>
+
     <div>
         <left>
             <c:if test="${agroup_id>0&&isOperator==1}">
@@ -108,6 +106,7 @@
                         <a class="btn-link mar10" onclick="exp('jsond')">导出为 JsonD</a>
                     </div>
                 </div>
+                <button type="button" onclick="add()" class="edit mar10-l">新增</button>
             </c:if>
         </left>
         <right>

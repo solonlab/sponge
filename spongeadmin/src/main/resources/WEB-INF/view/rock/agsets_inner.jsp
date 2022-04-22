@@ -75,21 +75,25 @@
 </head>
 <body>
 <toolbar>
-    <form>
-        <input type="text" class="w250" value="${name}" name="name" id="name" value="${name}" placeholder="设置项名称"/>
-        <input type="hidden"  name="agroup_id"  value="${agroup_id}"/>
-        <button type="submit">查询</button>
-        <c:if test="${agroup_id>0&&isOperator==1}">
-            <button type="button" onclick="addAgroup()" class="edit mar10-l">新增</button>
-        </c:if>
-        <c:if test="${agroup_id>0&&isOperator==1}">
-            <div><file>
-                <label><input id="imp_file" type="file" accept=".jsond"/><a class="btn minor">导入</a></label>
-            </file>
+    <flex>
+        <left class="col-4">
+            <c:if test="${agroup_id>0&&isOperator==1}">
+                <file>
+                    <label><input id="imp_file" type="file" accept=".jsond"/><a class="btn minor">导入</a></label>
+                </file>
                 <button type='button' class="minor mar10-l" onclick="exp()" >导出</button>
-            </div>
-        </c:if>
-    </form>
+                <button type="button" onclick="addAgroup()" class="edit mar10-l">新增</button>
+            </c:if>
+        </left>
+        <middle  class="col-4">
+            <form>
+                <input type="text" class="w250" value="${name}" name="name" id="name" value="${name}" placeholder="设置项名称"/>
+                <input type="hidden"  name="agroup_id"  value="${agroup_id}"/>
+                <button type="submit">查询</button>
+            </form>
+        </middle>
+        <right  class="col-4"></right>
+    </flex>
 </toolbar>
 
 <datagrid>

@@ -26,18 +26,22 @@
 
 
 <toolbar>
-    <left>
-        <form>
-            <input type="text" class="w250" value="${name}" name="name" id="name" placeholder="用户组名称"/>
-            <button type="submit">查询</button>
+    <flex>
+        <left class="col-4">
             <c:if test="${isOperator==1}">
-                <button type="button" onclick="addUgroup()" class="edit mar10-l">新增</button>
+                <button type="button" onclick="addUgroup()" class="edit">新增</button>
             </c:if>
-        </form>
-    </left>
-    <right>
-        <ct:stateselector items="启用,未启用"></ct:stateselector>
-    </right>
+        </left>
+        <middle  class="col-4">
+            <form>
+                <input type="text" class="w250" value="${name}" name="name" id="name" placeholder="用户组名称"/>
+                <button type="submit">查询</button>
+            </form>
+        </middle>
+        <right  class="col-4">
+            <ct:stateselector items="启用,未启用"></ct:stateselector>
+        </right>
+    </flex>
 </toolbar>
 
 <datagrid>
