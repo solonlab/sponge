@@ -39,14 +39,20 @@
 </head>
 <body>
 <toolbar>
-    <left>
-        <input type="text" value="${url_name}" id="url_name" placeholder="名称"/>
-        <button onclick="query()">查询</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <c:if test="${tag_id>0 && isOperator==1}">
-            <button onclick="toAddUrl()" class="edit">新建跟踪</button>
-        </c:if>
-    </left>
-    <right><ct:stateselector items="启用中,禁用中"/></right>
+    <flex>
+        <left class="col-4">
+            <c:if test="${tag_id>0 && isOperator==1}">
+                <button onclick="toAddUrl()" class="edit">新建跟踪</button>
+            </c:if>
+        </left>
+        <middle  class="col-4">
+            <input type="text" class="w250" value="${url_name}" id="url_name" placeholder="名称"/>
+            <button onclick="query()">查询</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </middle>
+        <right  class="col-4">
+            <ct:stateselector items="启用中,禁用中"/>
+        </right>
+    </flex>
 </toolbar>
 <datagrid>
     <table>
