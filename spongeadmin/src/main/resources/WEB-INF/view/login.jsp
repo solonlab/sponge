@@ -12,7 +12,7 @@
   <script type="text/javascript" src="${js}/jtadmin.js" ></script>
   <style type="text/css">
 
-    section{width: 400px; padding: 50px 60px 50px 50px; left: calc(50vw - 200px); top: calc(50vh - 5vh - 140px); position: absolute; background: #ddd;}
+    section{width: 400px; padding: 50px 60px 50px 50px; left: calc(50vw - 200px); top: calc(50vh - 5vh - 130px); position: absolute; background: #ddd;}
     section table {width: 100%; }
     section table th{text-align: right;}
     section table td{padding-top: 5px; padding-bottom: 5px;}
