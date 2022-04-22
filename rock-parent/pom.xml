@@ -41,7 +41,7 @@
 
         <solon.ver>1.7.3</solon.ver>
         <weed3.ver>3.4.23</weed3.ver>
-        <grit.ver>1.1.3</grit.ver>
+        <grit.ver>1.1.4</grit.ver>
 
         <rock.ver>2.1.3</rock.ver>
     </properties>
@@ -53,9 +53,16 @@
                 <artifactId>rock.client</artifactId>
                 <version>${rock.ver}</version>
             </dependency>
+
             <dependency>
                 <groupId>org.noear</groupId>
                 <artifactId>rock.client-solon-plugin</artifactId>
+                <version>${rock.ver}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.noear</groupId>
+                <artifactId>rock-solon-plugin</artifactId>
                 <version>${rock.ver}</version>
             </dependency>
 
@@ -210,6 +217,7 @@
     <modules>
         <module>../rock.client</module>
         <module>../rock.client-solon-plugin</module>
+        <module>../rock-solon-plugin</module>
     </modules>
 
 </project>
