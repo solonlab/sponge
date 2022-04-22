@@ -84,9 +84,9 @@
         </c:if>
         <c:if test="${agroup_id>0&&isOperator==1}">
             <div><file>
-                <label><input id="imp_file" type="file" accept=".jsond"/><a class="btn minor w80">导入</a></label>
+                <label><input id="imp_file" type="file" accept=".jsond"/><a class="btn minor">导入</a></label>
             </file>
-                <button type='button' class="minor w80 mar10-l" onclick="exp()" >导出</button>
+                <button type='button' class="minor mar10-l" onclick="exp()" >导出</button>
             </div>
         </c:if>
     </form>
