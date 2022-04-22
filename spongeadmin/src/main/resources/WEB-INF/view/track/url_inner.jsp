@@ -47,7 +47,7 @@
         </left>
         <middle  class="col-4">
             <input type="text" class="w250" value="${url_name}" id="url_name" placeholder="名称"/>
-            <button onclick="query()">查询</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button onclick="query()">查询</button>
         </middle>
         <right  class="col-4">
             <ct:stateselector items="启用中,禁用中"/>
