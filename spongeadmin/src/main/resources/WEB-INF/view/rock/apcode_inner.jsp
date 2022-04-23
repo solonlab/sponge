@@ -63,6 +63,35 @@
             window.open(baseUrl + "&fmt=" + fmt + "&ids=" + vm.sel_id, "_blank");
         }
 
+        function del(act,hint){
+            var vm = formToMap(".sel_from");
+
+            if(!vm.sel_id){
+                alert("请选择..");
+                return;
+            }
+
+            if(confirm("确定要"+hint+"吗？") == false) {
+                return;
+            }
+
+            $.ajax({
+                type:"POST",
+                url:"ajax/batch",
+                data:{act: act, ids: vm.sel_id},
+                success:function (data) {
+                    if(data.code==1) {
+                        top.layer.msg('操作成功');
+                        setTimeout(function(){
+                            location.reload();
+                        },800);
+                    }else{
+                        top.layer.msg(data.msg);
+                    }
+                }
+            });
+        }
+
         $(function(){
             $('#sel_all').change(function(){
                 var ckd= $(this).prop('checked');
@@ -88,6 +117,9 @@
             <input type="hidden" value="${service}" name="service" />
             <button type="submit">查询</button>
         </form>
+        <c:if test="${agroup_id>0&&isOperator==1}">
+            <button type="button" onclick="add()" class="edit mar10-l">新增</button>
+        </c:if>
     </div>
     <div>
         <left>
@@ -105,7 +137,7 @@
                         <a class="btn-link mar10" onclick="exp('jsond')">导出为 JsonD</a>
                     </div>
                 </div>
-                <button type="button" onclick="add()" class="edit mar10-l">新增</button>
+                <button type='button' class="minor" onclick="del(9,'删除')" >删除</button>
             </c:if>
         </left>
         <right>

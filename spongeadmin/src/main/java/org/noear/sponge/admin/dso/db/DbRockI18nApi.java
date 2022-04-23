@@ -12,7 +12,9 @@ import org.noear.weed.DbTableQuery;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author noear 2021/2/24 created
@@ -140,6 +142,23 @@ public class DbRockI18nApi {
         }
 
         return isOk;
+    }
+
+    public static void codeDelByIds(int act, String ids) throws SQLException {
+        List<Object> list = Arrays.asList(ids.split(",")).stream().map(s -> Integer.parseInt(s)).collect(Collectors.toList());
+
+        if (act == 9) {
+            db().table("appx_ex_code")
+                    .whereIn("row_id", list)
+                    .delete();
+        } else {
+            db().table("appx_ex_code")
+                    .set("is_disabled", (act == 1 ? 1 : 0))
+                    .set("gmt_modified", System.currentTimeMillis())
+                    .whereIn("row_id", list)
+                    .update();
+        }
+
     }
 
 
@@ -284,6 +303,23 @@ public class DbRockI18nApi {
         }
 
         return isOk;
+    }
+
+    public static void i18nDelByIds(int act, String ids) throws SQLException {
+        List<Object> list = Arrays.asList(ids.split(",")).stream().map(s -> Integer.parseInt(s)).collect(Collectors.toList());
+
+        if (act == 9) {
+            db().table("appx_ex_i18n")
+                    .whereIn("row_id", list)
+                    .delete();
+        } else {
+            db().table("appx_ex_i18n")
+                    .set("is_disabled", (act == 1 ? 1 : 0))
+                    .set("gmt_modified", System.currentTimeMillis())
+                    .whereIn("row_id", list)
+                    .update();
+        }
+
     }
 
     public static void i18nImp(int agroup_id, String service, String name, String lang, String note) throws SQLException {

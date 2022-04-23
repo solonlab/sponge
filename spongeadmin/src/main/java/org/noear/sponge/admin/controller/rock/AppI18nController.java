@@ -216,6 +216,22 @@ public class AppI18nController extends BaseController {
     }
 
     @AuthPermissions(SessionPerms.admin)
+    @Mapping("ajax/batch")
+    public ViewModel batchDo(String tag, Integer act, String ids) throws Exception {
+        if (Session.current().isAdmin() == false) {
+            return viewModel.code(0, "没有权限！");
+        }
+
+        if (act == null) {
+            act = 0;
+        }
+
+        DbRockI18nApi.i18nDelByIds(act, ids);
+
+        return viewModel.code(1, "ok");
+    }
+
+    @AuthPermissions(SessionPerms.admin)
     @Mapping("edit/ajax/del")
     public ViewModel delApi18n(Integer agroup_id, String service, String name,  String nameOld) throws SQLException {
         boolean result = DbRockI18nApi.i18nDel(agroup_id, service, nameOld);
