@@ -3,6 +3,7 @@ version: '3'
 # 部署指南：
 # 1.把配置里的 solon.cloud.water.server 换成真实的 waterapi 服务地址。并启动
 
+
 services:
   spongeadmin:
     image: noearorg/spongeadmin:2.1.3

@@ -2,7 +2,6 @@
 
 ## 请在完整的看完文档后，再开始动手!!!
 
-
 ## 一、开始部署服务
 
 * 添加 water/spongeadmin 服务（镜像：noearorg/spongeadmin:2.1.3）
