@@ -81,7 +81,7 @@
                 <file>
                     <label><input id="imp_file" type="file" accept=".jsond"/><a class="btn minor">导入</a></label>
                 </file>
-                <button type='button' class="minor mar10-l" onclick="exp()" >导出</button>
+                <button type='button' class="minor" onclick="exp()" >导出</button>
                 <button type="button" onclick="addAgroup()" class="edit mar10-l">新增</button>
             </c:if>
         </left>
