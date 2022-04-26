@@ -207,7 +207,9 @@ public class DbRockApi {
                 .set("ver_start", m.ver_start)
                 .set("agroup_id", agroup_id);
 
-        if (tb.whereEq("agroup_id", agroup_id).andEq("app_id", 0).andEq("name", m.name).selectExists() == false) {
+        if (tb.whereEq("agroup_id", agroup_id).andEq("app_id", 0).andEq("name", m.name).selectExists()) {
+            tb.update();
+        }else{
             tb.insert();
         }
     }
@@ -357,7 +359,9 @@ public class DbRockApi {
                 .set("agroup_id", agroup_id)
                 .set("app_id", app_id);
 
-        if (tb.whereEq("app_id", app_id).andEq("name", m.name).selectExists() == false) {
+        if (tb.whereEq("app_id", app_id).andEq("name", m.name).selectExists()) {
+            tb.update();
+        }else{
             tb.insert();
         }
     }

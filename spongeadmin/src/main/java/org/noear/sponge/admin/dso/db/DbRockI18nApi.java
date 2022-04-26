@@ -162,7 +162,7 @@ public class DbRockI18nApi {
     }
 
 
-    public static void codeImp(int agroup_id, String service, Integer code, String lang, String note) throws SQLException {
+    public static void impCode(int agroup_id, String service, Integer code, String lang, String note) throws SQLException {
         note = note.replace("\\\\", "\\");
         note = note.replace("\\n", "\n");
 
@@ -322,7 +322,7 @@ public class DbRockI18nApi {
 
     }
 
-    public static void i18nImp(int agroup_id, String service, String name, String lang, String note) throws SQLException {
+    public static void impI18n(int agroup_id, String service, String name, String lang, String note) throws SQLException {
         note = note.replace("\\\\", "\\");
         note = note.replace("\\n", "\n");
 

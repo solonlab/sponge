@@ -346,7 +346,7 @@ public class AppI18nController extends BaseController {
                 service = m.service;
             }
 
-            DbRockI18nApi.i18nImp(agroup_id, service, m.name, m.lang, m.note);
+            DbRockI18nApi.impI18n(agroup_id, service, m.name, m.lang, m.note);
         }
 
         RockUtil.delCacheForI18ns(service);
@@ -398,7 +398,7 @@ public class AppI18nController extends BaseController {
         for (Object k : i18n.keySet()) {
             if (k instanceof String) {
                 String name = (String) k;
-                DbRockI18nApi.i18nImp(agroup_id, service, name, lang, i18n.getProperty(name));
+                DbRockI18nApi.impI18n(agroup_id, service, name, lang, i18n.getProperty(name));
                 isOk = true;
             }
         }
