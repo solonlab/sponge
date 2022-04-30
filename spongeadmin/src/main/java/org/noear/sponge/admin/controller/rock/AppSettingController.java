@@ -123,9 +123,9 @@ public class AppSettingController extends BaseController {
     //ajax保存编辑
     @AuthPermissions(SessionPerms.admin)
     @Mapping("apsets/edit/ajax/save")
-    public BaseResp saveAppsets(Integer row_id, String name, Integer type, String value, String note, Integer is_client, Integer ver_start, Integer app_id) throws SQLException {
+    public BaseResp saveAppsets(Integer row_id, String name, Integer type, String value, String note, Integer is_client, Integer ver_start, Integer app_id, int is_disabled) throws SQLException {
         BaseResp resp = new BaseResp();
-        boolean result = DbRockApi.editAppsets(row_id, name, type, value, note, is_client, ver_start, app_id);
+        boolean result = DbRockApi.editAppsets(row_id, name, type, value, note, is_client, ver_start, app_id, is_disabled);
         if (result) {
             resp.code = 1;
             resp.msg = "操作成功";

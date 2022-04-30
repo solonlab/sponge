@@ -181,13 +181,14 @@ public class DbRockApi {
     }
 
     //保存应用组配置
-    public static boolean editAgsets(Integer row_id, String name, Integer type, String value, String note,Integer is_client, Integer ver_start, Integer agroup_id) throws SQLException {
+    public static boolean editAgsets(Integer row_id, String name, Integer type, String value, String note,Integer is_client, Integer ver_start, Integer agroup_id, int is_disabled) throws SQLException {
          DbTableQuery tb = db().table("appx_ex_setting")
                  .set("name",name)
                  .set("type",type)
                  .set("value",value)
                  .set("note",note)
                  .set("is_client",is_client)
+                 .set("is_disabled", is_disabled)
                  .set("ver_start",ver_start)
                  .set("agroup_id",agroup_id);
 
@@ -321,35 +322,35 @@ public class DbRockApi {
 
     //根据id获取应用配置
     public static AppExSettingModel getAppsetsById(Integer row_id) throws SQLException {
-            return db().table("appx_ex_setting")
-                    .where("row_id = ?",row_id)
-                    .limit(1)
-                    .select("*")
-                    .getItem(new AppExSettingModel());
+        return db().table("appx_ex_setting")
+                .where("row_id = ?", row_id)
+                .limit(1)
+                .selectItem("*", AppExSettingModel.class);
     }
 
     //保存应用配置
-    public static boolean editAppsets(Integer row_id, String name, Integer type, String value, String note,Integer is_client, Integer ver_start, Integer app_id) throws SQLException {
+    public static boolean editAppsets(Integer row_id, String name, Integer type, String value, String note,Integer is_client, Integer ver_start, Integer app_id, int is_disabled) throws SQLException {
         int agroup_id = getAppById(app_id).agroup_id;
 
         DbTableQuery tb = db().table("appx_ex_setting")
-                .set("name",name)
-                .set("type",type)
-                .set("value",value)
-                .set("note",note)
-                .set("is_client",is_client)
-                .set("ver_start",ver_start)
-                .set("agroup_id",agroup_id)
-                .set("app_id",app_id);
+                .set("name", name)
+                .set("type", type)
+                .set("value", value)
+                .set("note", note)
+                .set("is_client", is_client)
+                .set("is_disabled", is_disabled)
+                .set("ver_start", ver_start)
+                .set("agroup_id", agroup_id)
+                .set("app_id", app_id);
 
         boolean isOk = true;
-        if(row_id>0){
-            isOk = tb.where("row_id = ?",row_id).update()>0;
-        }else{
-            isOk = tb.insert()>0;
+        if (row_id > 0) {
+            isOk = tb.where("row_id = ?", row_id).update() > 0;
+        } else {
+            isOk = tb.insert() > 0;
         }
 
-        if(isOk){
+        if (isOk) {
             RockUtil.delCacheByApp(app_id);
         }
 

@@ -110,9 +110,8 @@ public class AppGroupSettingController extends BaseController {
     //ajax保存编辑
     @AuthPermissions(SessionPerms.admin)
     @Mapping("agsets/edit/ajax/save")
-    public ViewModel saveAgsets(Integer row_id, String name, Integer type, String value, String note, Integer is_client, Integer ver_start, Integer agroup_id) throws SQLException {
-
-        boolean result = DbRockApi.editAgsets(row_id, name, type, value, note, is_client, ver_start, agroup_id);
+    public ViewModel saveAgsets(Integer row_id, String name, Integer type, String value, String note, Integer is_client, Integer ver_start, Integer agroup_id, int is_disabled) throws SQLException {
+        boolean result = DbRockApi.editAgsets(row_id, name, type, value, note, is_client, ver_start, agroup_id, is_disabled);
 
         if (result) {
             return viewModel.code(1, "操作成功");

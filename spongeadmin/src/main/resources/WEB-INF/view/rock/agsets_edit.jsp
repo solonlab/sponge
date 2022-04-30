@@ -23,33 +23,46 @@
         var row_id = ${agsets.row_id}
         var agroup_id = ${agroup_id};
         function saveEdit() {
-            var name = $('#name').val();
-            var type = $('#type').val();
-            var value = $('#value').val();
-            var note = $('#note').val();
-            var is_client = $('#is_client').prop("checked")?1:0;
-            var ver_start =$('#ver_start').val();
-            if (!name || name==null) {
+            let name = $('#name').val();
+            let type = $('#type').val();
+            let value = $('#value').val();
+            let note = $('#note').val();
+            let is_client = $('#is_client').prop("checked") ? 1 : 0;
+            let is_disabled = $('#is_disabled').prop('checked') ? 1 : 0;
+            let ver_start = $('#ver_start').val();
+
+            if (!name || name == null) {
                 top.layer.msg("配置项名称不能为空！");
                 return;
             }
-            if(row_id==null){
-                row_id=0
+            if (row_id == null) {
+                row_id = 0
             }
-            if(agroup_id==null){
-                agroup_id=0
+            if (agroup_id == null) {
+                agroup_id = 0
             }
+
             $.ajax({
-                type:"POST",
-                url:"/rock/agsets/edit/ajax/save",
-                data:{"row_id":row_id,"name":name,"type":type,"value":value, "note":note,"is_client":is_client,"ver_start":ver_start,"agroup_id":agroup_id},
-                success:function (data) {
-                    if(data.code==1) {
+                type: "POST",
+                url: "/rock/agsets/edit/ajax/save",
+                data: {
+                    "row_id": row_id,
+                    "name": name,
+                    "type": type,
+                    "value": value,
+                    "note": note,
+                    "is_client": is_client,
+                    "is_disabled": is_disabled,
+                    "ver_start": ver_start,
+                    "agroup_id": agroup_id
+                },
+                success: function (data) {
+                    if (data.code == 1) {
                         top.layer.msg(data.msg);
-                        setTimeout(function(){
-                            parent.location.href="/rock/agsets?agroup_id="+agroup_id;
-                        },1000);
-                    }else{
+                        setTimeout(function () {
+                            parent.location.href = "/rock/agsets?agroup_id=" + agroup_id;
+                        }, 1000);
+                    } else {
                         top.layer.msg(data.msg);
                     }
                 }
@@ -102,6 +115,14 @@
                     <switcher>
                         <label><input id="is_client" value="1" type="checkbox" ${agsets.is_client == 1?"checked":""}><a></a></label>
                     </switcher>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <checkbox>
+                        <label class="mar10-r"><input type="checkbox" id="is_disabled" ${agsets.disabled()?"checked":""} /><a>禁止使用</a></label>
+                    </checkbox>
                 </td>
             </tr>
             <tr>
