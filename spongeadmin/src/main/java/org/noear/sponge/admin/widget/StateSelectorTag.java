@@ -19,7 +19,7 @@ public class StateSelectorTag extends TagSupport {
             sb.append("<script>").append("function " + clientID + "_onStateSelect(val,e) { ");
 
             if (forPage && org.noear.water.utils.TextUtils.isEmpty(onSelect))
-                sb.append("    UrlQueryBy('" + stateKey + "',val,'page');");
+                sb.append("    if(!window.UrlQueryBy){window.UrlQueryBy=window.urlQueryBy;} UrlQueryBy('" + stateKey + "',val,'page');");
             else {
                 sb.append("    $('#" + clinetStateKey + "').val(val);")
                         .append("    var m = $('#" + clientID + "');")
