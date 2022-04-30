@@ -95,6 +95,7 @@ public class AppSettingController extends BaseController {
 
         List<AppExSettingModel> apsetsList = DbRockApi.getAppSets(app_id, name, _state == 1);
 
+        viewModel.put("_state", _state);
         viewModel.put("apsetsList", apsetsList);
         viewModel.put("app_id", app_id);
         viewModel.put("name", name);
