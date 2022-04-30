@@ -88,15 +88,17 @@ public class AppSettingController extends BaseController {
     }
 
     @Mapping("apsets/inner")
-    public ModelAndView apsets_inner(Integer app_id, String name) throws SQLException {
+    public ModelAndView apsets_inner(Integer app_id, String name,  int _state) throws SQLException {
         if (app_id == null) {
             app_id = 0;
         }
 
-        List<AppExSettingModel> apsetsList = DbRockApi.getAppSets(app_id, name);
+        List<AppExSettingModel> apsetsList = DbRockApi.getAppSets(app_id, name, _state == 1);
+
         viewModel.put("apsetsList", apsetsList);
         viewModel.put("app_id", app_id);
         viewModel.put("name", name);
+
         return view("rock/apsets_inner");
     }
 

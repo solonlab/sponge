@@ -82,9 +82,11 @@ public class AppGroupSettingController extends BaseController {
         }
 
         List<AppExSettingModel> agsetsList = DbRockApi.getAppGroupSetsById(agroup_id, name, _state == 1);
+
         viewModel.put("name", name);
         viewModel.put("agroup_id", agroup_id);
         viewModel.put("agsetsList", agsetsList);
+
         return view("rock/agsets_inner");
     }
 

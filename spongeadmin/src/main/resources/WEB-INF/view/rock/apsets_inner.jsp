@@ -94,7 +94,9 @@
                 <button type="submit">查询</button>
             </form>
         </middle>
-        <right  class="col-4"></right>
+        <right  class="col-4">
+            <ct:stateselector items="启用,未启用"></ct:stateselector>
+        </right>
     </flex>
 </toolbar>
 

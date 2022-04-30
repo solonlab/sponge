@@ -291,21 +291,21 @@ public class DbRockApi {
     }
 
     //获取应用设置列表
-    public static List<AppExSettingModel> getAppSets(Integer app_id, String name) throws SQLException {
-        if(app_id<1){
+    public static List<AppExSettingModel> getAppSets(Integer app_id, String name, boolean is_disabled) throws SQLException {
+        if (app_id < 1) {
             return new ArrayList<>();
         }
 
         return db().table("appx_ex_setting")
-                .where("app_id = ?",app_id)
-                .expre((tb)->{
-                    if (TextUtils.isEmpty(name)==false){
-                        tb.and("name like ?",name +"%");
+                .whereEq("app_id", app_id)
+                .andEq("is_disabled", is_disabled ? 1 : 0)
+                .build((tb) -> {
+                    if (TextUtils.isEmpty(name) == false) {
+                        tb.and("name like ?", name + "%");
                     }
                 })
                 .orderBy("name ASC")
-                .select("*")
-        .getList(new AppExSettingModel());
+                .selectList("*", AppExSettingModel.class);
     }
 
     public static List<AppExSettingModel> getAppSetsList(Integer app_id, List<Object> ids) throws SQLException {
