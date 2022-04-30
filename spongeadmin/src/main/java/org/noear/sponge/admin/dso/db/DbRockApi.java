@@ -1,7 +1,6 @@
 package org.noear.sponge.admin.dso.db;
 
 import org.noear.sponge.admin.dso.CacheUtil;
-import org.noear.sponge.admin.model.TagCountsModel;
 import org.noear.sponge.admin.model.rock.*;
 import org.noear.rock.RockUtil;
 import org.noear.water.utils.TextUtils;
@@ -66,17 +65,13 @@ public class DbRockApi {
     }
 
     public static List<AppGroupModel> getAppGroup(String name) throws SQLException{
-        return getAppGroup(name,0);
+        return getAppGroup(name,false);
     }
 
     //获取 app_agroup 列表
-    public static List<AppGroupModel> getAppGroup(String name, Integer _state) throws SQLException {
-        if (_state == null) {
-            _state = 0;
-        }
-
+    public static List<AppGroupModel> getAppGroup(String name, boolean is_disabled) throws SQLException {
         return db().table("appx_agroup")
-                .whereEq("is_disabled", (_state == 0 ? 0 : 1))
+                .whereEq("is_disabled", is_disabled ? 1 : 0)
                 .build((tb) -> {
                     if (TextUtils.isEmpty(name) == false) {
                         tb.and("name like ?", name + "%");
@@ -126,21 +121,21 @@ public class DbRockApi {
     }
 
     //获取应用组设置列表
-    public static List<AppExSettingModel> getAppGroupSetsById(Integer agroup_id,String name) throws SQLException {
-        if(agroup_id<1){
+    public static List<AppExSettingModel> getAppGroupSetsById(Integer agroup_id,String name, boolean is_disabled) throws SQLException {
+        if (agroup_id < 1) {
             return new ArrayList<>();
         }
 
         return db().table("appx_ex_setting")
-                .where("agroup_id = ? AND app_id=0",agroup_id)
-                .expre((tb)->{
-                    if (TextUtils.isEmpty(name)==false){
-                        tb.and("name like ?",name + "%");
+                .where("agroup_id = ? AND app_id=0", agroup_id)
+                .andEq("is_disabled", is_disabled ? 1 : 0)
+                .build((tb) -> {
+                    if (TextUtils.isEmpty(name) == false) {
+                        tb.and("name like ?", name + "%");
                     }
                 })
                 .orderBy("name ASC")
-                .select("*")
-        .getList(new AppExSettingModel());
+                .selectList("*", AppExSettingModel.class);
     }
 
     public static List<AppExSettingModel> getAppGroupSetsList(Integer agroup_id, List<Object> ids) throws SQLException {
@@ -152,6 +147,19 @@ public class DbRockApi {
                 .where("agroup_id = ? AND app_id=0", agroup_id).andIn("row_id", ids)
                 .orderBy("name ASC")
                 .selectList("*", AppExSettingModel.class);
+    }
+
+    public static void delAppGroupSets(int act,  List<Object> ids) throws SQLException {
+        if (act == 9) {
+            db().table("appx_ex_setting")
+                    .whereIn("row_id", ids)
+                    .delete();
+        } else {
+            db().table("appx_ex_setting")
+                    .set("is_disabled", (act == 1 ? 0 : 1))
+                    .whereIn("row_id", ids)
+                    .update();
+        }
     }
 
     //获取应用组设置分组 计数。

@@ -18,8 +18,8 @@ import java.util.List;
 @Mapping("/rock/")
 public class AppGroupController extends BaseController {
     @Mapping("agroup")
-    public ModelAndView agroup(String name, Integer _state) throws SQLException {
-        List<AppGroupModel> agroupList = DbRockApi.getAppGroup(name, _state);
+    public ModelAndView agroup(String name, int _state) throws SQLException {
+        List<AppGroupModel> agroupList = DbRockApi.getAppGroup(name, _state == 1);
         viewModel.put("agroupList",agroupList);
         return view("rock/agroup");
     }

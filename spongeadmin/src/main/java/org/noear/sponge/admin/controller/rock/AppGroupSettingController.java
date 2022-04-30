@@ -74,14 +74,14 @@ public class AppGroupSettingController extends BaseController {
 
     //agsets的iframe页面。
     @Mapping("agsets/inner")
-    public ModelAndView agesets_inner(Integer agroup_id, String name) throws SQLException {
+    public ModelAndView agesets_inner(Integer agroup_id, String name, int _state) throws SQLException {
         if (agroup_id == null) {
             agroup_id = 0;
         } else {
             AgroupCookieUtil.cookieSet(agroup_id);
         }
 
-        List<AppExSettingModel> agsetsList = DbRockApi.getAppGroupSetsById(agroup_id, name);
+        List<AppExSettingModel> agsetsList = DbRockApi.getAppGroupSetsById(agroup_id, name, _state == 1);
         viewModel.put("name", name);
         viewModel.put("agroup_id", agroup_id);
         viewModel.put("agsetsList", agsetsList);
@@ -156,5 +156,15 @@ public class AppGroupSettingController extends BaseController {
 
         ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
         ctx.output(jsonD);
+    }
+
+    @Mapping("agsets/ajax/batch")
+    public void ajaxBatch(Context ctx, int act, String ids) throws Exception {
+        List<Object> ids2 = Arrays.asList(ids.split(","))
+                .stream()
+                .map(s -> Integer.parseInt(s))
+                .collect(Collectors.toList());
+
+        DbRockApi.delAppGroupSets(act, ids2);
     }
 }

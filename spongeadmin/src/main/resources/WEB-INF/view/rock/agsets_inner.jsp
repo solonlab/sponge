@@ -61,6 +61,35 @@
             window.open("./ajax/export?agroup_id=${agroup_id}&ids=" + vm.sel_id, "_blank");
         }
 
+        function del(act,hint){
+            var vm = formToMap(".sel_from");
+
+            if(!vm.sel_id){
+                alert("请选择..");
+                return;
+            }
+
+            if(confirm("确定要"+hint+"吗？") == false) {
+                return;
+            }
+
+            $.ajax({
+                type:"POST",
+                url:"ajax/batch",
+                data:{act: act, ids: vm.sel_id},
+                success:function (data) {
+                    if(data.code==1) {
+                        top.layer.msg('操作成功');
+                        setTimeout(function(){
+                            location.reload();
+                        },800);
+                    }else{
+                        top.layer.msg(data.msg);
+                    }
+                }
+            });
+        }
+
         $(function(){
             $('#sel_all').change(function(){
                 var ckd= $(this).prop('checked');
@@ -82,6 +111,12 @@
                     <label><input id="imp_file" type="file" accept=".jsond"/><a class="btn minor">导入</a></label>
                 </file>
                 <button type='button' class="minor" onclick="exp()" >导出</button>
+                <c:if test="${_state == 0}">
+                <button type='button' class="minor" onclick="del(0,'禁用')" >禁用</button>
+                </c:if>
+                <c:if test="${_state > 0}">
+                <button type='button' class="minor" onclick="del(1,'启用')" >启用</button>
+                </c:if>
                 <button type="button" onclick="addAgroup()" class="edit mar10-l">新增</button>
             </c:if>
         </left>
@@ -92,7 +127,9 @@
                 <button type="submit">查询</button>
             </form>
         </middle>
-        <right  class="col-4"></right>
+        <right  class="col-4">
+            <ct:stateselector items="启用,未启用"></ct:stateselector>
+        </right>
     </flex>
 </toolbar>
 
