@@ -39,7 +39,7 @@ public class TagController extends BaseController {
         out_agroup_id = GroupUtil.groupCookie(out_agroup_id,agroup_id);
 
         List<AppGroupModel> agroups = new ArrayList<>();
-        List<AppGroupModel> tmp_agroups = DbRockApi.getAppGroup(null, 0);
+        List<AppGroupModel> tmp_agroups = DbRockApi.getAppGroup(null, false);
         for (AppGroupModel ag : tmp_agroups) {
             //检测是否有这个应用组的权限
             if (checker.find(ag.tag)) {
