@@ -8,8 +8,7 @@ import org.noear.weed.*;
 /// 
 /// </summary>
 @Getter
-public class AppExSettingModel implements IBinder
-{
+public class AppExSettingModel implements IBinder {
     public int row_id;
     public int agroup_id;
     public int app_id;
@@ -23,10 +22,9 @@ public class AppExSettingModel implements IBinder
 
     public long counts;
 
-	public void bind(GetHandlerEx s)
-	{
-		//1.source:数据源
-		//
+    public void bind(GetHandlerEx s) {
+        //1.source:数据源
+        //
         row_id = s.get("row_id").value(0);
         agroup_id = s.get("agroup_id").value(0);
         app_id = s.get("app_id").value(0);
@@ -38,10 +36,13 @@ public class AppExSettingModel implements IBinder
         ver_start = s.get("ver_start").value(0);
 
         counts = s.get("counts").value(0L);
-	}
-	
-	public IBinder clone()
-	{
-		return new AppExSettingModel();
-	}
+    }
+
+    public IBinder clone() {
+        return new AppExSettingModel();
+    }
+
+    public boolean disabled() {
+        return is_disabled == 1;
+    }
 }
