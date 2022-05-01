@@ -152,9 +152,9 @@ public class DbRockApi {
 
     public static void delAppGroupSets(int act,  List<Object> ids) throws SQLException {
         if (act == 9) {
-            db().table("appx_ex_setting")
-                    .whereIn("row_id", ids)
-                    .delete();
+//            db().table("appx_ex_setting")
+//                    .whereIn("row_id", ids)
+//                    .delete();
         } else {
             db().table("appx_ex_setting")
                     .set("is_disabled", (act == 1 ? 0 : 1))
@@ -321,9 +321,9 @@ public class DbRockApi {
 
     public static void delAppSets(int act,List<Object> ids) throws SQLException {
         if (act == 9) {
-            db().table("appx_ex_setting")
-                    .whereIn("row_id", ids)
-                    .delete();
+//            db().table("appx_ex_setting")
+//                    .whereIn("row_id", ids)
+//                    .delete();
         } else {
             db().table("appx_ex_setting")
                     .set("is_disabled", (act == 1 ? 0 : 1))
