@@ -18,8 +18,10 @@ import java.util.List;
 public class UserGroupController extends BaseController {
     //用户组界面
     @Mapping("ugroup")
-    public ModelAndView ugroup(String name, Integer _state) throws SQLException {
+    public ModelAndView ugroup(String name, int _state) throws SQLException {
         List<UserGroupModel> ugroupList = DbRockApi.getUserGroup(name, _state);
+
+        viewModel.put("_state", _state);
         viewModel.put("ugroupList", ugroupList);
         viewModel.put("name", name);
         return view("rock/ugroup");
