@@ -29,46 +29,47 @@
             var type = $('#type').val();
             var platform = $('#platform').val();
             var url = $('#url').val();
-            var is_disabled = $('#is_disabled').prop("checked")?1:0;
+            var is_disabled = $('#is_disabled').prop("checked") ? 1 : 0;
 
-            if (!ver || ver==null) {
+            if (!ver || ver == null) {
                 top.layer.msg("版本号不能为空！");
                 return;
-            };
-            if(row_id==null){
-                row_id=0
-            };
+            }
+
+            if (row_id == null) {
+                row_id = 0
+            }
 
             var reg = "^[0-9]*$";
             var re = new RegExp(reg);
-            if (re.test(app_id)&&re.test(ver)) {
-            }
-            else{
+            if (re.test(app_id) && re.test(ver)) {
+            } else {
                 top.layer.msg('应用ID和版本号为纯数字！');
                 return;
             }
 
             $.ajax({
-                type:"POST",
-                url:"/rock/apver/edit/ajax/save",
-                data:{"app_id":app_id,
-                    "row_id":row_id,
-                    "ver":ver,
-                    "content":content,"type":type,
-                    "alert_ver":$('#alert_ver').val(),
-                    "force_ver":$('#force_ver').val(),
-                    "platform":platform,
-                    "url":url,
-                    "is_disabled":is_disabled,
-                    "agroup_id":agroup_id
+                type: "POST",
+                url: "/rock/apver/edit/ajax/save",
+                data: {
+                    "app_id": app_id,
+                    "row_id": row_id,
+                    "ver": ver,
+                    "content": content, "type": type,
+                    "alert_ver": $('#alert_ver').val(),
+                    "force_ver": $('#force_ver').val(),
+                    "platform": platform,
+                    "url": url,
+                    "is_disabled": is_disabled,
+                    "agroup_id": agroup_id
                 },
-                success:function (data) {
-                    if(data.code==1) {
+                success: function (data) {
+                    if (data.code == 1) {
                         top.layer.msg(data.msg);
-                        setTimeout(function(){
-                            parent.location.href="/rock/apver?agroup_id="+agroup_id;
-                        },1000);
-                    }else{
+                        setTimeout(function () {
+                            parent.location.href = "/rock/apver?agroup_id=" + agroup_id + "&_state=" + is_disabled;
+                        }, 1000);
+                    } else {
                         top.layer.msg(data.msg);
                     }
                 }
