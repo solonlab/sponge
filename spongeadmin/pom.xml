@@ -64,19 +64,19 @@
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon.extend.sessionstate.jwt</artifactId>
+            <artifactId>solon.sessionstate.jwt</artifactId>
             <version>${solon.ver}</version>
         </dependency>
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon.boot.jetty</artifactId>
+            <artifactId>solon.boot.undertow</artifactId>
             <version>${solon.ver}</version>
         </dependency>
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon.boot.jetty.add.jsp</artifactId>
+            <artifactId>solon.boot.undertow.add.jsp</artifactId>
             <version>${solon.ver}</version>
         </dependency>
 
@@ -112,9 +112,8 @@
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <groupId>org.noear</groupId>
+            <artifactId>solon-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
