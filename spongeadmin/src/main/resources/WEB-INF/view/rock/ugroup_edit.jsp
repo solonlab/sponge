@@ -46,7 +46,7 @@
                     if(data.code==1) {
                         top.layer.msg(data.msg);
                         setTimeout(function(){
-                            location.href="/rock/ugroup";
+                            location.href="/rock/ugroup?_state=" + is_disabled;
                         },1000);
                     }else{
                         top.layer.msg(data.msg);

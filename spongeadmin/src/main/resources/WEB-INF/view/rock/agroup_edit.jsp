@@ -56,7 +56,7 @@
                     if(data.code==1) {
                         top.layer.msg(data.msg);
                         setTimeout(function(){
-                            location.href="/rock/agroup";
+                            location.href="/rock/agroup?_state=" + is_disabled;
                         },1000);
                     }else{
                         top.layer.msg(data.msg);
