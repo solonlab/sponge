@@ -47,10 +47,10 @@
     <table>
         <thead>
         <tr>
-            <td width="100px">应用组ID</td>
-            <td width="100px">技术代号</td>
+            <td width="120px">应用组ID</td>
+            <td width="120px">技术代号</td>
             <td>应用组名称</td>
-            <td width="100px">默认用户组ID</td>
+            <td width="120px">默认用户组ID</td>
 
             <c:if test="${isOperator==1}">
                 <td width="50px">操作</td>

@@ -48,7 +48,7 @@
     <table>
         <thead>
         <tr>
-            <td width="100">用户组ID</td>
+            <td width="120">用户组ID</td>
             <td>用户组名称</td>
             <c:if test="${isOperator==1}">
                 <td width="50px">操作</td>
