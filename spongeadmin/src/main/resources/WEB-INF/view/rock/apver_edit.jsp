@@ -132,11 +132,11 @@
                 <td><input type="text" id="url" value="${apver.url}" class="longtxt" placeholder="请输入更新地址"></td>
             </tr>
             <tr>
-                <th>是否禁用</th>
+                <th></th>
                 <td>
-                    <switcher>
-                        <label><input id="is_disabled" value="1" type="checkbox" ${apver.is_disabled == 1?"checked":""}><a></a></label>
-                    </switcher>
+                    <checkbox>
+                        <label><input id="is_disabled" value="1" type="checkbox" ${apver.is_disabled == 1?"checked":""}><a>是否禁用</a></label>
+                    </checkbox>
                 </td>
             </tr>
             <tr>

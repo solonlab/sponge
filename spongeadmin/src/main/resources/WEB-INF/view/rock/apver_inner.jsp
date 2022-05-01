@@ -43,7 +43,6 @@
             <td width="70px">更新方式</td>
             <td width="60px">平台</td>
             <td width="90px">更新时间</td>
-            <td width="70px">是否启用</td>
             <c:if test="${isOperator==1}">
                 <td width="50px">操作</td>
             </c:if>
@@ -62,12 +61,6 @@
                 <c:if test="${apver.platform==3}"><td>Web</td></c:if>
                 <c:if test="${apver.platform==0||apver.platform==null}"><td>未知</td></c:if>
                 <td><fmt:formatDate value="${apver.log_fulltime}" pattern="yyyy-MM-dd HH:mm:dd"/></td>
-                <c:if test="${apver.is_disabled==1}">
-                    <td>禁用</td>
-                </c:if>
-                <c:if test="${apver.is_disabled==0}">
-                    <td>启用</td>
-                </c:if>
                 <c:if test="${isOperator==1}">
                     <td><a href="/rock/apver/edit?row_id=${apver.row_id}&agroup_id=${agroup_id}" style="color: blue;">编辑</a></td>
                 </c:if>
