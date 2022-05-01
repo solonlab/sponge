@@ -60,7 +60,7 @@
         </tree>
     </middle>
     <right class="frm">
-        <iframe src="/rock/apsets/inner?app_id=${app_id}" frameborder="0" id="table"></iframe>
+        <iframe src="/rock/apsets/inner?app_id=${app_id}&_state=${_state}" frameborder="0" id="table"></iframe>
     </right>
 </main>
 </body>

@@ -60,7 +60,7 @@
                     if (data.code == 1) {
                         top.layer.msg(data.msg);
                         setTimeout(function () {
-                            location.href = "/rock/apsets/inner?app_id=" + app_id;
+                            location.href = "/rock/apsets/inner?app_id=" + app_id + "&_state=" + is_disabled;
                         }, 1000);
                     } else {
                         top.layer.msg(data.msg);

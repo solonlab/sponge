@@ -43,7 +43,7 @@
         </tree>
     </middle>
     <right class="frm">
-        <iframe src="/rock/agsets/inner?agroup_id=${agroup_id}" frameborder="0" id="table"></iframe>
+        <iframe src="/rock/agsets/inner?agroup_id=${agroup_id}&_state=${_state}" frameborder="0" id="table"></iframe>
     </right>
 </main>
 </body>

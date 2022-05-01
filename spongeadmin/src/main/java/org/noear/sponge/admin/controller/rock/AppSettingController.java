@@ -32,7 +32,7 @@ public class AppSettingController extends BaseController {
 
 
     @Mapping("apsets")
-    public ModelAndView apsets(Context ctx, Integer app_id, Integer agroup_id) throws SQLException {
+    public ModelAndView apsets(Context ctx, Integer app_id, Integer agroup_id, int _state) throws SQLException {
 
         //by noear 20180516::添加应用组的权限控制
         TagChecker checker = new TagChecker();
@@ -79,6 +79,7 @@ public class AppSettingController extends BaseController {
         }
 
 
+        viewModel.put("_state", _state);
         viewModel.put("appList", apps);
         viewModel.put("app_id", out_app_id);
 

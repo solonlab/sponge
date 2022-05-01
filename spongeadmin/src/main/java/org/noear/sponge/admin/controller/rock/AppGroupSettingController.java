@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 @Mapping("/rock/")
 public class AppGroupSettingController extends BaseController {
     @Mapping("agsets")
-    public ModelAndView agesets(Integer agroup_id) throws SQLException {
+    public ModelAndView agesets(Integer agroup_id, int _state) throws SQLException {
 
         //by noear 20180516::添加应用组的权限控制
         TagChecker checker = new TagChecker();
@@ -66,6 +66,7 @@ public class AppGroupSettingController extends BaseController {
             }
         }
 
+        viewModel.put("_state", _state);
         viewModel.put("apGmap", apGmap);
         viewModel.put("agroup_id", out_agroup_id);
 
