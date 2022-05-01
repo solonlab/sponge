@@ -483,19 +483,16 @@ public class DbRockApi {
     public static List<AppExVersionModel> getApverCounts() throws SQLException {
         return db().table("appx_ex_version")
                 .groupBy("agroup_id")
-                .select("agroup_id,count(*) counts")
-                .getList(new AppExVersionModel());
+                .selectList("agroup_id,count(*) counts", AppExVersionModel.class);
     }
+
     //根据agoup_id获取发布版本列表。
-    public static List<AppExVersionModel> getApvers(int agroup_id,Integer is_disabled) throws SQLException {
+    public static List<AppExVersionModel> getApvers(int agroup_id, boolean is_disabled) throws SQLException {
         return db().table("appx_ex_version")
-                .whereTrue()
+                .whereEq("is_disabled", is_disabled ? 1 : 0)
                 .build((tb) -> {
                     if (agroup_id > 0) {
-                        tb.and("agroup_id = ?", agroup_id);
-                    }
-                    if (is_disabled != null) {
-                        tb.and("is_disabled = ?", is_disabled);
+                        tb.andEq("agroup_id", agroup_id);
                     }
                 })
                 .orderBy("app_id ASC,ver DESC")

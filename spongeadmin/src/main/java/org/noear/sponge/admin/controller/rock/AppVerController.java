@@ -26,7 +26,7 @@ public class AppVerController extends BaseController {
 
     //应用版本发布页面跳转
     @Mapping("apver")
-    public ModelAndView apver(Context ctx, Integer agroup_id) throws SQLException {
+    public ModelAndView apver(Context ctx, Integer agroup_id, int _state) throws SQLException {
         //by noear 20180516::添加应用组的权限控制
         TagChecker checker = new TagChecker();
 
@@ -57,6 +57,8 @@ public class AppVerController extends BaseController {
                 apGmap.put(aps.agroup_id, apG);
             }
         }
+
+        viewModel.put("_state", _state);
         viewModel.put("apGmap", apGmap);
         viewModel.put("agroup_id", out_agroup_id);
 
@@ -66,19 +68,12 @@ public class AppVerController extends BaseController {
 
     @Mapping("apver/inner")
     public ModelAndView apver_inner(int agroup_id, int _state) throws SQLException {
-        Integer is_disabled = null;
+        List<AppExVersionModel> apverList = DbRockApi.getApvers(agroup_id, _state == 1);
 
         viewModel.put("_state", _state);
-
-        if (_state == 1) {
-            is_disabled = 1; //禁用
-        } else {
-            is_disabled = 0; //默认显示启用
-        }
-
-        List<AppExVersionModel> apverList = DbRockApi.getApvers(agroup_id, is_disabled);
         viewModel.put("apverList", apverList);
         viewModel.put("agroup_id", agroup_id);
+
         return view("rock/apver_inner");
     }
 
@@ -87,6 +82,7 @@ public class AppVerController extends BaseController {
     public ModelAndView apver_add(Integer agroup_id) {
         viewModel.put("agroup_id", agroup_id);
         viewModel.put("apver", new AppExVersionModel());
+
         return view("rock/apver_edit");
     }
 
