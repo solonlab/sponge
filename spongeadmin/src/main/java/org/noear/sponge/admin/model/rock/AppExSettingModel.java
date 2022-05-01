@@ -33,6 +33,8 @@ public class AppExSettingModel implements IBinder {
         type = s.get("type").value(0);
         value = s.get("value").value(null);
         note = s.get("note").value(null);
+        is_disabled = s.get("is_disabled").value(0);
+
         ver_start = s.get("ver_start").value(0);
 
         counts = s.get("counts").value(0L);

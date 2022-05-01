@@ -167,17 +167,15 @@ public class DbRockApi {
         return db().table("appx_ex_setting")
                 .where("app_id=0")
                 .groupBy("agroup_id")
-                .select("agroup_id,count(*) counts")
-                .getList(new AppExSettingModel());
+                .selectList("agroup_id,count(*) counts", AppExSettingModel.class);
     }
 
     //编辑 根据id获取用户组设置
     public static AppExSettingModel getAgsetsById(Integer row_id) throws SQLException {
         return db().table("appx_ex_setting")
-                .where("row_id = ?",row_id)
+                .where("row_id = ?", row_id)
                 .limit(1)
-                .select("*")
-                .getItem(new AppExSettingModel());
+                .selectItem("*", AppExSettingModel.class);
     }
 
     //保存应用组配置
