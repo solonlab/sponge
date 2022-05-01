@@ -89,7 +89,7 @@ public class AppSettingController extends BaseController {
     }
 
     @Mapping("apsets/inner")
-    public ModelAndView apsets_inner(Integer app_id, String name,  int _state) throws SQLException {
+    public ModelAndView apsets_inner(Integer app_id, String name, int _state) throws SQLException {
         if (app_id == null) {
             app_id = 0;
         }
@@ -138,6 +138,7 @@ public class AppSettingController extends BaseController {
         return resp;
     }
 
+    @AuthPermissions(SessionPerms.operator)
     @Mapping("apsets/ajax/import")
     public ViewModel ajaxImport(int app_id, UploadedFile file) throws Exception {
         if (Session.current().isAdmin() == false) {
@@ -177,5 +178,22 @@ public class AppSettingController extends BaseController {
 
         ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
         ctx.output(jsonD);
+    }
+
+    @AuthPermissions(SessionPerms.operator)
+    @Mapping("apsets/ajax/batch")
+    public ViewModel ajaxBatch(int act, String ids) throws Exception {
+        try {
+            List<Object> ids2 = Arrays.asList(ids.split(","))
+                    .stream()
+                    .map(s -> Integer.parseInt(s))
+                    .collect(Collectors.toList());
+
+            DbRockApi.delAppSets(act, ids2);
+
+            return viewModel.code(1, "ok");
+        } catch (Throwable e) {
+            return viewModel.code(0, e.getLocalizedMessage());
+        }
     }
 }

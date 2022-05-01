@@ -319,6 +319,19 @@ public class DbRockApi {
                 .selectList("*", AppExSettingModel.class);
     }
 
+    public static void delAppSets(int act,List<Object> ids) throws SQLException {
+        if (act == 9) {
+            db().table("appx_ex_setting")
+                    .whereIn("row_id", ids)
+                    .delete();
+        } else {
+            db().table("appx_ex_setting")
+                    .set("is_disabled", (act == 1 ? 0 : 1))
+                    .whereIn("row_id", ids)
+                    .update();
+        }
+    }
+
     //根据id获取应用配置
     public static AppExSettingModel getAppsetsById(Integer row_id) throws SQLException {
         return db().table("appx_ex_setting")

@@ -123,6 +123,8 @@ public class AppGroupSettingController extends BaseController {
         }
     }
 
+
+    @AuthPermissions(SessionPerms.operator)
     @Mapping("agsets/ajax/import")
     public ViewModel ajaxImport(int agroup_id, UploadedFile file) throws Exception {
         if (Session.current().isAdmin() == false) {
@@ -162,13 +164,21 @@ public class AppGroupSettingController extends BaseController {
         ctx.output(jsonD);
     }
 
-    @Mapping("agsets/ajax/batch")
-    public void ajaxBatch(Context ctx, int act, String ids) throws Exception {
-        List<Object> ids2 = Arrays.asList(ids.split(","))
-                .stream()
-                .map(s -> Integer.parseInt(s))
-                .collect(Collectors.toList());
 
-        DbRockApi.delAppGroupSets(act, ids2);
+    @AuthPermissions(SessionPerms.operator)
+    @Mapping("agsets/ajax/batch")
+    public ViewModel ajaxBatch(int act, String ids) throws Exception {
+        try {
+            List<Object> ids2 = Arrays.asList(ids.split(","))
+                    .stream()
+                    .map(s -> Integer.parseInt(s))
+                    .collect(Collectors.toList());
+
+            DbRockApi.delAppGroupSets(act, ids2);
+
+            return viewModel.code(1, "ok");
+        } catch (Throwable e) {
+            return viewModel.code(0, e.getLocalizedMessage());
+        }
     }
 }

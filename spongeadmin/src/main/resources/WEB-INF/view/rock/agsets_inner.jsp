@@ -75,7 +75,7 @@
 
             $.ajax({
                 type:"POST",
-                url:"ajax/batch",
+                url:"./ajax/batch",
                 data:{act: act, ids: vm.sel_id},
                 success:function (data) {
                     if(data.code==1) {
