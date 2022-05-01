@@ -26,7 +26,7 @@
             var a_id = $('#agroup_id').val();
             var tag = $('#tag').val();
             var ugroup_id = $('#ugroup').val();
-            var is_enabled = $('#is_enabled').prop("checked")?1:0;
+            var is_disabled = $('#is_disabled').prop("checked")?1:0;
 
             if (!name || name==null) {
                 top.layer.msg("应用组名称不能为空！");
@@ -50,7 +50,7 @@
                     "name":name,
                     "tag":tag,
                     "ugroup_id":ugroup_id,
-                    "is_enabled":is_enabled
+                    "is_disabled":is_disabled
                 },
                 success:function (data) {
                     if(data.code==1) {
@@ -105,11 +105,11 @@
                 <td><input type="text" id="tag" value="${agroup.tag}"></td>
             </tr>
             <tr>
-                <th>是否启用</th>
+                <th></th>
                 <td>
-                    <switcher>
-                        <label><input id="is_enabled" value="1" type="checkbox" ${agroup.is_disabled == 0?"checked":""}><a></a></label>
-                    </switcher>
+                    <checkbox>
+                        <label><input id="is_disabled" value="1" type="checkbox" ${agroup.is_disabled == 1?"checked":""}><a>是否禁用</a></label>
+                    </checkbox>
                 </td>
             </tr>
 

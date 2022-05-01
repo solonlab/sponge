@@ -48,10 +48,10 @@ public class DbRockApi {
                 .getItem(new UserGroupModel());
     }
     //编辑或新增用户组
-    public static Boolean editUgroup(Integer ugroup_id, String name,Integer new_ugroup_id,Integer is_enabled) throws SQLException {
+    public static Boolean editUgroup(Integer ugroup_id, String name,Integer new_ugroup_id,boolean is_disabled) throws SQLException {
         DbTableQuery tb = db().table("appx_ugroup")
                 .set("name", name)
-                .set("is_disabled", (is_enabled == 1 ? 0 : 1));
+                .set("is_disabled", is_disabled ? 1 : 0);
 
         if (new_ugroup_id > 0) {
             tb.set("ugroup_id", new_ugroup_id);
@@ -95,25 +95,26 @@ public class DbRockApi {
 
 
     //编辑或新增应用组
-    public static Boolean editAgroup(Integer agroup_id, Integer new_agroup_id,String name, String tag,Integer ugroup_id,Integer enable_track, Integer is_enabled) throws SQLException {
+    public static Boolean editAgroup(Integer agroup_id, Integer new_agroup_id,String name, String tag,Integer ugroup_id,Integer enable_track, boolean is_disabled) throws SQLException {
         DbTableQuery tb = db().table("appx_agroup")
                 .set("name", name)
                 .set("tag", tag)
-                .set("enable_track",enable_track)
+                .set("enable_track", enable_track)
                 .set("ugroup_id", ugroup_id)
-                .set("is_disabled", (is_enabled == 1 ? 0 : 1));
+                .set("is_disabled", is_disabled ? 1 : 0);
 
         boolean isOk = true;
-        if (new_agroup_id>0){
-            tb.set("agroup_id",new_agroup_id);
-        }
-        if (agroup_id>0){
-            isOk = tb.where("agroup_id = ?",agroup_id).update()>0;
-        }else{
-            isOk = tb.insert()>0;
+        if (new_agroup_id > 0) {
+            tb.set("agroup_id", new_agroup_id);
         }
 
-        if(isOk){
+        if (agroup_id > 0) {
+            isOk = tb.where("agroup_id = ?", agroup_id).update() > 0;
+        } else {
+            isOk = tb.insert() > 0;
+        }
+
+        if (isOk) {
             RockUtil.delCacheByAppGroup(agroup_id);
         }
 

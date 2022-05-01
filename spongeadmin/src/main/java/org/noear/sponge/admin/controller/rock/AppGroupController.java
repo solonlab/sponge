@@ -20,7 +20,7 @@ public class AppGroupController extends BaseController {
     @Mapping("agroup")
     public ModelAndView agroup(String name, int _state) throws SQLException {
         List<AppGroupModel> agroupList = DbRockApi.getAppGroup(name, _state == 1);
-        viewModel.put("agroupList",agroupList);
+        viewModel.put("agroupList", agroupList);
         return view("rock/agroup");
     }
 
@@ -29,8 +29,8 @@ public class AppGroupController extends BaseController {
     @Mapping("agroup/add")
     public ModelAndView add_agroup() throws SQLException {
         List<UserGroupModel> ugroupList = DbRockApi.getUserGroup("");
-        viewModel.put("ugroupList",ugroupList);
-        viewModel.put("agroup",new AppGroupModel());
+        viewModel.put("ugroupList", ugroupList);
+        viewModel.put("agroup", new AppGroupModel());
         return view("rock/agroup_edit");
     }
 
@@ -56,10 +56,11 @@ public class AppGroupController extends BaseController {
     //编辑或新增用户组
     @AuthPermissions(SessionPerms.admin)
     @Mapping("agroup/edit/ajax/save")
-    public BaseResp editAgroup(Integer agroup_id, Integer new_agroup_id, String name, String tag, Integer ugroup_id,Integer enable_track, Integer is_enabled) throws SQLException {
+    public BaseResp editAgroup(Integer agroup_id, Integer new_agroup_id, String name, String tag, Integer ugroup_id, Integer enable_track, int is_disabled) throws SQLException {
         BaseResp resp = new BaseResp();
-        Boolean result = DbRockApi.editAgroup(agroup_id,new_agroup_id,name,tag,ugroup_id,enable_track, is_enabled);
-        if (result){
+        Boolean result = DbRockApi.editAgroup(agroup_id, new_agroup_id, name, tag, ugroup_id, enable_track, is_disabled == 1);
+
+        if (result) {
             resp.code = 1;
             resp.msg = "操作成功";
         } else {

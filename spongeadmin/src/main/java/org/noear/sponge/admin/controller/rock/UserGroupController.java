@@ -19,16 +19,16 @@ public class UserGroupController extends BaseController {
     //用户组界面
     @Mapping("ugroup")
     public ModelAndView ugroup(String name, Integer _state) throws SQLException {
-        List<UserGroupModel> ugroupList =  DbRockApi.getUserGroup(name,_state);
-        viewModel.put("ugroupList",ugroupList);
-        viewModel.put("name",name);
+        List<UserGroupModel> ugroupList = DbRockApi.getUserGroup(name, _state);
+        viewModel.put("ugroupList", ugroupList);
+        viewModel.put("name", name);
         return view("rock/ugroup");
     }
 
     //新增用户组跳转
     @Mapping("ugroup/add")
-    public ModelAndView add_ugroup(){
-        viewModel.put("ugroup",new UserGroupModel());
+    public ModelAndView add_ugroup() {
+        viewModel.put("ugroup", new UserGroupModel());
         return view("rock/ugroup_edit");
     }
 
@@ -36,18 +36,18 @@ public class UserGroupController extends BaseController {
     @Mapping("ugroup/edit")
     public ModelAndView edit_ugroup(Integer ugroup_id) throws SQLException {
         UserGroupModel userGroup = DbRockApi.getUserGroupById(ugroup_id);
-        viewModel.put("ugroup",userGroup);
+        viewModel.put("ugroup", userGroup);
         return view("rock/ugroup_edit");
     }
 
     //编辑或新增用户组
     @AuthPermissions(SessionPerms.admin)
     @Mapping("ugroup/edit/ajax/save")
-    public BaseResp editUgroup(Integer ugroup_id, String name, Integer new_ugroup_id,Integer is_enabled) throws SQLException {
+    public BaseResp editUgroup(Integer ugroup_id, String name, Integer new_ugroup_id, int is_disabled) throws SQLException {
         BaseResp resp = new BaseResp();
 
-        Boolean result = DbRockApi.editUgroup(ugroup_id,name,new_ugroup_id,is_enabled);
-        if (result){
+        Boolean result = DbRockApi.editUgroup(ugroup_id, name, new_ugroup_id, is_disabled == 1);
+        if (result) {
             resp.code = 1;
             resp.msg = "操作成功";
         } else {
