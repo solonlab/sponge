@@ -2,6 +2,7 @@ package org.noear.sponge.admin;
 
 import org.noear.snack.ONode;
 import org.noear.solon.Solon;
+import org.noear.solon.Utils;
 import org.noear.solon.annotation.Bean;
 import org.noear.solon.annotation.Configuration;
 import org.noear.solon.auth.AuthAdapter;
@@ -11,6 +12,9 @@ import org.noear.sponge.admin.dso.auth.AuthProcessorImpl;
 import org.noear.water.model.ConfigM;
 import org.noear.weed.DbContext;
 import org.noear.water.*;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Configuration
 public class Config {
@@ -32,12 +36,24 @@ public class Config {
     }
 
 
+    public static Map<String, Object> lang_type() {
+        ConfigM cfg = Config.cfg("lang_type");
+
+        if (cfg == null || Utils.isEmpty(cfg.value)) {
+            return new LinkedHashMap<>();
+        }
+
+        return cfg.getProp().toMap();
+    }
+
+
     //================================
     //
     //获取一个数据库配置
     public static ConfigM cfg(String key) {
         return cfg(Solon.cfg().appGroup(), key);
     }
+
 
     public static ConfigM cfg(String group, String key) {
         return WaterClient.Config.get(group, key);

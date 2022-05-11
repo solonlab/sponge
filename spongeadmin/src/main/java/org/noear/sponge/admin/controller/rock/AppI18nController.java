@@ -152,7 +152,7 @@ public class AppI18nController extends BaseController {
         }
 
         Map lang_type = new TreeMap(new MapKeyComparator());
-        lang_type.putAll(Config.cfg("lang_type").getProp().toMap());
+        lang_type.putAll(Config.lang_type());
 
         viewModel.put("app_groups", appGroups);
         viewModel.put("model", model);
@@ -179,7 +179,7 @@ public class AppI18nController extends BaseController {
         }
 
         Map lang_type = new TreeMap(new MapKeyComparator());
-        lang_type.putAll(Config.cfg("lang_type").getProp().toMap());
+        lang_type.putAll(Config.lang_type());
 
         viewModel.put("app_groups", appGroups);
         viewModel.put("model", model);
