@@ -1,6 +1,6 @@
 package org.noear.rock.integration;
 
-import org.noear.solon.SolonApp;
+import org.noear.solon.core.AopContext;
 import org.noear.solon.core.Plugin;
 
 /**
@@ -8,7 +8,7 @@ import org.noear.solon.core.Plugin;
  */
 public class XPluginImp implements Plugin {
     @Override
-    public void start(SolonApp app) {
-        app.beanMake(msg_updatecache.class);
+    public void start(AopContext context) {
+        context.beanMake(msg_updatecache.class);
     }
 }
