@@ -34,13 +34,13 @@
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon.boot.jetty</artifactId>
+            <artifactId>solon.boot.undertow</artifactId>
             <version>${solon.ver}</version>
         </dependency>
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon.boot.jetty.add.jsp</artifactId>
+            <artifactId>solon.boot.undertow.add.jsp</artifactId>
             <version>${solon.ver}</version>
         </dependency>
 
