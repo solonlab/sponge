@@ -41,7 +41,7 @@
 
         <solon.ver>1.8.0</solon.ver>
         <weed3.ver>3.4.25</weed3.ver>
-        <grit.ver>1.1.4</grit.ver>
+        <grit.ver>1.2.0</grit.ver>
 
         <rock.ver>2.2.0</rock.ver>
     </properties>
