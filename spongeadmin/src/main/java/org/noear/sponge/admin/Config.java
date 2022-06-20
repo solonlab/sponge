@@ -6,7 +6,7 @@ import org.noear.solon.Utils;
 import org.noear.solon.annotation.Bean;
 import org.noear.solon.annotation.Configuration;
 import org.noear.solon.auth.AuthAdapter;
-import org.noear.solon.extend.health.HealthHandler;
+import org.noear.solon.health.HealthHandler;
 import org.noear.sponge.admin.dso.SessionPerms;
 import org.noear.sponge.admin.dso.auth.AuthProcessorImpl;
 import org.noear.water.model.ConfigM;
@@ -19,7 +19,7 @@ import java.util.Map;
 @Configuration
 public class Config {
 
-    public static final String sponge_version = "v2.2.0";
+    public static final String sponge_version = "v2.2.1";
 
     public static String track_uri() {
         return cfg("track_uri").value;
