@@ -3,14 +3,13 @@ package org.noear.sponge.admin.dso;
 import lombok.extern.slf4j.Slf4j;
 import org.noear.snack.ONode;
 import org.noear.solon.Solon;
-import org.noear.solon.SolonApp;
 import org.noear.solon.Utils;
 import org.noear.solon.cloud.CloudClient;
 import org.noear.solon.core.AopContext;
 import org.noear.solon.core.Plugin;
 import org.noear.solon.core.handle.Context;
 import org.noear.solon.logging.utils.TagsMDC;
-import org.noear.water.WaterClient;
+import org.noear.water.utils.BehaviorUtils;
 import org.noear.water.utils.TextUtils;
 import org.noear.weed.WeedConfig;
 
@@ -92,7 +91,7 @@ public class InitPlugin implements Plugin {
                 String userDisplayName = getUserDisplayName(ctx);
                 String userId = getUserId(ctx);
 
-                WaterClient.Track.trackOfBehavior(Solon.cfg().appName(), cmd, ctx.userAgent(), ctx.pathNew(), userId + "." + userDisplayName, ctx.realIp());
+                BehaviorUtils.trackOfBehavior(Solon.cfg().appName(), cmd, ctx.userAgent(), ctx.pathNew(), userId + "." + userDisplayName, ctx.realIp());
             }
 
             if (isTrackEnable) {
