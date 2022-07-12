@@ -90,7 +90,7 @@
             <plugin>
                 <groupId>org.noear</groupId>
                 <artifactId>solon-maven-plugin</artifactId>
-                <version>1.0.1</version>
+                <version>${solon.ver}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
