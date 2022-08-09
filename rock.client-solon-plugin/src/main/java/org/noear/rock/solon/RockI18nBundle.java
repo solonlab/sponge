@@ -1,6 +1,7 @@
 package org.noear.rock.solon;
 
 import org.noear.rock.i18n.MessageContext;
+import org.noear.solon.core.Props;
 import org.noear.solon.i18n.I18nBundle;
 
 import java.util.Locale;
@@ -22,9 +23,15 @@ public class RockI18nBundle implements I18nBundle {
         this.locale_lang = locale.toString();
     }
 
+    @Deprecated
     @Override
     public Map<String, String> toMap() {
         return context.getMap(locale_lang);
+    }
+
+    @Override
+    public Props toProps() {
+        return new Props(context.getMap(locale_lang));
     }
 
     @Override
