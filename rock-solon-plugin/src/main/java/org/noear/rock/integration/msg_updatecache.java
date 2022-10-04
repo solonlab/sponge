@@ -1,11 +1,11 @@
 package org.noear.rock.integration;
 
 import org.noear.rock.i18n.I18nContextManager;
+import org.noear.solon.Utils;
 import org.noear.solon.cloud.CloudEventHandler;
 import org.noear.solon.cloud.annotation.CloudEvent;
 import org.noear.solon.cloud.annotation.EventLevel;
 import org.noear.solon.cloud.model.Event;
-import org.noear.water.utils.TextUtils;
 
 /**
  * @author noear
@@ -16,7 +16,7 @@ public class msg_updatecache implements CloudEventHandler {
     public boolean handle(Event event) throws Throwable {
         if (event.content().contains("app_")) {
             for (String tag : event.content().split(";")) {
-                if (TextUtils.isEmpty(tag) == false) {
+                if (Utils.isEmpty(tag) == false) {
                     handlerDo(tag);
                 }
             }

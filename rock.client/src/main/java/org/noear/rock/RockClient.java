@@ -3,9 +3,9 @@ package org.noear.rock;
 import org.noear.nami.Nami;
 import org.noear.rock.protocol.RockRpc;
 import org.noear.rock.model.*;
+import org.noear.solon.Utils;
 import org.noear.water.WW;
 import org.noear.water.WaterClient;
-import org.noear.water.utils.TextUtils;
 import org.noear.weed.cache.EmptyCache;
 import org.noear.weed.cache.ICacheServiceEx;
 import org.noear.weed.cache.LocalCache;
@@ -84,7 +84,7 @@ public class RockClient {
 
     //获取一个应用模型
     public static AppModel getAppByKey(String appKey) throws SQLException {
-        if (TextUtils.isEmpty(appKey)) {
+        if (Utils.isEmpty(appKey)) {
             throw new RuntimeException("请输入有效的 appKey");
         }
 

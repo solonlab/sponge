@@ -2,7 +2,7 @@ package org.noear.rock.i18n;
 
 import org.noear.rock.RockClient;
 import org.noear.rock.model.AppI18nCollection;
-import org.noear.water.utils.TextUtils;
+import org.noear.solon.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,7 +57,7 @@ public class CodeContext {
     }
 
     public String getAndFormat(String code, String lang, Object[] args) {
-        if (TextUtils.isEmpty(lang)) {
+        if (Utils.isEmpty(lang)) {
             return getAndFormat(code, lang, null, args);
         } else {
             return getAndFormat(code, lang, new Locale(lang), args);
