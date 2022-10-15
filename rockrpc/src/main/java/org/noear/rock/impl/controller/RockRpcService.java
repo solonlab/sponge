@@ -7,8 +7,8 @@ import lombok.NonNull;
 import org.noear.solon.annotation.*;
 import org.noear.solon.core.Aop;
 import org.noear.rock.impl.dso.process.*;
-import org.noear.weed.DbContext;
-import org.noear.weed.cache.ICacheServiceEx;
+import org.noear.wood.DbContext;
+import org.noear.wood.cache.ICacheServiceEx;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -331,7 +331,7 @@ public final class RockRpcService implements RockRpc {
 
          Integer agroup_id = getAppByID(appID).agroup_id;
 
-        if (db().table("appx_ex_setting").where("app_id=? AND name=?", appID, name).exists()) {
+        if (db().table("appx_ex_setting").where("app_id=? AND name=?", appID, name).selectExists()) {
             db().table("appx_ex_setting")
                     .set("agroup_id", agroup_id)
                     .set("type", type)
@@ -446,7 +446,7 @@ public final class RockRpcService implements RockRpc {
             throw new Exception("请输入有效的 agroup_id");
         }
 
-        if (db().table("appx_ex_setting").where("agroup_id=? AND app_id=0 AND name=?", agroupID, name).exists()) {
+        if (db().table("appx_ex_setting").where("agroup_id=? AND app_id=0 AND name=?", agroupID, name).selectExists()) {
             db().table("appx_ex_setting")
                     .set("type", type)
                     .set("value", value)
