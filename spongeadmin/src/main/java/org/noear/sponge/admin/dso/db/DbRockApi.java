@@ -4,8 +4,8 @@ import org.noear.sponge.admin.dso.CacheUtil;
 import org.noear.sponge.admin.model.rock.*;
 import org.noear.rock.RockUtil;
 import org.noear.water.utils.TextUtils;
-import org.noear.weed.DbContext;
-import org.noear.weed.DbTableQuery;
+import org.noear.wood.DbContext;
+import org.noear.wood.DbTableQuery;
 import org.noear.sponge.admin.Config;
 
 import java.sql.SQLException;
@@ -36,7 +36,7 @@ public class DbRockApi {
                     }
                 })
                 .select("*")
-                .getList(new UserGroupModel());
+                .getList(UserGroupModel.class);
     }
 
     //根据id获取用户组
@@ -45,7 +45,7 @@ public class DbRockApi {
                 .where("ugroup_id = ?",ugroup_id)
                 .limit(1)
                 .select("*")
-                .getItem(new UserGroupModel());
+                .getItem(UserGroupModel.class);
     }
     //编辑或新增用户组
     public static Boolean editUgroup(Integer ugroup_id, String name,Integer new_ugroup_id,boolean is_disabled) throws SQLException {
@@ -90,7 +90,7 @@ public class DbRockApi {
                 .where("agroup_id = ?",agroup_id)
                 .limit(1)
                 .select("*")
-                .getItem(new AppGroupModel());
+                .getItem(AppGroupModel.class);
     }
 
 
@@ -228,7 +228,7 @@ public class DbRockApi {
 
         return db().table("appx")
                 .where("1 = 1")
-                .expre((tb)->{
+                .build((tb)->{
                     if (TextUtils.isEmpty(name)==false){
                         tb.and("name like ?",name + "%");
                     }
@@ -241,7 +241,7 @@ public class DbRockApi {
                 })
                 .orderBy("name asc")
                 .select("*")
-                .getList(new AppModel());
+                .getList(AppModel.class);
     }
 
     //获取应用分组 计数。
@@ -249,7 +249,7 @@ public class DbRockApi {
         return db().table("appx")
                 .groupBy("agroup_id")
                 .select("agroup_id,count(*) counts")
-                .getList(new AppModel());
+                .getList(AppModel.class);
     }
 
 
@@ -259,7 +259,7 @@ public class DbRockApi {
                 .where("app_id = ?",app_id)
                 .limit(1)
                 .select("*")
-                .getItem(new AppModel());
+                .getItem(AppModel.class);
     }
 
     //保存app信息
@@ -395,27 +395,27 @@ public class DbRockApi {
 
         return db().table("appx")
                 .where("1=1")
-                .expre((tb)->{
+                .build((tb)->{
                     if (agroup_id!=null && agroup_id!=0){
                         tb.and("agroup_id = ?",agroup_id);
                     }
                 })
                 .orderBy("app_id asc")
                 .select("*")
-                .getList(new AppModel());
+                .getList(AppModel.class);
     }
 
     public static List<AppModel> getAppsByAgroupIdForSetting(Integer agroup_id) throws SQLException {
         return db().table("appx")
                 .where("ar_is_setting=1")
-                .expre((tb)->{
+                .build((tb)->{
                     if (agroup_id!=null && agroup_id!=0){
                         tb.and("agroup_id = ?",agroup_id);
                     }
                 })
                 .orderBy("app_id asc")
                 .select("*")
-                .getList(new AppModel());
+                .getList(AppModel.class);
     }
 
 
@@ -425,14 +425,14 @@ public class DbRockApi {
         return db().table("appx_whitelist")
                 .groupBy("tag")
                 .select("*,COUNT(tag) count")
-                .getList(new AppxWhitelistModel());
+                .getList(AppxWhitelistModel.class);
 
     }
 
     public static List<AppxWhitelistModel> getWhiteLists(String tag,String value) throws SQLException{
         return db().table("appx_whitelist")
                 .where("1=1")
-                .expre(tb->{
+                .build(tb->{
                     if (TextUtils.isEmpty(tag) == false){
                         tb.and("tag = ?",tag);
                     }
@@ -441,14 +441,14 @@ public class DbRockApi {
                     }
                 })
                 .select("*")
-                .getList(new AppxWhitelistModel());
+                .getList(AppxWhitelistModel.class);
     }
 
     public static AppxWhitelistModel getWhiteListById(int row_id) throws SQLException{
         return db().table("appx_whitelist")
                 .where("row_id = ?",row_id)
                 .select("*")
-                .getItem(new AppxWhitelistModel());
+                .getItem(AppxWhitelistModel.class);
 
     }
 
@@ -480,7 +480,7 @@ public class DbRockApi {
         return db().table("appx_agroup")
                 .caching(CacheUtil.dataCache)
                 .select("*")
-                .getList(new AppGroupModel());
+                .getList(AppGroupModel.class);
     }
 
     //获取全部用户组
@@ -488,7 +488,7 @@ public class DbRockApi {
         return db().table("appx_ugroup")
                 .caching(CacheUtil.dataCache)
                 .select("*")
-                .getList(new UserGroupModel());
+                .getList(UserGroupModel.class);
     }
 
 
@@ -517,7 +517,7 @@ public class DbRockApi {
         return db().table("appx_ex_version")
                 .where("row_id = ?",row_id)
                 .select("*")
-                .getItem(new AppExVersionModel());
+                .getItem(AppExVersionModel.class);
 
     }
 

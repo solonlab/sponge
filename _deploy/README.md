@@ -10,9 +10,9 @@
 
 | 镜像                         | 镜像端口    | 说明        |
 |----------------------------|-------|-----------|
-| noearorg/spongeadmin:2.4.1 | 8171  | 管理控制台     |
-| noearorg/rockrpc:2.4.1           | 8181  | 应用控制接口服务  |
-| noearorg/trackapi:2.4.1          | 8182  | 价值跟踪短地址服务 |
+| noearorg/spongeadmin:2.4.2 | 8171  | 管理控制台     |
+| noearorg/rockrpc:2.4.2           | 8181  | 应用控制接口服务  |
+| noearorg/trackapi:2.4.2          | 8182  | 价值跟踪短地址服务 |
 
 
 ### 部署流程
@@ -43,9 +43,9 @@
 
 | 镜像  | 描述          | 备注                                   |
 |-----|-------------|--------------------------------------|
-| noearorg/spongeadmin:2.4.1 | sponge 管理台后 | 管理后台                                 |
-| noearorg/trackapi:2.4.1 | 价值跟踪服务      | 一个短地址统计服务                            |
-| noearorg/rockrpc:2.4.1 | 应用控制服务 | 一个rpc服务，提供渠道配置与国际化配置等能力 |
+| noearorg/spongeadmin:2.4.2 | sponge 管理台后 | 管理后台                                 |
+| noearorg/trackapi:2.4.2 | 价值跟踪服务      | 一个短地址统计服务                            |
+| noearorg/rockrpc:2.4.2 | 应用控制服务 | 一个rpc服务，提供渠道配置与国际化配置等能力 |
 
 为什么需要提供渠道配置支持？
 

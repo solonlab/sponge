@@ -1,7 +1,7 @@
 package org.noear.sponge.admin.model.sponge_track;
 
 import lombok.Getter;
-import org.noear.weed.*;
+import org.noear.wood.*;
 
 /// <summary>
 /// 生成:2017/12/08 10:53:42

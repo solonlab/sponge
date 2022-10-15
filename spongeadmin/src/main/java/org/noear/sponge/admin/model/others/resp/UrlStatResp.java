@@ -1,8 +1,8 @@
 package org.noear.sponge.admin.model.others.resp;
 
 import lombok.Getter;
-import org.noear.weed.GetHandlerEx;
-import org.noear.weed.IBinder;
+import org.noear.wood.GetHandlerEx;
+import org.noear.wood.IBinder;
 
 /**
  * @Author:Fei.chu

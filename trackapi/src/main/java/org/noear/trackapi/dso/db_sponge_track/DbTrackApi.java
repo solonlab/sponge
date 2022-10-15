@@ -8,8 +8,8 @@ import org.noear.trackapi.model.ShortUrlModel;
 import org.noear.trackapi.utils.EncryptUtil;
 import org.noear.water.utils.LockUtils;
 import org.noear.water.utils.TextUtils;
-import org.noear.weed.DataItem;
-import org.noear.weed.DbContext;
+import org.noear.wood.DataItem;
+import org.noear.wood.DbContext;
 
 
 import java.sql.SQLException;
@@ -27,7 +27,7 @@ public class DbTrackApi {
                 .select("*")
                 .caching(Config.cache)
                 .cacheTag("track_url_key_" + url_key)//有缓存控制
-                .getItem(new ShortUrlModel());
+                .getItem(ShortUrlModel.class);
     }
 
 
@@ -51,7 +51,7 @@ public class DbTrackApi {
                 .limit(1)
                 .select("ua_id,platform,client")
                 .caching(Config.cache)
-                .getItem(new CodeUaModel(), (cu, v) -> {
+                .getItem(CodeUaModel.class, (cu, v) -> {
                     if (v.ua_id == 0) {
                         cu.usingCache(false);
                     }
@@ -90,7 +90,7 @@ public class DbTrackApi {
                 .limit(1)
                 .select("ip_id,city_code")
                 .caching(Config.cache)
-                .getItem(new CodeIpModel(), (cu, v) -> {
+                .getItem(CodeIpModel.class, (cu, v) -> {
                     if (v.ip_id == 0) {
                         cu.usingCache(false);
                     }

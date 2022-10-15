@@ -1,7 +1,7 @@
 package org.noear.sponge.admin.model.sponge_track;
 
 import lombok.Getter;
-import org.noear.weed.*;
+import org.noear.wood.*;
 import org.noear.sponge.admin.Config;
 
 import java.util.*;

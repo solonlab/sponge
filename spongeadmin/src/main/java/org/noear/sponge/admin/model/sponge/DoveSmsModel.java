@@ -1,6 +1,6 @@
 package org.noear.sponge.admin.model.sponge;
 
-import org.noear.weed.*;
+import org.noear.wood.*;
 
 import java.util.*;
 

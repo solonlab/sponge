@@ -10,7 +10,7 @@ import org.noear.water.WaterClient;
 import org.noear.water.utils.Datetime;
 import org.noear.water.utils.EncryptUtils;
 import org.noear.water.utils.TextUtils;
-import org.noear.weed.DbContext;
+import org.noear.wood.DbContext;
 import org.noear.sponge.admin.Config;
 
 import java.sql.SQLException;
@@ -30,7 +30,7 @@ public class DbTrackApi {
         long tag_id = db().table("track_tag")
                 .set("agroup_id",tag.agroup_id)
                 .set("tag_name",tag.tag_name)
-                .expre(tb -> {
+                .build(tb -> {
                     if (!TextUtils.isEmpty(tag.tag_host)){
                         tb.set("tag_host",tag.tag_host);
                     }
@@ -55,7 +55,7 @@ public class DbTrackApi {
     public static List<TrackTagModel> getTrackTagList(int agroup_id) throws SQLException{
         return db().table("track_tag").where("agroup_id=?",agroup_id)
                 .select("*")
-                .getList(new TrackTagModel());
+                .getList(TrackTagModel.class);
     }
 
     public static List<TagResp> getTagListInfo(int agroup_id) throws SQLException{
@@ -65,7 +65,7 @@ public class DbTrackApi {
                 .where("t.agroup_id=?",agroup_id)
                 .select("t.tag_id,t.agroup_id,t.tag_name,t.note,t.admin_group,s.pv_today,s.ip_today,s.uv_today," +
                         "s.pv_yesterday,s.uv_yesterday,s.ip_yesterday,t.t_user_field,t.t_track_params,t.t_trans_params")
-                .getList(new TagResp());
+                .getList(TagResp.class);
     }
 
 
@@ -73,7 +73,7 @@ public class DbTrackApi {
         return db().table("track_tag")
                 .where("tag_id = ?",tag_id)
                 .select("*")
-                .getItem(new TrackTagModel());
+                .getItem(TrackTagModel.class);
     }
 
     public static void updateTrackTag(TrackTagModel tag) throws SQLException{
@@ -94,13 +94,13 @@ public class DbTrackApi {
         return db().table("short_url")
                 .where("tag_id = ?",tag_id)
                 .and("is_disable = ?",is_disable)
-                .expre((tb) -> {
+                .build((tb) -> {
                     if (TextUtils.isEmpty(url_name) == false) {
                         tb.and("url_name like ?", "%" + url_name + "%");
                     }
                 })
                 .select("*")
-                .getList(new ShortUrlModel());
+                .getList(ShortUrlModel.class);
     }
 
     public static String addShortUrl(String url, String name, int tagID, String trackParams,
@@ -159,7 +159,7 @@ public class DbTrackApi {
         return db().table("short_url")
                 .where("url_val_md5=?", url_md5)
                 .select("*")
-                .getItem(new ShortUrlModel());
+                .getItem(ShortUrlModel.class);
     }
 
     //更新短网址
@@ -203,7 +203,7 @@ public class DbTrackApi {
         return db().table("short_url")
                 .where("url_id = ?",url_id)
                 .select("*")
-                .getItem(new ShortUrlModel());
+                .getItem(ShortUrlModel.class);
     }
 
     public static String getParamName(int vi,String params) {
@@ -550,7 +550,7 @@ public class DbTrackApi {
                 .and("log_date <= ?",endDate)
                 .select("*")
                 .caching(CacheUtil.dataCache).cacheTag("stat_date_hour_pv_uv_ip"+tag_id+startDate+endDate)
-                .getList(new StatDateHourPvUvIpModel());
+                .getList(StatDateHourPvUvIpModel.class);
     }
 
     public static List<StatDateHourPvUvIpModel> getStatDateHourPvUvIpByDateUrlId(int url_id,int startDate,int endDate) throws SQLException{
@@ -561,7 +561,7 @@ public class DbTrackApi {
                 .and("log_date <= ?",endDate)
                 .select("*")
                 .caching(CacheUtil.dataCache).cacheTag("stat_date_hour_pv_uv_ip"+url_id+startDate+endDate)
-                .getList(new StatDateHourPvUvIpModel());
+                .getList(StatDateHourPvUvIpModel.class);
     }
 
     //根据url_id，vi，vd查询短地址近几天统计
@@ -575,7 +575,7 @@ public class DbTrackApi {
                 .and("log_date <= ?",endDate)
                 .select("*")
                 .caching(CacheUtil.dataCache).cacheTag("stat_track_date_hour_pv_uv_ip"+url_id+startDate+endDate)
-                .getList(new StatDateHourPvUvIpModel());
+                .getList(StatDateHourPvUvIpModel.class);
     }
 
     //处理短地址 uv pv ip  30天图表渲染数据
@@ -706,7 +706,7 @@ public class DbTrackApi {
 
         List<StatUaPlatformDatePvUvIpModel> platforms = db().table("stat_ua_platform_date_pv_uv_ip")
                 .where("log_date >= ?", yesterday)
-                .expre(tb -> {
+                .build(tb -> {
                     if (tag_id > 0) {
                         tb.and("tag_id = ?", tag_id);
                     }
@@ -716,7 +716,7 @@ public class DbTrackApi {
                 })
                 .groupBy("ua_platform")
                 .select("ua_platform,SUM(" + tField + ") _val") //减少求合
-                .getList(new StatUaPlatformDatePvUvIpModel());
+                .getList(StatUaPlatformDatePvUvIpModel.class);
 
         Map<Integer, String> enumMap = getCodeEnum(1);
 
@@ -775,7 +775,7 @@ public class DbTrackApi {
                 })
                 .groupBy("ua_client")
                 .select("ua_client,sum(" + tField + ") _val")
-                .getList(new StatUaClientDatePvUvIpModel());
+                .getList(StatUaClientDatePvUvIpModel.class);
 
         clients.sort(Comparator.comparingLong(m -> -m._val));//倒排用负数
 
@@ -837,7 +837,7 @@ public class DbTrackApi {
         List<CodeEnumModel> list = db().table("code_enum")
                 .where(" type = ?",type)
                 .select("*")
-                .getList(new CodeEnumModel());
+                .getList(CodeEnumModel.class);
         list.forEach(li->{out.put(li.value,li.title);});
         return out;
     }
@@ -978,7 +978,7 @@ public class DbTrackApi {
                 .on("s.url_id = u.url_id")
                 .and("s.tag_id = t.tag_id")
                 .where("s.user_key = ?",user_key)
-                .expre((tb) -> {
+                .build((tb) -> {
                     if (tag_id > 0) {
                         tb.and("s.tag_id = ?", tag_id);
                     }
@@ -989,7 +989,7 @@ public class DbTrackApi {
                 .orderBy("s.log_fulltime desc")
                 .limit(50)
                 .select("u.url_name,t.tag_name,s.url_id,s.tag_id,s.log_fulltime")
-                .getList(new ShortRedirectLog30dModel());
+                .getList(ShortRedirectLog30dModel.class);
 
 
         for (ShortRedirectLog30dModel log:list) {
@@ -1013,7 +1013,7 @@ public class DbTrackApi {
                 .where("url_partner_key = ?", url_partner_key)
                 .and("tag_id = ?",tag_id)
                 .select("*")
-                .getItem(new ShortUrlModel());
+                .getItem(ShortUrlModel.class);
 
         List<StatDateHourPvUvIpModel> list = db().table("stat_date_hour_pv_uv_ip")
                 .where("url_id = ?", short_url.url_id)
@@ -1021,7 +1021,7 @@ public class DbTrackApi {
                 .and("log_hour = -1")
                 .and("log_date = ?",log_date)
                 .select("*")
-                .getList(new StatDateHourPvUvIpModel());
+                .getList(StatDateHourPvUvIpModel.class);
 
 
         for (StatDateHourPvUvIpModel pui: list) {
@@ -1040,7 +1040,7 @@ public class DbTrackApi {
     public static List<ShortUrlModel> getUrlNamesAndPartnerKeys() throws SQLException{
         return db().table("short_url")
                 .select("url_id,url_name,url_partner_key")
-                .getList(new ShortUrlModel());
+                .getList(ShortUrlModel.class);
     }
 
     //获取指定标签下所有短地址的访问信息
@@ -1054,7 +1054,7 @@ public class DbTrackApi {
                 .and("t.log_date = ?",log_date)
                 .and("t.log_hour = -1")
                 .select("s.url_id,s.url_name,s.url_partner_key,t.pv,t.uv,t.ip")
-                .getList(new PUIUrlResp());
+                .getList(PUIUrlResp.class);
 
         for (PUIUrlResp pui: list) {
             ONode oNode = new ONode();
@@ -1074,7 +1074,7 @@ public class DbTrackApi {
         return db().table("whitelist")
                 .where("ip = ?",ip)
                 .select("*")
-                .getItem(new WhitelistModel());
+                .getItem(WhitelistModel.class);
     }
 
     public static TrackTagModel getTagByIdAndAccKey(String tag_access_key,int tag_id) throws SQLException{
@@ -1082,6 +1082,6 @@ public class DbTrackApi {
                 .where("tag_id = ?",tag_id)
                 .and("tag_access_key = ?",tag_access_key)
                 .select("*")
-                .getItem(new TrackTagModel());
+                .getItem(TrackTagModel.class);
     }
 }

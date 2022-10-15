@@ -1,8 +1,8 @@
 package org.noear.sponge.admin.model.sponge_track;
 
 import lombok.Data;
-import org.noear.weed.GetHandlerEx;
-import org.noear.weed.IBinder;
+import org.noear.wood.GetHandlerEx;
+import org.noear.wood.IBinder;
 
 import java.math.BigDecimal;
 

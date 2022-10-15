@@ -6,9 +6,9 @@ import org.noear.rock.model.*;
 import org.noear.solon.Utils;
 import org.noear.water.WW;
 import org.noear.water.WaterClient;
-import org.noear.weed.cache.EmptyCache;
-import org.noear.weed.cache.ICacheServiceEx;
-import org.noear.weed.cache.LocalCache;
+import org.noear.wood.cache.EmptyCache;
+import org.noear.wood.cache.ICacheServiceEx;
+import org.noear.wood.cache.LocalCache;
 
 import java.sql.SQLException;
 import java.util.List;

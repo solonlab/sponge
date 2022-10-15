@@ -10,7 +10,7 @@ import org.noear.solon.health.HealthHandler;
 import org.noear.sponge.admin.dso.SessionPerms;
 import org.noear.sponge.admin.dso.auth.AuthProcessorImpl;
 import org.noear.water.model.ConfigM;
-import org.noear.weed.DbContext;
+import org.noear.wood.DbContext;
 import org.noear.water.*;
 
 import java.util.LinkedHashMap;
@@ -19,7 +19,7 @@ import java.util.Map;
 @Configuration
 public class Config {
 
-    public static final String sponge_version = "v2.4.1";
+    public static final String sponge_version = "v2.4.2";
 
     public static String track_uri() {
         return cfg("track_uri").value;

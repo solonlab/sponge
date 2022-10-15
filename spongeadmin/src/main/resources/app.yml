@@ -21,4 +21,4 @@ solon.logging.logger:
   "org.apache.*":
     level: INFO
 
-srww.weed.track.enable: false
+srww.wood.track.enable: false

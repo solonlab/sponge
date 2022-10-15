@@ -1,7 +1,7 @@
 package org.noear.sponge.admin.model.rock;
 
 import lombok.Data;
-import org.noear.weed.*;
+import org.noear.wood.*;
 
 /// <summary>
 /// 生成:2018/01/22 05:47:35

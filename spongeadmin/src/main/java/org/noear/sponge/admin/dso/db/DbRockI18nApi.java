@@ -7,8 +7,8 @@ import org.noear.sponge.admin.model.rock.AppExCodeModel;
 import org.noear.sponge.admin.model.rock.AppExI18nModel;
 import org.noear.sponge.admin.model.rock.I18nModel;
 import org.noear.water.utils.TextUtils;
-import org.noear.weed.DbContext;
-import org.noear.weed.DbTableQuery;
+import org.noear.wood.DbContext;
+import org.noear.wood.DbTableQuery;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

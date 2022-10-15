@@ -1,7 +1,7 @@
 package org.noear.rock.impl.dso.process;
 
-import org.noear.weed.DbContext;
-import org.noear.weed.DbQueryProcedure;
+import org.noear.wood.DbContext;
+import org.noear.wood.DbQueryProcedure;
 
 /**
  * Created by xq on 2017/8/8.

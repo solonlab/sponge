@@ -1,7 +1,7 @@
 package org.noear.sponge.admin.dso;
 
 import org.noear.solon.Solon;
-import org.noear.weed.cache.ICacheServiceEx;
+import org.noear.wood.cache.ICacheServiceEx;
 import org.noear.sponge.admin.Config;
 
 public class CacheUtil {
@@ -13,7 +13,7 @@ public class CacheUtil {
       dataCache.clear(tag);
    }
 
-   public static <T> void updateByTag(String tag, org.noear.weed.ext.Fun1<T, T> setter) {
+   public static <T> void updateByTag(String tag, org.noear.wood.ext.Fun1<T, T> setter) {
       dataCache.update(tag, setter);
    }
 

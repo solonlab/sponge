@@ -3,7 +3,7 @@ package org.noear.rock;
 import org.noear.rock.model.AppModel;
 import org.noear.rock.protocol.RockRpc;
 import org.noear.water.WaterClient;
-import org.noear.weed.cache.ICacheServiceEx;
+import org.noear.wood.cache.ICacheServiceEx;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.UUID;

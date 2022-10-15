@@ -1,8 +1,8 @@
 package org.noear.trackapi.model;
 
 import org.noear.water.utils.TextUtils;
-import org.noear.weed.GetHandlerEx;
-import org.noear.weed.IBinder;
+import org.noear.wood.GetHandlerEx;
+import org.noear.wood.IBinder;
 
 public class ShortUrlModel implements IBinder {
     public long url_id;
