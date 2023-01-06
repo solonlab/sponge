@@ -20,6 +20,8 @@
 #### 2.3.1
 * solon 升级为：1.9.3
 * water 升到为：2.8.1
+* 开始提供 RockCodeI18nBundleFactory 接口
+* 开始提供 rock-solon-plugin 插件
 
 #### 2.3.0
 * solon 升级为：1.9.1
