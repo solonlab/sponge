@@ -22,7 +22,7 @@ public class RockCodeI18nBundle implements I18nBundle {
     }
 
     @Deprecated
-    @Override
+    //@Override
     public Map<String, String> toMap() {
         return context.getMap(locale_lang);
     }

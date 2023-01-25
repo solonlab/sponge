@@ -4,8 +4,8 @@ import org.noear.rock.protocol.RockRpc;
 import org.noear.rock.model.*;
 import org.noear.rock.RockUtil;
 import lombok.NonNull;
+import org.noear.solon.Solon;
 import org.noear.solon.annotation.*;
-import org.noear.solon.core.Aop;
 import org.noear.rock.impl.dso.process.*;
 import org.noear.wood.DbContext;
 import org.noear.wood.cache.ICacheServiceEx;
@@ -28,7 +28,7 @@ public final class RockRpcService implements RockRpc {
 
     //初始化...
     public RockRpcService() {
-        Aop.getAsyn("rock_cache", (bw)->{
+        Solon.context().getWrapAsync("rock_cache", (bw)->{
             RockUtil.tryInit(bw.raw(), this);
         });
     }

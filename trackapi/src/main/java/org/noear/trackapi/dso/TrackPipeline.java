@@ -29,7 +29,7 @@ public class TrackPipeline extends EventPipeline<DataItem> {
         try {
             DbTrackApi.addUrlLogAll("short_redirect_log_30d", list);
         } catch (Exception ex) {
-            EventBus.pushAsyn(ex);
+            EventBus.pushAsync(ex);
         }
     }
 }

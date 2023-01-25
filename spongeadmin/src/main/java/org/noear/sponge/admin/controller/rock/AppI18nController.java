@@ -320,7 +320,7 @@ public class AppI18nController extends BaseController {
     @AuthPermissions(SessionPerms.admin)
     @Mapping("ajax/import")
     public ViewModel importFile(int agroup_id, String service, UploadedFile file) throws Exception {
-        if ("jsond".equals(file.extension)) {
+        if ("jsond".equals(file.getExtension())) {
             return importFileForJsond(agroup_id, service, file);
         } else {
             return importFileForProfile(agroup_id, service, file);
@@ -332,7 +332,7 @@ public class AppI18nController extends BaseController {
             return viewModel.code(0, "没有权限！");
         }
 
-        String jsonD = IOUtils.toString(file.content);
+        String jsonD = IOUtils.toString(file.getContent());
         JsondEntity entity = JsondUtils.decode(jsonD);
 
         if (entity == null || "agroup_i18n".equals(entity.table) == false) {
@@ -355,7 +355,7 @@ public class AppI18nController extends BaseController {
     }
 
     private ViewModel importFileForProfile(int agroup_id, String service, UploadedFile file) throws Exception {
-        String i18nStr = Utils.transferToString(file.content, "UTF-8");
+        String i18nStr = Utils.transferToString(file.getContent(), "UTF-8");
         Properties i18n = Utils.buildProperties(i18nStr);
 
         //初始化 _i18n.lang (_开头可以排序在前)
