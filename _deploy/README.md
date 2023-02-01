@@ -1,6 +1,7 @@
 
 提醒：sponge 业务技撑中台，基于 water 服务而建。部署时，须提前准备好 water 环境
 
+
 ### 两种部署模式：
 
 * docker-compose：基于 docker-compose 模式部署参考
