@@ -6,7 +6,7 @@ public class App {
     public static void main(String[] args) {
 
         Solon.start(App.class, args, app -> {
-            app.cfg().enableSafeStop(app.cfg().isFilesMode() == false);
+            app.cfg().stopSafe(app.cfg().isFilesMode() == false);
         });
     }
 }
