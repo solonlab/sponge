@@ -1,6 +1,7 @@
 package test;
 
 import org.noear.nami.Nami;
+import org.noear.solon.cloud.CloudClient;
 import org.noear.solon.cloud.impl.CloudLoadBalanceFactory;
 import org.noear.rock.RockClient;
 import org.noear.rock.model.AppModel;
@@ -34,7 +35,7 @@ public class RockRpcTest {
         System.out.println("RockClient.getApp(48)::成功!!!");
 
 
-        int cont = CloudLoadBalanceFactory.instance.get("","rockrpc").getDiscovery().clusterSize();
+        int cont = CloudClient.loadBalance().get("rockrpc").getDiscovery().clusterSize();
         assert cont > 0;
 
         System.out.println("upstream>>" + cont);
