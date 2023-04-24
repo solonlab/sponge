@@ -2,6 +2,7 @@ package org.noear.sponge.admin.controller.rock;
 
 import org.noear.rock.RockUtil;
 import org.noear.snack.ONode;
+import org.noear.snack.core.Feature;
 import org.noear.solon.Utils;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
@@ -22,7 +23,6 @@ import org.noear.sponge.admin.model.rock.AppExCodeModel;
 import org.noear.sponge.admin.controller.BaseController;
 import org.noear.sponge.admin.model.rock.AppGroupModel;
 import org.noear.sponge.admin.model.rock.I18nModel;
-import org.noear.sponge.admin.utils.JsonUtils;
 import org.noear.sponge.admin.utils.MapKeyComparator;
 import org.noear.water.utils.*;
 
@@ -279,7 +279,7 @@ public class AppCodeController extends BaseController {
         }
 
         if("json".equals(fmt)){
-            String data = JsonUtils.format(ONode.stringify(i18nMap));//格式化一下好看些
+            String data = ONode.load(i18nMap, Feature.PrettyFormat).toJson();//格式化一下好看些
             String filename2 = filename + ".json";
 
             ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
