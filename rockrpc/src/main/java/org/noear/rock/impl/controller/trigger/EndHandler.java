@@ -26,9 +26,9 @@ public class EndHandler implements Handler {
         String _node = Instance.local().address();
         String _from = CloudClient.trace().getFromId(); //FromUtils.getFrom(ctx);
 
-        CloudClient.metric().addMeter(service, "rpc", ctx.path(), times);
-        CloudClient.metric().addMeter(WW.track_service, service, _node, times);
-        CloudClient.metric().addMeter(WW.track_from, service, _from, times);
+        CloudClient.metric().addTimer(service, "rpc", ctx.path(), times);
+        CloudClient.metric().addTimer(WW.track_service, service, _node, times);
+        CloudClient.metric().addTimer(WW.track_from, service, _from, times);
 
         String _out = ctx.attr("output", "");
         String _in = ONode.stringify(ctx.paramMap());

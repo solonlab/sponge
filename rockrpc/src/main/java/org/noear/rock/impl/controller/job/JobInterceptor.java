@@ -24,7 +24,7 @@ public class JobInterceptor implements CloudJobInterceptor {
             log.info("interceptor job: {} end", job.getName());
 
             long timespan = System.currentTimeMillis() - start;
-            CloudClient.metric().addCount("job", job.getName(), timespan);
+            CloudClient.metric().addCounter("job", job.getName(), timespan);
         }
     }
 }
