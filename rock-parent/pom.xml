@@ -39,13 +39,17 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <solon.version>2.4.2</solon.version>
+        <solon.version>2.4.6</solon.version>
         <wood.version>1.1.8</wood.version>
         <grit.version>1.6.3</grit.version>
 
         <rock.version>2.7.2</rock.version>
 
         <slf4j.version>2.0.7</slf4j.version>
+
+        <maven-compiler.version>3.11.0</maven-compiler.version>
+        <maven-assembly.version>3.6.0</maven-assembly.version>
+        <maven-resources.version>3.3.1</maven-resources.version>
     </properties>
 
     <dependencyManagement>
@@ -215,18 +219,6 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <compilerArgument>-parameters</compilerArgument>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.3.0</version>
                 <configuration>
@@ -239,6 +231,28 @@
             </plugin>
 
         </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler.version}</version>
+                    <configuration>
+                        <compilerArgument>-parameters</compilerArgument>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                        <encoding>UTF-8</encoding>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven-resources.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
     <modules>
