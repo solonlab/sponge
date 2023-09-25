@@ -39,8 +39,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <solon.version>2.5.4</solon.version>
-        <wood.version>1.1.8</wood.version>
+        <solon.version>2.5.6</solon.version>
+        <wood.version>1.2.1</wood.version>
         <grit.version>1.6.5</grit.version>
 
         <rock.version>2.7.3</rock.version>
