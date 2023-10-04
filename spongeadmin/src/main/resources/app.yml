@@ -1,5 +1,6 @@
 server.port: 8171
 server.session.timeout: 360000 #10h
+server.http.gzip.enable: true
 
 solon.app:
   group: "sponge"

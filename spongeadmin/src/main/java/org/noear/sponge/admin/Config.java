@@ -19,7 +19,7 @@ import java.util.Map;
 @Configuration
 public class Config {
 
-    public static final String sponge_version = "v2.7.3";
+    public static final String sponge_version = "v2.7.4";
 
     public static String track_uri() {
         return cfg("track_uri").value;
