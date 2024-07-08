@@ -1,16 +1,15 @@
 package test;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.noear.rock.RockClient;
 import org.noear.rock.model.AppModel;
 import org.noear.snack.ONode;
-import org.noear.solon.test.SolonJUnit4ClassRunner;
+import org.noear.solon.test.SolonTest;
 
 /**
  * @author noear 2021/5/20 created
  */
-@RunWith(SolonJUnit4ClassRunner.class)
+@SolonTest
 public class ApiTest {
     @Test
     public void test() throws Exception{

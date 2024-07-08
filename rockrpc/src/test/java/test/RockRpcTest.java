@@ -1,20 +1,18 @@
 package test;
 
+import org.junit.jupiter.api.Test;
 import org.noear.nami.Nami;
 import org.noear.solon.cloud.CloudClient;
-import org.noear.solon.cloud.impl.CloudLoadBalanceFactory;
 import org.noear.rock.RockClient;
 import org.noear.rock.model.AppModel;
 import org.noear.rock.model.AppUpdateModel;
 import org.noear.rock.protocol.RockRpc;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.noear.snack.ONode;
-import org.noear.solon.test.SolonJUnit4ClassRunner;
+import org.noear.solon.test.SolonTest;
 import org.noear.water.WW;
 import org.noear.water.WaterClient;
 
-@RunWith(SolonJUnit4ClassRunner.class)
+@SolonTest
 public class RockRpcTest {
 
     @Test
