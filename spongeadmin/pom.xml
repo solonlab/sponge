@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.noear</groupId>
         <artifactId>rock-parent</artifactId>
-        <version>2.10.1</version>
+        <version>2.10.2-M1</version>
         <relativePath>../rock-parent/pom.xml</relativePath>
     </parent>
 
@@ -32,19 +32,31 @@
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon-rpc</artifactId>
+            <artifactId>solon-web</artifactId>
             <version>${solon.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon.boot.undertow</artifactId>
+            <artifactId>nami-channel-http-okhttp</artifactId>
             <version>${solon.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon.boot.undertow.add.jsp</artifactId>
+            <artifactId>nami-coder-snack3</artifactId>
+            <version>${solon.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon-boot-undertow</artifactId>
+            <version>${solon.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon-boot-undertow-add-jsp</artifactId>
             <version>${solon.version}</version>
         </dependency>
 
@@ -68,19 +80,19 @@
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon.sessionstate.jwt</artifactId>
+            <artifactId>solon-sessionstate-jwt</artifactId>
             <version>${solon.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon.auth</artifactId>
+            <artifactId>solon-security-auth</artifactId>
             <version>${solon.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.noear</groupId>
-            <artifactId>solon.view.jsp</artifactId>
+            <artifactId>solon-view-jsp</artifactId>
             <version>${solon.version}</version>
         </dependency>
 

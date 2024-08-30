@@ -12,8 +12,8 @@ public class LogUtil {
     public static void LogDebug(String cmd, String args, Context data) {
         StringBuilder sb = new StringBuilder();
 
-        data.paramMap().forEach((k, v) -> {
-            sb.append(k).append("=").append(v).append("; ");
+        data.paramMap().forEach(kv -> {
+            sb.append(kv.getKey()).append("=").append(kv.getFirstValue()).append("; ");
         });
 
         LogDebug(cmd, args, sb.toString());
