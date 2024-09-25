@@ -12,10 +12,9 @@ import org.noear.rock.impl.controller.trigger.StartHandler;
 public class RpcGateway extends Gateway {
     @Override
     protected void register() {
-        before(StartHandler.class);
-        before(IpHandler.class);
-
-        after(EndHandler.class);
+        filter(new StartHandler());
+        filter(new IpHandler());
+        filter(new EndHandler());
 
         add(RockRpcService.class, true);
     }

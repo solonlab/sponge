@@ -1,14 +1,15 @@
 package org.noear.rock.impl.controller.trigger;
 
-
-import org.noear.solon.annotation.Component;
 import org.noear.solon.core.handle.Context;
-import org.noear.solon.core.handle.Handler;
+import org.noear.solon.core.handle.Filter;
+import org.noear.solon.core.handle.FilterChain;
 
-@Component
-public class StartHandler implements Handler {
+public class StartHandler implements Filter {
+
     @Override
-    public void handle(Context ctx) throws Exception {
+    public void doFilter(Context ctx, FilterChain chain) throws Throwable {
         ctx.attrSet("_start", System.currentTimeMillis());
+
+        chain.doFilter(ctx);
     }
 }

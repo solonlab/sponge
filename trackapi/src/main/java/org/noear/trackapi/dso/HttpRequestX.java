@@ -42,7 +42,7 @@ public class HttpRequestX {
     }
 
     public String getCookie(String name){
-        return context.cookie(name,"");
+        return context.cookieOrDefault(name,"");
     }
 
     public void setCookie(String name, String val) {

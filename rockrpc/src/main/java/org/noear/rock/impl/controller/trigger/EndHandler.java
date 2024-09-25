@@ -2,24 +2,26 @@ package org.noear.rock.impl.controller.trigger;
 
 import org.noear.snack.ONode;
 import org.noear.solon.Solon;
-import org.noear.solon.annotation.Component;
 import org.noear.solon.cloud.CloudClient;
 import org.noear.solon.cloud.model.Instance;
 import org.noear.solon.core.handle.Context;
-import org.noear.solon.core.handle.Handler;
+import org.noear.solon.core.handle.Filter;
+import org.noear.solon.core.handle.FilterChain;
 import org.noear.solon.logging.utils.TagsMDC;
 import org.noear.water.WW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Component
-public class EndHandler implements Handler {
+public class EndHandler implements Filter {
 
     static Logger log = LoggerFactory.getLogger(EndHandler.class);
 
     @Override
-    public void handle(Context ctx) throws Exception {
-        long start = ctx.attr("_start", 0L);
+    public void doFilter(Context ctx, FilterChain chain) throws Throwable {
+        chain.doFilter(ctx);
+
+
+        long start = ctx.attrOrDefault("_start", 0L);
         long times = System.currentTimeMillis() - start;
 
         String service = Solon.cfg().appName();
@@ -30,7 +32,7 @@ public class EndHandler implements Handler {
         CloudClient.metric().addTimer(WW.track_service, service, _node, times);
         CloudClient.metric().addTimer(WW.track_from, service, _from, times);
 
-        String _out = ctx.attr("output", "");
+        String _out = ctx.attrOrDefault("output", "");
         String _in = ONode.stringify(ctx.paramMap());
 
         StringBuilder buf = new StringBuilder();

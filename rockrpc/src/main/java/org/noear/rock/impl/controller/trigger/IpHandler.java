@@ -1,23 +1,21 @@
 package org.noear.rock.impl.controller.trigger;
 
 import org.noear.solon.Solon;
-import org.noear.solon.annotation.Component;
 import org.noear.solon.cloud.CloudClient;
 import org.noear.solon.core.handle.Context;
-import org.noear.solon.core.handle.Handler;
-import org.noear.rock.impl.utils.IpUtil;
+import org.noear.solon.core.handle.Filter;
+import org.noear.solon.core.handle.FilterChain;
 import org.noear.solon.logging.utils.TagsMDC;
 import org.noear.water.WaterClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Component
-public class IpHandler implements Handler {
+public class IpHandler implements Filter {
 
     static Logger log = LoggerFactory.getLogger(IpHandler.class);
 
     @Override
-    public void handle(Context ctx) throws Throwable {
+    public void doFilter(Context ctx, FilterChain chain) throws Throwable {
         String ip = ctx.realIp();
 
         if (Solon.cfg().isWhiteMode()) {
@@ -33,5 +31,8 @@ public class IpHandler implements Handler {
                 ctx.setHandled(true);
             }
         }
+
+
+        chain.doFilter(ctx);
     }
 }

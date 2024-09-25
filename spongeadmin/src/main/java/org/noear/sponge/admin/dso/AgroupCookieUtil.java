@@ -7,7 +7,7 @@ import org.noear.solon.core.handle.Context;
  */
 public class AgroupCookieUtil {
     public static int cookieGet() {
-        return Integer.parseInt(Context.current().cookie("spongeadmin_agroup", "0"));
+        return Integer.parseInt(Context.current().cookieOrDefault("spongeadmin_agroup", "0"));
     }
 
     public static void cookieSet(int agroup_id) {
