@@ -13,6 +13,7 @@
 
     <groupId>org.noear</groupId>
     <artifactId>spongeadmin</artifactId>
+    <name>${project.artifactId}</name>
     <packaging>jar</packaging>
 
     <description>spongeadmin project for java</description>

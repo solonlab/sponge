@@ -13,6 +13,7 @@
 
     <groupId>org.noear</groupId>
     <artifactId>trackapi</artifactId>
+    <name>${project.artifactId}</name>
     <packaging>jar</packaging>
 
     <description>trackapi project for java</description>

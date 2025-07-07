@@ -12,6 +12,7 @@
     </parent>
 
     <artifactId>rock-solon-plugin</artifactId>
+    <name>${project.artifactId}</name>
     <packaging>jar</packaging>
 
 
