@@ -18,7 +18,7 @@ public class ErrorEventListener implements EventListener<Throwable> {
 
         if (ctx != null) {
             TagsMDC.tag0(ctx.path());
-            log.error("> Body: {}\r\n{}", ONode.serialize(ctx.paramMap().toValueMap()), err);
+            log.error("> Body: {}\r\n{}", ONode.serialize(ctx.paramMap()), err);
         } else {
             TagsMDC.tag0("global");
             log.error("{}", err);

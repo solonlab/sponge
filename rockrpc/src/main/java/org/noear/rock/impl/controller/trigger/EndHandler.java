@@ -33,7 +33,7 @@ public class EndHandler implements Filter {
         CloudClient.metric().addTimer(WW.track_from, service, _from, times);
 
         String _out = ctx.attrOrDefault("output", "");
-        String _in = ONode.serialize(ctx.paramMap().toValueMap());
+        String _in = ONode.serialize(ctx.paramMap());
 
         StringBuilder buf = new StringBuilder();
         buf.append("> Param: ").append(_in).append("\n");
