@@ -1,6 +1,6 @@
 package org.noear.rock.impl.controller.trigger;
 
-import org.noear.snack.ONode;
+import org.noear.snack4.ONode;
 import org.noear.solon.Solon;
 import org.noear.solon.cloud.CloudClient;
 import org.noear.solon.cloud.model.Instance;
@@ -33,7 +33,7 @@ public class EndHandler implements Filter {
         CloudClient.metric().addTimer(WW.track_from, service, _from, times);
 
         String _out = ctx.attrOrDefault("output", "");
-        String _in = ONode.stringify(ctx.paramMap());
+        String _in = ONode.serialize(ctx.paramMap().toValueMap());
 
         StringBuilder buf = new StringBuilder();
         buf.append("> Param: ").append(_in).append("\n");

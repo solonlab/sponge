@@ -7,7 +7,7 @@ import org.noear.rock.RockClient;
 import org.noear.rock.model.AppModel;
 import org.noear.rock.model.AppUpdateModel;
 import org.noear.rock.protocol.RockRpc;
-import org.noear.snack.ONode;
+import org.noear.snack4.ONode;
 import org.noear.solon.test.SolonTest;
 import org.noear.water.WW;
 import org.noear.water.WaterClient;
@@ -47,13 +47,13 @@ public class RockRpcTest {
         assert app.app_id == 1;
 
 
-        System.out.println(ONode.stringify(app));
+        System.out.println(ONode.serialize(app));
 
         Object obj = app.getClientSetting(1);
 
         assert obj != null;
 
-        System.out.println(ONode.stringify(obj));
+        System.out.println(ONode.serialize(obj));
     }
 
     @Test

@@ -138,7 +138,7 @@ public class AppGroupSettingController extends BaseController {
             return viewModel.code(0, "数据不对！");
         }
 
-        List<AppExSettingModel> list = entity.data.toObjectList(AppExSettingModel.class);
+        List<AppExSettingModel> list = entity.data.toBeanList(AppExSettingModel.class);
 
         for (AppExSettingModel m : list) {
             DbRockApi.impAgsets(agroup_id, m);

@@ -154,7 +154,7 @@ public class AppSettingController extends BaseController {
 
         int agroup_id = DbRockApi.getAppById(app_id).agroup_id;
 
-        List<AppExSettingModel> list = entity.data.toObjectList(AppExSettingModel.class);
+        List<AppExSettingModel> list = entity.data.toBeanList(AppExSettingModel.class);
 
         for (AppExSettingModel m : list) {
             DbRockApi.impAppsets(agroup_id, app_id, m);

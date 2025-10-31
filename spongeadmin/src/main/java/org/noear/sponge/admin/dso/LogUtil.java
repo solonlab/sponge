@@ -9,10 +9,10 @@ public class LogUtil {
 
     static Logger logger = LoggerFactory.getLogger("sponge_log_admin");
 
-    public static void LogDebug(String cmd, String args, Context data) {
+    public static void LogDebug(String cmd, String args, Context ctx) {
         StringBuilder sb = new StringBuilder();
 
-        data.paramMap().forEach(kv -> {
+        ctx.paramMap().forEach(kv -> {
             sb.append(kv.getKey()).append("=").append(kv.getFirstValue()).append("; ");
         });
 

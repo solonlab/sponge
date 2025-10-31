@@ -1,6 +1,6 @@
 package org.noear.trackapi.controller.event;
 
-import org.noear.snack.ONode;
+import org.noear.snack4.ONode;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.core.event.EventListener;
 import org.noear.solon.core.handle.Context;
@@ -18,7 +18,7 @@ public class ErrorEventListener implements EventListener<Throwable> {
 
         if (ctx != null) {
             TagsMDC.tag0(ctx.path());
-            log.error("> Body: {}\r\n{}", ONode.stringify(ctx.paramMap()), err);
+            log.error("> Body: {}\r\n{}", ONode.serialize(ctx.paramMap().toValueMap()), err);
         } else {
             TagsMDC.tag0("global");
             log.error("{}", err);

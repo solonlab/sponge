@@ -1,8 +1,8 @@
 package org.noear.sponge.admin.controller.rock;
 
 import org.noear.rock.RockUtil;
-import org.noear.snack.ONode;
-import org.noear.snack.core.Feature;
+import org.noear.snack4.ONode;
+import org.noear.snack4.Feature;
 import org.noear.solon.Utils;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
@@ -158,7 +158,7 @@ public class AppCodeController extends BaseController {
         viewModel.put("app_groups", appGroups);
         viewModel.put("model", model);
         viewModel.put("lang_type", lang_type);
-        viewModel.put("langs", ONode.stringify(langs));
+        viewModel.put("langs", ONode.serialize(langs));
         viewModel.put("agroup_id", model.agroup_id);
 
         return view("rock/apcode_edit");
@@ -185,7 +185,7 @@ public class AppCodeController extends BaseController {
         viewModel.put("app_groups", appGroups);
         viewModel.put("model", model);
         viewModel.put("lang_type", lang_type);
-        viewModel.put("langs", ONode.stringify(langs));
+        viewModel.put("langs", ONode.serialize(langs));
         viewModel.put("agroup_id", agroup_id);
 
         return view("rock/apcode_edit");
@@ -195,7 +195,7 @@ public class AppCodeController extends BaseController {
     @AuthPermissions(SessionPerms.admin)
     @Mapping("edit/ajax/save")
     public ViewModel saveApcode(Integer agroup_id, String service, Integer code, Integer codeOld, String items) throws SQLException {
-        List<I18nModel> itemList = ONode.loadStr(items).toObjectList(I18nModel.class);
+        List<I18nModel> itemList = ONode.ofJson(items).toBeanList(I18nModel.class);
 
         boolean result = true;
 
@@ -279,7 +279,7 @@ public class AppCodeController extends BaseController {
         }
 
         if("json".equals(fmt)){
-            String data = ONode.load(i18nMap, Feature.PrettyFormat).toJson();//格式化一下好看些
+            String data = ONode.ofBean(i18nMap, Feature.Write_PrettyFormat).toJson();//格式化一下好看些
             String filename2 = filename + ".json";
 
             ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
@@ -333,7 +333,7 @@ public class AppCodeController extends BaseController {
             return viewModel.code(0, "数据不对！");
         }
 
-        List<AppExCodeModel> list = entity.data.toObjectList(AppExCodeModel.class);
+        List<AppExCodeModel> list = entity.data.toBeanList(AppExCodeModel.class);
 
 
         boolean isOk = false;

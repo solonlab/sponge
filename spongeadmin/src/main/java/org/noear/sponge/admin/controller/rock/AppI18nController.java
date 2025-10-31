@@ -1,8 +1,8 @@
 package org.noear.sponge.admin.controller.rock;
 
 import org.noear.rock.RockUtil;
-import org.noear.snack.ONode;
-import org.noear.snack.core.Feature;
+import org.noear.snack4.ONode;
+import org.noear.snack4.Feature;
 import org.noear.solon.Utils;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
@@ -158,7 +158,7 @@ public class AppI18nController extends BaseController {
         viewModel.put("app_groups", appGroups);
         viewModel.put("model", model);
         viewModel.put("lang_type", lang_type);
-        viewModel.put("langs", ONode.stringify(langs));
+        viewModel.put("langs", ONode.serialize(langs));
         viewModel.put("agroup_id", model.agroup_id);
 
         return view("rock/api18n_edit");
@@ -185,7 +185,7 @@ public class AppI18nController extends BaseController {
         viewModel.put("app_groups", appGroups);
         viewModel.put("model", model);
         viewModel.put("lang_type", lang_type);
-        viewModel.put("langs", ONode.stringify(langs));
+        viewModel.put("langs", ONode.serialize(langs));
         viewModel.put("agroup_id", agroup_id);
 
         return view("rock/api18n_edit");
@@ -195,7 +195,7 @@ public class AppI18nController extends BaseController {
     @AuthPermissions(SessionPerms.admin)
     @Mapping("edit/ajax/save")
     public ViewModel saveApi18n(Integer agroup_id, String service, String name,  String nameOld, String items) throws SQLException {
-        List<I18nModel> itemList = ONode.loadStr(items).toObjectList(I18nModel.class);
+        List<I18nModel> itemList = ONode.ofJson(items).toBeanList(I18nModel.class);
 
         boolean result = true;
 
@@ -278,7 +278,7 @@ public class AppI18nController extends BaseController {
 
 
         if("json".equals(fmt)){
-            String data = ONode.load(i18nMap, Feature.PrettyFormat).toJson();//格式化一下好看些
+            String data = ONode.ofBean(i18nMap, Feature.Write_PrettyFormat).toJson();//格式化一下好看些
             String filename2 = filename + ".json";
 
             ctx.headerSet("Content-Disposition", "attachment; filename=\"" + filename2 + "\"");
@@ -340,7 +340,7 @@ public class AppI18nController extends BaseController {
             return viewModel.code(0, "数据不对！");
         }
 
-        List<AppExI18nModel> list = entity.data.toObjectList(AppExI18nModel.class);
+        List<AppExI18nModel> list = entity.data.toBeanList(AppExI18nModel.class);
 
         for (AppExI18nModel m : list) {
             if (service == null) {

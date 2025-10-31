@@ -1,6 +1,6 @@
 package org.noear.sponge.admin.dso.db;
 
-import org.noear.snack.ONode;
+import org.noear.snack4.ONode;
 import org.noear.sponge.admin.dso.CacheUtil;
 import org.noear.sponge.admin.dso.IDUtil;
 import org.noear.sponge.admin.model.others.ienum.ProvinceEnum;

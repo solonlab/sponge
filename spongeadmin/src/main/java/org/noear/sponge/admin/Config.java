@@ -1,6 +1,6 @@
 package org.noear.sponge.admin;
 
-import org.noear.snack.ONode;
+import org.noear.snack4.ONode;
 import org.noear.solon.Solon;
 import org.noear.solon.Utils;
 import org.noear.solon.annotation.Bean;
@@ -19,7 +19,7 @@ import java.util.Map;
 @Configuration
 public class Config {
 
-    public static final String sponge_version = "v2.13.0";
+    public static final String sponge_version = "v2.14.0";
 
     public static String track_uri() {
         return cfg("track_uri").value;

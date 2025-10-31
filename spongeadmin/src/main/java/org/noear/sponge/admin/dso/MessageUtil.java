@@ -1,6 +1,6 @@
 package org.noear.sponge.admin.dso;
 
-import org.noear.snack.ONode;
+import org.noear.snack4.ONode;
 import org.noear.water.WaterClient;
 
 public class MessageUtil {

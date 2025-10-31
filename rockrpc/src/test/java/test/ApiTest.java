@@ -3,7 +3,7 @@ package test;
 import org.junit.jupiter.api.Test;
 import org.noear.rock.RockClient;
 import org.noear.rock.model.AppModel;
-import org.noear.snack.ONode;
+import org.noear.snack4.ONode;
 import org.noear.solon.test.SolonTest;
 
 /**
@@ -27,7 +27,7 @@ public class ApiTest {
     public void test2() throws Exception {
         AppModel app = RockClient.getAppByID(1);
 
-        System.out.println(ONode.stringify(app));
+        System.out.println(ONode.serialize(app));
 
         assert app.app_id == 1;
     }
