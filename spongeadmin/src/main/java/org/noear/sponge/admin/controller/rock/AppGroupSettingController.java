@@ -1,5 +1,6 @@
 package org.noear.sponge.admin.controller.rock;
 
+import org.noear.snack4.codec.TypeRef;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
 import org.noear.solon.core.handle.Context;
@@ -138,7 +139,7 @@ public class AppGroupSettingController extends BaseController {
             return viewModel.code(0, "数据不对！");
         }
 
-        List<AppExSettingModel> list = entity.data.toBeanList(AppExSettingModel.class);
+        List<AppExSettingModel> list = entity.data.toBean(new TypeRef<List<AppExSettingModel>>() {});
 
         for (AppExSettingModel m : list) {
             DbRockApi.impAgsets(agroup_id, m);

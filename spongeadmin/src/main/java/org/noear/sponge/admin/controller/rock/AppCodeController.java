@@ -3,6 +3,7 @@ package org.noear.sponge.admin.controller.rock;
 import org.noear.rock.RockUtil;
 import org.noear.snack4.ONode;
 import org.noear.snack4.Feature;
+import org.noear.snack4.codec.TypeRef;
 import org.noear.solon.Utils;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
@@ -195,7 +196,7 @@ public class AppCodeController extends BaseController {
     @AuthPermissions(SessionPerms.admin)
     @Mapping("edit/ajax/save")
     public ViewModel saveApcode(Integer agroup_id, String service, Integer code, Integer codeOld, String items) throws SQLException {
-        List<I18nModel> itemList = ONode.ofJson(items).toBeanList(I18nModel.class);
+        List<I18nModel> itemList = ONode.ofJson(items).toBean(new TypeRef<List<I18nModel>>() {});
 
         boolean result = true;
 
@@ -333,7 +334,7 @@ public class AppCodeController extends BaseController {
             return viewModel.code(0, "数据不对！");
         }
 
-        List<AppExCodeModel> list = entity.data.toBeanList(AppExCodeModel.class);
+        List<AppExCodeModel> list = entity.data.toBean(new TypeRef<List<AppExCodeModel>>() { });
 
 
         boolean isOk = false;

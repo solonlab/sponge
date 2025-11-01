@@ -3,6 +3,7 @@ package org.noear.sponge.admin.controller.rock;
 import org.noear.rock.RockUtil;
 import org.noear.snack4.ONode;
 import org.noear.snack4.Feature;
+import org.noear.snack4.codec.TypeRef;
 import org.noear.solon.Utils;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
@@ -195,7 +196,7 @@ public class AppI18nController extends BaseController {
     @AuthPermissions(SessionPerms.admin)
     @Mapping("edit/ajax/save")
     public ViewModel saveApi18n(Integer agroup_id, String service, String name,  String nameOld, String items) throws SQLException {
-        List<I18nModel> itemList = ONode.ofJson(items).toBeanList(I18nModel.class);
+        List<I18nModel> itemList = ONode.ofJson(items).toBean(new TypeRef<List<I18nModel>>() {});
 
         boolean result = true;
 
@@ -340,7 +341,7 @@ public class AppI18nController extends BaseController {
             return viewModel.code(0, "数据不对！");
         }
 
-        List<AppExI18nModel> list = entity.data.toBeanList(AppExI18nModel.class);
+        List<AppExI18nModel> list = entity.data.toBean(new TypeRef<List<AppExI18nModel>>() {});
 
         for (AppExI18nModel m : list) {
             if (service == null) {
