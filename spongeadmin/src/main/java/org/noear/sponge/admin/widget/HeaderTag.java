@@ -10,8 +10,6 @@ import org.noear.solon.Utils;
 import org.noear.solon.core.handle.Context;
 import org.noear.sponge.admin.Config;
 import org.noear.sponge.admin.dso.Session;
-import org.noear.water.WW;
-import org.noear.water.utils.TextUtils;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
