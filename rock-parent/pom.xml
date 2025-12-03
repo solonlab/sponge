@@ -6,7 +6,7 @@
 
     <groupId>org.noear</groupId>
     <artifactId>rock-parent</artifactId>
-    <version>2.14.0</version>
+    <version>2.14.1</version>
     <packaging>pom</packaging>
 
     <name>${project.artifactId}</name>
@@ -39,13 +39,13 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
 
-        <solon.version>3.7.0</solon.version>
-        <grit.version>2.2.0</grit.version>
-        <water.version>2.19.0</water.version>
+        <solon.version>3.7.3</solon.version>
+        <grit.version>2.2.1</grit.version>
+        <water.version>2.19.1</water.version>
 
-        <wood.version>1.4.2</wood.version>
+        <wood.version>1.4.3</wood.version>
 
-        <rock.version>2.14.0</rock.version>
+        <rock.version>2.14.1</rock.version>
 
         <slf4j.version>2.0.17</slf4j.version>
 
